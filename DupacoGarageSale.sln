@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DupacoGarageSale.Data", "DupacoGarageSale.Domain\DupacoGarageSale.Data.csproj", "{B1E5C505-F181-4C9A-9595-DC6CBA69523D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DupacoGarageSale.Web", "DupacoGarageSale.Web\DupacoGarageSale.Web.csproj", "{23F6320F-B076-4E98-AA36-24899E7B9421}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1E5C505-F181-4C9A-9595-DC6CBA69523D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E5C505-F181-4C9A-9595-DC6CBA69523D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E5C505-F181-4C9A-9595-DC6CBA69523D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E5C505-F181-4C9A-9595-DC6CBA69523D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F6320F-B076-4E98-AA36-24899E7B9421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F6320F-B076-4E98-AA36-24899E7B9421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F6320F-B076-4E98-AA36-24899E7B9421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F6320F-B076-4E98-AA36-24899E7B9421}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

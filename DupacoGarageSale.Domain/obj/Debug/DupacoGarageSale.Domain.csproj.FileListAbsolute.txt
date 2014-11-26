@@ -1,0 +1,5 @@
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\DupacoGarageSale.Domain.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\DupacoGarageSale.Domain.pdb
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Domain.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Domain.pdb
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Domain.csprojResolveAssemblyReference.cache
