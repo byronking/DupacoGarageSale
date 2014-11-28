@@ -12,6 +12,11 @@ namespace DupacoGarageSale.Data.Repository
 {
     public class AccountsRepository
     {
+        /// <summary>
+        /// This saves a new garage sale user.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public UserSaveResult SaveGarageSaleUser(GarageSaleUser user)
         {
             var saveResult = new UserSaveResult();
@@ -58,6 +63,12 @@ namespace DupacoGarageSale.Data.Repository
             return saveResult;
         }
 
+        /// <summary>
+        /// This gets an active user by username.
+        /// </summary>
+        /// <param name="user_name"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public GarageSaleUser GetActiveGarageSaleUserByUserName(string user_name, byte[] password)
         {
             var user = new GarageSaleUser();
@@ -84,7 +95,6 @@ namespace DupacoGarageSale.Data.Repository
                         }
 
                         user.Active = Convert.ToBoolean(reader["active"]);
-                        //user.AddressId = Convert.ToInt32(reader["address_id"]);
                         user.CreateDate = Convert.ToDateTime(reader["create_date"]);
                         user.Email = reader["email"].ToString();
                         user.FirstName = reader["first_name"].ToString();
@@ -95,6 +105,7 @@ namespace DupacoGarageSale.Data.Repository
                         user.Phone = reader["phone"].ToString();
                         user.UserId = Convert.ToInt32(reader["user_id"]);
                         user.UserName = reader["user_name"].ToString();
+                        user.UserType = reader["user_type"].ToString();
                         user.UserTypeId = Convert.ToInt32(reader["user_type_id"]);
                     }
                 }
@@ -107,6 +118,11 @@ namespace DupacoGarageSale.Data.Repository
             return user;
         }
 
+        /// <summary>
+        /// This gets a user profile by id.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
         public GarageSaleUser GetUserProfileInfoById(int user_id)
         {
             var user = new GarageSaleUser();
@@ -141,26 +157,17 @@ namespace DupacoGarageSale.Data.Repository
                             Zip = reader["zip"].ToString()
                         };
 
-                        //DateTime? modifyDate = null;
-
-                        //if (reader["modify_date"] != DBNull.Value)
-                        //{
-                        //    modifyDate = Convert.ToDateTime(reader["modify_date"]);
-                        //}
-
-                        //user.Active = Convert.ToBoolean(reader["active"]);
+                        user.Active = Convert.ToBoolean(reader["active"]);
                         user.Address = address;
                         user.CreateDate = Convert.ToDateTime(reader["create_date"]);
                         user.Email = reader["email"].ToString();
                         user.FirstName = reader["first_name"].ToString();
                         user.LastName = reader["last_name"].ToString();
-                        //user.ModifyDate = modifyDate;
-                        //user.ModifyUser = reader["modify_user"].ToString();
-                        //user.BytePassword = (byte[])reader["password"];
                         user.Phone = reader["phone"].ToString();
                         user.UserId = Convert.ToInt32(reader["user_id"]);
                         user.UserName = reader["user_name"].ToString();
                         user.UserTypeId = Convert.ToInt32(reader["user_type_id"]);
+                        user.UserType = reader["user_type"].ToString();
                     }
                 }
             }
@@ -170,6 +177,6 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return user;
-        }
+        }        
     }
 }

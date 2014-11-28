@@ -10,44 +10,150 @@
         <div class="row">
             <p class="lead">Account info for @Model.FirstName @Model.LastName</p>
         </div>
+        
+        @using (Html.BeginForm("SaveUserProfile", "Accounts", FormMethod.Post, new { @class="form-horizontal", @role="form" }))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label"></div>
+                        <div class="col-sm-7">
+                            <img src="~/Content/images/dupaco.png" alt="..." class="img-thumbnail" />
+                        </div>                     
+                    </div>
 
-        <div class="row">
-            <form class="form-horizontal" role="form">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">First Name</label>
-                    <div class="col-sm-10">
-                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", id="txtFirstName" })
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fileThumbnail">Profile pic (optional)</label>
+                        <div class="col-sm-5">
+                            <div class="input-group"> 
+                                <span class="input-group-btn">
+                                    <span class="btn btn-primary btn-file">Browse…
+                                        <input type="file" id="fileUpload" name="fileUpload" />
+                                    </span>
+                                </span>&nbsp;
+                                <input type="text" class="form-control", id="txtFileName" readonly="true" style="width:255px;" />
+                                <button type="button" class="btn btn-primary" id="btnUploadProfileImage">Upload</button>
+                            </div>
+                            <span id="lblUploadMessage" class="red invisible">Please select an image file to upload</span>
+                        </div>
+                        
+                        @*<div class="col-md-5">
+                            <div class="form-group">
+                                <label class="control-label">Community</label>
+                                <div class="col-sm-7">
+                                <select class="form-control" style="width:100px;">
+                                    <option>Dubuque</option>
+                                    <option>Plattville</option>
+                                    <option>Baltimore</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>*@
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Account Type</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.UserType, new { @class = "form-control", id="txtAccountType", @readonly="true" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">First name</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", id="txtFirstName" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label class="col-sm-3 control-label">Last name</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", id="txtLastName" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label class="col-sm-3 control-label">User name</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", id="txtUserName", @readonly="true" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id="txtEmail", @readonly="true" })
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Address 1</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Address.Address1, new { @class = "form-control", id="txtAddress1" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Address 2</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Address.Address2, new { @class = "form-control", id="txtAddress2" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">City</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Address.City, new { @class = "form-control", id="txtCity" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">State</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.Address.State, ViewData["StatesList"] as SelectList, "Select...",
+                                            new { id = "ddlStatesList", @class = "form-control" })
+                            @*@Html.TextBoxFor(m => m.Address.State, new { @class = "form-control", id="txtState" })*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Zip Code</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Address.Zip, new { @class = "form-control", id="txtZip" })
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-3 control-label">Phone</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", id="txtPhone" })
+                        </div>
+                    </div>                  
+                </div>
+            </div>
+            <div class="row down-40">
+                <div class="col-md-12 text-center">
+                    <div class="form-group">
+                        <input type="submit" value="Save profile" class="btn btn-primary" />
+                        @*@Html.ActionLink("Change password", "ChangePassword", "Accounts", new { @class="btn btn-success" })*@
 
-                <div class="form-group">
-                     <label class="col-sm-2 control-label">Last Name</label>
-                    <div class="col-sm-10">
-                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", id="txtLastName" })
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#changePasswordModal">
+                            Change password
+                        </button>
                     </div>
                 </div>
+            </div>
+            
+            <div>
+                @Html.HiddenFor(m => m.Active)
+                @Html.HiddenFor(m => m.CreateDate)
+                @Html.HiddenFor(m => m.UserId)
+                @Html.HiddenFor(m => m.UserTypeId)
+            </div>
+        }
+    </div>    
+</div>
 
-                <div class="form-group">
-                     <label class="col-sm-2 control-label">User Name</label>
-                    <div class="col-sm-10">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", id="txtUserName", disabled="disabled" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                     <label class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id="txtEmail", disabled="disabled" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                    </div>
-                </div>
-            </form>
-        </div>
+<!-- Change password model -->
+<div id="changePasswordModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      Change your password!
     </div>
+  </div>
 </div>

@@ -12,12 +12,21 @@ namespace DupacoGarageSale.Web.Controllers
 {
     public class AccountsController : Controller
     {
+        /// <summary>
+        /// This loads the sign up page.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult SignUp()
         {
             return View();
         }
 
+        /// <summary>
+        /// This saves a newly registered user.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult RegisterUser(GarageSaleUser model)
         {
@@ -46,6 +55,11 @@ namespace DupacoGarageSale.Web.Controllers
             }));
         }
 
+        /// <summary>
+        /// This signs in a user.
+        /// </summary>
+        /// <param name="formCollection"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SignIn(FormCollection formCollection)
         {
@@ -89,25 +103,48 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// This loads a user profile by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult UserProfile(int? id)
         {
+            // Load the states dropdown.
+            var addressRepository = new AddressRepository();
+            var statesList = addressRepository.GetStates();
+            ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+
             // If the user id is null, then attempt to log the user in. Else, retrieve the user by id.
             var repository = new AccountsRepository();
             var user = new GarageSaleUser();
 
             if (id == null)
             {
-                
+                // Load an empty form for new users.
             }
             else
             {
+                // Load a saved user by id.
                 user = repository.GetUserProfileInfoById((int)id);
             }
 
             return View(user);
         }
 
-        
+        /// <summary>
+        /// This saves changes to the registered user profile.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SaveUserProfile(GarageSaleUser user)
+        {
+            user.ModifyDate = DateTime.Now;
+            user.ModifyUser = user.UserName;
+
+            return View("~/Views/Accounts/UserProfile.cshtml", user);
+        }
     }
 }
