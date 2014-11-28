@@ -17,9 +17,8 @@ namespace DupacoGarageSale.Web.Controllers
 
         public ActionResult LogOut()
         {
-            var testy = Session["UserSession"] as UserSession;
-
-
+            var session = Session["UserSession"] as UserSession;
+            Session["UserSession"] = null;
 
             return RedirectToAction("Index");
         }

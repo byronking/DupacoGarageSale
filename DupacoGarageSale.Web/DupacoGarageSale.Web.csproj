@@ -127,10 +127,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\GarageSaleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GarageSaleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -248,10 +250,12 @@
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Shared\_UserProfileNav.cshtml" />
     <Content Include="Views\Shared\_UserProfileLayout.cshtml" />
+    <Content Include="Views\GarageSale\Add.cshtml" />
+    <Content Include="Views\Shared\_GarageSaleNav.cshtml" />
+    <Content Include="Views\Shared\_GarageSaleLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

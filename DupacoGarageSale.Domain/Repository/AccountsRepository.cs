@@ -177,6 +177,55 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return user;
-        }        
+        }
+
+        /// <summary>
+        /// This saves updates to the garage sale user profile.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public UserSaveResult SaveGarageSaleUserProfile(GarageSaleUser user)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SaveGarageSaleUserProfile", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_id", SqlDbType.Int).Value = user.UserId;
+                    cmd.Parameters.Add("@first_name", SqlDbType.VarChar).Value = user.FirstName;
+                    cmd.Parameters.Add("@last_name", SqlDbType.VarChar).Value = user.LastName;
+                    cmd.Parameters.Add("@phone", SqlDbType.VarChar).Value = user.Phone;
+                    cmd.Parameters.Add("@address1", SqlDbType.VarChar).Value = user.Address.Address1;
+                    cmd.Parameters.Add("@address2", SqlDbType.VarChar).Value = user.Address.Address2 ?? string.Empty;
+                    cmd.Parameters.Add("@city", SqlDbType.VarChar).Value = user.Address.City;
+                    cmd.Parameters.Add("@state", SqlDbType.VarChar).Value = user.Address.State;
+                    cmd.Parameters.Add("@zip", SqlDbType.VarChar).Value = user.Address.Zip;
+                    cmd.Parameters.Add("@modify_date", SqlDbType.DateTime).Value = user.CreateDate;
+                    cmd.Parameters.Add("@modify_user", SqlDbType.VarChar).Value = user.ModifyUser;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.SaveResultId = (int)returnParameter.Value;
+
+                    if (saveResult.SaveResultId != 0)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return saveResult;
+        }
     }
 }

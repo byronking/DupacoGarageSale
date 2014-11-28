@@ -56,6 +56,16 @@ namespace DupacoGarageSale.Web.Controllers
         }
 
         /// <summary>
+        /// This is the default user login page.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult SignIn()
+        {
+            return View("~/Views/Accounts/Login.cshtml");
+        }
+
+        /// <summary>
         /// This signs in a user.
         /// </summary>
         /// <param name="formCollection"></param>
@@ -84,8 +94,7 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     SessionKey = Guid.NewGuid(),
                     SessionStartDate = DateTime.Now,
-                    UserId = user.UserId,
-                    UserName = user.UserName
+                    User = user
                 };
 
                 Session["UserSession"] = session;
@@ -111,26 +120,37 @@ namespace DupacoGarageSale.Web.Controllers
         [HttpGet]
         public ActionResult UserProfile(int? id)
         {
-            // Load the states dropdown.
-            var addressRepository = new AddressRepository();
-            var statesList = addressRepository.GetStates();
-            ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
-
-            // If the user id is null, then attempt to log the user in. Else, retrieve the user by id.
-            var repository = new AccountsRepository();
             var user = new GarageSaleUser();
 
-            if (id == null)
+            if (Session["UserSession"] != null)
             {
-                // Load an empty form for new users.
+                // Load the states dropdown.
+                var addressRepository = new AddressRepository();
+                var statesList = addressRepository.GetStates();
+                ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+
+                // If the user id is null, then attempt to log the user in. Else, retrieve the user by id.
+                var repository = new AccountsRepository();
+                //var user = new GarageSaleUser();
+
+                if (id == null)
+                {
+                    // Load an empty form for new users.
+                }
+                else
+                {
+                    // Load a saved user by id.
+                    user = repository.GetUserProfileInfoById((int)id);
+                }
+
+                ViewBag.NavProfile = "active";
+
+                return View(user);
             }
             else
             {
-                // Load a saved user by id.
-                user = repository.GetUserProfileInfoById((int)id);
+                return RedirectToAction("SignIn", "Accounts");
             }
-
-            return View(user);
         }
 
         /// <summary>
@@ -144,7 +164,18 @@ namespace DupacoGarageSale.Web.Controllers
             user.ModifyDate = DateTime.Now;
             user.ModifyUser = user.UserName;
 
-            return View("~/Views/Accounts/UserProfile.cshtml", user);
+            var errors = ModelState.Where(v => v.Value.Errors.Any());
+
+            var saveResult = new UserSaveResult();
+            var repository = new AccountsRepository();
+            saveResult = repository.SaveGarageSaleUserProfile(user);
+
+            return RedirectToAction("UserProfile", new RouteValueDictionary(new
+            {
+                controller = "Accounts",
+                action = "UserProfile",
+                id = user.UserId
+            }));
         }
     }
 }

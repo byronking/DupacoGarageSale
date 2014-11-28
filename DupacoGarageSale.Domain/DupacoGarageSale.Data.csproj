@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\AuthenticationInfo.cs" />
+    <Compile Include="Domain\GarageSale.cs" />
     <Compile Include="Domain\GarageSaleUser.cs" />
     <Compile Include="Domain\State.cs" />
     <Compile Include="Domain\UserAddress.cs" />
