@@ -9,6 +9,6 @@ namespace DupacoGarageSale.Web.Models
     public class GarageSaleViewModel
     {
         public GarageSaleUser User { get; set; }
-        public List<GarageSale> GarageSales { get; set; }
+        public GarageSale Sale { get; set; }
     }
 }

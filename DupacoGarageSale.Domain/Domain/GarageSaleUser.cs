@@ -30,6 +30,7 @@ namespace DupacoGarageSale.Data.Domain
         [RegularExpression(@"^\(?([0-9]{3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$", ErrorMessage = "Enter your phone number in the following format: 555-323-1234")]
         public string Phone { get; set; }
         public DateTime? BirthDate { get; set; }
+        public string ProfilePicLink { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]

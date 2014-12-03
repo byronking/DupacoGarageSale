@@ -26,6 +26,9 @@ namespace DupacoGarageSale.Web
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                         "~/Scripts/default.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/timepicker").Include(
+                        "~/Scripts/jquery.timepicker.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
@@ -45,6 +48,9 @@ namespace DupacoGarageSale.Web
             bundles.Add(new StyleBundle("~/Content/bootstrap/css").Include(
                        "~/Content/bootstrap/css/bootstrap.css",
                        "~/Content/bootstrap/css/bootstrap-theme.css"));
+
+           bundles.Add(new StyleBundle("~/Content/timepicker/css").Include(
+                      "~/Content/timepicker/jquery.timepicker.css"));
         }
     }
 }

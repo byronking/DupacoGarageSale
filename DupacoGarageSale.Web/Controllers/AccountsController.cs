@@ -3,6 +3,8 @@ using DupacoGarageSale.Data.Repository;
 using DupacoGarageSale.Domain.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -131,7 +133,6 @@ namespace DupacoGarageSale.Web.Controllers
 
                 // If the user id is null, then attempt to log the user in. Else, retrieve the user by id.
                 var repository = new AccountsRepository();
-                //var user = new GarageSaleUser();
 
                 if (id == null)
                 {
@@ -141,6 +142,12 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     // Load a saved user by id.
                     user = repository.GetUserProfileInfoById((int)id);
+
+                    // Set the default profile pic
+                    if (user.ProfilePicLink == string.Empty)
+                    {
+                        user.ProfilePicLink = "keep-calm-and-come-to-the-dupaco-garage-sale.png";
+                    }
                 }
 
                 ViewBag.NavProfile = "active";
@@ -159,10 +166,31 @@ namespace DupacoGarageSale.Web.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveUserProfile(GarageSaleUser user)
+        public ActionResult SaveUserProfile(HttpPostedFileBase fileUpload, GarageSaleUser user)
         {
             user.ModifyDate = DateTime.Now;
             user.ModifyUser = user.UserName;
+
+            if (fileUpload != null)
+            {
+                // Save the image file
+                user.ProfilePicLink = fileUpload.FileName;
+
+                var fileName = Path.GetFileName(user.ProfilePicLink);
+                var dir = ConfigurationManager.AppSettings["ProfileImagesDirectory"].ToString();
+
+                var storageDir = dir + Path.DirectorySeparatorChar + fileName;
+
+                if (!System.IO.File.Exists(fileName))
+                {
+                    fileUpload.SaveAs(dir + Path.DirectorySeparatorChar + fileName);
+                }
+            }
+            else
+            {
+                // Use the default pic.
+                user.ProfilePicLink = "keep-calm-and-come-to-the-dupaco-garage-sale.png";
+            }
 
             var errors = ModelState.Where(v => v.Value.Errors.Any());
 
@@ -176,6 +204,18 @@ namespace DupacoGarageSale.Web.Controllers
                 action = "UserProfile",
                 id = user.UserId
             }));
+        }
+
+        /// <summary>
+        /// This saves the user's profile pic.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SaveProfilePic(HttpPostedFileBase file)
+        {
+            var testy = file;
+            return View();
         }
     }
 }

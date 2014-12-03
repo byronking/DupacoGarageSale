@@ -107,6 +107,7 @@ namespace DupacoGarageSale.Data.Repository
                         user.UserName = reader["user_name"].ToString();
                         user.UserType = reader["user_type"].ToString();
                         user.UserTypeId = Convert.ToInt32(reader["user_type_id"]);
+                        user.ProfilePicLink = reader["profile_pic_link"].ToString();
                     }
                 }
             }
@@ -168,6 +169,7 @@ namespace DupacoGarageSale.Data.Repository
                         user.UserName = reader["user_name"].ToString();
                         user.UserTypeId = Convert.ToInt32(reader["user_type_id"]);
                         user.UserType = reader["user_type"].ToString();
+                        user.ProfilePicLink = reader["profile_pic_link"].ToString();
                     }
                 }
             }
@@ -203,8 +205,16 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.Parameters.Add("@city", SqlDbType.VarChar).Value = user.Address.City;
                     cmd.Parameters.Add("@state", SqlDbType.VarChar).Value = user.Address.State;
                     cmd.Parameters.Add("@zip", SqlDbType.VarChar).Value = user.Address.Zip;
-                    cmd.Parameters.Add("@modify_date", SqlDbType.DateTime).Value = user.CreateDate;
+                    if (user.ModifyDate != null)
+                    {
+                        cmd.Parameters.Add("@modify_date", SqlDbType.DateTime).Value = user.ModifyDate;
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@modify_date", SqlDbType.DateTime).Value = user.CreateDate;
+                    }
                     cmd.Parameters.Add("@modify_user", SqlDbType.VarChar).Value = user.ModifyUser;
+                    cmd.Parameters.Add("@profile_pic_link", SqlDbType.VarChar).Value = user.ProfilePicLink;
 
                     var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;

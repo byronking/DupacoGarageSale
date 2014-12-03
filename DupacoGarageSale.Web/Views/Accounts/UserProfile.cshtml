@@ -11,47 +11,8 @@
             <h2>Account info for @Model.FirstName @Model.LastName</h2>
         </div>
         
-        @using (Html.BeginForm("SaveUserProfile", "Accounts", FormMethod.Post, new { @class="form-horizontal", @role="form" }))
+        @using (Html.BeginForm("SaveUserProfile", "Accounts", FormMethod.Post, new { @class="form-horizontal", @role="form", enctype="multipart/form-data" }))
         {
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="col-sm-2 control-label"></div>
-                        <div class="col-sm-7">
-                            <img src="~/Content/images/dupaco.png" alt="..." class="img-thumbnail" />
-                        </div>                     
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="fileThumbnail">Profile pic (optional)</label>
-                        <div class="col-sm-5">
-                            <div class="input-group"> 
-                                <span class="input-group-btn">
-                                    <span class="btn btn-primary btn-file">Browse…
-                                        <input type="file" id="fileUpload" name="fileUpload" />
-                                    </span>
-                                </span>&nbsp;
-                                <input type="text" class="form-control", id="txtFileName" readonly="true" style="width:255px;" />
-                                <button type="button" class="btn btn-primary" id="btnUploadProfileImage">Upload</button>
-                            </div>
-                            <span id="lblUploadMessage" class="red invisible">Please select an image file to upload</span>
-                        </div>
-                        
-                        @*<div class="col-md-5">
-                            <div class="form-group">
-                                <label class="control-label">Community</label>
-                                <div class="col-sm-7">
-                                <select class="form-control" style="width:100px;">
-                                    <option>Dubuque</option>
-                                    <option>Plattville</option>
-                                    <option>Baltimore</option>
-                                </select>
-                                </div>
-                            </div>
-                        </div>*@
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -108,8 +69,7 @@
                         <label class="col-sm-3 control-label">State</label>
                         <div class="col-sm-7">
                             @Html.DropDownListFor(m => m.Address.State, ViewData["StatesList"] as SelectList, "Select...",
-                                            new { id = "ddlStatesList", @class = "form-control" })
-                            @*@Html.TextBoxFor(m => m.Address.State, new { @class = "form-control", id="txtState" })*@
+                                new { id = "ddlStatesList", @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
@@ -126,6 +86,21 @@
                     </div>                  
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="col-sm-6 col-md-3" style="margin-left:136px;">
+                    <div class="thumbnail">
+                        <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/profile_pictures/@Model.ProfilePicLink" data-holder-rendered="true">
+                        <div class="caption">
+                            <h3>Profile pic <small>(optional)</small></h3>
+                            <input type="file" id="fileUpload" name="fileUpload" />@*<br />
+                            <button type="submit" class="btn btn-default btn-xs" id="btnUploadProfileImage">Upload profile pic</button>
+                            <span id="lblUploadMessage" class="red invisible">Please select an image file to upload</span>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="row down-40">
                 <div class="col-md-12 text-center">
                     <div class="form-group">
@@ -137,8 +112,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
-            
+            </div>            
             <div>
                 @Html.HiddenFor(m => m.Active)
                 @Html.HiddenFor(m => m.CreateDate)
