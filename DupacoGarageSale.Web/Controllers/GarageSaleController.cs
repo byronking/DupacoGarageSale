@@ -13,6 +13,11 @@ namespace DupacoGarageSale.Web.Controllers
 {
     public class GarageSaleController : Controller
     {
+        /// <summary>
+        /// This is the landing page for adding garage sales.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Add(int? id)
         {
@@ -54,6 +59,11 @@ namespace DupacoGarageSale.Web.Controllers
             }            
         }
 
+        /// <summary>
+        /// This saves a user's garage sale.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Save(GarageSaleViewModel model)
         {
@@ -96,6 +106,44 @@ namespace DupacoGarageSale.Web.Controllers
                 action = "Add",
                 id = model.Sale.GarageSaleId
             }));
+        }
+
+        /// <summary>
+        /// This display's the user's garge sale(s).
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult View()
+        {
+            var userSession = new UserSession();
+
+            if (Session["UserSession"] != null)
+            {
+                // Load the states dropdown.
+                var addressRepository = new AddressRepository();
+                var statesList = addressRepository.GetStates();
+
+                userSession = Session["UserSession"] as UserSession;
+
+                var repository = new GarageSaleRepository();
+
+                // Load saved garage sales by user name.
+                var viewModel = new GarageSaleViewModel
+                {
+                    User = userSession.User,
+                    Sale = new GarageSale()                    
+                };
+
+                viewModel.GarageSales = repository.GetGarageSaleByUserName(viewModel.User.UserName);
+                ViewBag.NavViewSales = "active";
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("SignIn", "Accounts");
+            }  
         }
     }
 }

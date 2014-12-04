@@ -100,6 +100,11 @@ namespace DupacoGarageSale.Data.Repository
             return saveResult;
         }
 
+        /// <summary>
+        /// This gets an individual garage sale by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public GarageSale GetGarageSaleById(int id)
         {
             var sale = new GarageSale();
@@ -111,6 +116,14 @@ namespace DupacoGarageSale.Data.Repository
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@sale_id", SqlDbType.VarChar).Value = id;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+
+                    }
                 }
             }
             catch (Exception ex)
@@ -119,6 +132,71 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return sale;
+        }
+
+         /// <summary>
+        /// This gets a list of garage sales by user name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>List<GarageSale></returns>
+        public List<GarageSale> GetGarageSaleByUserName(string username)
+        {
+            var garageSalesList = new List<GarageSale>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetGarageSalesByUserName", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@garage_sale_user_name", SqlDbType.VarChar).Value = username;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var saleDatesTimes = new SaleDatesTimes();
+                        saleDatesTimes.SaleDateTimeId = Convert.ToInt32(reader["sale_date_time_id"]);
+                        saleDatesTimes.SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]);
+                        saleDatesTimes.DayOneStart = reader["day_one_start"].ToString();
+                        saleDatesTimes.DayOneEnd = reader["day_one_end"].ToString();
+                        saleDatesTimes.SaleDateTwo = Convert.ToDateTime(reader["sale_date_two"]);
+                        saleDatesTimes.DayTwoStart = reader["day_two_start"].ToString();
+                        saleDatesTimes.DayTwoEnd = reader["day_two_end"].ToString();
+                        saleDatesTimes.SaleDateThree = Convert.ToDateTime(reader["sale_date_three"]);
+                        saleDatesTimes.DayThreeStart = reader["day_three_start"].ToString();
+                        saleDatesTimes.DayThreeEnd = reader["day_three_end"].ToString();
+                        saleDatesTimes.SaleDateFour = Convert.ToDateTime(reader["sale_date_four"]);
+                        saleDatesTimes.DayFourStart = reader["day_four_start"].ToString();
+                        saleDatesTimes.DayFourEnd = reader["day_four_end"].ToString();
+
+                        var garageSale = new GarageSale
+                        {
+                            CreateDate = Convert.ToDateTime(reader["create_date"]),
+                            DatesTimes = saleDatesTimes,
+                            GarageSaleId = Convert.ToInt32(reader["sale_id"]),
+                            GarageSaleName = reader["sale_name"].ToString(),
+                            ModifyDate = Convert.ToDateTime(reader["modify_date"]),
+                            ModifyUser = reader["modify_user"].ToString(),
+                            SaleAddress1 = reader["sale_address1"].ToString(),
+                            SaleAddress2 = reader["sale_address2"].ToString(),
+                            SaleCity = reader["sale_city"].ToString(),
+                            SaleDescription = reader["sale_description"].ToString(),
+                            SaleState = reader["state_name"].ToString(),
+                            SaleZip = reader["sale_zip"].ToString(),
+                        };
+
+                        garageSalesList.Add(garageSale);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return garageSalesList;
         }
     }
 }

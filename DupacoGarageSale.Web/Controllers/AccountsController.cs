@@ -173,7 +173,7 @@ namespace DupacoGarageSale.Web.Controllers
 
             if (fileUpload != null)
             {
-                // Save the image file
+                // Save the image file.
                 user.ProfilePicLink = fileUpload.FileName;
 
                 var fileName = Path.GetFileName(user.ProfilePicLink);
@@ -204,18 +204,6 @@ namespace DupacoGarageSale.Web.Controllers
                 action = "UserProfile",
                 id = user.UserId
             }));
-        }
-
-        /// <summary>
-        /// This saves the user's profile pic.
-        /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult SaveProfilePic(HttpPostedFileBase file)
-        {
-            var testy = file;
-            return View();
         }
     }
 }

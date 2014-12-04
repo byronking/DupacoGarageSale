@@ -1,0 +1,67 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+@{
+    ViewBag.Title = "View your garage sales";
+    Layout = "~/Views/Shared/_GarageSaleLayout.cshtml";
+}
+
+<div id="page-wrap" class="jumbotron" style="min-height:500px;">
+    <div class="container">
+        <div class="row" style="margin-bottom:40px;">
+            @*<h2>Garage sales for @Model.User.FirstName @Model.User.LastName</h2><br />*@
+            <h2>View your existing garage sales:</h2><br />
+            <div class="col-md-9" style="margin-left:135px;">
+                @{
+                    foreach (var sale in Model.GarageSales)
+                    {
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">@sale.GarageSaleName</h3>
+                            </div>
+                            <div class="panel-body">
+                                @Html.HiddenFor(m => m.Sale.GarageSaleId)
+                                <strong>Description:</strong> @sale.SaleDescription<br /><br />
+                                <strong>Address 1:</strong> @sale.SaleAddress1<br />
+                                <strong>Address 2:</strong> @sale.SaleAddress2<br />
+                                <strong>City:</strong> @sale.SaleCity<br />
+                                <strong>State:</strong> @sale.SaleState<br />
+                                <strong>Zip code:</strong> @sale.SaleZip<br /><br />
+                                <strong>Sale dates/times:</strong><br /><br />
+                                <div>
+                                    <table style="width:525px;" class="table table-bordered table-condensed table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>@sale.DatesTimes.SaleDateOne.ToLongDateString()</th>
+                                                <th>@sale.DatesTimes.SaleDateTwo.ToLongDateString()</th>
+                                                <th>@sale.DatesTimes.SaleDateThree.ToLongDateString()</th>
+                                                <th>@sale.DatesTimes.SaleDateFour.ToLongDateString()</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="width:auto">
+                                            <tr>
+                                                <td>Start:<br />@sale.DatesTimes.DayOneStart</td>
+                                                <td>Start:<br />@sale.DatesTimes.DayTwoStart</td>
+                                                <td>Start:<br />@sale.DatesTimes.DayThreeStart</td>
+                                                <td>Start:<br />@sale.DatesTimes.DayFourStart</td>
+                                            </tr>
+                                            <tr>
+                                                <td>End:<br />@sale.DatesTimes.DayOneEnd</td>
+                                                <td>End:<br />@sale.DatesTimes.DayTwoEnd</td>
+                                                <td>End:<br />@sale.DatesTimes.DayThreeEnd</td>
+                                                <td>End:<br />@sale.DatesTimes.DayFourEnd</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    @Html.ActionLink("Edit this garage sale", "GarageSale", @sale.GarageSaleId, new { @class="btn btn-info" })
+                                    @Html.ActionLink("Delete this garage sale", "GarageSale", @sale.GarageSaleId, new { @class="btn btn-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

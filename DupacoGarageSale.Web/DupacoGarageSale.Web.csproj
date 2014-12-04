@@ -259,6 +259,7 @@
     <Content Include="Views\GarageSale\Add.cshtml" />
     <Content Include="Views\Shared\_GarageSaleNav.cshtml" />
     <Content Include="Views\Shared\_GarageSaleLayout.cshtml" />
+    <Content Include="Views\GarageSale\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
