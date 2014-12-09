@@ -31,4 +31,11 @@
             $("#charNumDescription").text(char + ' characters left');
         }
     });
+
+    $("#btnAddSaleItems").click(function (e) {
+        if ($("#txtSaleName").val() == "") {
+            alert('You have not added the dates/times of your sale!');
+            e.preventDefault();
+        }
+    });
 });

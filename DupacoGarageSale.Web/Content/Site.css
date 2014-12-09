@@ -26,6 +26,11 @@
     z-index: 2;
 }
 
+.accordion button {
+    width: 100%;
+    display: block;
+}
+
 .ninety-eight-wide {
     width: 98px;
 }

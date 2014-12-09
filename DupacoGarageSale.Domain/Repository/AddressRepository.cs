@@ -43,7 +43,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
 
             return statesList;

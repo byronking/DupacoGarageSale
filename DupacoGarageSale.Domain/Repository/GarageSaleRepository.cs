@@ -198,5 +198,88 @@ namespace DupacoGarageSale.Data.Repository
 
             return garageSalesList;
         }
+
+        /// <summary>
+        /// This gets all the subcategories
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <returns></returns>
+        public List<ItemCategory> GetCategoriesAndSubcategories()
+        {
+            var subcategoriesList = new List<ItemCategory>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetCategoriesAndSubcategories", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var subcategory = new ItemCategory
+                        {
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemCategoryName = reader["item_category_name"].ToString(),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            ItemSubcategoryName = reader["item_subcategory_name"].ToString()
+                        };
+
+                        subcategoriesList.Add(subcategory);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return subcategoriesList;
+        }
+
+        /// <summary>
+        /// This gets the subcategories by category id.
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <returns></returns>
+        public List<ItemCategory> GetCategoriesByCategoryId(int category_id)
+        {
+            var categoriesList = new List<ItemCategory>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetSubcategoriesByCategoryId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@category_id", SqlDbType.Int).Value = category_id;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var category = new ItemCategory
+                        {
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemCategoryName = reader["item_category_name"].ToString(),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            ItemSubcategoryName = reader["item_subcategory_name"].ToString()
+                        };
+
+                        categoriesList.Add(category);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return categoriesList;
+        }
     }
 }

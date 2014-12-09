@@ -1,0 +1,102 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+@{
+    ViewBag.Title = "Add your garage sales";
+    Layout = "~/Views/Shared/_GarageSaleLayout.cshtml";
+}
+
+<div id="page-wrap" class="jumbotron" style="min-height:500px;">
+    <div class="container">
+        <div class="row" style="margin-bottom:40px;">
+            <h2>Add a new garage sale!</h2><br />
+            <p class="lead">Step 1: Tell everyone about your garage sale and where to find it!</p>
+        </div>
+        <div class="row">
+            @using (Html.BeginForm("Save", "GarageSale", FormMethod.Post, new { @class = "form-horizontal", @role="form" }))
+            {
+                <div class="col-md-5">
+                    <div class="well">                    
+                        <div style="padding:10px;">
+                            <p class="lead">Enter some basic info about your sale:</p>
+                            <div class="form-group">
+                                <label for="txtSaleName">Sale name</label>
+                                @Html.TextBoxFor(m => m.Sale.GarageSaleName, new { @class="form-control", id="txtSaleName", placeholder="Name your sale" })
+                                <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.GarageSaleName)</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtAddress1">Address 1</label>
+                                @Html.TextBoxFor(m => m.Sale.SaleAddress1, new { @class="form-control", id="txtAddress1" })
+                                <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.SaleAddress1)</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtAddress2">Address 2</label>
+                                @Html.TextBoxFor(m => m.Sale.SaleAddress2, new { @class="form-control", id="txtAddress2" })
+                            </div>
+                            <div class="form-group">
+                                <label for="txtCity">City</label>
+                                @Html.TextBoxFor(m => m.Sale.SaleCity, new { @class="form-control", id="txtCity" })
+                                <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.SaleCity)</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ddlStatesList">State</label>
+                                @Html.DropDownListFor(m => m.Sale.SaleState, ViewData["StatesList"] as SelectList, "Select...", new { id = "ddlStatesList", @class = "form-control" })
+                                <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.SaleState)</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtZip">Zip code</label>
+                                @Html.TextBoxFor(m => m.Sale.SaleZip, new { @class="form-control", id="txtZip" })
+                                <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.SaleZip)</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtDescription">Describe your sale</label>
+                                @Html.TextAreaFor(m => m.Sale.SaleDescription, new { @class="form-control", id="txtDescription", placeholder="Brevity is the soul of wit (300 characters max)", maxlength="300" })
+                                <div id="charNumDescription"></div>
+                                <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.SaleDescription)</span>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="well">
+                        <div style="padding:10px;">
+                            <div class="form-group">
+                                <p class="lead">Enter start and end times for the dates of your sale:</p>
+                                <table style="width:200px;" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Thu April 23rd</th>
+                                            <th>Fri April 24th</th>
+                                            <th>Sat April 25th</th>
+                                            <th>Sun April 26th</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="width:auto">
+                                        <tr>
+                                            <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayOneStart, new { id="dayOneStart", @class="ninety-eight-wide" })</td>
+                                            <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayTwoStart, new { id="dayTwoStart", @class="ninety-eight-wide" })</td>
+                                            <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayThreeStart, new { id="dayThreeStart", @class="ninety-eight-wide" })</td>
+                                            <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayFourStart, new { id="dayFourStart", @class="ninety-eight-wide" })</td>
+                                        </tr>
+                                        <tr>
+                                            <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayOneEnd, new { id="dayOneEnd", @class="ninety-eight-wide" })</td>
+                                            <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayTwoEnd, new { id="dayTwoEnd", @class="ninety-eight-wide" })</td>
+                                            <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayThreeEnd, new { id="dayThreeEnd", @class="ninety-eight-wide" })</td>
+                                            <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayFourEnd, new { id="dayFourEnd", @class="ninety-eight-wide" })</td>
+                                        </tr>
+                                    </tbody>
+                                </table>                                
+                            </div>
+                        </div>               
+                    </div>
+                    <div class="well">
+                        <p class="lead">Select the categories of the items in your sale:</p>
+                    </div> 
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Next, add items to your sale", "AddItems", "GarageSale", new { @class="btn btn-success", id="btnAddSaleItems" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

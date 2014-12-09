@@ -10,6 +10,8 @@ namespace DupacoGarageSale.Data.Domain
     public class GarageSale
     {
         public int GarageSaleId { get; set; }
+
+        [Required(ErrorMessage = "Enter a name for your garage sale")]
         public string GarageSaleName { get; set; }
 
         [Required(ErrorMessage="Enter a description of your garage sale")]

@@ -40,6 +40,9 @@ namespace DupacoGarageSale.Web.Controllers
 
                 var repository = new GarageSaleRepository();
 
+                // Get the subcategories
+                viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+
                 if (id == null)
                 {
                     // Load an empty form for new users.
@@ -65,10 +68,23 @@ namespace DupacoGarageSale.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Save(GarageSaleViewModel model)
+        public ActionResult Save(GarageSaleViewModel model, FormCollection form)
         {
-            // Set the sale dates in the web.config file and then set them as the model properties...
+            var categoryIdList = new List<int>();
 
+            foreach (var key in form.AllKeys)
+            {
+                int categoryId;
+
+                if (Int32.TryParse(key, out categoryId))
+                {
+                    categoryIdList.Add(categoryId);
+                }
+            }
+
+            var testy = categoryIdList;
+
+            // Set the sale dates in the web.config file and then set them as the model properties...
             model.Sale.DatesTimes.SaleDateOne = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateOne"]);
             model.Sale.DatesTimes.SaleDateTwo = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateTwo"]);
             model.Sale.DatesTimes.SaleDateThree = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateThree"]);
@@ -88,24 +104,30 @@ namespace DupacoGarageSale.Web.Controllers
             }
 
             var errors = ModelState.Where(v => v.Value.Errors.Any());
+            var repository = new GarageSaleRepository();
 
             if (ModelState.IsValid)
             {
                 var saveResult = new UserSaveResult();
-
-                var repository = new GarageSaleRepository();
+               
                 saveResult = repository.SaveGarageSale(model.Sale);
                 model.Sale.GarageSaleId = saveResult.SaveResultId;
+
+                ViewBag.NavAddSale = "active";   
+
+                return RedirectToAction("Add", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "Add",
+                    id = model.Sale.GarageSaleId
+                }));
             }
-
-            ViewBag.NavAddSale = "active";
-
-            return RedirectToAction("Add", new RouteValueDictionary(new
+            else
             {
-                controller = "GarageSale",
-                action = "Add",
-                id = model.Sale.GarageSaleId
-            }));
+                // Get the subcategories
+                model.ItemCategories = repository.GetCategoriesAndSubcategories();
+                return View("~/Views/GarageSale/Add.cshtml", model);
+            }                     
         }
 
         /// <summary>
@@ -144,6 +166,52 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 return RedirectToAction("SignIn", "Accounts");
             }  
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var userSession = new UserSession();
+
+            if (Session["UserSession"] != null)
+            {
+                // Load the states dropdown.
+                var addressRepository = new AddressRepository();
+                var statesList = addressRepository.GetStates();
+                ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+
+                userSession = Session["UserSession"] as UserSession;
+
+                var repository = new GarageSaleRepository();
+
+                var viewModel = new GarageSaleViewModel
+                {
+                    User = userSession.User,
+                    Sale = repository.GetGarageSaleById(id),
+                    SelectedCategories = new List<int>()
+                };                
+
+                // Get the subcategories
+                viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+                viewModel.Sale = repository.GetGarageSaleById((int)id);
+
+                ViewBag.NavAddSale = "active";
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("SignIn", "Accounts");
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult CreateItinerary()
+        {
+            return View();
         }
     }
 }

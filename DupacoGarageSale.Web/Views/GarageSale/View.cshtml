@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row" style="margin-bottom:40px;">
             @*<h2>Garage sales for @Model.User.FirstName @Model.User.LastName</h2><br />*@
-            <h2>View your existing garage sales:</h2><br />
+            <h2>View your existing garage sales</h2><br />
             <div class="col-md-9" style="margin-left:135px;">
                 @{
                     foreach (var sale in Model.GarageSales)
@@ -52,10 +52,10 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div><br />
                                 <div>
-                                    @Html.ActionLink("Edit this garage sale", "GarageSale", @sale.GarageSaleId, new { @class="btn btn-info" })
-                                    @Html.ActionLink("Delete this garage sale", "GarageSale", @sale.GarageSaleId, new { @class="btn btn-danger" })
+                                    @Html.ActionLink("Edit this garage sale", "Edit", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-info" })
+                                    @Html.ActionLink("Delete this garage sale", "Delete", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-danger" })
                                 </div>
                             </div>
                         </div>
