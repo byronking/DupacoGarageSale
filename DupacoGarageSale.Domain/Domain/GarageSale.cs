@@ -23,9 +23,11 @@ namespace DupacoGarageSale.Data.Domain
 
         [Required(ErrorMessage="Enter a city")]
         public string SaleCity { get; set; }
-
-        [Required(ErrorMessage="Enter a state")]
+        
         public string SaleState { get; set; }
+
+        [Required(ErrorMessage = "Enter a state")]
+        public int SaleStateId { get; set; }
 
         [Required(ErrorMessage = "Enter a zip code")]
         public string SaleZip { get; set; }
@@ -34,5 +36,6 @@ namespace DupacoGarageSale.Data.Domain
         public DateTime CreateDate { get; set; }
         public DateTime? ModifyDate { get; set; }
         public string ModifyUser { get; set; }
+        public List<GarageSaleItem> GarageSaleItems { get; set; }
     }
 }

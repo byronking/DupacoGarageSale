@@ -32,7 +32,7 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.Parameters.Add("@sale_address1", SqlDbType.VarChar).Value = sale.SaleAddress1;
                     cmd.Parameters.Add("@sale_address2", SqlDbType.VarChar).Value = sale.SaleAddress2 ?? string.Empty;
                     cmd.Parameters.Add("@sale_city", SqlDbType.VarChar).Value = sale.SaleCity;
-                    cmd.Parameters.Add("@sale_state", SqlDbType.VarChar).Value = sale.SaleState;
+                    cmd.Parameters.Add("@sale_state", SqlDbType.VarChar).Value = sale.SaleStateId;
                     cmd.Parameters.Add("@sale_zip", SqlDbType.VarChar).Value = sale.SaleZip;
                     cmd.Parameters.Add("@create_date", SqlDbType.DateTime).Value = sale.CreateDate;
                     cmd.Parameters.Add("@modify_date", SqlDbType.DateTime).Value = sale.CreateDate;
@@ -86,10 +86,112 @@ namespace DupacoGarageSale.Data.Repository
 
                     saveResult.SaveResultId = (int)returnParameter.Value;
 
-                    if (saveResult.SaveResultId != 0)
+                    // Save the garage sale items.
+                    foreach (var item in sale.GarageSaleItems)
+                    {
+                        item.SaleId = saveResult.SaveResultId;
+                    }
+
+                    var itemsSaveResult = SaveGarageSaleItems(sale.GarageSaleItems);
+
+                    if (saveResult.SaveResultId != 0 && itemsSaveResult == true)
                     {
                         saveResult.IsSaveSuccessful = true;
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return saveResult;
+        }
+
+        /// <summary>
+        /// This saves a new garage sale.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public UserSaveResult UpdateGarageSale(GarageSale sale)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("UpdateGarageSale", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = sale.GarageSaleId;
+                    cmd.Parameters.Add("@sale_name", SqlDbType.VarChar).Value = sale.GarageSaleName;
+                    cmd.Parameters.Add("@sale_description", SqlDbType.VarChar).Value = sale.SaleDescription;
+                    cmd.Parameters.Add("@sale_address1", SqlDbType.VarChar).Value = sale.SaleAddress1;
+                    cmd.Parameters.Add("@sale_address2", SqlDbType.VarChar).Value = sale.SaleAddress2 ?? string.Empty;
+                    cmd.Parameters.Add("@sale_city", SqlDbType.VarChar).Value = sale.SaleCity;
+                    cmd.Parameters.Add("@sale_state", SqlDbType.Int).Value = sale.SaleStateId;
+                    cmd.Parameters.Add("@sale_zip", SqlDbType.VarChar).Value = sale.SaleZip;
+                    cmd.Parameters.Add("@create_date", SqlDbType.DateTime).Value = sale.CreateDate;
+                    cmd.Parameters.Add("@modify_date", SqlDbType.DateTime).Value = sale.ModifyDate;
+                    cmd.Parameters.Add("@modify_user", SqlDbType.VarChar).Value = sale.ModifyUser;
+
+                    cmd.Parameters.Add("@sale_date_one", SqlDbType.DateTime).Value = sale.DatesTimes.SaleDateOne;
+
+                    DateTime? dayOneStart = null;
+
+                    if (sale.DatesTimes.DayOneStart == null)
+                    {
+                        dayOneStart = null;
+                    }
+                    else
+                    {
+                        dayOneStart = Convert.ToDateTime(sale.DatesTimes.DayOneStart);
+                    }
+
+                    cmd.Parameters.Add("@day_one_start", SqlDbType.DateTime).Value = dayOneStart;
+
+                    DateTime? dayOneEnd = null;
+
+                    if (sale.DatesTimes.DayOneEnd == null)
+                    {
+                        dayOneEnd = null;
+                    }
+                    else
+                    {
+                        dayOneEnd = Convert.ToDateTime(sale.DatesTimes.DayOneEnd);
+                    }
+
+                    cmd.Parameters.Add("@day_one_end", SqlDbType.DateTime).Value = dayOneEnd;
+
+                    cmd.Parameters.Add("@sale_date_two", SqlDbType.DateTime).Value = sale.DatesTimes.SaleDateTwo;
+                    cmd.Parameters.Add("@day_two_start", SqlDbType.DateTime).Value = sale.DatesTimes.DayTwoStart;
+                    cmd.Parameters.Add("@day_two_end", SqlDbType.DateTime).Value = sale.DatesTimes.DayTwoEnd;
+
+                    cmd.Parameters.Add("@sale_date_three", SqlDbType.DateTime).Value = sale.DatesTimes.SaleDateThree;
+                    cmd.Parameters.Add("@day_three_start", SqlDbType.DateTime).Value = sale.DatesTimes.DayThreeStart;
+                    cmd.Parameters.Add("@day_three_end", SqlDbType.DateTime).Value = sale.DatesTimes.DayThreeEnd;
+
+                    cmd.Parameters.Add("@sale_date_four", SqlDbType.DateTime).Value = sale.DatesTimes.SaleDateFour;
+                    cmd.Parameters.Add("@day_four_start", SqlDbType.DateTime).Value = sale.DatesTimes.DayFourStart;
+                    cmd.Parameters.Add("@day_four_end", SqlDbType.DateTime).Value = sale.DatesTimes.DayFourEnd;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();                    
+
+                    saveResult.SaveResultId = (int)returnParameter.Value;
+
+                    // Save the garage sale items.
+                    var itemsSaveResult = SaveGarageSaleItems(sale.GarageSaleItems);
+
+                    if (saveResult.SaveResultId != 0 && itemsSaveResult == true)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
+
+                    
                 }
             }
             catch (Exception ex)
@@ -105,9 +207,10 @@ namespace DupacoGarageSale.Data.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public GarageSale GetGarageSaleById(int id)
+        public GarageSale GetGarageSaleAndItemsById(int id)
         {
-            var sale = new GarageSale();
+            var garageSale = new GarageSale();
+            var garageSaleItemsList = new List<GarageSaleItem>();
 
             try
             {
@@ -122,7 +225,39 @@ namespace DupacoGarageSale.Data.Repository
 
                     while (reader.Read())
                     {
+                        garageSale.DatesTimes = new SaleDatesTimes
+                        {
+                            SaleDateTimeId = Convert.ToInt32(reader["sale_date_time_id"]),
+                            SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]),
+                            DayOneStart = reader["day_one_start"].ToString(),
+                            DayOneEnd = reader["day_one_end"].ToString(),
+                            SaleDateTwo = Convert.ToDateTime(reader["sale_date_two"]),
+                            DayTwoStart = reader["day_two_start"].ToString(),
+                            DayTwoEnd = reader["day_two_end"].ToString(),
+                            SaleDateThree = Convert.ToDateTime(reader["sale_date_three"]),
+                            DayThreeStart = reader["day_three_start"].ToString(),
+                            DayThreeEnd = reader["day_three_end"].ToString(),
+                            SaleDateFour = Convert.ToDateTime(reader["sale_date_four"]),
+                            DayFourStart = reader["day_four_start"].ToString(),
+                            DayFourEnd = reader["day_four_end"].ToString(),                        
+                        };
 
+                        garageSale = new GarageSale
+                        {
+                            CreateDate = Convert.ToDateTime(reader["create_date"]),
+                            DatesTimes = garageSale.DatesTimes,
+                            GarageSaleId = Convert.ToInt32(reader["sale_id"]),
+                            GarageSaleName = reader["sale_name"].ToString(),
+                            ModifyDate = Convert.ToDateTime(reader["modify_date"]),
+                            ModifyUser = reader["modify_user"].ToString(),
+                            SaleAddress1 = reader["sale_address1"].ToString(),
+                            SaleAddress2 = reader["sale_address2"].ToString(),
+                            SaleCity = reader["sale_city"].ToString(),                            
+                            SaleDescription = reader["sale_description"].ToString(),
+                            SaleState = reader["state_name"].ToString(),
+                            SaleStateId = Convert.ToInt32(reader["state_id"]),
+                            SaleZip = reader["sale_zip"].ToString()
+                        };
                     }
                 }
             }
@@ -131,7 +266,41 @@ namespace DupacoGarageSale.Data.Repository
                 Console.Write(ex.ToString());
             }
 
-            return sale;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetGarageSaleItemsBySaleId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.VarChar).Value = id;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var garageSaleItem = new GarageSaleItem
+                        {
+                            GarageSaleItemsId = Convert.ToInt32(reader["garage_sale_items_id"]),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemCategoryName = reader["item_category_name"].ToString(),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            ItemSubcategoryName = reader["item_subcategory_name"].ToString()
+                        };
+
+                        garageSaleItemsList.Add(garageSaleItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            garageSale.GarageSaleItems = garageSaleItemsList;
+
+            return garageSale;
         }
 
          /// <summary>
@@ -184,7 +353,8 @@ namespace DupacoGarageSale.Data.Repository
                             SaleCity = reader["sale_city"].ToString(),
                             SaleDescription = reader["sale_description"].ToString(),
                             SaleState = reader["state_name"].ToString(),
-                            SaleZip = reader["sale_zip"].ToString(),
+                            SaleStateId = Convert.ToInt32(reader["state_id"]),
+                            SaleZip = reader["sale_zip"].ToString()
                         };
 
                         garageSalesList.Add(garageSale);
@@ -280,6 +450,70 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return categoriesList;
+        }
+
+        private bool SaveGarageSaleItems(List<GarageSaleItem> garageSaleItems)
+        {
+            var savesSuccessful = false;
+            var itemsSaveResult = new UserSaveResult();
+            var saveResultsList = new List<UserSaveResult>();
+
+            try
+            {
+                // First, delete any existing garage sale items for this sale.
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("DeleteGarageSaleItems", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.VarChar).Value = garageSaleItems[0].SaleId;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            // Now, add the newly chosen items.
+            try
+            {
+                foreach (var garageSaleItem in garageSaleItems)
+                {
+                    using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                    using (SqlCommand cmd = new SqlCommand("SaveGarageSaleItems", conn))
+                    {
+                    
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@sale_id", SqlDbType.VarChar).Value = garageSaleItem.SaleId;
+                        cmd.Parameters.Add("@item_subcategory_id", SqlDbType.VarChar).Value = garageSaleItem.ItemSubcategoryId;
+
+                        var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                        returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+
+                        itemsSaveResult.SaveResultId = (int)returnParameter.Value;
+                        saveResultsList.Add(itemsSaveResult);
+
+                        cmd.Connection.Close();                        
+                    }
+                }
+
+                if (saveResultsList.Count == garageSaleItems.Count)
+                {
+                    savesSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return savesSuccessful;
         }
     }
 }

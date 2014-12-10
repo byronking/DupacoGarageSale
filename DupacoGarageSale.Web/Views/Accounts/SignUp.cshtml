@@ -18,10 +18,10 @@
         @using (Html.BeginForm("RegisterUser", "Accounts", FormMethod.Post, new { @role="form"}))
         {
             <p class="lead">
-                Are you a buyer or a seller?
+                Register for free to publish yours sales or search the existing sales to find exactly what you want. 
             </p>
             
-            <div class="form-group">
+            @*<div class="form-group">
                 <label class="radio-inline">
                     @Html.RadioButtonFor(m => m.UserTypeId, 3, new { @checked = "checked" }) I am a buyer
                 </label>
@@ -29,7 +29,7 @@
                 <label class="radio-inline">
                     @Html.RadioButtonFor(m => m.UserTypeId, 2) I am a seller
                 </label>
-            </div>
+            </div>*@
             
             <div class="form-group">
                 <label for="txtFirstName">First Name *</label>

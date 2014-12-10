@@ -152,6 +152,20 @@ namespace DupacoGarageSale.Web.Controllers
 
                 ViewBag.NavProfile = "active";
 
+                // Show the success message if the sale worked.
+                if (Session["SaveSuccessful"] != null)
+                {
+                    var saveSuccessful = Convert.ToBoolean(Session["SaveSuccessful"]);
+
+                    if (saveSuccessful)
+                    {
+                        ViewBag.Invisible = "false";
+                    }
+                }
+
+                // Clear the session object.
+                Session["SaveSuccessful"] = null;
+
                 return View(user);
             }
             else
@@ -197,6 +211,11 @@ namespace DupacoGarageSale.Web.Controllers
             var saveResult = new UserSaveResult();
             var repository = new AccountsRepository();
             saveResult = repository.SaveGarageSaleUserProfile(user);
+
+            if (saveResult.IsSaveSuccessful)
+            {
+                Session["SaveSuccessful"] = true;
+            }
 
             return RedirectToAction("UserProfile", new RouteValueDictionary(new
             {

@@ -7,20 +7,25 @@
 
 <div id="page-wrap" class="jumbotron" style="min-height:500px;">
     <div class="container">
-        <div class="row" style="margin-bottom:40px;">
+        <div class="row" style="margin-bottom:20px;width:40%;">
             <h2>Account info for @Model.FirstName @Model.LastName</h2>
+            <input id="hdnSaveMessage" type="hidden" value="@ViewBag.Invisible" />
+            <div class="alert alert-success invisible" role="alert" id="divSaveMessage">
+                <strong>Nice work!</strong>
+                    Your profile was successfully updated!
+            </div>
         </div>
         
         @using (Html.BeginForm("SaveUserProfile", "Accounts", FormMethod.Post, new { @class="form-horizontal", @role="form", enctype="multipart/form-data" }))
         {
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label class="col-sm-3 control-label">Account Type</label>
                         <div class="col-sm-7">
                             @Html.TextBoxFor(m => m.UserType, new { @class = "form-control", id="txtAccountType", @readonly="true" })
                         </div>
-                    </div>
+                    </div>*@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">First name</label>
                         <div class="col-sm-7">
@@ -44,7 +49,13 @@
                         <div class="col-sm-7">
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id="txtEmail", @readonly="true" })
                         </div>
-                    </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-3 control-label">Phone</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", id="txtPhone" })
+                        </div>
+                    </div>  
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -77,12 +88,7 @@
                             @Html.TextBoxFor(m => m.Address.Zip, new { @class = "form-control", id="txtZip" })
                         </div>
                     </div>                    
-                    <div class="form-group">
-                        <label for="inputPassword" class="col-sm-3 control-label">Phone</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", id="txtPhone" })
-                        </div>
-                    </div>                  
+                                     
                 </div>
             </div>
             
@@ -104,8 +110,8 @@
                         <input type="submit" value="Save profile" class="btn btn-primary" />
                         @*@Html.ActionLink("Change password", "ChangePassword", "Accounts", new { @class="btn btn-success" })*@
 
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#changePasswordModal">
-                            Change password
+                        <button type="button" class="btn btn-success" data-toggle="modal" disabled data-target="#changePasswordModal">
+                            Change password coming soon...
                         </button>
                     </div>
                 </div>

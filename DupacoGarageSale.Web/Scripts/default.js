@@ -1,5 +1,14 @@
 ﻿$(document).ready(function () {
 
+    // Show the successful save message.
+    if (($("#hdnSaveMessage").val() !== undefined)) {
+        //alert($("#hdnSaveMessage").val());
+
+        if ($("#hdnSaveMessage").val() == "false") {
+            $("#divSaveMessage").removeClass("invisible");
+        }
+    }
+
     // Make sure a user cannot click the upload button when there is a file attached.
     $("#btnUploadProfileImage").click(function (e) {
         var fileName = $('#txtFileName').val();
@@ -38,4 +47,14 @@
             e.preventDefault();
         }
     });
+
+    // Set the selected item categories.
+    if ($("#hdnSelectedCategories").val() !== undefined) {
+        var selectedCategories = new Array();
+        selectedCategories = $("#hdnSelectedCategories").val().split(',');
+
+        for (x in selectedCategories) {
+            $("input:checkbox[value=" + selectedCategories[x] + "]").attr("checked", true);
+        }
+    }
 });
