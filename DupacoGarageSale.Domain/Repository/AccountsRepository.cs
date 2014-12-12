@@ -36,7 +36,6 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = user.Email;
                     cmd.Parameters.Add("@phone", SqlDbType.VarChar).Value = user.Phone;
                     cmd.Parameters.Add("@password", SqlDbType.VarBinary).Value = hashedPassword;
-                    cmd.Parameters.Add("@user_type_id", SqlDbType.VarChar).Value = user.UserTypeId;
                     cmd.Parameters.Add("@create_date", SqlDbType.DateTime).Value = user.CreateDate;
                     cmd.Parameters.Add("@modify_user", SqlDbType.VarChar).Value = user.ModifyUser;
                     cmd.Parameters.Add("@active", SqlDbType.Bit).Value = user.Active;
@@ -105,8 +104,6 @@ namespace DupacoGarageSale.Data.Repository
                         user.Phone = reader["phone"].ToString();
                         user.UserId = Convert.ToInt32(reader["user_id"]);
                         user.UserName = reader["user_name"].ToString();
-                        user.UserType = reader["user_type"].ToString();
-                        user.UserTypeId = Convert.ToInt32(reader["user_type_id"]);
                         user.ProfilePicLink = reader["profile_pic_link"].ToString();
                     }
                 }
@@ -167,8 +164,6 @@ namespace DupacoGarageSale.Data.Repository
                         user.Phone = reader["phone"].ToString();
                         user.UserId = Convert.ToInt32(reader["user_id"]);
                         user.UserName = reader["user_name"].ToString();
-                        user.UserTypeId = Convert.ToInt32(reader["user_type_id"]);
-                        user.UserType = reader["user_type"].ToString();
                         user.ProfilePicLink = reader["profile_pic_link"].ToString();
                     }
                 }

@@ -42,8 +42,6 @@ namespace DupacoGarageSale.Data.Domain
         public string ConfirmPassword { get; set; }
 
         public byte[] BytePassword { get; set; }
-        public string UserType { get; set; }
-        public int UserTypeId { get; set; }
         public UserAddress Address { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? ModifyDate { get; set; }

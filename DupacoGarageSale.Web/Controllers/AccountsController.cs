@@ -47,14 +47,28 @@ namespace DupacoGarageSale.Web.Controllers
                 saveResult = repository.SaveGarageSaleUser(model);
 
                 model.UserId = saveResult.SaveResultId;
-            }
 
-            return RedirectToAction("UserProfile", new RouteValueDictionary(new
+                // Create a user session.
+                var session = new UserSession
+                {
+                    SessionKey = Guid.NewGuid(),
+                    SessionStartDate = DateTime.Now,
+                    User = model
+                };
+
+                Session["UserSession"] = session;
+
+                return RedirectToAction("UserProfile", new RouteValueDictionary(new
+                {
+                    controller = "Accounts",
+                    action = "UserProfile",
+                    id = model.UserId
+                }));
+            }
+            else
             {
-                controller = "Accounts",
-                action = "UserProfile",
-                id = model.UserId
-            }));
+                return View("~/Views/Accounts/SignUp.cshtml", model);
+            }
         }
 
         /// <summary>
@@ -62,7 +76,7 @@ namespace DupacoGarageSale.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult SignIn()
+        public ActionResult Login()
         {
             return View("~/Views/Accounts/Login.cshtml");
         }
@@ -73,7 +87,7 @@ namespace DupacoGarageSale.Web.Controllers
         /// <param name="formCollection"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SignIn(FormCollection formCollection)
+        public ActionResult Login(FormCollection formCollection)
         {
             var model = new AuthenticationInfo
             {
@@ -170,7 +184,7 @@ namespace DupacoGarageSale.Web.Controllers
             }
             else
             {
-                return RedirectToAction("SignIn", "Accounts");
+                return RedirectToAction("Login", "Accounts");
             }
         }
 

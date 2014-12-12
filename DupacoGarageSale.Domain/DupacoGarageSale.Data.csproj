@@ -46,6 +46,7 @@
     <Compile Include="Domain\GarageSaleItem.cs" />
     <Compile Include="Domain\GarageSaleUser.cs" />
     <Compile Include="Domain\SaleDatesTimes.cs" />
+    <Compile Include="Domain\SpecialItem.cs" />
     <Compile Include="Domain\State.cs" />
     <Compile Include="Domain\ItemCategory.cs" />
     <Compile Include="Domain\UserAddress.cs" />

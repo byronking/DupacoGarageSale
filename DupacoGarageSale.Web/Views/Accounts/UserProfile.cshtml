@@ -7,10 +7,10 @@
 
 <div id="page-wrap" class="jumbotron" style="min-height:500px;">
     <div class="container">
-        <div class="row" style="margin-bottom:20px;width:40%;">
+        <div class="row" style="margin-bottom:20px">
             <h2>Account info for @Model.FirstName @Model.LastName</h2>
             <input id="hdnSaveMessage" type="hidden" value="@ViewBag.Invisible" />
-            <div class="alert alert-success invisible" role="alert" id="divSaveMessage">
+            <div class="alert alert-success invisible" role="alert" id="divSaveMessage" style="width:40%;">
                 <strong>Nice work!</strong>
                     Your profile was successfully updated!
             </div>
@@ -120,7 +120,6 @@
                 @Html.HiddenFor(m => m.Active)
                 @Html.HiddenFor(m => m.CreateDate)
                 @Html.HiddenFor(m => m.UserId)
-                @Html.HiddenFor(m => m.UserTypeId)
             </div>
         }
     </div>    

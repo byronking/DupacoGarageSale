@@ -58,7 +58,7 @@ namespace DupacoGarageSale.Web.Controllers
             }
             else
             {
-                return RedirectToAction("SignIn", "Accounts");
+                return RedirectToAction("Login", "Accounts");
             }            
         }
 
@@ -257,7 +257,7 @@ namespace DupacoGarageSale.Web.Controllers
             }
             else
             {
-                return RedirectToAction("SignIn", "Accounts");
+                return RedirectToAction("Login", "Accounts");
             }  
         }
 
@@ -307,15 +307,50 @@ namespace DupacoGarageSale.Web.Controllers
                     }
                 }
 
+                // Save the viewmodel for later use.
+                Session["ViewModel"] = viewModel;
+
                 // Clear the session object.
-                Session["SaveSuccessful"] = null;
+                Session["SaveSuccessful"] = null;                
 
                 return View(viewModel);
             }
             else
             {
-                return RedirectToAction("SignIn", "Accounts");
+                return RedirectToAction("Login", "Accounts");
             }
+        }
+
+        public ActionResult SaveSpecialItems()
+        {
+            var viewModel = new GarageSaleViewModel();
+
+            if (Session["ViewModel"] != null)
+            {
+                viewModel = Session["ViewModel"] as GarageSaleViewModel;
+            }
+
+            var userSession = new UserSession();
+
+            if (Session["UserSession"] != null)
+            {
+                // Load the states dropdown.
+                var addressRepository = new AddressRepository();
+                var statesList = addressRepository.GetStates();
+                ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+
+                userSession = Session["UserSession"] as UserSession;
+
+                var repository = new GarageSaleRepository();
+
+                // Need to load the model
+
+                return View("~/Views/GarageSale/Edit.cshtml", viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }            
         }
 
         public ActionResult Delete(int id)

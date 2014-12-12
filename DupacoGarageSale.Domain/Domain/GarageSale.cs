@@ -17,6 +17,8 @@ namespace DupacoGarageSale.Data.Domain
         [Required(ErrorMessage="Enter a description of your garage sale")]
         public string SaleDescription { get; set; }
 
+        public string GargeSalePicLink { get; set; }
+
         [Required(ErrorMessage="Enter an address")]
         public string SaleAddress1 { get; set; }
         public string SaleAddress2 { get; set; }

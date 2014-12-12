@@ -2,12 +2,12 @@
 
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
 <div id="page-wrap" class="jumbotron" style="min-height:500px;">
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top:40px;">
             <div class="col-md-3"></div>
             <div class="col-md-6 text-center">
                 <div class="alert alert-danger" role="alert">
@@ -21,14 +21,14 @@
         
         <div class="row">
             <div class="col-md-3"></div>
-            <div class="col-md-6 text-center">
-                @using (Html.BeginForm("SignIn", "Accounts", FormMethod.Post, new { @class = "form-signin", @role = "form" }))
+            <div class="col-md-6">
+                @using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { @class = "form-signin", @role = "form" }))
                 {
-                    <h2 class="form-signin-heading">Please sign in</h2>
-                    <label class="sr-only" for="inputEmail">Email address</label>
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control seventy-percent", id="txtUserName", placeholder="User Name", required="", autofocus="" })<br />
+                    <h2 class="form-signin-heading">Please sign in</h2><br />
+                    <label for="txtUserName">User name</label>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control seventy-percent", id="txtUserName", placeholder="User name", required="", autofocus="" })<br />
                     
-                    <label class="sr-only" for="inputPassword">Password</label>
+                    <label for="txtPassword">Password</label>
                     @Html.TextBoxFor(m => m.Password, new { @class = "form-control", id="txtPassword", type="Password", placeholder="Password", required="" })
                     <div class="checkbox invisible">
                         <label>
