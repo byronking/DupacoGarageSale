@@ -28,7 +28,7 @@ namespace DupacoGarageSale.Data.Repository
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@sale_name", SqlDbType.VarChar).Value = sale.GarageSaleName;
-                    cmd.Parameters.Add("@sale_description", SqlDbType.VarChar).Value = sale.SaleDescription;
+                    cmd.Parameters.Add("@sale_description", SqlDbType.VarChar).Value = sale.SaleDescription;                    
                     cmd.Parameters.Add("@sale_address1", SqlDbType.VarChar).Value = sale.SaleAddress1;
                     cmd.Parameters.Add("@sale_address2", SqlDbType.VarChar).Value = sale.SaleAddress2 ?? string.Empty;
                     cmd.Parameters.Add("@sale_city", SqlDbType.VarChar).Value = sale.SaleCity;
@@ -126,6 +126,7 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = sale.GarageSaleId;
                     cmd.Parameters.Add("@sale_name", SqlDbType.VarChar).Value = sale.GarageSaleName;
                     cmd.Parameters.Add("@sale_description", SqlDbType.VarChar).Value = sale.SaleDescription;
+                    cmd.Parameters.Add("@sale_pic_link", SqlDbType.VarChar).Value = sale.GargeSalePicLink;
                     cmd.Parameters.Add("@sale_address1", SqlDbType.VarChar).Value = sale.SaleAddress1;
                     cmd.Parameters.Add("@sale_address2", SqlDbType.VarChar).Value = sale.SaleAddress2 ?? string.Empty;
                     cmd.Parameters.Add("@sale_city", SqlDbType.VarChar).Value = sale.SaleCity;
@@ -254,6 +255,7 @@ namespace DupacoGarageSale.Data.Repository
                             SaleAddress2 = reader["sale_address2"].ToString(),
                             SaleCity = reader["sale_city"].ToString(),                            
                             SaleDescription = reader["sale_description"].ToString(),
+                            GargeSalePicLink = reader["sale_pic_link"].ToString(),
                             SaleState = reader["state_name"].ToString(),
                             SaleStateId = Convert.ToInt32(reader["state_id"]),
                             SaleZip = reader["sale_zip"].ToString()

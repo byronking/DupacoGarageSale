@@ -4,6 +4,7 @@ using DupacoGarageSale.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -43,15 +44,11 @@ namespace DupacoGarageSale.Web.Controllers
                 // Get the subcategories
                 viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
 
-                //if (id == null)
-                //{
-                //    // Load an empty form for new users.
-                //}
-                //else
-                //{
-                //    // Load a saved garage sale by id.
-                //    viewModel.Sale = repository.GetGarageSaleById((int)id);
-                //}
+                // Set the default pic
+                if (viewModel.Sale.GargeSalePicLink == null)
+                {
+                    viewModel.Sale.GargeSalePicLink = "Insulators-3080-Karen-St-DBQ.jpg";
+                }
 
                 ViewBag.NavAddSale = "active";
                 return View(viewModel);
@@ -71,7 +68,7 @@ namespace DupacoGarageSale.Web.Controllers
         public ActionResult Save(GarageSaleViewModel model, FormCollection form)
         {
             var categoryIdList = new List<int>();
-            model.Sale.GarageSaleItems = new List<GarageSaleItem>();
+            model.Sale.GarageSaleItems = new List<GarageSaleItem>();            
 
             foreach (var key in form.AllKeys)
             {
@@ -89,9 +86,6 @@ namespace DupacoGarageSale.Web.Controllers
                     categoryIdList.Add(categoryId);
                 }
             }
-
-            var testy = categoryIdList;
-            var testy2 = model.Sale.GarageSaleItems;
 
             // Set the sale dates in the web.config file and then set them as the model properties...
             model.Sale.DatesTimes.SaleDateOne = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateOne"]);
@@ -145,10 +139,31 @@ namespace DupacoGarageSale.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Update(GarageSaleViewModel model, FormCollection form)
+        public ActionResult Update(HttpPostedFileBase garageSalePicUpload, GarageSaleViewModel model, FormCollection form)
         {
             var categoryIdList = new List<int>();
             model.Sale.GarageSaleItems = new List<GarageSaleItem>();
+
+            if (garageSalePicUpload != null)
+            {
+                // Save the image file.
+                model.Sale.GargeSalePicLink = garageSalePicUpload.FileName;
+
+                var fileName = Path.GetFileName(model.Sale.GargeSalePicLink);
+                var dir = ConfigurationManager.AppSettings["GarageSaleImagesDirectory"].ToString();
+
+                var storageDir = dir + Path.DirectorySeparatorChar + fileName;
+
+                if (!System.IO.File.Exists(fileName))
+                {
+                    garageSalePicUpload.SaveAs(dir + Path.DirectorySeparatorChar + fileName);
+                }
+            }
+            else
+            {
+                // Use the default pic.
+                model.Sale.GargeSalePicLink = "Insulators-3080-Karen-St-DBQ.jpg";
+            }
 
             foreach (var key in form.AllKeys)
             {
@@ -261,6 +276,7 @@ namespace DupacoGarageSale.Web.Controllers
             }  
         }
 
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             var userSession = new UserSession();
@@ -292,11 +308,10 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
 
                 var selectedCategories = viewModel.SelectedCategories.ToArray();
-
                 ViewBag.SelectedCategories = string.Join(",", selectedCategories);
-                ViewBag.NavViewSales = "active";
+                ViewBag.NavViewSales = "active";                
 
-                // Show the success message if the sale worked.
+                // Show the success message if the save worked.
                 if (Session["SaveSuccessful"] != null)
                 {
                     var saveSuccessful = Convert.ToBoolean(Session["SaveSuccessful"]);
