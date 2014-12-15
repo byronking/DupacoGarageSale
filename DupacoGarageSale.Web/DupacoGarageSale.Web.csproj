@@ -265,6 +265,7 @@
     <Content Include="Views\GarageSale\CreateItinerary.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_LoginTopNavigation.cshtml" />
+    <Content Include="Views\GarageSale\AddSpecialItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,243 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+@{
+    ViewBag.Title = "AddSpecialItem";
+    Layout = "~/Views/Shared/_GarageSaleLayout.cshtml";
+}
+
+<div id="page-wrap" class="jumbotron" style="min-height:500px;">
+    <div class="container">
+        <div class="row" style="margin-bottom:0px;">
+            <h2>Add a hot pick item to your garage sale</h2><br />
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Add a new hot pick</strong></h3>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("SaveSpecialItem", "GarageSale", FormMethod.Post, new { enctype="multipart/form-data", role="form" }))
+                    {
+                        <div style="width:50%;margin-left:150px;">
+                            <div class="form-group">
+                                <label for="fileThumbnail">Upload a picture of your special item *</label>
+                                <div class="input-group"> 
+                                    <span class="input-group-btn">
+                                        <span class="btn btn-primary btn-file">Browse…
+                                            <input type="file" id="picUpload" name="picUpload" />
+                                        </span>
+                                    </span>
+                                    @Html.TextBoxFor(m => m.GarageSaleSpecialItem.PictureLink, new { @class = "form-control", id="txtSpecialItemFileName", @readonly="true" })                                    
+                                </div>
+                                <span id="imgUploadValidationMessage" class="red invisible">Please select a valid image file to upload.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblTitle">Title *</label>
+                                @Html.TextBoxFor(m => m.GarageSaleSpecialItem.Title, new { @class = "form-control", id="txtTitle", @placeholder="Enter a title" })
+                                <span id="titleValidationMessage" class="red invisible">Please enter a title.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblCategory">Category *</label>
+                                <select name="ddlCategories" id="ddlCategories" class="form-control">
+                                    <option value="0">Select...</option>
+                                    <optgroup label="Baby">
+                                        <option value="4">Activities & Toys</option>
+                                        <option value="6">Bedding</option>
+                                        <option value="2">Car Seats</option>
+                                        <option value="7">Diapering</option>
+                                        <option value="3">Equipment</option>
+                                        <option value="8">Feeding</option>
+                                        <option value="9">Health & Safety</option>
+                                        <option value="5">Nursery Furniture</option>
+                                        <option value="1">Strollers</option>
+                                    </optgroup>
+                                    <optgroup label="Clothing & Accessories">
+                                        <option value="26">Accessories</option>
+                                        <option value="28">Bags & Purses</option>
+                                        <option value="19">Boys' Clothing sized 4-20</option>
+                                        <option value="12">Girls' Clothing sized 4-16</option>
+                                        <option value="17">Infant Boys' Clothing</option>
+                                        <option value="10">Infant Girls' Clothing</option>
+                                        <option value="27">Jewelry & Watches</option>
+                                        <option value="13">Juniors' Clothing</option>
+                                        <option value="16">Maternity Clothing</option>
+                                        <option value="22">Men's Big & Tall Clothing</option>
+                                        <option value="21">Men's Clothing</option>
+                                        <option value="24">Men's Formal</option>
+                                        <option value="30">Name-brand Items</option>
+                                        <option value="25">Outerwear</option>
+                                        <option value="15">Plus-Size Clothing</option>
+                                        <option value="29">Shoes & Boots</option>
+                                        <option value="18">Toddler Boys' Clothing</option>
+                                        <option value="11">Toddler Girls' Clothing</option>
+                                        <option value="14">Women's Clothing</option>
+                                        <option value="23">Women's Formal</option>
+                                        <option value="20">Young Men's Clothing</option>
+                                    </optgroup>
+                                    <optgroup label="Electronics">
+                                        <option value="34">Computers & Peripherals</option>
+                                        <option value="36">Games & Game Systems</option>
+                                        <option value="41">GPS & Navigation</option>
+                                        <option value="42">Instruments</option>
+                                        <option value="33">Laptops & Tablets</option>
+                                        <option value="37">Mobile Phones & Accessories</option>
+                                        <option value="38">Office & School Supplies</option>
+                                        <option value="35">Photo & Video</option>
+                                        <option value="32">Portable Audio & MP3 Players</option>
+                                        <option value="40">Smart Home</option>
+                                        <option value="43">Turntables & Vintage Electronics</option>
+                                        <option value="31">TV & Home Theater</option>
+                                        <option value="39">Wearable Technology</option>
+                                    </optgroup>
+                                    <optgroup label="Health & Beauty">
+                                        <option value="48">Accessories</option>
+                                        <option value="47">Fragrance</option>
+                                        <option value="45">Nail Care</option>
+                                        <option value="44">Skin Care & Makeup</option>
+                                        <option value="46">Styling Tools</option>
+                                    </optgroup>
+                                    <optgroup label="Pets">
+                                        <option value="51">Cages, Kennels & Bedding</option>
+                                        <option value="50">Carriers</option>
+                                        <option value="49">Clothes & Toys</option>
+                                        <option value="52">Feeding & Grooming</option>
+                                        <option value="55">Pets For Sale</option>
+                                        <option value="54">Tanks & Filters</option>
+                                        <option value="53">Training</option>
+                                    </optgroup>
+                                    <optgroup label="Home">
+                                        <option value="79">Antiques & Vintage</option>
+                                        <option value="62">Bath</option>
+                                        <option value="61">Bedding</option>
+                                        <option value="71">Collectibles & Knick-knacks</option>
+                                        <option value="57">Cookware & Bake-ware</option>
+                                        <option value="69">Décor</option>
+                                        <option value="56">Dining & Serving-ware</option>
+                                        <option value="59">Food Storage & Canning</option>
+                                        <option value="58">Glassware</option>
+                                        <option value="68">Heating & Cooling</option>
+                                        <option value="70">Holiday Décor</option>
+                                        <option value="60">Kitchen Textiles</option>
+                                        <option value="66">Large Appliances</option>
+                                        <option value="74">Lighting</option>
+                                        <option value="77">Luggage</option>
+                                        <option value="75">Rugs & Floor Covering</option>
+                                        <option value="78">Sewing & Crafting</option>
+                                        <option value="67">Small Appliances & Electronics</option>
+                                        <option value="72">Storage & Organization</option>
+                                        <option value="63">Tables & Chairs</option>
+                                        <option value="65">Upholstered Furniture</option>
+                                        <option value="73">Vacuums & Floor Care</option>
+                                        <option value="76">Window Coverings</option>
+                                        <option value="64">Wood Furniture</option>
+                                    </optgroup>
+                                    <optgroup label="Home Maintenance">
+                                        <option value="80">Building Materials</option>
+                                        <option value="82">Hand Tools</option>
+                                        <option value="81">Ladders</option>
+                                        <option value="86">Lawn & Garden</option>
+                                        <option value="87">Outdoor Power Equipment</option>
+                                        <option value="85">Painting Supplies</option>
+                                        <option value="83">Power Tools</option>
+                                        <option value="88">Snow Removal</option>
+                                        <option value="84">Tool Boxes & Storage</option>
+                                    </optgroup>
+                                    <optgroup label="Media">
+                                        <option value="89">Books: Adult & Teen</option>
+                                        <option value="91">Cookbooks</option>
+                                        <option value="90">Magazines</option>
+                                        <option value="96">Movies</option>
+                                        <option value="94">Music</option>
+                                        <option value="92">Sheet Music</option>
+                                        <option value="93">Software</option>
+                                        <option value="95">TV Series</option>
+                                        <option value="97">Video Games</option>
+                                        <option value="98">Vinyl & Vintage Media</option>
+                                    </optgroup>
+                                    <optgroup label="Toys & Games">
+                                        <option value="99">Action Figures & Playsets</option>
+                                        <option value="100">Arts & Crafts</option>
+                                        <option value="112">Books: Kids & Pre-teen</option>
+                                        <option value="101">Building Sets & Blocks</option>
+                                        <option value="114">Collectible Cards</option>
+                                        <option value="102">Dolls & Accessories</option>
+                                        <option value="103">Dress-up & Pretend Play</option>
+                                        <option value="104">Games & Puzzles</option>
+                                        <option value="105">Kids' Electronics</option>
+                                        <option value="106">Learning Toys</option>
+                                        <option value="108">Outdoor Play Systems</option>
+                                        <option value="107">Outdoor Toys</option>
+                                        <option value="111">Remote Controlled</option>
+                                        <option value="109">Riding Toys</option>
+                                        <option value="110">Stuffed Animals & Plush Toys</option>
+                                        <option value="113">Toy Cars & Trucks</option>
+                                    </optgroup>
+                                    <optgroup label="Vehicles">
+                                        <option value="120">Agricultural Machinery</option>
+                                        <option value="117">Campers & ATVs</option>
+                                        <option value="115">Cars & Trucks</option>
+                                        <option value="118">Motorcycles</option>
+                                        <option value="122">Parts & Accessories</option>
+                                        <option value="119">Scooters</option>
+                                        <option value="121">Trailers</option>
+                                        <option value="116">Watercraft</option>
+                                    </optgroup>
+                                    <optgroup label="Sports, Fitness & Outdoors">
+                                        <option value="135">Backyard Games</option>
+                                        <option value="123">Bicycling</option>
+                                        <option value="125">Boating & Water Sports</option>
+                                        <option value="127">Camping & Outdoors</option>
+                                        <option value="137">Exercise & Fitness</option>
+                                        <option value="139">Firewood</option>
+                                        <option value="132">Fishing</option>
+                                        <option value="133">Golfing</option>
+                                        <option value="130">Grills</option>
+                                        <option value="131">Hunting</option>
+                                        <option value="128">Outdoor Décor</option>
+                                        <option value="138">Outdoor Storage</option>
+                                        <option value="129">Patio Furniture</option>
+                                        <option value="140">Plants</option>
+                                        <option value="126">Pools & Water Play</option>
+                                        <option value="124">Scooters, Skateboards & Skates</option>
+                                        <option value="134">Team Sports Equipment</option>
+                                        <option value="136">Winter Sports</option>
+                                    </optgroup>
+                                </select>
+                                <span id="categoryValidationMessage" class="red invisible">Please select a category for your hot pick.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblPrice">Price *</label>
+                                @Html.TextBoxFor(m => m.GarageSaleSpecialItem.Price, new { @class = "form-control", id="txtPrice", placeholder="How much is it?" })
+                                <span id="priceValidationMessage" class="red invisible">Please enter a price.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lblDescription">Special item description *</label>
+                                @Html.TextAreaFor(m => m.GarageSaleSpecialItem.Description, new { @class = "form-control", id="txtSpecialItemDescription", placeholder="Enter a description of your special item", maxlength="300" })
+                                <div id="charSpecialItemDescription"></div>
+                                <span id="descriptionValidationMessage" class="red invisible">Please enter a description.</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary down_30" value="Save item" id="btnSaveSpecialItem" />                                
+                            </div>
+                            <div class="form-group">
+                                @{
+                                    if (Model != null)
+                                    {
+                                        if (ViewBag.SaveSuccesful == true)
+                                        {
+                                            Html.RenderPartial("~/Views/Shared/_Success.cshtml");
+                                        }
+                                        else if (ViewBag.SaveSuccesful == false)
+                                        {
+                                            Html.RenderPartial("~/Views/Shared/_Error.cshtml");
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }<br />
+                                         
+                </div>
+            </div>   
+        </div>
+    </div>
+</div>

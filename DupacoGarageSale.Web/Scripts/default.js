@@ -65,5 +65,53 @@
         input.trigger('fileselect', [numFiles, label]);
 
         $('#txtFileName').val(label);
+        $('#txtSpecialItemFileName').val(label);
+    });
+
+    $("#btnSaveSpecialItem").click(function (e) {
+        if ($('#txtSpecialItemFileName').val() == "") {
+            $('#imgUploadValidationMessage').removeClass('invisible');
+            
+            e.preventDefault();
+        }
+        else {
+            $('#imgUploadValidationMessage').addClass('invisible');
+        }
+
+        if ($('#ddlCategories option:selected').val() == 0) {
+            $('#categoryValidationMessage').removeClass('invisible');
+
+            e.preventDefault();
+        }
+        else {
+            $('#categoryValidationMessage').addClass('invisible');
+        }
+
+        if ($('#txtTitle').val() == "") {
+            $('#titleValidationMessage').removeClass('invisible');
+
+            e.preventDefault();
+        }
+        else {
+            $('#titleValidationMessage').addClass('invisible');
+        }
+
+        if ($('#txtPrice').val() == "") {
+            $('#priceValidationMessage').removeClass('invisible');
+
+            e.preventDefault();
+        }
+        else {
+            $('#priceValidationMessage').addClass('invisible');
+        }
+
+        if ($('#txtSpecialItemDescription').val() == "") {
+            $('#descriptionValidationMessage').removeClass('invisible');
+
+            e.preventDefault();
+        }
+        else {
+            $('#descriptionValidationMessage').addClass('invisible');
+        }
     });
 });

@@ -336,8 +336,16 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
-        public ActionResult SaveSpecialItems()
+        [HttpGet]
+        public ActionResult AddSpecialItem()
         {
+            var userSession = new UserSession();
+
+            if (Session["UserSession"] != null)
+            {
+                userSession = Session["UserSession"] as UserSession;
+            }
+
             var viewModel = new GarageSaleViewModel();
 
             if (Session["ViewModel"] != null)
@@ -345,22 +353,75 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel = Session["ViewModel"] as GarageSaleViewModel;
             }
 
-            var userSession = new UserSession();
+            return View(viewModel);
+        }
 
-            if (Session["UserSession"] != null)
+        [HttpPost]
+        public ActionResult SaveSpecialItem(GarageSaleViewModel model, FormCollection formCollection, HttpPostedFileBase picUpload)
+        {
+            var viewModel = new GarageSaleViewModel();
+
+            if (Session["ViewModel"] != null)
             {
+                viewModel = Session["ViewModel"] as GarageSaleViewModel;
+
+                model.GarageSaleSpecialItem.ItemSubcategoryId = Convert.ToInt32(formCollection["ddlCategories"]);
+                model.GarageSaleSpecialItem.SaleId = viewModel.Sale.GarageSaleId;
+                viewModel.Sale.ModifyDate = DateTime.Now;
+                viewModel.Sale.ModifyUser = viewModel.User.UserName;
+
+                if (picUpload != null)
+                {
+                    // Save the image file.
+                    model.GarageSaleSpecialItem.PictureLink = picUpload.FileName;
+
+                    var fileName = Path.GetFileName(model.GarageSaleSpecialItem.PictureLink);
+                    var dir = ConfigurationManager.AppSettings["GarageSaleImagesDirectory"].ToString();
+
+                    var storageDir = dir + Path.DirectorySeparatorChar + fileName;
+
+                    if (!System.IO.File.Exists(fileName))
+                    {
+                        picUpload.SaveAs(dir + Path.DirectorySeparatorChar + fileName);
+                    }
+                }
+                else
+                {
+                    // Use the default pic.
+                    model.GarageSaleSpecialItem.PictureLink = "keep-calm-and-come-to-the-dupaco-garage-sale.png";
+                }
+
+                var userSession = new UserSession();
+
+                if (Session["UserSession"] != null)
+                {
+                    userSession = Session["UserSession"] as UserSession;
+                }
+
                 // Load the states dropdown.
                 var addressRepository = new AddressRepository();
                 var statesList = addressRepository.GetStates();
-                ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
-
-                userSession = Session["UserSession"] as UserSession;
+                ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");                
 
                 var repository = new GarageSaleRepository();
+                var saveResult = new UserSaveResult();
 
-                // Need to load the model
+                if (saveResult.IsSaveSuccessful)
+                {
+                    viewModel.GarageSaleSpecialItem.SpecialItemsId = saveResult.SaveResultId;
+                }
+                else
+                {
+                    // Indicate in some way that the save failed.
+                }
 
-                return View("~/Views/GarageSale/Edit.cshtml", viewModel);
+                viewModel.GarageSaleSpecialItem = model.GarageSaleSpecialItem;
+
+                Session["ViewModel"] = viewModel;
+                Session["UserSession"] = userSession;
+                ViewBag.NavViewSales = "active";                  
+
+                return View("~/Views/GarageSale/AddSpecialItem.cshtml", viewModel);               
             }
             else
             {

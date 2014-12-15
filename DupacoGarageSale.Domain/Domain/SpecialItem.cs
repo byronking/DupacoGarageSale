@@ -17,7 +17,7 @@ namespace DupacoGarageSale.Data.Domain
         [Required(ErrorMessage = "Enter a description")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "upload a picture")]
+        [Required(ErrorMessage = "Upload a picture")]
         public string PictureLink { get; set; }
 
         [Required(ErrorMessage = "Enter a price")]
