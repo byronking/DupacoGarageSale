@@ -1,7 +1,7 @@
 ﻿@model DupacoGarageSale.Data.Domain.GarageSaleUser
 
 @{
-    ViewBag.Title = "Sign up for the Dupaco Garage Sale";
+    ViewBag.Title = "Sign up for a good buy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,13 +12,13 @@
 <div id="page-wrap" class="jumbotron" style="min-height:600px;">
     <a href="http://www.dupaco.com" style="margin-top:-40px;"><img alt="dupaco!" src="~/Content/images/dupaco.png" /></a>
     <img src="~/Content/images/garagesale.gif" />
-    <h2>@ViewBag.Title</h2>
+    <h2 style="margin-left:275px;">@ViewBag.Title</h2><br /><br />
 
-    <div class="marketing well" style="width:50%;margin-left:250px;">
+    <div class="marketing well" style="width:50%;margin-left:250px;margin-top:-20px">
         @using (Html.BeginForm("RegisterUser", "Accounts", FormMethod.Post, new { @role="form"}))
         {
             <p class="lead">
-                Register for free to publish yours sales or search the existing sales to find exactly what you want. 
+                Register to be able to publish a sale or to search garage sales and save your favorites. Registration is free!
             </p>
             
             @*<div class="form-group">

@@ -8,8 +8,13 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="@ViewBag.NavProfile"><a href="~/Accounts/UserProfile/@Model.UserId">My profile</a></li>
-                <li class="@ViewBag.NavAddSale"><a href="~/GarageSale/Add/">Add a new sale</a></li>
-                <li class="@ViewBag.NavViewSales"><a href="~/GarageSale/View/">View my sales</a></li>
+                <li class="dropdown @ViewBag.NavGarageSales">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Garage sales <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="~/GarageSale/Add/">Add a new sale</a></li>
+                        <li><a href="~/GarageSale/View/">View my sales</a></li>
+                    </ul>
+                </li>
                 @*<li class="@ViewBag.NavCreateItinerary"><a href="~/GarageSale/CreateItinerary/">Create an itinerary</a></li>*@
                 <li><a href="~/Accounts/SignUp/">Create new account</a></li>
             </ul>

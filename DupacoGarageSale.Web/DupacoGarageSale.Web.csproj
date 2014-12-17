@@ -238,7 +238,32 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\sql scripts\Garage sale items insert.txt" />
+    <Content Include="Scripts\sql scripts\sp_DeleteGarageSale.txt" />
+    <Content Include="Scripts\sql scripts\sp_DeleteGarageSaleItems.txt" />
+    <Content Include="Scripts\sql scripts\sp_DeleteGarageSpecialItems.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetActiveGarageSaleByUserName.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetCategoriesAndSubcategories.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetGarageSaleById.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetGarageSaleItemById.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetGarageSaleItemsBySaleId.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetGarageSalesByUserName.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetGarageSaleSpecialItems.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetStates.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetSubcategoriesByCategoryId.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetUserProfileInfoById.txt" />
+    <Content Include="Scripts\sql scripts\sp_SaveGarageSale.txt" />
+    <Content Include="Scripts\sql scripts\sp_SaveGarageSaleItems.txt" />
+    <Content Include="Scripts\sql scripts\sp_SaveGarageSaleSpecialItems.txt" />
+    <Content Include="Scripts\sql scripts\sp_SaveGarageSaleUser.txt" />
+    <Content Include="Scripts\sql scripts\sp_SaveGarageSaleUserProfile.txt" />
+    <Content Include="Scripts\sql scripts\sp_UpdateGarageSale.txt" />
+    <Content Include="Scripts\sql scripts\sp_UpdateGarageSaleSpecialItem.txt" />
+    <Content Include="Scripts\sql scripts\States insert script.txt" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Shared\_SuccessfulDelete.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -266,6 +291,8 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_LoginTopNavigation.cshtml" />
     <Content Include="Views\GarageSale\AddSpecialItem.cshtml" />
+    <Content Include="Views\Shared\_FailedDelete.cshtml" />
+    <Content Include="Views\GarageSale\EditSpecialItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

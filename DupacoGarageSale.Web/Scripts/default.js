@@ -5,7 +5,7 @@
         //alert($("#hdnSaveMessage").val());
 
         if ($("#hdnSaveMessage").val() == "false") {
-            $("#divSaveMessage").removeClass("invisible");
+            $("#divSaveMessage").removeClass("hidden");
         }
     }
 
@@ -66,6 +66,7 @@
 
         $('#txtFileName').val(label);
         $('#txtSpecialItemFileName').val(label);
+        $('#txtVideoFileName').val(label);
     });
 
     $("#btnSaveSpecialItem").click(function (e) {
@@ -114,4 +115,20 @@
             $('#descriptionValidationMessage').addClass('invisible');
         }
     });
+
+    $("#txtSpecialItemDescription").keyup(function () {
+        var max = 300;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $("#charSpecialItemDescription").text(' you have reached the limit');
+        } else {
+            var char = max - len;
+            $("#charSpecialItemDescription").text(char + ' characters left');
+        }
+    });
+    
+    //$("#linkReplacePicture").click(function (e) {
+    //    $("#pictureUpload").removeClass('hidden');
+    //    e.preventDefault();
+    //});
 });

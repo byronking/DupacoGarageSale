@@ -1,26 +1,46 @@
 ﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
 
 @{
-    ViewBag.Title = "Add a hot pick item";
+    ViewBag.Title = "Edit your hot pick item";
     Layout = "~/Views/Shared/_GarageSaleLayout.cshtml";
 }
 
 <div id="page-wrap" class="jumbotron" style="min-height:500px;">
     <div class="container">
         <div class="row" style="margin-bottom:0px;">
-            <h2>Add a hot pick item to your garage sale</h2><br />
+            <h2>@ViewBag.Title</h2><br />
 
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Add a new hot pick</strong></h3>
+                    <h3 class="panel-title"><strong>Edit item</strong></h3>
                 </div>
                 <div class="panel-body">
-                    @using (Html.BeginForm("SaveSpecialItem", "GarageSale", FormMethod.Post, new { enctype="multipart/form-data", role="form" }))
+                    @{ var testy = ViewBag.Invisible; }
+                    <input id="hdnSaveMessage" type="hidden" value="@ViewBag.Invisible" />
+                    <div class="alert alert-success hidden" role="alert" id="divSaveMessage" style="width:40%;">
+                        <strong>Nice work!</strong>
+                            Your hot pick was successfully updated!
+                    </div>
+
+                    @using (Html.BeginForm("UpdateSpecialItem", "GarageSale", FormMethod.Post, new { enctype="multipart/form-data", role="form" }))
                     {
+                        @Html.HiddenFor(m => m.GarageSaleSpecialItem.SpecialItemsId)
                         <div style="width:50%;margin-left:150px;">
                             <div class="form-group">
+                                <label for="lblTitle">Title *</label>
+                                @Html.TextBoxFor(m => m.GarageSaleSpecialItem.Title, new { @class = "form-control", id="txtTitle", @placeholder="Enter a title" })
+                                <span id="titleValidationMessage" class="red invisible">Please enter a title.</span>
+                            </div>
+                            <div class="form-group">
                                 <label for="fileThumbnail">Upload a picture of your special item *</label>
-                                <div class="input-group"> 
+                                <div class="thumbnail" style="width: 50%;">
+                                    <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true"
+                                        src="~/Content/images/garage_sale_pictures/@Model.GarageSaleSpecialItem.PictureLink" />
+                                </div>
+                                @*<div class="input-group">
+                                    @Html.ActionLink("Replace this picture", "ReplacePicture", "GarageSale", new { saleId = @Model.Sale.GarageSaleId, id="linkReplacePicture" })
+                                </div><br />*@
+                                <div class="input-group" id="pictureUpload">                                    
                                     <span class="input-group-btn">
                                         <span class="btn btn-primary btn-file">Browse…
                                             <input type="file" id="picUpload" name="picUpload" />
@@ -29,13 +49,9 @@
                                     @Html.TextBoxFor(m => m.GarageSaleSpecialItem.PictureLink, new { @class = "form-control", id="txtSpecialItemFileName", @readonly="true" })                                    
                                 </div>
                                 <span id="imgUploadValidationMessage" class="red invisible">Please select a valid image file to upload.</span>
-                            </div>
+                            </div>                            
                             <div class="form-group">
-                                <label for="lblTitle">Title *</label>
-                                @Html.TextBoxFor(m => m.GarageSaleSpecialItem.Title, new { @class = "form-control", id="txtTitle", @placeholder="Enter a title" })
-                                <span id="titleValidationMessage" class="red invisible">Please enter a title.</span>
-                            </div>
-                            <div class="form-group">
+                                @Html.HiddenFor(m => m.GarageSaleSpecialItem.ItemSubcategoryId, new { id="selectedCategory" })
                                 <label for="lblCategory">Category *</label>
                                 <select name="ddlCategories" id="ddlCategories" class="form-control">
                                     <option value="0">Select...</option>
@@ -211,13 +227,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="lblDescription">Special item description *</label>
-                                @Html.TextAreaFor(m => m.GarageSaleSpecialItem.Description, new { @class = "form-control", id="txtSpecialItemDescription", placeholder="Enter a description of your special item", maxlength="300", rows="7" })
+                                @Html.TextAreaFor(m => m.GarageSaleSpecialItem.Description, new { @class = "form-control", id="txtSpecialItemDescription", placeholder="Enter a description of your special item", maxlength="300", rows="5" })
                                 <div id="charSpecialItemDescription"></div>
                                 <span id="descriptionValidationMessage" class="red invisible">Please enter a description.</span>
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary down_30" value="Save item" id="btnSaveSpecialItem" />    
-                                @Html.ActionLink("Cancel and go back", "Edit", "GarageSale", new { id = @Model.Sale.GarageSaleId }, new { @class = "btn btn-default" })                          
+                                <input type="submit" class="btn btn-primary down_30" value="Save item" id="btnSaveSpecialItem" />
+                                @Html.ActionLink("Cancel and go back", "Edit", "GarageSale", new { id = @Model.Sale.GarageSaleId }, new { @class = "btn btn-default" })                                  
                             </div>
                             <div class="form-group">
                                 @{
@@ -235,10 +251,17 @@
                                 }
                             </div>
                         </div>
-                    }<br />
-                                         
+                    }
+                    <br />                                         
                 </div>
             </div>   
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //alert($("#selectedCategory").val());
+        $("#ddlCategories").val($("#selectedCategory").val());
+    });
+</script>

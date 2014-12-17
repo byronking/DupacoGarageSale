@@ -12,6 +12,23 @@
             <h2>View your existing garage sales</h2><br />
             <div class="col-md-9" style="margin-left:135px;">
                 @{
+                    <div class="form-group">
+                        @{
+                            if (TempData["SaveSuccessful"] != null)
+                            {
+                                var saveSuccessful = Convert.ToBoolean(TempData["SaveSuccessful"]);
+                                if (saveSuccessful == true)
+                                {
+                                    Html.RenderPartial("~/Views/Shared/_SuccessfulDelete.cshtml");
+                                }
+                                else if (saveSuccessful == false)
+                                {
+                                    Html.RenderPartial("~/Views/Shared/_FailedDelete.cshtml");
+                                }
+                            }
+                        }
+                    </div>
+                    
                     foreach (var sale in Model.GarageSales)
                     {
                         <div class="panel panel-info">
@@ -56,7 +73,7 @@
                                 </div><br />
                                 <div>
                                     @Html.ActionLink("Edit this garage sale", "Edit", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-info" })
-                                    @Html.ActionLink("Delete garage sale coming soon...", "Delete", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-danger", disabled = "disabled" })
+                                    @Html.ActionLink("Delete garage sale", "Delete", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-danger" })
                                 </div>
                             </div>
                         </div>

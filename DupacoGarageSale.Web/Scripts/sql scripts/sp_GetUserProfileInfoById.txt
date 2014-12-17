@@ -1,0 +1,21 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[GetUserProfileInfoById]    Script Date: 12/16/14 9:27:59 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[GetUserProfileInfoById] 
+
+@user_id int
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    select active, user_id, first_name, last_name, user_name, email, phone, create_date, a.address_id, address1, address2, city, state, 
+		zip, profile_pic_link from GarageSaleUsers u left join Address a on u.address_id = a.address_id where user_id = @user_id
+END

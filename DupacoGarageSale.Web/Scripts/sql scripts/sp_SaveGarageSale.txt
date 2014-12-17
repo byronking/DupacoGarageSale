@@ -1,0 +1,54 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[SaveGarageSale]    Script Date: 12/16/14 9:28:54 PM ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+ALTER PROCEDURE [dbo].[SaveGarageSale]
+
+@sale_name varchar(100),
+@sale_description varchar(300),
+@sale_address1 varchar(250),
+@sale_address2 varchar(250),
+@sale_city varchar(250),
+@sale_state varchar(100),
+@sale_zip varchar(20),
+@create_date datetime,
+@modify_date datetime,
+@modify_user varchar(50),
+@sale_date_one date, 	
+@day_one_start time = null,
+@day_one_end time = null,
+@sale_date_two date, 	
+@day_two_start time = null, 		
+@day_two_end time = null,	
+@sale_date_three date,
+@day_three_start time = null,
+@day_three_end time = null,	
+@sale_date_four date,
+@day_four_start time = null,
+@day_four_end time = null
+
+as
+
+begin
+
+set nocount on;
+declare @id int
+
+	begin
+
+	insert into GarageSales values (@sale_name, @sale_description, @sale_address1, @sale_address2, @sale_city, @sale_state, @sale_zip,
+		@create_date, @modify_date, @modify_user);
+
+	set @id = SCOPE_IDENTITY();
+
+	insert into GarageSaleDatesTimes values (@sale_date_one, @day_one_start, @day_one_end, @sale_date_two, @day_two_start, @day_two_end,
+		@sale_date_three, @day_three_start, @day_three_end, @sale_date_four, @day_four_start, @day_four_end, @id);
+
+	return (@id);
+
+	end
+end

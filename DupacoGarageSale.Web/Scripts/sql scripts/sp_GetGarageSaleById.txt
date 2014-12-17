@@ -1,0 +1,26 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[GetGarageSaleById]    Script Date: 12/16/14 9:23:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[GetGarageSaleById] 
+
+@sale_id int
+
+AS
+BEGIN
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+	SET NOCOUNT ON;
+
+    select gs.sale_id, sale_name, sale_description, sale_pic_link, sale_address1, sale_address2, sale_city, s.state_name, s.state_id, 
+		sale_zip, create_date, modify_date, modify_user, sale_date_time_id, sale_date_one, day_one_start, day_one_end, sale_date_two, 
+		day_two_start, day_two_end, sale_date_three, day_three_start, day_three_end, sale_date_four, day_four_start, day_four_end 
+		from GarageSales gs left join GarageSaleDatesTimes dt on gs.sale_id = dt.sale_id join States s on gs.sale_state_id = s.state_id 
+		where gs.sale_id = @sale_id
+END

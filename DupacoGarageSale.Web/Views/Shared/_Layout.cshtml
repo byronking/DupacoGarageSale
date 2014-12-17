@@ -6,16 +6,19 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/bootstrap/css")
+    @Styles.Render("~/Content/timepicker/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/timepicker")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
     @Html.Partial("~/Views/Shared/_TopNavigation.cshtml")
     
     <div class="container" style="margin-top:60px;">
         <div id="bg">
-          <img src="~/Content/images/garage-sale-1.jpg" alt="">
+          <img src="~/Content/images/Insulators-3080-Karen-St-DBQ.jpg" alt="">
         </div>
 
         @RenderBody()

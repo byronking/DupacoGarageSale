@@ -78,6 +78,9 @@ body {
     height:100%;
 }
 
+.table-scrollable{
+    overflow: auto;
+}
 
 header, footer, nav, section {
     display: block;

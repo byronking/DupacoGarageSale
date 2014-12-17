@@ -2,4 +2,3 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\DupacoGarageSale.
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\DupacoGarageSale.Data.pdb
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.pdb
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.csprojResolveAssemblyReference.cache

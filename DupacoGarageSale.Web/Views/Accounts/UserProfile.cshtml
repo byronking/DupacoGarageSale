@@ -8,120 +8,126 @@
 <div id="page-wrap" class="jumbotron" style="min-height:500px;">
     <div class="container">
         <div class="row" style="margin-bottom:20px">
-            <h2>Account info for @Model.FirstName @Model.LastName</h2>
-            <input id="hdnSaveMessage" type="hidden" value="@ViewBag.Invisible" />
-            <div class="alert alert-success invisible" role="alert" id="divSaveMessage" style="width:40%;">
-                <strong>Nice work!</strong>
-                    Your profile was successfully updated!
-            </div>
-        </div>
-        
-        @using (Html.BeginForm("SaveUserProfile", "Accounts", FormMethod.Post, new { @class="form-horizontal", @role="form", enctype="multipart/form-data" }))
-        {
-            <div class="row">
-                <div class="col-md-6">
-                    @*<div class="form-group">
-                        <label class="col-sm-3 control-label">Account Type</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.UserType, new { @class = "form-control", id="txtAccountType", @readonly="true" })
-                        </div>
-                    </div>*@
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">First name</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", id="txtFirstName" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                            <label class="col-sm-3 control-label">Last name</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", id="txtLastName" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                            <label class="col-sm-3 control-label">User name</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", id="txtUserName", @readonly="true" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                            <label class="col-sm-3 control-label">Email</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id="txtEmail", @readonly="true" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword" class="col-sm-3 control-label">Phone</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", id="txtPhone" })
-                        </div>
-                    </div>  
+            <h2>Account info for @Model.FirstName @Model.LastName</h2><br />
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>View / update your account info</strong></h3>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Address 1</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.Address.Address1, new { @class = "form-control", id="txtAddress1" })
-                        </div>
+                <div class="panel-body">
+                    <input id="hdnSaveMessage" type="hidden" value="@ViewBag.Invisible" />
+                    <div class="alert alert-success hidden" role="alert" id="divSaveMessage" style="width:40%;">
+                        <strong>Nice work!</strong>
+                            Your profile was successfully updated!
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Address 2</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.Address.Address2, new { @class = "form-control", id="txtAddress2" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">City</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.Address.City, new { @class = "form-control", id="txtCity" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">State</label>
-                        <div class="col-sm-7">
-                            @Html.DropDownListFor(m => m.Address.State, ViewData["StatesList"] as SelectList, "Select...", new { id="ddlStatesList", @class="form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Zip Code</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.Address.Zip, new { @class = "form-control", id="txtZip" })
-                        </div>
-                    </div>                    
+                    @*<h2>Account info for @Model.FirstName @Model.LastName</h2><br />*@
+                    @using (Html.BeginForm("SaveUserProfile", "Accounts", FormMethod.Post, new { @class="form-horizontal", @role="form", enctype="multipart/form-data" }))
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                @*<div class="form-group">
+                                    <label class="col-sm-3 control-label">Account Type</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(m => m.UserType, new { @class = "form-control", id="txtAccountType", @readonly="true" })
+                                    </div>
+                                </div>*@
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">First name</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", id="txtFirstName" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                        <label class="col-sm-3 control-label">Last name</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", id="txtLastName" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                        <label class="col-sm-3 control-label">User name</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", id="txtUserName", @readonly="true" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                        <label class="col-sm-3 control-label">Email</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id="txtEmail", @readonly="true" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword" class="col-sm-3 control-label">Phone</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", id="txtPhone" })
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">House number & street</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(m => m.Address.Address1, new { @class = "form-control", id="txtAddress1" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Apt, unit, or condo #</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(m => m.Address.Address2, new { @class = "form-control", id="txtAddress2" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">City</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(m => m.Address.City, new { @class = "form-control", id="txtCity" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">State</label>
+                                    <div class="col-sm-7">
+                                        @Html.DropDownListFor(m => m.Address.State, ViewData["StatesList"] as SelectList, "Select...", new { id="ddlStatesList", @class="form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Zip Code</label>
+                                    <div class="col-sm-7">
+                                        @Html.TextBoxFor(m => m.Address.Zip, new { @class = "form-control", id="txtZip" })
+                                    </div>
+                                </div>                    
                                      
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-sm-6 col-md-3" style="margin-left:136px;">
-                    <div class="thumbnail">
-                        <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/profile_pictures/@Model.ProfilePicLink" data-holder-rendered="true">
-                        <div class="caption">
-                            <h3>Profile pic <small>(optional)</small></h3>
-                            <input type="file" id="fileUpload" name="fileUpload" />
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
             
-            <div class="row down-40">
-                <div class="col-md-12 text-center">
-                    <div class="form-group">
-                        <input type="submit" value="Save profile" class="btn btn-primary" />
-                        @*@Html.ActionLink("Change password", "ChangePassword", "Accounts", new { @class="btn btn-success" })*@
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3" style="margin-left:136px;">
+                                <div class="thumbnail">
+                                    <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/profile_pictures/@Model.ProfilePicLink" data-holder-rendered="true">
+                                    <div class="caption">
+                                        <h3>Profile pic <small>(optional)</small></h3>
+                                        <input type="file" id="fileUpload" name="fileUpload" style="width:185px;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="row down-40">
+                            <div class="col-md-12 text-center">
+                                <div class="form-group">
+                                    <input type="submit" value="Save profile" class="btn btn-primary" />
+                                    @*@Html.ActionLink("Change password", "ChangePassword", "Accounts", new { @class="btn btn-success" })*@
 
-                        <button type="button" class="btn btn-success" data-toggle="modal" disabled data-target="#changePasswordModal">
-                            Change password coming soon...
-                        </button>
-                    </div>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" disabled data-target="#changePasswordModal">
+                                        Change password coming soon...
+                                    </button>
+                                </div>
+                            </div>
+                        </div>            
+                        <div>
+                            @Html.HiddenFor(m => m.Active)
+                            @Html.HiddenFor(m => m.CreateDate)
+                            @Html.HiddenFor(m => m.UserId)
+                        </div>
+                    }
                 </div>
-            </div>            
-            <div>
-                @Html.HiddenFor(m => m.Active)
-                @Html.HiddenFor(m => m.CreateDate)
-                @Html.HiddenFor(m => m.UserId)
             </div>
-        }
     </div>    
 </div>
 

@@ -1,0 +1,18 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[GetStates]    Script Date: 12/16/14 9:26:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[GetStates] 
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    select state_id, state_name from States
+END

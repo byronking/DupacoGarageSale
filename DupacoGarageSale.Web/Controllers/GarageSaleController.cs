@@ -50,7 +50,7 @@ namespace DupacoGarageSale.Web.Controllers
                     viewModel.Sale.GargeSalePicLink = "Insulators-3080-Karen-St-DBQ.jpg";
                 }
 
-                ViewBag.NavAddSale = "active";
+                ViewBag.NavGarageSales = "active";
                 return View(viewModel);
             }
             else
@@ -265,8 +265,7 @@ namespace DupacoGarageSale.Web.Controllers
                 };
 
                 viewModel.GarageSales = repository.GetGarageSaleByUserName(viewModel.User.UserName);
-                
-                ViewBag.NavViewSales = "active";
+                ViewBag.NavGarageSales = "active";
 
                 return View(viewModel);
             }
@@ -308,8 +307,10 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
 
                 var selectedCategories = viewModel.SelectedCategories.ToArray();
-                ViewBag.SelectedCategories = string.Join(",", selectedCategories);
-                ViewBag.NavViewSales = "active";                
+                ViewBag.SelectedCategories = string.Join(",", selectedCategories);                
+       
+                // Get the special items.
+                viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(viewModel.Sale.GarageSaleId);
 
                 // Show the success message if the save worked.
                 if (Session["SaveSuccessful"] != null)
@@ -326,8 +327,9 @@ namespace DupacoGarageSale.Web.Controllers
                 Session["ViewModel"] = viewModel;
 
                 // Clear the session object.
-                Session["SaveSuccessful"] = null;                
+                Session["SaveSuccessful"] = null;
 
+                ViewBag.NavGarageSales = "active";
                 return View(viewModel);
             }
             else
@@ -356,6 +358,121 @@ namespace DupacoGarageSale.Web.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public ActionResult EditSpecialItem(int special_item_id)
+        {
+            var userSession = new UserSession();
+
+            if (Session["UserSession"] != null)
+            {
+                userSession = Session["UserSession"] as UserSession;
+
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                }
+
+                // Show the success message if the save worked.
+                if (Session["SaveSuccessful"] != null)
+                {
+                    var saveSuccessful = Convert.ToBoolean(Session["SaveSuccessful"]);
+
+                    if (saveSuccessful)
+                    {
+                        ViewBag.Invisible = "false";
+                    }
+                }
+
+                var item = viewModel.GarageSaleSpecialItems.Where(m => m.SpecialItemsId == special_item_id).ToList();
+                viewModel.GarageSaleSpecialItem = item[0];
+
+                Session["ViewModel"] = viewModel;
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }            
+        }
+
+        [HttpPost]
+        public ActionResult UpdateSpecialItem(GarageSaleViewModel model, FormCollection formCollection, HttpPostedFileBase picUpload)
+        {
+            var userSession = new UserSession();
+
+            if (Session["UserSession"] != null)
+            {
+                userSession = Session["UserSession"] as UserSession;
+
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                    model.GarageSaleSpecialItem.SaleId = viewModel.GarageSaleSpecialItem.SaleId;
+
+                    viewModel.GarageSaleSpecialItem = model.GarageSaleSpecialItem;
+                }
+
+                model.GarageSaleSpecialItem.ItemSubcategoryId = Convert.ToInt32(formCollection["ddlCategories"]);
+
+                if (picUpload != null)
+                {
+                    // Save the image file.
+                    model.GarageSaleSpecialItem.PictureLink = picUpload.FileName;
+
+                    var fileName = Path.GetFileName(model.GarageSaleSpecialItem.PictureLink);
+                    var dir = ConfigurationManager.AppSettings["GarageSaleImagesDirectory"].ToString();
+
+                    var storageDir = dir + Path.DirectorySeparatorChar + fileName;
+
+                    if (!System.IO.File.Exists(fileName))
+                    {
+                        picUpload.SaveAs(dir + Path.DirectorySeparatorChar + fileName);
+                    }
+                }
+                else
+                {
+                    // Don't do anything. Use the previously-uploaded pic.
+                    //model.GarageSaleSpecialItem.PictureLink = "keep-calm-and-come-to-the-dupaco-garage-sale.png";
+                }
+
+                var repository = new GarageSaleRepository();
+                var saveSuccessful = repository.UpdateGarageSaleSpecialItem(model.GarageSaleSpecialItem);
+
+                if (saveSuccessful)
+                {
+                    Session["SaveSuccessful"] = true;
+                    
+                    // Remove the updated item.
+                    foreach (var item in viewModel.GarageSaleSpecialItems.ToList())
+                    {
+                        if (item.SpecialItemsId == model.GarageSaleSpecialItem.SpecialItemsId)
+                        {
+                            viewModel.GarageSaleSpecialItems.Remove(item);
+                            viewModel.GarageSaleSpecialItems.Add(model.GarageSaleSpecialItem);
+                        }
+                    }
+                }
+
+                Session["ViewModel"] = viewModel;
+
+                return RedirectToAction("EditSpecialItem", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "EditSpecialItem",
+                    special_item_id = viewModel.GarageSaleSpecialItem.SpecialItemsId
+                }));  
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }            
+        }
+
         [HttpPost]
         public ActionResult SaveSpecialItem(GarageSaleViewModel model, FormCollection formCollection, HttpPostedFileBase picUpload)
         {
@@ -367,8 +484,8 @@ namespace DupacoGarageSale.Web.Controllers
 
                 model.GarageSaleSpecialItem.ItemSubcategoryId = Convert.ToInt32(formCollection["ddlCategories"]);
                 model.GarageSaleSpecialItem.SaleId = viewModel.Sale.GarageSaleId;
-                viewModel.Sale.ModifyDate = DateTime.Now;
-                viewModel.Sale.ModifyUser = viewModel.User.UserName;
+                //viewModel.Sale.ModifyDate = DateTime.Now;
+                //viewModel.Sale.ModifyUser = viewModel.User.UserName;
 
                 if (picUpload != null)
                 {
@@ -406,9 +523,13 @@ namespace DupacoGarageSale.Web.Controllers
                 var repository = new GarageSaleRepository();
                 var saveResult = new UserSaveResult();
 
+                //repository.SaveGarageSale(viewModel.Sale);
+                saveResult = repository.SaveGarageSaleSpecialItem(model.GarageSaleSpecialItem);
+
                 if (saveResult.IsSaveSuccessful)
                 {
-                    viewModel.GarageSaleSpecialItem.SpecialItemsId = saveResult.SaveResultId;
+                    model.GarageSaleSpecialItem.SpecialItemsId = saveResult.SaveResultId;
+                    Session["SaveSuccessful"] = true;
                 }
                 else
                 {
@@ -419,9 +540,14 @@ namespace DupacoGarageSale.Web.Controllers
 
                 Session["ViewModel"] = viewModel;
                 Session["UserSession"] = userSession;
-                ViewBag.NavViewSales = "active";                  
+                ViewBag.NavViewSales = "active";
 
-                return View("~/Views/GarageSale/AddSpecialItem.cshtml", viewModel);               
+                return RedirectToAction("Edit", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "Edit",
+                    id = viewModel.Sale.GarageSaleId
+                }));              
             }
             else
             {
@@ -429,9 +555,70 @@ namespace DupacoGarageSale.Web.Controllers
             }            
         }
 
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            if (Session["UserSession"] != null)
+            {
+                var saveSuccessful = false;
+
+                var repository = new GarageSaleRepository();
+                saveSuccessful = repository.DeleteGarageSale(id);
+
+                TempData["SaveSuccessful"] = saveSuccessful;
+
+                return RedirectToAction("View", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "View",
+                    id = id
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        public ActionResult DeleteSpecialItem(int special_item_id)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var saveSuccessful = false;
+
+                var repository = new GarageSaleRepository();
+                saveSuccessful = repository.DeleteGarageSpecialItems(special_item_id);
+
+                TempData["ItemDeleteSuccessful"] = saveSuccessful;
+
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                }
+
+                return RedirectToAction("Edit", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "Edit",
+                    id = viewModel.Sale.GarageSaleId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        public ActionResult ReplacePicture(int saleId)
+        {
+            return RedirectToAction("EditSpecialItem", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "EditSpecialItem",
+                    id = saleId
+                })); 
         }
 
         [HttpGet]

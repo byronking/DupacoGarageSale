@@ -454,6 +454,11 @@ namespace DupacoGarageSale.Data.Repository
             return categoriesList;
         }
 
+        /// <summary>
+        /// This saves garage sale items.
+        /// </summary>
+        /// <param name="garageSaleItems"></param>
+        /// <returns></returns>
         private bool SaveGarageSaleItems(List<GarageSaleItem> garageSaleItems)
         {
             var savesSuccessful = false;
@@ -468,7 +473,7 @@ namespace DupacoGarageSale.Data.Repository
                 {
 
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@sale_id", SqlDbType.VarChar).Value = garageSaleItems[0].SaleId;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = garageSaleItems[0].SaleId;
 
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
@@ -489,8 +494,8 @@ namespace DupacoGarageSale.Data.Repository
                     {
                     
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@sale_id", SqlDbType.VarChar).Value = garageSaleItem.SaleId;
-                        cmd.Parameters.Add("@item_subcategory_id", SqlDbType.VarChar).Value = garageSaleItem.ItemSubcategoryId;
+                        cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = garageSaleItem.SaleId;
+                        cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = garageSaleItem.ItemSubcategoryId;
 
                         var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
                         returnParameter.Direction = ParameterDirection.ReturnValue;
@@ -516,6 +521,176 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return savesSuccessful;
+        }
+
+        /// <summary>
+        /// This saves a special item.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public UserSaveResult SaveGarageSaleSpecialItem(SpecialItem item)
+        {
+            var itemSaveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SaveGarageSaleSpecialItems", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = item.SaleId;
+                    cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = item.ItemSubcategoryId;
+                    cmd.Parameters.Add("@title", SqlDbType.VarChar).Value = item.Title;
+                    cmd.Parameters.Add("@description", SqlDbType.VarChar).Value = item.Description;
+                    cmd.Parameters.Add("@picture_link", SqlDbType.VarChar).Value = item.PictureLink;
+                    cmd.Parameters.Add("@price", SqlDbType.Money).Value = item.Price;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    itemSaveResult.SaveResultId = (int)returnParameter.Value;
+
+                    if (itemSaveResult.SaveResultId != 0)
+                    {
+                        itemSaveResult.IsSaveSuccessful = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return itemSaveResult;
+        }
+
+        public List<SpecialItem> GetGarageSaleSpecialItems(int sale_id)
+        {
+            var specialItems = new List<SpecialItem>();
+
+            try
+            {
+                // First, delete any existing garage sale items for this sale.
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetGarageSaleSpecialItems", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = sale_id;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var specialItem = new SpecialItem
+                        {
+                            SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
+                            Title = reader["title"].ToString(),
+                            Description = reader["description"].ToString(),
+                            PictureLink = reader["picture_link"].ToString(),
+                            Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
+                            SaleId = sale_id,
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"])
+                        };
+
+                        specialItems.Add(specialItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return specialItems;
+        }
+
+        public bool DeleteGarageSale(int sale_id)
+        {
+            var saveSuccessful = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("DeleteGarageSale", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = sale_id;
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return saveSuccessful;
+        }
+
+        public bool DeleteGarageSpecialItems(int special_items_id)
+        {
+            var saveSuccessful = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("DeleteGarageSpecialItems", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@special_items_id", SqlDbType.Int).Value = special_items_id;
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return saveSuccessful;
+        }
+
+        public bool UpdateGarageSaleSpecialItem(SpecialItem specialItem)
+        {
+            var updateSuccessful = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("UpdateGarageSaleSpecialItem", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@special_items_id", SqlDbType.Int).Value = specialItem.SpecialItemsId;
+                    //cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = specialItem.SaleId;
+                    cmd.Parameters.Add("@title", SqlDbType.VarChar).Value = specialItem.Title;
+                    cmd.Parameters.Add("@description", SqlDbType.VarChar).Value = specialItem.Description;
+                    cmd.Parameters.Add("@picture_link", SqlDbType.VarChar).Value = specialItem.PictureLink;
+                    cmd.Parameters.Add("@price", SqlDbType.Money).Value = specialItem.Price;
+                    cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = specialItem.ItemSubcategoryId;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    updateSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return updateSuccessful;
         }
     }
 }

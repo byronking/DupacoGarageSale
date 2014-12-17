@@ -1,0 +1,24 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteGarageSpecialItems]    Script Date: 12/16/14 9:19:41 PM ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+ALTER PROCEDURE [dbo].[DeleteGarageSpecialItems]
+
+@special_items_id int
+
+as
+
+begin
+
+set nocount on;
+
+	begin
+
+		delete from SpecialItems where special_items_id = @special_items_id;
+
+	end
+end
