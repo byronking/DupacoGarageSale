@@ -83,6 +83,11 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.ExecuteNonQuery();
 
                     saveResult.SaveResultId = (int)returnParameter.Value;
+
+                    if (saveResult.SaveResultId != 0)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
                 }
             }
             catch (Exception ex)

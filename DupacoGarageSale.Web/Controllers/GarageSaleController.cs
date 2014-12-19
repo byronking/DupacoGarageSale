@@ -638,7 +638,7 @@ namespace DupacoGarageSale.Web.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveBlogPost(GarageSaleViewModel model)
+        public ActionResult SaveBlogPost(GarageSaleViewModel model, HttpPostedFileBase garageSalePicUpload)
         {
             if (Session["UserSession"] != null)
             {
@@ -649,6 +649,22 @@ namespace DupacoGarageSale.Web.Controllers
                     viewModel = Session["ViewModel"] as GarageSaleViewModel;
                     viewModel.GarageSaleBlogPost = model.GarageSaleBlogPost;
                     viewModel.GarageSaleBlogPost.SaleId = viewModel.Sale.GarageSaleId;
+
+                    if (garageSalePicUpload != null)
+                    {
+                        // Save the image file.
+                        viewModel.GarageSaleBlogPost.ImageUri = garageSalePicUpload.FileName;
+
+                        var fileName = Path.GetFileName(viewModel.GarageSaleBlogPost.ImageUri);
+                        var dir = ConfigurationManager.AppSettings["GarageSaleImagesDirectory"].ToString();
+
+                        var storageDir = dir + Path.DirectorySeparatorChar + fileName;
+
+                        if (!System.IO.File.Exists(fileName))
+                        {
+                            garageSalePicUpload.SaveAs(dir + Path.DirectorySeparatorChar + fileName);
+                        }
+                    }
                 }
 
                 if (viewModel.GarageSaleBlogPost.MediaTypeId == 2)
@@ -662,6 +678,16 @@ namespace DupacoGarageSale.Web.Controllers
 
                 var repository = new BlogPostRepository();
                 var saveResult = repository.SaveBlogPost(viewModel.GarageSaleBlogPost);
+
+                if (saveResult.IsSaveSuccessful)
+                {
+                    viewModel.GarageSaleBlogPost.BlogPostId = saveResult.SaveResultId;
+                    Session["SaveSuccessful"] = true;
+                }
+                else
+                {
+                    // Indicate in some way that the save failed.
+                }
 
                 // Save the viewmodel for later use.
                 Session["ViewModel"] = viewModel;
