@@ -19,17 +19,17 @@
                         <div style="padding:10px;">
                             <p class="lead">Enter some basic info about your sale:</p>
                             <div class="form-group">
-                                <label for="txtSaleName">Sale name</label>
+                                <label for="txtSaleName">Sale title</label>
                                 @Html.TextBoxFor(m => m.Sale.GarageSaleName, new { @class="form-control", id="txtSaleName", placeholder="Name your sale" })
                                 <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.GarageSaleName)</span>
                             </div>
                             <div class="form-group">
-                                <label for="txtAddress1">Address 1</label>
+                                <label for="txtAddress1">House number & street</label>
                                 @Html.TextBoxFor(m => m.Sale.SaleAddress1, new { @class="form-control", id="txtAddress1" })
                                 <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.SaleAddress1)</span>
                             </div>
                             <div class="form-group">
-                                <label for="txtAddress2">Address 2</label>
+                                <label for="txtAddress2">Apt, unit, or condo #</label>
                                 @Html.TextBoxFor(m => m.Sale.SaleAddress2, new { @class="form-control", id="txtAddress2" })
                             </div>
                             <div class="form-group">
@@ -53,7 +53,8 @@
                                 @Html.TextAreaFor(m => m.Sale.SaleDescription, new { @class="form-control", id="txtDescription", placeholder="Brevity is the soul of wit (300 characters max)", maxlength="300" })
                                 <div id="charNumDescription"></div>
                                 <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.SaleDescription)</span>
-                            </div>                            
+                            </div>
+                                                     
                         </div>
                     </div>
                 </div>
@@ -62,17 +63,18 @@
                     <div class="well">
                         <div style="padding:10px;">
                             <div class="form-group">
-                                <p class="lead">Enter start and end times for the dates of your sale:</p>
-                                <table style="width:200px;" class="table table-bordered">
-                                    <thead>
+                                <div class="table-scrollable">
+                                    <p class="lead">Enter start and end times for the dates of your sale:</p>
+                                    <table class="table table-bordered">
+                                    @*<thead>*@
                                         <tr>
                                             <th>Thu April 23rd</th>
                                             <th>Fri April 24th</th>
                                             <th>Sat April 25th</th>
                                             <th>Sun April 26th</th>
                                         </tr>
-                                    </thead>
-                                    <tbody style="width:auto">
+                                    @*</thead>*@
+                                    @*<tbody style="width:auto">*@
                                         <tr>
                                             <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayOneStart, new { id="dayOneStart", @class="ninety-eight-wide" })</td>
                                             <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayTwoStart, new { id="dayTwoStart", @class="ninety-eight-wide" })</td>
@@ -85,8 +87,9 @@
                                             <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayThreeEnd, new { id="dayThreeEnd", @class="ninety-eight-wide" })</td>
                                             <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayFourEnd, new { id="dayFourEnd", @class="ninety-eight-wide" })</td>
                                         </tr>
-                                    </tbody>
-                                </table>                                
+                                    @*</tbody>*@
+                                    </table> 
+                                </div>                               
                             </div>
                         </div>               
                     </div>
@@ -98,7 +101,7 @@
                             <div id="headingOne" role="tab" class="panel-heading">
                               <h4 class="panel-title">
                                 <a aria-controls="collapseOne" aria-expanded="true" href="#collapseOne" data-parent="#accordion" data-toggle="collapse">
-                                  Baby & Kids
+                                  Baby
                                 </a>
                               </h4>
                             </div>
@@ -177,7 +180,7 @@
                             <div id="headingFour" role="tab" class="panel-heading">
                                 <h4 class="panel-title">
                                 <a aria-controls="collapseFour" aria-expanded="false" href="#collapseFour" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                    Home
+                                    Health & Beauty
                                 </a>
                                 </h4>
                             </div>
@@ -203,7 +206,7 @@
                             <div id="headingFive" role="tab" class="panel-heading">
                                 <h4 class="panel-title">
                                 <a aria-controls="collapseFive" aria-expanded="false" href="#collapseFive" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                    Media
+                                    Pets
                                 </a>
                                 </h4>
                             </div>
@@ -229,37 +232,11 @@
                             <div id="headingSix" role="tab" class="panel-heading">
                                 <h4 class="panel-title">
                                 <a aria-controls="collapseSix" aria-expanded="false" href="#collapseSix" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                    Sports, Fitness & Outdoors
+                                    Home
                                 </a>
                                 </h4>
                             </div>
                             <div aria-labelledby="headingSix" role="tabpanel" class="panel-collapse collapse" id="collapseSix">
-                              <div class="list-group">
-                                  @{
-                                      if (Model.ItemCategories != null)
-                                      {
-                                            var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
-
-                                            foreach (var category in categories8)
-                                            {
-                                                <div class="row" style="margin-left:20px;">
-                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                                </div>
-                                            }
-                                        }
-                                    }
-                              </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-info">
-                            <div id="headingSeven" role="tab" class="panel-heading">
-                                <h4 class="panel-title">
-                                <a aria-controls="collapseSeven" aria-expanded="false" href="#collapseSeven" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                    Toys & Games
-                                </a>
-                                </h4>
-                            </div>
-                            <div aria-labelledby="headingSeven" role="tabpanel" class="panel-collapse collapse" id="collapseSeven">
                               <div class="list-group">
                                   @{
                                       if (Model.ItemCategories != null)
@@ -278,14 +255,14 @@
                             </div>
                         </div>
                         <div class="panel panel-info">
-                            <div id="headingEight" role="tab" class="panel-heading">
+                            <div id="headingSeven" role="tab" class="panel-heading">
                                 <h4 class="panel-title">
-                                <a aria-controls="collapseEight" aria-expanded="false" href="#collapseEight" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                    Vehicles
+                                <a aria-controls="collapseSeven" aria-expanded="false" href="#collapseSeven" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Home Maintenance
                                 </a>
                                 </h4>
                             </div>
-                            <div aria-labelledby="headingEight" role="tabpanel" class="panel-collapse collapse" id="collapseEight">
+                            <div aria-labelledby="headingSeven" role="tabpanel" class="panel-collapse collapse" id="collapseSeven">
                               <div class="list-group">
                                   @{
                                       if (Model.ItemCategories != null)
@@ -303,7 +280,110 @@
                               </div>
                             </div>
                         </div>
+                        <div class="panel panel-info">
+                            <div id="headingEight" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseEight" aria-expanded="false" href="#collapseEight" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Media
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingEight" role="tabpanel" class="panel-collapse collapse" id="collapseEight">
+                              <div class="list-group">
+                                  @{
+                                      if (Model.ItemCategories != null)
+                                      {
+                                            var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
 
+                                            foreach (var category in categories8)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
+                                        }
+                                    }
+                              </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-info">
+                            <div id="headingNine" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseNine" aria-expanded="false" href="#collapseNine" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Toys & Games
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingNine" role="tabpanel" class="panel-collapse collapse" id="collapseNine">
+                              <div class="list-group">
+                                  @{
+                                      if (Model.ItemCategories != null)
+                                      {
+                                            var categories9 = Model.ItemCategories.Where(m => m.ItemCategoryId == 9);
+
+                                            foreach (var category in categories9)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
+                                        }
+                                    }
+                              </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-info">
+                            <div id="headingTen" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseTen" aria-expanded="false" href="#collapseTen" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Vehicles
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingTen" role="tabpanel" class="panel-collapse collapse" id="collapseTen">
+                              <div class="list-group">
+                                  @{
+                                      if (Model.ItemCategories != null)
+                                      {
+                                            var categories10 = Model.ItemCategories.Where(m => m.ItemCategoryId == 10);
+
+                                            foreach (var category in categories10)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
+                                        }
+                                    }
+                              </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-info">
+                            <div id="headingEleven" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseEleven" aria-expanded="false" href="#collapseEleven" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Sports, Fitness & Outdoors
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingEleven" role="tabpanel" class="panel-collapse collapse" id="collapseEleven">
+                              <div class="list-group">
+                                  @{
+                                      if (Model.ItemCategories != null)
+                                      {
+                                            var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
+
+                                            foreach (var category in categories11)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
+                                        }
+                                    }
+                              </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
                                        

@@ -21,6 +21,7 @@ namespace DupacoGarageSale.Data.Domain
         public string PictureLink { get; set; }
 
         [Required(ErrorMessage = "Enter a price")]
+        [DataType(DataType.Currency, ErrorMessage="Enter a price without special characters.")]
         public decimal Price { get; set; }
 
         public int SaleId { get; set; }

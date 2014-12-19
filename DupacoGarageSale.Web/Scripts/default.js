@@ -127,8 +127,73 @@
         }
     });
     
-    //$("#linkReplacePicture").click(function (e) {
-    //    $("#pictureUpload").removeClass('hidden');
-    //    e.preventDefault();
-    //});
+    // Respond to the changing of the optionsMedia radio buttons.
+    if ($("#radioImage").is(':checked')) {
+        //alert('image');
+        $("#divImage").removeClass('hidden');
+        $("#divYouTube").addClass('hidden');
+        $("#divVine").addClass('hidden');
+    }
+    else if ($("#radioYouTube").is(':checked')) {
+        //alert('youtube');
+        $("#divImage").addClass('hidden');
+        $("#divYouTube").removeClass('hidden');
+        $("#divVine").addClass('hidden');
+    }
+    else if ($("#radioVine").is(':checked')) {
+        //alert('vine');
+        $("#divImage").addClass('hidden');
+        $("#divYouTube").addClass('hidden');
+        $("#divVine").removeClass('hidden');
+    }
+
+    $("#radioImage").change(function () {
+        $("#divImage").removeClass('hidden');
+        $("#divYouTube").addClass('hidden');
+        $("#divVine").addClass('hidden');
+    });
+
+    $("#radioYouTube").change(function () {
+        $("#divImage").addClass('hidden');
+        $("#divYouTube").removeClass('hidden');
+        $("#divVine").addClass('hidden');
+    });
+
+    $('#radioVine').change(function () {
+        $("#divImage").addClass('hidden');
+        $("#divYouTube").addClass('hidden');
+        $("#divVine").removeClass('hidden');
+    });
+
+    // Validation for the blog post
+    $("#btnSaveBlogPost").click(function (e) {
+        if ($('#txtBlogPostTitle').val() == "") {
+            $('#titleValidationMessage').removeClass('invisible');
+
+            e.preventDefault();
+        }
+        else {
+            $('#titleValidationMessage').addClass('invisible');
+        }
+
+        if ($('#txtBlogPost').val() == "") {
+            $('#postValidationMessage').removeClass('invisible');
+
+            e.preventDefault();
+        }
+        else {
+            $('#postValidationMessage').addClass('invisible');
+        }
+    });
+    
+    $("#txtBlogPost").keyup(function () {
+        var max = 300;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $("#charNumBlogPost").text(' you have reached the limit');
+        } else {
+            var char = max - len;
+            $("#charNumBlogPost").text(char + ' characters left');
+        }
+    });
 });

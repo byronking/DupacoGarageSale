@@ -57,24 +57,6 @@
                                                      
                         </div>
                     </div>
-                    <div class="well">
-                        <p class="lead">Add a picture of your garage sale:</p>
-                        <div class="form-group">
-                            <div class="thumbnail">
-                                <img alt="Garage sale pic" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true"
-                                    src="~/Content/images/garage_sale_pictures/@Model.Sale.GargeSalePicLink" />
-                            </div>
-                            <div class="input-group" style="width:75%;"> 
-                                <span class="input-group-btn">
-                                    <span class="btn btn-primary btn-file">Browse…
-                                        <input type="file" id="garageSalePicUpload" name="garageSalePicUpload" />
-                                    </span>
-                                </span>
-                                @Html.TextBoxFor(m => m.Sale.GargeSalePicLink, new { @class="form-control", id="txtFileName", @readonly="true" })
-                                <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.GargeSalePicLink)</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="col-md-6">

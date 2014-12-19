@@ -204,8 +204,8 @@
                                 </select>
                                 <span id="categoryValidationMessage" class="red invisible">Please select a category for your hot pick.</span>
                             </div>
-                            <div class="form-group">
-                                <label for="lblPrice">Price *</label>
+                            <div class="form-group">                                
+                                <label for="lblPrice">Price (numbers only) *</label>
                                 @Html.TextBoxFor(m => m.GarageSaleSpecialItem.Price, new { @class = "form-control", id="txtPrice", placeholder="How much is it?" })
                                 <span id="priceValidationMessage" class="red invisible">Please enter a price.</span>
                             </div>

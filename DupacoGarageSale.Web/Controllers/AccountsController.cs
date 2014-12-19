@@ -114,12 +114,12 @@ namespace DupacoGarageSale.Web.Controllers
                 };
 
                 Session["UserSession"] = session;
+                //~/Accounts/UserProfile/@Model.UserId
 
-                return RedirectToAction("UserProfile", new RouteValueDictionary(new
+                return RedirectToAction("View", new RouteValueDictionary(new
                 {
-                    controller = "Accounts",
-                    action = "UserProfile",
-                    id = user.UserId
+                    controller = "GarageSale",
+                    action = "View"
                 }));
             }
             else

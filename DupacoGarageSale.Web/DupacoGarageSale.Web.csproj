@@ -132,6 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Models\GarageSaleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -239,10 +240,12 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\sql scripts\Garage sale items insert.txt" />
+    <Content Include="Scripts\sql scripts\sp_DeleteBlogPost.txt" />
     <Content Include="Scripts\sql scripts\sp_DeleteGarageSale.txt" />
     <Content Include="Scripts\sql scripts\sp_DeleteGarageSaleItems.txt" />
     <Content Include="Scripts\sql scripts\sp_DeleteGarageSpecialItems.txt" />
     <Content Include="Scripts\sql scripts\sp_GetActiveGarageSaleByUserName.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetBlogPostsBySaleId.txt" />
     <Content Include="Scripts\sql scripts\sp_GetCategoriesAndSubcategories.txt" />
     <Content Include="Scripts\sql scripts\sp_GetGarageSaleById.txt" />
     <Content Include="Scripts\sql scripts\sp_GetGarageSaleItemById.txt" />
@@ -252,6 +255,7 @@
     <Content Include="Scripts\sql scripts\sp_GetStates.txt" />
     <Content Include="Scripts\sql scripts\sp_GetSubcategoriesByCategoryId.txt" />
     <Content Include="Scripts\sql scripts\sp_GetUserProfileInfoById.txt" />
+    <Content Include="Scripts\sql scripts\sp_SaveBlogPosts.txt" />
     <Content Include="Scripts\sql scripts\sp_SaveGarageSale.txt" />
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleItems.txt" />
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleSpecialItems.txt" />
@@ -293,6 +297,7 @@
     <Content Include="Views\GarageSale\AddSpecialItem.cshtml" />
     <Content Include="Views\Shared\_FailedDelete.cshtml" />
     <Content Include="Views\GarageSale\EditSpecialItem.cshtml" />
+    <Content Include="Views\GarageSale\_BlogPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

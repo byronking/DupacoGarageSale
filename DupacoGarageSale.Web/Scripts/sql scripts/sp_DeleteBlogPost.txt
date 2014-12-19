@@ -1,0 +1,24 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteBlogPost]    Script Date: 12/19/14 4:14:05 PM ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+CREATE PROCEDURE [dbo].[DeleteBlogPost]
+
+@blog_post_id int
+
+as
+
+begin
+
+set nocount on;
+
+	begin
+
+		delete from BlogPosts where blog_post_id = @blog_post_id;
+
+	end
+end

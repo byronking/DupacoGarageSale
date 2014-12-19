@@ -1,0 +1,71 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+@using (Html.BeginForm("SaveBlogPost", "GarageSale", FormMethod.Post, new { @class="form-horizontal", @role="form", enctype="multipart/form-data" }))
+{
+<div class="modal fade blog-post-modal" tabindex="-1" role="dialog" aria-labelledby="blogPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add a new garage sale post</h4>
+            </div>
+            <div class="modal-body" style="margin-left:100px;">
+                @Html.HiddenFor(m => m.GarageSaleBlogPost.SaleId, new { id = "hdnSaleId" })        
+                <div class="form-group" style="width:50%;">
+                    <label for="txtTitle">Title *</label>
+                    @Html.TextBoxFor(m => m.GarageSaleBlogPost.BlogPostTitle, new { @class="form-control", @id="txtBlogPostTitle", placeholder="Enter a title" })
+                    <span id="titleValidationMessage" class="red invisible">Please enter a title.</span>
+                </div><br />
+                <div class="form-group">
+                    <label>Upload media *</label>
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(m => m.GarageSaleBlogPost.MediaTypeId, "1", new { id="radioImage", name="optionsMedia", @checked="checked" })
+                            Image file
+                        </label>
+                        <label>
+                            @Html.RadioButtonFor(m => m.GarageSaleBlogPost.MediaTypeId, "2", new { id="radioYouTube", name="optionsMedia" })
+                            YouTube video
+                        </label>
+                        <label>
+                            @Html.RadioButtonFor(m => m.GarageSaleBlogPost.MediaTypeId, "3", new { id="radioVine", name="optionsMedia" })
+                            Vine video
+                        </label>
+                    </div>
+                </div>
+
+                    <div class="form-group hidden" id="divImage" style="width:50%;">
+                        <div class="input-group"> 
+                            <span class="input-group-btn">
+                                <span class="btn btn-info btn-file">Browse…
+                                    <input type="file" id="garageSalePicUpload" name="garageSalePicUpload" />
+                                </span>
+                            </span>
+                            @Html.TextBoxFor(m => m.GarageSaleBlogPost.ImageUri, new { @class="form-control", id="txtFileName", @readonly="true", placeholder="Click browse to select an image" })
+                        </div>
+                    </div>
+
+                    <div class="form-group hidden" id="divYouTube" style="width:65%;">
+                        @Html.TextAreaFor(m => m.GarageSaleBlogPost.YouTubeUri, new { rows="3", @class="form-control", @placeholder="Enter the URL of the YouTube video like this: 'https://www.youtube.com/embed/c98h41TkREA'" })
+                    </div>
+
+                    <div class="form-group hidden" id="divVine" style="width:65%;">
+                        @Html.TextAreaFor(m => m.GarageSaleBlogPost.VineUri, new { rows="3", @class="form-control", @placeholder="Enter the URL of the Vine video like this: 'https://vine.co/v/Og55Bn5EZhQ'" })
+                    </div>
+                    <br />
+                    <div class="form-group" style="width:65%;">
+                        <label for="txtMessage">Write post *</label>
+                        @Html.TextAreaFor(m => m.GarageSaleBlogPost.PostMessage, new { id="txtBlogPost", rows="4", @class="form-control", @placeholder="What's going on at your garage sale?" })
+                        <span id="postValidationMessage" class="red invisible">Please enter a title.</span>
+                        <div id="charNumBlogPost"></div>                       
+                    </div>
+                    <br />
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-info" value="Save post" id="btnSaveBlogPost" />
+            </div>
+        </div>
+    </div>
+</div>
+}

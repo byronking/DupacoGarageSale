@@ -1,0 +1,24 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[GetBlogPostsBySaleId]    Script Date: 12/19/14 1:23:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[GetBlogPostsBySaleId] 
+
+@sale_id int
+
+AS
+BEGIN
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+	SET NOCOUNT ON;
+
+    select blog_post_id, blog_post_title, media_type_id, image_uri, youtube_uri, vine_uri, post_message, sale_id, blog_post_date_time 
+		from BlogPosts where sale_id = @sale_id order by blog_post_date_time desc
+
+END
