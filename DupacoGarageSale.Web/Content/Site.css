@@ -68,6 +68,10 @@
     margin-top: 40px;
 }
 
+.over-30 {
+    margin-right: 30px;
+}
+
 body {
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;

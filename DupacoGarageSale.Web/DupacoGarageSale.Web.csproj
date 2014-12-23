@@ -252,6 +252,7 @@
     <Content Include="Scripts\sql scripts\sp_GetGarageSaleItemsBySaleId.txt" />
     <Content Include="Scripts\sql scripts\sp_GetGarageSalesByUserName.txt" />
     <Content Include="Scripts\sql scripts\sp_GetGarageSaleSpecialItems.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetSpecialItemsForSearch.txt" />
     <Content Include="Scripts\sql scripts\sp_GetStates.txt" />
     <Content Include="Scripts\sql scripts\sp_GetSubcategoriesByCategoryId.txt" />
     <Content Include="Scripts\sql scripts\sp_GetUserProfileInfoById.txt" />
@@ -298,6 +299,8 @@
     <Content Include="Views\Shared\_FailedDelete.cshtml" />
     <Content Include="Views\GarageSale\EditSpecialItem.cshtml" />
     <Content Include="Views\GarageSale\_BlogPost.cshtml" />
+    <Content Include="Views\Accounts\_ResetPassword.cshtml" />
+    <Content Include="Views\Accounts\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

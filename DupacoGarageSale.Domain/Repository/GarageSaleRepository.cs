@@ -566,6 +566,11 @@ namespace DupacoGarageSale.Data.Repository
             return itemSaveResult;
         }
 
+        /// <summary>
+        /// This gets special items by garage sale id.
+        /// </summary>
+        /// <param name="sale_id"></param>
+        /// <returns></returns>
         public List<SpecialItem> GetGarageSaleSpecialItems(int sale_id)
         {
             var specialItems = new List<SpecialItem>();
@@ -609,6 +614,11 @@ namespace DupacoGarageSale.Data.Repository
             return specialItems;
         }
 
+        /// <summary>
+        /// This deletes a garage sale by id.
+        /// </summary>
+        /// <param name="sale_id"></param>
+        /// <returns></returns>
         public bool DeleteGarageSale(int sale_id)
         {
             var saveSuccessful = false;
@@ -634,6 +644,11 @@ namespace DupacoGarageSale.Data.Repository
             return saveSuccessful;
         }
 
+        /// <summary>
+        /// This deletes individual special items by id.
+        /// </summary>
+        /// <param name="special_items_id"></param>
+        /// <returns></returns>
         public bool DeleteGarageSpecialItems(int special_items_id)
         {
             var saveSuccessful = false;
@@ -659,6 +674,11 @@ namespace DupacoGarageSale.Data.Repository
             return saveSuccessful;
         }
 
+        /// <summary>
+        /// This updates individual garage sale special items.
+        /// </summary>
+        /// <param name="specialItem"></param>
+        /// <returns></returns>
         public bool UpdateGarageSaleSpecialItem(SpecialItem specialItem)
         {
             var updateSuccessful = false;
@@ -689,6 +709,86 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return updateSuccessful;
+        }
+
+
+        public GarageSaleSearchResults SearchGarageSales(string searchCriteria, int itemSubcategory)
+        {
+            var results = new GarageSaleSearchResults()
+            {
+                 GarageSaleItems = new List<GarageSaleItem>(),
+                  SpecialItems = new List<SpecialItem>()
+            };
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SearchSpecialItems", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var specialItem = new SpecialItem
+                        {
+                            SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
+                            Title = reader["title"].ToString(),
+                            Description = reader["description"].ToString(),
+                            PictureLink = reader["picture_link"].ToString(),
+                            Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"])
+                        };
+
+                        results.SpecialItems.Add(specialItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItems", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = itemSubcategory;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var item = new GarageSaleItem
+                        {
+                            GarageSaleItemsId = Convert.ToInt32(reader["garage_sale_items_id"]),
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemCategoryName = reader["item_category_name"].ToString(),
+                            ItemSubcategoryName = reader["item_subcategory_name"].ToString(),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            SaleId = Convert.ToInt32(reader["sale_id"])
+                        };
+
+                        results.GarageSaleItems.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return results;
         }
     }
 }

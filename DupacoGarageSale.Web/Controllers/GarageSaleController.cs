@@ -736,6 +736,20 @@ namespace DupacoGarageSale.Web.Controllers
 
         #endregion
 
+        #region Search sales
+
+        public ActionResult Search(FormCollection formCollection)
+        {
+            var searchCriteria = formCollection["txtSearch"].ToString();
+            var itemSubcategory = Convert.ToInt32(formCollection["ddlCategories"]);
+
+            var repository = new GarageSaleRepository();
+            var searchResults = repository.SearchGarageSales(searchCriteria, itemSubcategory);
+            return View();
+        }
+
+        #endregion
+
         [HttpGet]
         public ActionResult CreateItinerary()
         {

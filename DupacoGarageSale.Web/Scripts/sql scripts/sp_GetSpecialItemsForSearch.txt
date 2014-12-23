@@ -1,0 +1,25 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[GetSpecialItemsForSearch]    Script Date: 12/22/14 8:09:34 PM ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+create PROCEDURE [dbo].[GetSpecialItemsForSearch]
+
+@search_criteria varchar(100)
+
+as
+
+begin
+
+set nocount on;
+
+	begin
+		
+		select special_items_id, title, description, picture_link, price, sale_id item_category_id, item_subcategory_id from 
+			SpecialItems where title like @search_criteria or description like @search_criteria
+
+	end
+end

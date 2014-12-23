@@ -232,5 +232,42 @@ namespace DupacoGarageSale.Data.Repository
 
             return saveResult;
         }
+
+        public UserSaveResult SavePasswordResetRequest(PasswordResetRequest request)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SavePasswordResetRequest", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_name", SqlDbType.VarChar).Value = request.UserName;
+                    cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = request.Email;
+                    cmd.Parameters.Add("@reset_token", SqlDbType.VarChar).Value = request.ResetToken;
+                    cmd.Parameters.Add("@request_date_time", SqlDbType.DateTime).Value = request.RequestDateTime;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.SaveResultId = (int)returnParameter.Value;
+
+                    if (saveResult.SaveResultId != 0)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return saveResult;
+        }
     }
 }

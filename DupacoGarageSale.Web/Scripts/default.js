@@ -196,4 +196,46 @@
             $("#charNumBlogPost").text(char + ' characters left');
         }
     });
+
+    // Validation for the password reset page.
+    $("#btnResetPassword").click(function (e) {
+        if ($('#txtPasswordResetUserName').val() == "") {
+            $('#validateUserName').removeClass('invisible');
+
+            e.preventDefault();
+        }
+        else {
+            $('#validateUserName').addClass('invisible');
+        }
+
+        if ($('#txtPasswordResetEmail').val() == "") {
+            $('#validateEmail').removeClass('invisible');
+
+            e.preventDefault();
+        }
+        else {
+            $('#validateEmail').addClass('invisible');
+        }
+    });
+
+    // Validation for the search screen.
+    $("#btnSearch").click(function (e) {
+        if ($('#txtSearch').val() == "") {
+            $('#validateSearchText').removeClass('hidden');
+
+            e.preventDefault();
+        }
+        else {
+            $('#validateSearchText').addClass('hidden');
+        }
+        
+        if ($('#ddlCategories option:selected').val() == 0) {
+            $('#validateSearchCategories').removeClass('hidden');
+
+            e.preventDefault();
+        }
+        else {
+            $('#validateSearchCategories').addClass('hidden');
+        }
+    });
 });

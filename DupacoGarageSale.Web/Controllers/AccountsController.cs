@@ -238,5 +238,43 @@ namespace DupacoGarageSale.Web.Controllers
                 id = user.UserId
             }));
         }
+
+        /// <summary>
+        /// This resets the user's password.
+        /// </summary>
+        /// <param name="accountInfo"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ResetPassword(PasswordResetInfo accountInfo)
+        {
+            // Verify that the account info is legit.
+            if (AccountHelper.ValidateUserAccount(accountInfo))
+            {
+                // Generate a reset token and store it in the database.
+                var token = AccountHelper.GeneratePasswordResetToken(20);
+
+                var repository = new AccountsRepository();
+                var passwordResetRequest = new PasswordResetRequest
+                {
+                    UserName = accountInfo.UserName,
+                    Email = accountInfo.Email,
+                    ResetToken = token,
+                    RequestDateTime = DateTime.Now
+                };
+
+                var saveResult = repository.SavePasswordResetRequest(passwordResetRequest);
+
+                if (saveResult.IsSaveSuccessful == true)
+                {
+                    // Send password reset email.
+                }
+            }
+            else
+            {
+                // Invalid account entered.
+            }
+
+            return View();
+        }
     }
 }
