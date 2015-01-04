@@ -15,6 +15,8 @@ namespace DupacoGarageSale.Web.Controllers
 {
     public class GarageSaleController : Controller
     {
+        #region Main garage sale actions
+
         /// <summary>
         /// This is the landing page for adding garage sales.
         /// </summary>
@@ -378,8 +380,14 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
+        #endregion
+
         #region Garage sale special items
 
+        /// <summary>
+        /// This adds a special item.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult AddSpecialItem()
         {
@@ -400,6 +408,11 @@ namespace DupacoGarageSale.Web.Controllers
             return View(viewModel);
         }
 
+        /// <summary>
+        /// This edits a special item.
+        /// </summary>
+        /// <param name="special_item_id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult EditSpecialItem(int special_item_id)
         {
@@ -440,6 +453,13 @@ namespace DupacoGarageSale.Web.Controllers
             }            
         }
 
+        /// <summary>
+        /// This updates a special item.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="formCollection"></param>
+        /// <param name="picUpload"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UpdateSpecialItem(GarageSaleViewModel model, FormCollection formCollection, HttpPostedFileBase picUpload)
         {
@@ -515,6 +535,13 @@ namespace DupacoGarageSale.Web.Controllers
             }            
         }
 
+        /// <summary>
+        /// This saves a special item.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="formCollection"></param>
+        /// <param name="picUpload"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SaveSpecialItem(GarageSaleViewModel model, FormCollection formCollection, HttpPostedFileBase picUpload)
         {
@@ -597,6 +624,11 @@ namespace DupacoGarageSale.Web.Controllers
             }            
         }
 
+        /// <summary>
+        /// This deletes a special item.
+        /// </summary>
+        /// <param name="special_item_id"></param>
+        /// <returns></returns>
         public ActionResult DeleteSpecialItem(int special_item_id)
         {
             if (Session["UserSession"] != null)
@@ -626,6 +658,67 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 return RedirectToAction("Login", "Accounts");
             }
+        }
+
+        #endregion
+
+        #region View garage sale
+
+        /// <summary>
+        /// This displays a garage sale.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ViewGarageSale(int id)
+        {
+            
+
+            // Load the states dropdown.
+            var addressRepository = new AddressRepository();
+            var statesList = addressRepository.GetStates();
+            ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+
+            var repository = new GarageSaleRepository();
+
+            var viewModel = new GarageSaleViewModel
+            {
+                Sale = repository.GetGarageSaleAndItemsById(id),
+                SelectedCategories = new List<int>()
+            };
+
+            // Get the user session
+            UserSession session = null;
+            if (Session["UserSession"] != null)
+            {
+                session = Session["UserSession"] as UserSession;
+                viewModel.User = session.User;
+            }
+
+            foreach (var itemId in viewModel.Sale.GarageSaleItems)
+            {
+                viewModel.SelectedCategories.Add(itemId.ItemSubcategoryId);
+            }
+
+            // Get the categories and subcategories.
+            viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+
+            var selectedCategories = viewModel.SelectedCategories.ToArray();
+            ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+
+            // Get the special items.
+            viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(viewModel.Sale.GarageSaleId);
+
+            // Get the blog posts.
+            var blogRepo = new BlogPostRepository();
+            viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.Sale.GarageSaleId);
+
+            // Save the viewmodel for later use.
+            Session["ViewModel"] = viewModel;
+
+            ViewBag.NavGarageSales = "active";
+
+            return View(viewModel);
         }
 
         #endregion
@@ -740,12 +833,28 @@ namespace DupacoGarageSale.Web.Controllers
 
         public ActionResult Search(FormCollection formCollection)
         {
-            var searchCriteria = formCollection["txtSearch"].ToString();
-            var itemSubcategory = Convert.ToInt32(formCollection["ddlCategories"]);
+            UserSession session = null;
 
-            var repository = new GarageSaleRepository();
-            var searchResults = repository.SearchGarageSales(searchCriteria, itemSubcategory);
-            return View();
+            var viewModel = new SearchViewModel();
+
+            if (Session["UserSession"] != null)
+            {
+                session = Session["UserSession"] as UserSession;
+                viewModel.User = session.User;
+            }
+
+            if (formCollection.AllKeys.Count() != 0)
+            {
+                var searchCriteria = formCollection["txtSearch"].ToString();
+                var itemSubcategory = Convert.ToInt32(formCollection["ddlCategories"]);
+
+                var repository = new GarageSaleRepository();
+                viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, itemSubcategory);
+            }
+
+            ViewBag.NavSearch = "active";
+
+            return View(viewModel);
         }
 
         #endregion

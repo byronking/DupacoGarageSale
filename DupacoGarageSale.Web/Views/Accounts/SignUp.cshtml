@@ -1,4 +1,4 @@
-﻿@model DupacoGarageSale.Data.Domain.GarageSaleUser
+﻿@model DupacoGarageSale.Web.Models.SearchViewModel
 
 @{
     ViewBag.Title = "Sign up for a good buy";
@@ -33,44 +33,44 @@
             
             <div class="form-group">
                 <label for="txtFirstName">First Name *</label>
-                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", id="txtFirstName" })
-                <span class="text-error">@Html.ValidationMessageFor(m => m.FirstName)</span>
+                @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", id="txtFirstName" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.FirstName)</span>
             </div>
 
             <div class="form-group">
                 <label for="txtLastName">Last Name *</label>
-                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", id="txtLastName" })
-                <span class="text-error">@Html.ValidationMessageFor(m => m.LastName)</span>
+                @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", id="txtLastName" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.LastName)</span>
             </div>
             
             <div class="form-group">
                 <label for="txtUserName">User Name *</label>
-                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", id="txtUserName" })
-                <span class="text-error">@Html.ValidationMessageFor(m => m.UserName)</span>
+                @Html.TextBoxFor(m => m.User.UserName, new { @class = "form-control", id="txtUserName" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.UserName)</span>
             </div>
 
             <div class="form-group">
                 <label for="txtEmail">Email *</label>
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id="txtEmail" })
-                <span class="text-error">@Html.ValidationMessageFor(m => m.Email)</span>
+                @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control", id="txtEmail" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.Email)</span>
             </div>
             
             <div class="form-group">
                 <label for="txtPhone">Phone *</label>
-                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", id="txtPhone", @placeholder="555-323-1234" })
-                <span class="text-error">@Html.ValidationMessageFor(m => m.Phone)</span>
+                @Html.TextBoxFor(m => m.User.Phone, new { @class = "form-control", id="txtPhone", @placeholder="555-323-1234" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.Phone)</span>
             </div>
             
             <div class="form-group">
                 <label for="txtPassword">Password *</label>
-                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", id="txtPassword", @type="password" })
-                <span class="text-error">@Html.ValidationMessageFor(m => m.Password)</span>
+                @Html.TextBoxFor(m => m.User.Password, new { @class = "form-control", id="txtPassword", @type="password" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.Password)</span>
             </div>
             
             <div class="form-group">
                 <label for="txtConfirmPassword">Confirm Password *</label>
-                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", id="txtConfirmPassword", @type="password" })
-                <span class="text-error">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
+                @Html.TextBoxFor(m => m.User.ConfirmPassword, new { @class = "form-control", id="txtConfirmPassword", @type="password" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.ConfirmPassword)</span>
             </div>
             
             <div class="form-group">

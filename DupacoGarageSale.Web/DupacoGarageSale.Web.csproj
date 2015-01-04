@@ -134,6 +134,7 @@
     </Compile>
     <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Models\GarageSaleViewModel.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +302,9 @@
     <Content Include="Views\GarageSale\_BlogPost.cshtml" />
     <Content Include="Views\Accounts\_ResetPassword.cshtml" />
     <Content Include="Views\Accounts\ResetPassword.cshtml" />
+    <Content Include="Views\GarageSale\Search.cshtml" />
+    <Content Include="Views\GarageSale\ViewGarageSale.cshtml" />
+    <Content Include="Views\Shared\_HomeNavLoggedIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

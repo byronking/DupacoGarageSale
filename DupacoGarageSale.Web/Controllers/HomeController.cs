@@ -1,4 +1,5 @@
 ﻿using DupacoGarageSale.Data.Domain;
+using DupacoGarageSale.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,21 @@ namespace DupacoGarageSale.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            UserSession session = null;
+
+            var viewModel = new SearchViewModel();
+
+            if (Session["UserSession"] != null)
+            {
+                session = Session["UserSession"] as UserSession;
+                viewModel.User = session.User;
+
+                return View(viewModel);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult LogOut()

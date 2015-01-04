@@ -14,7 +14,14 @@
     @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
-    @Html.Partial("~/Views/Shared/_TopNavigation.cshtml")
+    @if (Session["UserSession"] != null)
+    {
+        @Html.Partial("~/Views/Shared/_HomeNavLoggedIn.cshtml")
+    }
+    else
+    {
+        @Html.Partial("~/Views/Shared/_TopNavigation.cshtml")
+    }
     
     <div class="container" style="margin-top:60px;">
         <div id="bg">

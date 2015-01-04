@@ -45,6 +45,7 @@
     <Compile Include="Domain\BlogPost.cs" />
     <Compile Include="Domain\GarageSale.cs" />
     <Compile Include="Domain\GarageSaleItem.cs" />
+    <Compile Include="Domain\GarageSaleSearchItem.cs" />
     <Compile Include="Domain\GarageSaleSearchResults.cs" />
     <Compile Include="Domain\GarageSaleUser.cs" />
     <Compile Include="Domain\PasswordResetInfo.cs" />

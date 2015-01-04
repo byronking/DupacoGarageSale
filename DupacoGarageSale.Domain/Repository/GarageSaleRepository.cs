@@ -716,7 +716,7 @@ namespace DupacoGarageSale.Data.Repository
         {
             var results = new GarageSaleSearchResults()
             {
-                 GarageSaleItems = new List<GarageSaleItem>(),
+                 GarageSaleItems = new List<GarageSaleSearchItem>(),
                   SpecialItems = new List<SpecialItem>()
             };
 
@@ -769,14 +769,19 @@ namespace DupacoGarageSale.Data.Repository
 
                     while (reader.Read())
                     {
-                        var item = new GarageSaleItem
+                        var item = new GarageSaleSearchItem
                         {
                             GarageSaleItemsId = Convert.ToInt32(reader["garage_sale_items_id"]),
                             ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
                             ItemCategoryName = reader["item_category_name"].ToString(),
                             ItemSubcategoryName = reader["item_subcategory_name"].ToString(),
                             ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
-                            SaleId = Convert.ToInt32(reader["sale_id"])
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            Address1 = reader["sale_address1"].ToString(),
+                            Address2 = reader["sale_address2"].ToString(),
+                            City = reader["sale_city"].ToString(),
+                            State = reader["state_name"].ToString(),
+                            ZipCode = reader["sale_zip"].ToString()
                         };
 
                         results.GarageSaleItems.Add(item);

@@ -9,6 +9,6 @@ namespace DupacoGarageSale.Data.Domain
     public class GarageSaleSearchResults
     {
         public List<SpecialItem> SpecialItems { get; set; }
-        public List<GarageSaleItem> GarageSaleItems { get; set; }
+        public List<GarageSaleSearchItem> GarageSaleItems { get; set; }
     }
 }

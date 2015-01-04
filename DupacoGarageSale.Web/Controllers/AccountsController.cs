@@ -1,6 +1,7 @@
 ﻿using DupacoGarageSale.Data.Domain;
 using DupacoGarageSale.Data.Repository;
 using DupacoGarageSale.Domain.Helpers;
+using DupacoGarageSale.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,7 +22,20 @@ namespace DupacoGarageSale.Web.Controllers
         [HttpGet]
         public ActionResult SignUp()
         {
-            return View();
+            UserSession session = null;
+
+            var viewModel = new SearchViewModel();
+
+            if (Session["UserSession"] != null)
+            {
+                session = Session["UserSession"] as UserSession;
+                viewModel.User = session.User;
+                return View(viewModel);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         /// <summary>
