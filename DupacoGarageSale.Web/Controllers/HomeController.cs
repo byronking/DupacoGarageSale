@@ -15,7 +15,7 @@ namespace DupacoGarageSale.Web.Controllers
         {
             UserSession session = null;
 
-            var viewModel = new SearchViewModel();
+            var viewModel = new GarageSaleViewModel();
 
             if (Session["UserSession"] != null)
             {

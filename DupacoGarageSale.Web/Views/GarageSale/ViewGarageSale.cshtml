@@ -8,7 +8,7 @@
 <div id="page-wrap" class="jumbotron" style="min-height:500px;">
     <div class="container">
         <div class="row">
-            <h2>@Model.Sale.GarageSaleName</h2>
+            <h2><a href="~/Home">Home / </a>@Model.Sale.GarageSaleName</h2>
             @Model.Sale.SaleDescription<br /><br />
             <div class="col-md-5">
                 <div class="panel panel-info">
@@ -113,7 +113,7 @@
                                 <div>
                                     @Html.Hidden("hdnBlogPostId", post.BlogPostId)
                                     <h3>@post.BlogPostTitle</h3> 
-                                    <small>Posted by @Model.User.FirstName @Model.User.LastName @@ @post.PostDateTime</small><br /><br />
+                                    <small>Posted by @post.BlogPostUser @@ @post.PostDateTime</small><br /><br />
                                 
                                     @if (@post.MediaTypeId == 1)
                                     {

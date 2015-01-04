@@ -672,8 +672,6 @@ namespace DupacoGarageSale.Web.Controllers
         [HttpGet]
         public ActionResult ViewGarageSale(int id)
         {
-            
-
             // Load the states dropdown.
             var addressRepository = new AddressRepository();
             var statesList = addressRepository.GetStates();
@@ -835,7 +833,7 @@ namespace DupacoGarageSale.Web.Controllers
         {
             UserSession session = null;
 
-            var viewModel = new SearchViewModel();
+            var viewModel = new GarageSaleViewModel();
 
             if (Session["UserSession"] != null)
             {

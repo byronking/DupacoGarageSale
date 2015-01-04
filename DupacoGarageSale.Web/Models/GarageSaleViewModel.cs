@@ -17,5 +17,6 @@ namespace DupacoGarageSale.Web.Models
         public List<SpecialItem> GarageSaleSpecialItems { get; set; }
         public BlogPost GarageSaleBlogPost { get; set; }
         public List<BlogPost> BlogPosts { get; set; }
+        public GarageSaleSearchResults SearchResults { get; set; }
     }
 }

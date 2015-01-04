@@ -32,6 +32,7 @@ namespace DupacoGarageSale.Data.Repository
                         {
                             BlogPostId = Convert.ToInt32(reader["blog_post_id"]),
                             BlogPostTitle = reader["blog_post_title"].ToString(),
+                            BlogPostUser = reader["blog_post_user_id"].ToString(),
                             ImageUri = reader["image_uri"].ToString(),
                             MediaTypeId = Convert.ToInt16(reader["media_type_id"]),
                             PostDateTime = Convert.ToDateTime(reader["blog_post_date_time"]),

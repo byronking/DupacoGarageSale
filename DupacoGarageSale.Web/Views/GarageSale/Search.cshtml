@@ -1,4 +1,4 @@
-﻿@model DupacoGarageSale.Web.Models.SearchViewModel
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
 
 @{
     ViewBag.Title = "Search garage sales";
@@ -196,7 +196,7 @@
         @if (Model.SearchResults != null)
         {
             <div class="row">            
-                @{ if (Model.SearchResults.GarageSaleItems.Count == 0)
+                @{ if (Model.SearchResults.SpecialItems.Count == 0)
                     {
                         <p class="lead">Sorry! No hot picks of this type returned. :-(</p>
                     }

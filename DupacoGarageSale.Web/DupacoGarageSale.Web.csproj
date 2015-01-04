@@ -134,7 +134,6 @@
     </Compile>
     <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Models\GarageSaleViewModel.cs" />
-    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

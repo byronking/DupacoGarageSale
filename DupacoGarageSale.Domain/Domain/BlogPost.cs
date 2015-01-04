@@ -14,6 +14,7 @@ namespace DupacoGarageSale.Data.Domain
         [Required (ErrorMessage="Add a title to your post")]
         public string BlogPostTitle { get; set; }
         public DateTime PostDateTime { get; set; }
+        public string BlogPostUser { get; set; }
         public int MediaTypeId { get; set; }
         public string ImageUri { get; set; }
         public string YouTubeUri { get; set; }
