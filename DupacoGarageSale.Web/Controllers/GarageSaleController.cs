@@ -396,16 +396,20 @@ namespace DupacoGarageSale.Web.Controllers
             if (Session["UserSession"] != null)
             {
                 userSession = Session["UserSession"] as UserSession;
+
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                }
+
+                return View(viewModel);
             }
-
-            var viewModel = new GarageSaleViewModel();
-
-            if (Session["ViewModel"] != null)
+            else
             {
-                viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                return RedirectToAction("Login", "Accounts");
             }
-
-            return View(viewModel);
         }
 
         /// <summary>
@@ -768,7 +772,7 @@ namespace DupacoGarageSale.Web.Controllers
                 } 
 
                 var repository = new BlogPostRepository();
-                var saveResult = repository.SaveBlogPost(viewModel.GarageSaleBlogPost);
+                var saveResult = repository.SaveBlogPost(viewModel.GarageSaleBlogPost, viewModel.User.UserId);
 
                 if (saveResult.IsSaveSuccessful)
                 {
@@ -845,6 +849,8 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 var searchCriteria = formCollection["txtSearch"].ToString();
                 var itemSubcategory = Convert.ToInt32(formCollection["ddlCategories"]);
+                var radius = formCollection["ddlRadius"].ToString();
+                var address = formCollection["txtAddress"].ToString();
 
                 var repository = new GarageSaleRepository();
                 viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, itemSubcategory);

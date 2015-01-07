@@ -1,0 +1,32 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateGarageSaleSpecialItem]   Script Date: 12/15/14 10:49:18 PM ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+alter PROCEDURE [dbo].[UpdateGarageSaleSpecialItem]
+
+@special_items_id int,
+@title varchar(50),
+@description varchar(300),
+@picture_link varchar(100),
+@price money,
+@item_subcategory_id int
+
+as
+
+begin
+
+set nocount on;
+
+	begin
+
+		update SpecialItems set title = @title, description = @description, picture_link = @picture_link, price = @price, 
+		item_subcategory_id = @item_subcategory_id, item_category_id = 
+		(select item_category_id from ItemSubcategory where item_subcategory_id = @item_subcategory_id)
+		where special_items_id = @special_items_id;
+
+	end
+end

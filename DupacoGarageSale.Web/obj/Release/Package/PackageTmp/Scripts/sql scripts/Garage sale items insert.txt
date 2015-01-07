@@ -1,0 +1,163 @@
+insert into ItemCategory values ('Baby');
+insert into ItemCategory values ('Clothing & Accessories');
+insert into ItemCategory values ('Electronics');
+insert into ItemCategory values ('Health & Beauty');
+insert into ItemCategory values ('Pets');
+insert into ItemCategory values ('Home');
+insert into ItemCategory values ('Home Maintenance');
+insert into ItemCategory values ('Media');
+insert into ItemCategory values ('Toys & Games');
+insert into ItemCategory values ('Vehicles');
+insert into ItemCategory values ('Sports, Fitness & Outdoors');
+
+
+insert into ItemSubcategory values ('Strollers', 1);
+insert into ItemSubcategory values ('Car Seats', 1);
+insert into ItemSubcategory values ('Equipment', 1);
+insert into ItemSubcategory values ('Activities & Toys', 1);
+insert into ItemSubcategory values ('Nursery Furniture', 1);
+insert into ItemSubcategory values ('Bedding', 1);
+insert into ItemSubcategory values ('Diapering', 1);
+insert into ItemSubcategory values ('Feeding', 1);
+insert into ItemSubcategory values ('Health & Safety', 1);
+
+insert into ItemSubcategory values ('Infant Girls'' Clothing', 2)
+insert into ItemSubcategory values ('Toddler Girls'' Clothing', 2)
+insert into ItemSubcategory values ('Girls'' Clothing sized 4-16', 2)
+insert into ItemSubcategory values ('Juniors'' Clothing', 2)
+insert into ItemSubcategory values ('Women''s Clothing', 2)
+insert into ItemSubcategory values ('Plus-Size Clothing', 2)
+insert into ItemSubcategory values ('Maternity Clothing', 2)
+insert into ItemSubcategory values ('Infant Boys'' Clothing', 2)
+insert into ItemSubcategory values ('Toddler Boys'' Clothing', 2)
+insert into ItemSubcategory values ('Boys'' Clothing sized 4-20', 2)
+insert into ItemSubcategory values ('Young Men''s Clothing', 2)
+insert into ItemSubcategory values ('Men''s Clothing', 2)
+insert into ItemSubcategory values ('Men''s Big & Tall Clothing', 2)
+insert into ItemSubcategory values ('Women''s Formal', 2)
+insert into ItemSubcategory values ('Men''s Formal', 2)
+insert into ItemSubcategory values ('Outerwear', 2)
+insert into ItemSubcategory values ('Accessories', 2)
+insert into ItemSubcategory values ('Jewelry & Watches', 2)
+insert into ItemSubcategory values ('Bags & Purses', 2)
+insert into ItemSubcategory values ('Shoes & Boots', 2)
+insert into ItemSubcategory values ('Name-brand Items', 2)
+
+insert into ItemSubcategory values ('TV & Home Theater', 3)
+insert into ItemSubcategory values ('Portable Audio & MP3 Players', 3)
+insert into ItemSubcategory values ('Laptops & Tablets', 3)
+insert into ItemSubcategory values ('Computers & Peripherals', 3)
+insert into ItemSubcategory values ('Photo & Video', 3)
+insert into ItemSubcategory values ('Games & Game Systems', 3)
+insert into ItemSubcategory values ('Mobile Phones & Accessories', 3)
+insert into ItemSubcategory values ('Office & School Supplies', 3)
+insert into ItemSubcategory values ('Wearable Technology', 3)
+insert into ItemSubcategory values ('Smart Home', 3)
+insert into ItemSubcategory values ('GPS & Navigation', 3)
+insert into ItemSubcategory values ('Instruments', 3)
+insert into ItemSubcategory values ('Turntables & Vintage Electronics', 3)
+
+insert into ItemSubcategory values ('Skin Care & Makeup', 4)
+insert into ItemSubcategory values ('Nail Care', 4)
+insert into ItemSubcategory values ('Styling Tools', 4)
+insert into ItemSubcategory values ('Fragrance', 4)
+insert into ItemSubcategory values ('Accessories', 4)
+
+insert into ItemSubcategory values ('Clothes & Toys', 5)
+insert into ItemSubcategory values ('Carriers', 5)
+insert into ItemSubcategory values ('Cages, Kennels & Bedding', 5)
+insert into ItemSubcategory values ('Feeding & Grooming', 5)
+insert into ItemSubcategory values ('Training', 5)
+insert into ItemSubcategory values ('Tanks & Filters', 5)
+insert into ItemSubcategory values ('Pets For Sale', 5)
+
+insert into ItemSubcategory values ('Dining & Serving-ware', 6)
+insert into ItemSubcategory values ('Cookware & Bake-ware', 6)
+insert into ItemSubcategory values ('Glassware', 6)
+insert into ItemSubcategory values ('Food Storage & Canning', 6)
+insert into ItemSubcategory values ('Kitchen Textiles', 6)
+insert into ItemSubcategory values ('Bedding', 6)
+insert into ItemSubcategory values ('Bath', 6)
+insert into ItemSubcategory values ('Tables & Chairs', 6)
+insert into ItemSubcategory values ('Wood Furniture', 6)
+insert into ItemSubcategory values ('Upholstered Furniture', 6)
+insert into ItemSubcategory values ('Large Appliances', 6)
+insert into ItemSubcategory values ('Small Appliances & Electronics', 6)
+insert into ItemSubcategory values ('Heating & Cooling', 6)
+insert into ItemSubcategory values ('Décor', 6)
+insert into ItemSubcategory values ('Holiday Décor', 6)
+insert into ItemSubcategory values ('Collectibles & Knick-knacks', 6)
+insert into ItemSubcategory values ('Storage & Organization', 6)
+insert into ItemSubcategory values ('Vacuums & Floor Care', 6)
+insert into ItemSubcategory values ('Lighting', 6)
+insert into ItemSubcategory values ('Rugs & Floor Covering', 6)
+insert into ItemSubcategory values ('Window Coverings', 6)
+insert into ItemSubcategory values ('Luggage', 6)
+insert into ItemSubcategory values ('Sewing & Crafting', 6)
+insert into ItemSubcategory values ('Antiques & Vintage', 6)
+
+insert into ItemSubcategory values ('Building Materials', 7)
+insert into ItemSubcategory values ('Ladders', 7)
+insert into ItemSubcategory values ('Hand Tools', 7)
+insert into ItemSubcategory values ('Power Tools', 7)
+insert into ItemSubcategory values ('Tool Boxes & Storage', 7)
+insert into ItemSubcategory values ('Painting Supplies', 7)
+insert into ItemSubcategory values ('Lawn & Garden', 7)
+insert into ItemSubcategory values ('Outdoor Power Equipment', 7)
+insert into ItemSubcategory values ('Snow Removal', 7)
+
+insert into ItemSubcategory values ('Books: Adult & Teen', 8)
+insert into ItemSubcategory values ('Magazines', 8)
+insert into ItemSubcategory values ('Cookbooks', 8)
+insert into ItemSubcategory values ('Sheet Music', 8)
+insert into ItemSubcategory values ('Software', 8)
+insert into ItemSubcategory values ('Music', 8)
+insert into ItemSubcategory values ('TV Series', 8)
+insert into ItemSubcategory values ('Movies', 8)
+insert into ItemSubcategory values ('Video Games', 8)
+insert into ItemSubcategory values ('Vinyl & Vintage Media', 8)
+
+insert into ItemSubcategory values ('Action Figures & Playsets', 9)
+insert into ItemSubcategory values ('Arts & Crafts', 9)
+insert into ItemSubcategory values ('Building Sets & Blocks', 9)
+insert into ItemSubcategory values ('Dolls & Accessories', 9)
+insert into ItemSubcategory values ('Dress-up & Pretend Play', 9)
+insert into ItemSubcategory values ('Games & Puzzles', 9)
+insert into ItemSubcategory values ('Kids'' Electronics', 9)
+insert into ItemSubcategory values ('Learning Toys', 9)
+insert into ItemSubcategory values ('Outdoor Toys', 9)
+insert into ItemSubcategory values ('Outdoor Play Systems', 9)
+insert into ItemSubcategory values ('Riding Toys', 9)
+insert into ItemSubcategory values ('Stuffed Animals & Plush Toys', 9)
+insert into ItemSubcategory values ('Remote Controlled', 9)
+insert into ItemSubcategory values ('Books: Kids & Pre-teen', 9)
+insert into ItemSubcategory values ('Toy Cars & Trucks', 9)
+insert into ItemSubcategory values ('Collectible Cards', 9)
+
+insert into ItemSubcategory values ('Cars & Trucks', 10)
+insert into ItemSubcategory values ('Watercraft', 10)
+insert into ItemSubcategory values ('Campers & ATVs', 10)
+insert into ItemSubcategory values ('Motorcycles', 10)
+insert into ItemSubcategory values ('Scooters', 10)
+insert into ItemSubcategory values ('Agricultural Machinery', 10)
+insert into ItemSubcategory values ('Trailers', 10)
+insert into ItemSubcategory values ('Parts & Accessories', 10)
+
+insert into ItemSubcategory values ('Bicycling', 11)
+insert into ItemSubcategory values ('Scooters, Skateboards & Skates', 11)
+insert into ItemSubcategory values ('Boating & Water Sports', 11)
+insert into ItemSubcategory values ('Pools & Water Play', 11)
+insert into ItemSubcategory values ('Camping & Outdoors', 11)
+insert into ItemSubcategory values ('Outdoor Décor', 11)
+insert into ItemSubcategory values ('Patio Furniture', 11)
+insert into ItemSubcategory values ('Grills', 11)
+insert into ItemSubcategory values ('Hunting', 11)
+insert into ItemSubcategory values ('Fishing', 11)
+insert into ItemSubcategory values ('Golfing', 11)
+insert into ItemSubcategory values ('Team Sports Equipment', 11)
+insert into ItemSubcategory values ('Backyard Games', 11)
+insert into ItemSubcategory values ('Winter Sports', 11)
+insert into ItemSubcategory values ('Exercise & Fitness', 11)
+insert into ItemSubcategory values ('Outdoor Storage', 11)
+insert into ItemSubcategory values ('Firewood', 11)
+insert into ItemSubcategory values ('Plants', 11)

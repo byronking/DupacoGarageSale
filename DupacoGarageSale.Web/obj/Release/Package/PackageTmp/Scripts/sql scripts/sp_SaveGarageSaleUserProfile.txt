@@ -1,0 +1,46 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[SaveGarageSaleUserProfile]    Script Date: 12/16/14 9:30:59 PM ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+ALTER PROCEDURE [dbo].[SaveGarageSaleUserProfile]
+
+@user_id int,
+@address1 varchar(250), 
+@address2 varchar(250), 
+@city varchar(250), 
+@state varchar(100), 
+@zip varchar(20),
+@first_name varchar(50),
+@last_name varchar(50),
+@phone varchar(20),
+@modify_date datetime,
+@modify_user varchar(50),
+@profile_pic_link varchar(250)
+
+as 
+
+begin
+
+set nocount on;
+declare @addr_id int
+
+	begin
+
+	insert into Address values (@address1, @address2, @city, @state, @zip);
+
+	set @addr_id = SCOPE_IDENTITY();
+
+	update GarageSaleUsers set first_name = @first_name, last_name = @last_name, phone = @phone, address_id = @addr_id, 
+		modify_date = @modify_date, modify_user = @modify_user, profile_pic_link = @profile_pic_link where user_id = @user_id;
+
+	return (@addr_id);
+
+	end
+	
+end
+

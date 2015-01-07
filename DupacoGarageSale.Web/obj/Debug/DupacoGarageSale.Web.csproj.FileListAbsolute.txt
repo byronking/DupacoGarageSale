@@ -31,3 +31,7 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.pdb
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DupacoGarageSale.Data.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DupacoGarageSale.Data.pdb
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Microsoft.Web.Helpers.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.pdb
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.xml

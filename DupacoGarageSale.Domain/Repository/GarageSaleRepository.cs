@@ -795,5 +795,38 @@ namespace DupacoGarageSale.Data.Repository
 
             return results;
         }
+
+        public List<GarageSaleAddress> GetGarageSaleAddresses()
+        {
+            var garageSalesAddresses = new List<GarageSaleAddress>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetGarageSaleAddresses", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var address = new GarageSaleAddress
+                        {
+                            Address = reader["address"].ToString()
+                        };
+
+                        garageSalesAddresses.Add(address);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return garageSalesAddresses;
+        }
     }
 }

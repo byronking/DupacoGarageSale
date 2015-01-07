@@ -1,0 +1,81 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+@{
+    ViewBag.Title = "Sign up for a good buy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<div id="bg">
+  <img src="~/Content/images/garage-sale-3.jpg" alt="">
+</div>*@
+
+<div id="page-wrap" class="jumbotron" style="min-height:600px;">
+    <a href="http://www.dupaco.com" style="margin-top:-40px;"><img alt="dupaco!" src="~/Content/images/dupaco.png" /></a>
+    <img src="~/Content/images/garagesale.gif" />
+    <h2 style="margin-left:275px;">@ViewBag.Title</h2><br /><br />
+
+    <div class="marketing well" style="width:50%;margin-left:250px;margin-top:-20px">
+        @using (Html.BeginForm("RegisterUser", "Accounts", FormMethod.Post, new { @role="form"}))
+        {
+            <p class="lead">
+                Register to be able to publish a sale or to search garage sales and save your favorites. Registration is free!
+            </p>
+            
+            @*<div class="form-group">
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(m => m.UserTypeId, 3, new { @checked = "checked" }) I am a buyer
+                </label>
+
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(m => m.UserTypeId, 2) I am a seller
+                </label>
+            </div>*@
+            
+            <div class="form-group">
+                <label for="txtFirstName">First Name *</label>
+                @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", id="txtFirstName" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.FirstName)</span>
+            </div>
+
+            <div class="form-group">
+                <label for="txtLastName">Last Name *</label>
+                @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", id="txtLastName" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.LastName)</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="txtUserName">User Name *</label>
+                @Html.TextBoxFor(m => m.User.UserName, new { @class = "form-control", id="txtUserName" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.UserName)</span>
+            </div>
+
+            <div class="form-group">
+                <label for="txtEmail">Email *</label>
+                @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control", id="txtEmail" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.Email)</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="txtPhone">Phone *</label>
+                @Html.TextBoxFor(m => m.User.Phone, new { @class = "form-control", id="txtPhone", @placeholder="555-323-1234" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.Phone)</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="txtPassword">Password *</label>
+                @Html.TextBoxFor(m => m.User.Password, new { @class = "form-control", id="txtPassword", @type="password" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.Password)</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="txtConfirmPassword">Confirm Password *</label>
+                @Html.TextBoxFor(m => m.User.ConfirmPassword, new { @class = "form-control", id="txtConfirmPassword", @type="password" })
+                <span class="text-error">@Html.ValidationMessageFor(m => m.User.ConfirmPassword)</span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary down_30" value="Register" />
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[GetGarageSaleItemById]    Script Date: 12/16/14 9:23:14 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[GetGarageSaleItemById] 
+
+@item_subcategory_id int
+
+AS
+BEGIN
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+	SET NOCOUNT ON;
+
+    select sc.item_category_id, item_category_name, item_subcategory_id, item_subcategory_name from ItemSubcategory sc join ItemCategory c
+		on sc.item_category_id = c.item_category_id where sc.item_subcategory_id = @item_subcategory_id
+
+END
+
+
+

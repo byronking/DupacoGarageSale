@@ -1,0 +1,38 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[SaveGarageSaleSpecialItems]    Script Date: 12/15/14 10:17:00 AM ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+create PROCEDURE [dbo].[SaveGarageSaleSpecialItems]
+
+@sale_id int,
+@item_subcategory_id int,
+@title varchar(50),
+@description varchar(300),
+@picture_link varchar(100),
+@price money
+
+as
+
+begin
+
+set nocount on;
+declare @id int
+
+	begin
+
+		insert into dbo.SpecialItems values (@title, @description, @picture_link, @price, @sale_id, (select item_category_id from ItemSubCategory 
+			where item_subcategory_id = @item_subcategory_id), @item_subcategory_id)
+
+		set @id = SCOPE_IDENTITY();
+
+		return (@id);
+
+	end
+end
+
+
+select * from SpecialItems

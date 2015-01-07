@@ -1,0 +1,538 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Deployment\DupacoGarageSales</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>11/18/2014 14:27:52</publishTime>
+    </File>
+    <File Include="bin/DupacoGarageSale.Data.dll">
+      <publishTime>01/04/2015 20:08:13</publishTime>
+    </File>
+    <File Include="bin/DupacoGarageSale.Web.dll">
+      <publishTime>01/05/2015 20:02:39</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>11/18/2014 14:27:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>11/18/2014 14:27:49</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
+      <publishTime>11/18/2014 14:27:50</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>11/18/2014 14:27:49</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>11/18/2014 14:27:50</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>11/18/2014 14:27:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>11/18/2014 14:27:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>11/18/2014 14:27:50</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>11/18/2014 14:27:52</publishTime>
+    </File>
+    <File Include="bin/System.Web.Providers.dll">
+      <publishTime>11/18/2014 14:27:51</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>11/18/2014 14:27:49</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>11/18/2014 14:27:49</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>11/18/2014 14:27:49</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>11/18/2014 14:27:49</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>11/18/2014 14:27:52</publishTime>
+    </File>
+    <File Include="Content/bootstrap/css/bootstrap-theme.css">
+      <publishTime>06/26/2014 09:14:10</publishTime>
+    </File>
+    <File Include="Content/bootstrap/css/bootstrap-theme.css.map">
+      <publishTime>06/26/2014 09:14:10</publishTime>
+    </File>
+    <File Include="Content/bootstrap/css/bootstrap-theme.min.css">
+      <publishTime>06/26/2014 09:14:12</publishTime>
+    </File>
+    <File Include="Content/bootstrap/css/bootstrap.css">
+      <publishTime>11/30/2014 21:05:12</publishTime>
+    </File>
+    <File Include="Content/bootstrap/css/bootstrap.css.map">
+      <publishTime>06/26/2014 09:14:10</publishTime>
+    </File>
+    <File Include="Content/bootstrap/css/bootstrap.min.css">
+      <publishTime>06/26/2014 09:14:12</publishTime>
+    </File>
+    <File Include="Content/bootstrap/css/carousel.css">
+      <publishTime>10/28/2014 17:53:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap/css/cover.css">
+      <publishTime>11/19/2014 15:49:11</publishTime>
+    </File>
+    <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>06/26/2014 09:14:12</publishTime>
+    </File>
+    <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>06/26/2014 09:14:12</publishTime>
+    </File>
+    <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>06/26/2014 09:14:12</publishTime>
+    </File>
+    <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>06/26/2014 09:14:12</publishTime>
+    </File>
+    <File Include="Content/images/dupaco.png">
+      <publishTime>11/19/2014 11:36:13</publishTime>
+    </File>
+    <File Include="Content/images/dupaco_logo.gif">
+      <publishTime>11/19/2014 11:31:38</publishTime>
+    </File>
+    <File Include="Content/images/garage-sale-1.jpg">
+      <publishTime>11/19/2014 14:45:33</publishTime>
+    </File>
+    <File Include="Content/images/garage-sale-2.jpg">
+      <publishTime>11/19/2014 14:49:19</publishTime>
+    </File>
+    <File Include="Content/images/garage-sale-3.jpg">
+      <publishTime>11/19/2014 14:52:05</publishTime>
+    </File>
+    <File Include="Content/images/garage-sale-4.jpg">
+      <publishTime>11/19/2014 14:57:39</publishTime>
+    </File>
+    <File Include="Content/images/garagesale.gif">
+      <publishTime>11/18/2014 14:35:20</publishTime>
+    </File>
+    <File Include="Content/images/iowa.jpg">
+      <publishTime>11/18/2014 15:55:36</publishTime>
+    </File>
+    <File Include="Content/images/iowa.png">
+      <publishTime>11/18/2014 15:10:37</publishTime>
+    </File>
+    <File Include="Content/images/iowa2.jpg">
+      <publishTime>11/18/2014 15:58:31</publishTime>
+    </File>
+    <File Include="Content/images/keep-calm-and-come-to-our-garage-sale.png">
+      <publishTime>11/19/2014 12:47:21</publishTime>
+    </File>
+    <File Include="Content/images/keep-calm-and-come-to-the-dupaco-garage-sale.png">
+      <publishTime>11/19/2014 12:54:56</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>12/23/2014 13:14:57</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_222222_256x240.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_454545_256x240.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_888888_256x240.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery-ui.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.accordion.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.all.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.autocomplete.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.base.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.button.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.core.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.datepicker.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.dialog.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.progressbar.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.resizable.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.selectable.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.slider.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.tabs.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.theme.css">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_222222_256x240.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_454545_256x240.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_888888_256x240.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery-ui.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.accordion.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.autocomplete.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.button.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.core.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.datepicker.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.dialog.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.progressbar.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.resizable.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.selectable.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.slider.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.tabs.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/themes/base/minified/jquery.ui.theme.min.css">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Content/timepicker/jquery.timepicker.css">
+      <publishTime>10/14/2014 18:49:28</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>11/18/2014 14:27:45</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>11/18/2014 14:27:52</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>06/26/2014 09:14:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>06/26/2014 09:14:12</publishTime>
+    </File>
+    <File Include="Scripts/default.js">
+      <publishTime>01/05/2015 09:40:46</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.8.2.js">
+      <publishTime>11/18/2014 14:27:46</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.8.2.min.js">
+      <publishTime>11/18/2014 14:27:46</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.24.js">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.24.min.js">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.timepicker.js">
+      <publishTime>10/14/2014 18:49:28</publishTime>
+    </File>
+    <File Include="Scripts/jquery.timepicker.min.js">
+      <publishTime>10/14/2014 18:49:28</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.js">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.min.js">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.2.0.debug.js">
+      <publishTime>11/18/2014 14:27:52</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.2.0.js">
+      <publishTime>11/18/2014 14:27:52</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>11/18/2014 14:27:48</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/Garage sale items insert.txt">
+      <publishTime>12/10/2014 16:32:53</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_DeleteBlogPost.txt">
+      <publishTime>12/19/2014 16:14:39</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_DeleteGarageSale.txt">
+      <publishTime>12/16/2014 21:33:21</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_DeleteGarageSaleItems.txt">
+      <publishTime>12/16/2014 21:34:03</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_DeleteGarageSpecialItems.txt">
+      <publishTime>12/16/2014 21:20:16</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetActiveGarageSaleByUserName.txt">
+      <publishTime>12/16/2014 21:21:11</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetBlogPostsBySaleId.txt">
+      <publishTime>12/19/2014 13:24:42</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetCategoriesAndSubcategories.txt">
+      <publishTime>12/16/2014 21:22:27</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetGarageSaleById.txt">
+      <publishTime>12/16/2014 21:23:07</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetGarageSaleItemById.txt">
+      <publishTime>12/16/2014 21:23:55</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetGarageSaleItemsBySaleId.txt">
+      <publishTime>12/16/2014 21:25:14</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetGarageSalesByUserName.txt">
+      <publishTime>12/16/2014 21:26:02</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetGarageSaleSpecialItems.txt">
+      <publishTime>12/15/2014 11:31:14</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetSpecialItemsForSearch.txt">
+      <publishTime>12/22/2014 20:12:08</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetStates.txt">
+      <publishTime>12/16/2014 21:26:53</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetSubcategoriesByCategoryId.txt">
+      <publishTime>12/16/2014 21:27:38</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_GetUserProfileInfoById.txt">
+      <publishTime>12/16/2014 21:28:25</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_SaveBlogPosts.txt">
+      <publishTime>12/19/2014 13:25:35</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_SaveGarageSale.txt">
+      <publishTime>12/16/2014 21:29:01</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_SaveGarageSaleItems.txt">
+      <publishTime>12/16/2014 21:30:02</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_SaveGarageSaleSpecialItems.txt">
+      <publishTime>12/15/2014 10:21:56</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_SaveGarageSaleUser.txt">
+      <publishTime>12/16/2014 21:30:53</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_SaveGarageSaleUserProfile.txt">
+      <publishTime>12/16/2014 21:31:29</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_UpdateGarageSale.txt">
+      <publishTime>12/16/2014 21:32:04</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_UpdateGarageSaleSpecialItem.txt">
+      <publishTime>12/16/2014 21:18:35</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/States insert script.txt">
+      <publishTime>12/10/2014 15:59:38</publishTime>
+    </File>
+    <File Include="Scripts/_references.js">
+      <publishTime>11/18/2014 14:29:21</publishTime>
+    </File>
+    <File Include="Views/Accounts/Login.cshtml">
+      <publishTime>12/20/2014 18:24:20</publishTime>
+    </File>
+    <File Include="Views/Accounts/ResetPassword.cshtml">
+      <publishTime>12/21/2014 22:31:54</publishTime>
+    </File>
+    <File Include="Views/Accounts/SignUp.cshtml">
+      <publishTime>01/04/2015 17:00:08</publishTime>
+    </File>
+    <File Include="Views/Accounts/UserProfile.cshtml">
+      <publishTime>01/04/2015 22:44:56</publishTime>
+    </File>
+    <File Include="Views/Accounts/_ResetPassword.cshtml">
+      <publishTime>12/20/2014 18:30:42</publishTime>
+    </File>
+    <File Include="Views/GarageSale/Add.cshtml">
+      <publishTime>01/04/2015 22:44:56</publishTime>
+    </File>
+    <File Include="Views/GarageSale/AddSpecialItem.cshtml">
+      <publishTime>01/05/2015 11:10:47</publishTime>
+    </File>
+    <File Include="Views/GarageSale/CreateItinerary.cshtml">
+      <publishTime>12/05/2014 15:31:35</publishTime>
+    </File>
+    <File Include="Views/GarageSale/Edit.cshtml">
+      <publishTime>01/05/2015 16:56:49</publishTime>
+    </File>
+    <File Include="Views/GarageSale/EditSpecialItem.cshtml">
+      <publishTime>01/05/2015 16:54:25</publishTime>
+    </File>
+    <File Include="Views/GarageSale/Search.cshtml">
+      <publishTime>01/04/2015 22:44:56</publishTime>
+    </File>
+    <File Include="Views/GarageSale/View.cshtml">
+      <publishTime>01/04/2015 22:44:56</publishTime>
+    </File>
+    <File Include="Views/GarageSale/ViewGarageSale.cshtml">
+      <publishTime>01/04/2015 22:44:56</publishTime>
+    </File>
+    <File Include="Views/GarageSale/_BlogPost.cshtml">
+      <publishTime>01/04/2015 20:38:16</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>01/03/2015 14:47:31</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>11/18/2014 14:27:45</publishTime>
+    </File>
+    <File Include="Views/Shared/_FailedDelete.cshtml">
+      <publishTime>12/15/2014 23:01:46</publishTime>
+    </File>
+    <File Include="Views/Shared/_GarageSaleLayout.cshtml">
+      <publishTime>12/05/2014 20:04:41</publishTime>
+    </File>
+    <File Include="Views/Shared/_GarageSaleNav.cshtml">
+      <publishTime>01/04/2015 16:09:51</publishTime>
+    </File>
+    <File Include="Views/Shared/_HomeNavLoggedIn.cshtml">
+      <publishTime>01/04/2015 16:56:15</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>01/03/2015 16:31:14</publishTime>
+    </File>
+    <File Include="Views/Shared/_LoginLayout.cshtml">
+      <publishTime>12/20/2014 18:25:40</publishTime>
+    </File>
+    <File Include="Views/Shared/_LoginTopNavigation.cshtml">
+      <publishTime>12/11/2014 14:42:22</publishTime>
+    </File>
+    <File Include="Views/Shared/_SuccessfulDelete.cshtml">
+      <publishTime>12/15/2014 23:01:28</publishTime>
+    </File>
+    <File Include="Views/Shared/_TopNavigation.cshtml">
+      <publishTime>12/11/2014 14:46:30</publishTime>
+    </File>
+    <File Include="Views/Shared/_UserProfileLayout.cshtml">
+      <publishTime>12/16/2014 10:27:31</publishTime>
+    </File>
+    <File Include="Views/Shared/_UserProfileNav.cshtml">
+      <publishTime>01/03/2015 17:51:16</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>11/18/2014 14:27:45</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>11/18/2014 14:27:45</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>12/16/2014 21:38:40</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

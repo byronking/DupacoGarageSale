@@ -32,7 +32,7 @@ namespace DupacoGarageSale.Data.Repository
                         {
                             BlogPostId = Convert.ToInt32(reader["blog_post_id"]),
                             BlogPostTitle = reader["blog_post_title"].ToString(),
-                            BlogPostUser = reader["blog_post_user_id"].ToString(),
+                            BlogPostUser = reader["blog_post_user"].ToString(),
                             ImageUri = reader["image_uri"].ToString(),
                             MediaTypeId = Convert.ToInt16(reader["media_type_id"]),
                             PostDateTime = Convert.ToDateTime(reader["blog_post_date_time"]),
@@ -59,7 +59,7 @@ namespace DupacoGarageSale.Data.Repository
         /// </summary>
         /// <param name="post"></param>
         /// <returns></returns>
-        public UserSaveResult SaveBlogPost(BlogPost post)
+        public UserSaveResult SaveBlogPost(BlogPost post, int userId)
         {
             var saveResult = new UserSaveResult();
             try
@@ -76,6 +76,7 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.Parameters.Add("@post_message", SqlDbType.VarChar).Value = post.PostMessage;
                     cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = post.SaleId;
                     cmd.Parameters.Add("@blog_post_date_time", SqlDbType.DateTime).Value = DateTime.Now;
+                    cmd.Parameters.Add("@blog_post_user_id", SqlDbType.Int).Value = userId;
 
                     var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
