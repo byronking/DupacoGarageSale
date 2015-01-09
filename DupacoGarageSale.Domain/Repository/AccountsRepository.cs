@@ -269,5 +269,39 @@ namespace DupacoGarageSale.Data.Repository
 
             return saveResult;
         }
+
+        public UserAddress GetUserAddressByUserId(int user_id)
+        {
+            var address = new UserAddress();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetUserAddressByUserId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_id", SqlDbType.VarChar).Value = user_id;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        address.AddressId = Convert.ToInt32(reader["address_id"]);
+                        address.Address1 = reader["address1"].ToString();
+                        address.Address2 = reader["address2"].ToString();
+                        address.City = reader["city"].ToString();
+                        address.State = reader["state_name"].ToString();
+                        address.Zip = reader["zip"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return address;
+        }
     }
 }

@@ -140,3 +140,12 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
+
+
+/* Styles for the search page
+-----------------------------------------------------------*/
+
+#map-canvas { 
+    height: 100%; 
+    width: 100%
+}

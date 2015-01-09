@@ -843,6 +843,11 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 session = Session["UserSession"] as UserSession;
                 viewModel.User = session.User;
+
+                // Get the user's address.
+                ViewBag.CenterAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City + " " +
+                    viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
+                var testy = ViewBag.CenterAddress;
             }
 
             if (formCollection.AllKeys.Count() != 0)
@@ -854,6 +859,16 @@ namespace DupacoGarageSale.Web.Controllers
 
                 var repository = new GarageSaleRepository();
                 viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, itemSubcategory);
+                viewModel.GarageSaleAddresses = repository.GetGarageSaleAddresses();
+
+                var addresses = new List<string>();
+
+                foreach (var garageSaleAddress in viewModel.GarageSaleAddresses)
+                {
+                    addresses.Add(garageSaleAddress.Address);
+                }                
+
+                ViewBag.Addresses = addresses.ToArray();
             }
 
             ViewBag.NavSearch = "active";

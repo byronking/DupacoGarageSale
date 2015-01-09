@@ -127,8 +127,10 @@ namespace DupacoGarageSale.Web.Controllers
                     User = user
                 };
 
+                // Get the user's address if they log in.
+                session.User.Address = repository.GetUserAddressByUserId(session.User.UserId);                 
+
                 Session["UserSession"] = session;
-                //~/Accounts/UserProfile/@Model.UserId
 
                 return RedirectToAction("View", new RouteValueDictionary(new
                 {
