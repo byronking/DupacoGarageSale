@@ -212,16 +212,19 @@
 
                 <span class="red hidden" id="validateSearchText">Enter a search term</span><br />
                 <span class="red hidden" id="validateSearchCategories">Select a category</span><br />
+            </div>
         </div>
-        </div>
-        <hr />
-        <div class="row">
-            <div id="map-canvas" style="width: 100%; height: 550px;"></div>
-        </div>
-        <hr />
-        
+
         @if (Model.SearchResults != null)
         {
+            <hr />
+            <div class="row">
+                <div id="map-canvas" style="width: 100%; height: 550px;"></div>
+            </div>
+            <hr />
+        
+        @*@if (Model.SearchResults != null)
+        {*@
             <div class="row">  
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -298,7 +301,11 @@
                 </div>
             </div>       
         }
+        
+        <!-- This is the user's address that could be the center point of the Google map.  Alternatively, it is possible to center on the first item returned from search -->
         <input type="hidden" value="@ViewBag.CenterAddress" id="hdnCenterAddress" />
+        <input type="hidden" value="@ViewBag.SearchAddress" id="hdnSearchAddress" />
+        <input type="hidden" value="@ViewBag.Radius" id="hdnRadius" />
     </div>
 </div>
 
@@ -308,6 +315,8 @@
     var garageSaleAddresses = @Html.Raw(new JavaScriptSerializer().Serialize(ViewBag.Addresses))
     
     var geocoder;
+    var circle = null;
+    var gmarkers = [];
 
     function initialize() {
         // Begin simple test map
@@ -323,10 +332,10 @@
         geocoder = new google.maps.Geocoder();
         //alert(geocoder);
 
-        var map;
+        var map;         
 
         var myOptions = {
-            zoom: 10,
+            zoom: 8,
             center: new google.maps.LatLng(39.329102, -76.576853),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -337,42 +346,52 @@
 
         var addresses = garageSaleAddresses;
 
-        var marker, x;
-        var infowindow = new google.maps.InfoWindow();
+        if (addresses != null)
+        {
+            var marker, x;
+            var infowindow = new google.maps.InfoWindow();
 
-        for (x = 0; x < addresses.length; x++) {
-            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=false', null, function (data) {
+            for (x = 0; x < addresses.length; x++) {
+                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=false', null, function (data) {
 
-                var p = data.results[0].geometry.location
+                    var p = data.results[0].geometry.location
 
-                //alert(data.results[0].formatted_address);  // This will alert the individual addresses.
+                    //alert(data.results[0].formatted_address);  // This will alert the individual addresses.
 
-                //debugObject(data.results[0].formatted_address);
-                var latlng = new google.maps.LatLng(p.lat, p.lng);
-                var marker = new google.maps.Marker({
-                    position: latlng,
-                    map: map,
-                    title: data.results[0].formatted_address
-                });
+                    //debugObject(data.results[0].formatted_address);
+                    var latlng = new google.maps.LatLng(p.lat, p.lng);
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+                        title: data.results[0].formatted_address
+                    });
 
-                google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.setContent(data.results[0].formatted_address);
-                    infowindow.open(map, marker);
-                });
-            });            
+                    // Add the markers to the gmarkers array.
+                    gmarkers.push(marker);
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.setContent(data.results[0].formatted_address);
+                        infowindow.open(map, marker);
+                    });
+                });            
+            }
+
+            geoCodeAddress(map);
         }
-
-        geoCodeAddress(map);
     }    
 
     initialize();
 
     function geoCodeAddress(map) {
-        var address = document.getElementById("hdnCenterAddress").value;
-        alert(address);
+        var address = document.getElementById('hdnSearchAddress').value;
+        var radius = parseInt(document.getElementById('hdnRadius').value, 10)*1000;
+        //var address = document.getElementById("hdnCenterAddress").value;
+
         geocoder.geocode({ 'address': address }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
+            if (status == google.maps.GeocoderStatus.OK) 
+            {
                 map.setCenter(results[0].geometry.location);
+                var searchCenter = results[0].geometry.location; // Added for the radius circle.
                 var marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
@@ -384,12 +403,54 @@
                     infowindow.open(map, marker);
                 });
 
-            } else {
+                if (circle) 
+                {
+                    circle.setMap(null); // Clear the previous circle.
+                }
+
+                circle = new google.maps.Circle({center:searchCenter,
+                    radius: radius,
+                    fillOpacity: 0.35,
+                    fillColor: "#FF0000",
+                    map: map
+                });
+
+                var bounds = new google.maps.LatLngBounds();
+
+                var foundMarkers = 0;
+                for (var i=0; i<gmarkers.length;i++) 
+                {
+                    if (google.maps.geometry.spherical.computeDistanceBetween(gmarkers[i].getPosition(),searchCenter) < radius) {
+                        bounds.extend(gmarkers[i].getPosition())
+                        gmarkers[i].setMap(map);
+                        // add a line to the side_bar html
+                        //side_bar_html += '<a href="javascript:myclick(' + i + ')">' + gmarkers[i].title + '<\/a><br>';
+                        foundMarkers++;
+                    } 
+                    else 
+                    {
+                        gmarkers[i].setMap(null);
+                    }
+                }
+                // put the assembled side_bar_html contents into the side_bar div
+                //document.getElementById("side_bar").innerHTML = side_bar_html;
+                if (foundMarkers > 0) 
+                {
+                    map.fitBounds(bounds);
+                } 
+                else 
+                {
+                    map.fitBounds(circle.getBounds());
+                }
+                // makeSidebar();
+                google.maps.event.addListenerOnce(map, 'bounds_changed', makeSidebar);
+            }
+            else
+            {
                 alert("Geocode was not successful for the following reason: " + status);
             }
         });
     }
-
 
     function debugObject(inputobject) {
         obj = inputobject;

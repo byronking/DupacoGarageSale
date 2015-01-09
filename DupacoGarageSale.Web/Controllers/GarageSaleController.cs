@@ -857,6 +857,9 @@ namespace DupacoGarageSale.Web.Controllers
                 var radius = formCollection["ddlRadius"].ToString();
                 var address = formCollection["txtAddress"].ToString();
 
+                ViewBag.SearchAddress = address;
+                ViewBag.Radius = radius;
+
                 var repository = new GarageSaleRepository();
                 viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, itemSubcategory);
                 viewModel.GarageSaleAddresses = repository.GetGarageSaleAddresses();
