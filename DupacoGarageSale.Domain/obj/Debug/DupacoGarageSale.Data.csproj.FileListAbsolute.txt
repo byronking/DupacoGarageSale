@@ -2,7 +2,6 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\DupacoGarageSale.
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\DupacoGarageSale.Data.pdb
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.pdb
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.csprojResolveAssemblyReference.cache
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\GoogleMapsApi.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\Microsoft.Web.Helpers.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\Microsoft.Web.Infrastructure.dll
@@ -18,3 +17,4 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\System.Web.Razor.
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\System.Web.WebPages.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.csprojResolveAssemblyReference.cache

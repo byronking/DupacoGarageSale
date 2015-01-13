@@ -801,9 +801,13 @@ namespace DupacoGarageSale.Data.Repository
             return results;
         }
 
-        public List<GarageSaleAddress> GetGarageSaleAddresses()
+        /// <summary>
+        /// This gets all the garage sale addresses.
+        /// </summary>
+        /// <returns></returns>
+        public List<MapAddress> GetGarageSaleAddresses()
         {
-            var garageSalesAddresses = new List<GarageSaleAddress>();
+            var garageSalesAddresses = new List<MapAddress>();
 
             try
             {
@@ -817,7 +821,7 @@ namespace DupacoGarageSale.Data.Repository
 
                     while (reader.Read())
                     {
-                        var address = new GarageSaleAddress
+                        var address = new MapAddress
                         {
                             Address = reader["address"].ToString()
                         };
@@ -832,6 +836,39 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return garageSalesAddresses;
+        }
+
+        /// <summary>
+        /// This gets all the garage sale addresses.
+        /// </summary>
+        /// <returns></returns>
+        public int GetGarageSaleIdByAddresses(string address)
+        {
+            var garageSalesId = 0;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetGarageSaleIdByAddresses", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@address", SqlDbType.VarChar).Value = address+"%";
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        garageSalesId = Convert.ToInt32(reader["sale_id"]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return garageSalesId;
         }
     }
 }

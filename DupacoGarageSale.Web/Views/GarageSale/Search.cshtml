@@ -194,13 +194,14 @@
                         <div><h3>Where is it?</h3></div><br />
                         <div>
                             <select name="ddlRadius" id="ddlRadius" class="form-control">
-                                <option value="0">Any distance</option>
                                 <option value="5">5 miles</option>
                                 <option value="10">10 miles</option>
                                 <option value="15">15 miles</option>
                                 <option value="25">25 miles</option>
                                 <option value="50">50 miles</option>
                                 <option value="100">100 miles</option>
+                                <option value="250">250 miles</option>
+                                <option value="500">500 miles</option>
                             </select>
                             <span style="margin-left:10px;margin-right:10px;"> from</span>
                             <input type="text" class="form-control" style="width:384px;" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code" />                         
@@ -312,7 +313,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEuaqeYdUf01yfZX12DIppc6AKHeegvzY"></script>
 <script type="text/javascript">     
    
-    var garageSaleAddresses = @Html.Raw(new JavaScriptSerializer().Serialize(ViewBag.Addresses))
+    var mapAddresses = @Html.Raw(new JavaScriptSerializer().Serialize(ViewBag.Addresses))
     
     var geocoder;
     var circle = null;
@@ -344,7 +345,7 @@
         // Sample of hard-coded addresses
         //var addresses = ['7 Saint Paul St. Baltimore MD 21202', '2201 Lake Ave Baltimore MD 21213', '4846 Western Ave Bethesda MD 20816', '201 State Rd Rehoboth DE 19971', '2804 Hyson Lane Falls Church VA 22043'];
 
-        var addresses = garageSaleAddresses;
+        var addresses = mapAddresses;
 
         if (addresses != null)
         {
@@ -370,7 +371,7 @@
                     gmarkers.push(marker);
 
                     google.maps.event.addListener(marker, 'click', function () {
-                        infowindow.setContent(data.results[0].formatted_address);
+                        infowindow.setContent(data.results[0].formatted_address + ' <br/><a href="~/GarageSale/GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>');
                         infowindow.open(map, marker);
                     });
                 });            
@@ -418,6 +419,8 @@
                     map: map
                 });
 
+                //alert('zoom: ' + map.getZoom());
+
                 var bounds = new google.maps.LatLngBounds();
 
                 var foundMarkers = 0;
@@ -440,9 +443,12 @@
                 if (foundMarkers > 0) 
                 {
                     map.fitBounds(bounds);
+                    //alert('zoom: ' + map.getZoom());
+                    //map.setZoom(map.getZoom()+5);
                 } 
                 else 
                 {
+                    //alert('zoom else: ' + map.getZoom());
                     map.fitBounds(circle.getBounds());
                 }
                 // makeSidebar();

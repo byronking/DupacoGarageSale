@@ -8,7 +8,7 @@
     .nav-tabs li a {font-size:14px;padding: 13px 4px;color:#000000;}
 </style>
 
-<div id="page-wrap" class="jumbotron" style="min-height:550px;">
+<div id="page-wrap" class="jumbotron" style="min-height:580px;">
     <div>
         <a href="~/Home/" style="margin-top:-40px;"><img alt="dupaco!" src="~/Content/images/dupaco.png" /></a>
         <img src="~/Content/images/garagesale.gif" />
@@ -16,22 +16,47 @@
     <div style="background-color:#F9B82F;">
         <div class="container">
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="~/Home/">Home</a></li>
-                <li role="presentation"><a href="#">Baby</a></li>
-                <li role="presentation"><a href="#">Clothing & Accessories</a></li>
-                <li role="presentation"><a href="#">Electronics</a></li>
-                <li role="presentation"><a href="#">Health & Beauty</a></li>
-                <li role="presentation"><a href="#">Pets</a></li>
-                <li role="presentation"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">Home Maintenance</a></li>
-                <li role="presentation"><a href="#">Media</a></li>
-                <li role="presentation"><a href="#">Toys & Games</a></li>
-                <li role="presentation"><a href="#">Vehicles</a></li>
-                <li role="presentation"><a href="#">Sports, Fitness & Outdoors</a></li>
+                @*<li role="presentation"><a href="~/Home/">Home</a></li>*@
+                <li class="dropdown" role="presentation">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Baby</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Strollers</a></li>
+                        <li><a href="#">Car Seats</a></li>
+                        <li><a href="#">Equipment</a></li>
+                        <li><a href="#">Activities & Toys</a></li>
+                        <li><a href="#">Nursery Furniture</a></li>
+                        <li><a href="#">Bedding</a></li>
+                        <li><a href="#">Diapering</a></li>
+                        <li><a href="#">Feeding</a></li>
+                        <li><a href="#">Health & Safety</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" role="presentation"><a href="#">Clothing & Accessories</a></li>
+                <li class="dropdown" role="presentation"><a href="#">Electronics</a></li>
+                <li class="dropdown" role="presentation"><a href="#">Health & Beauty</a></li>
+                <li class="dropdown" role="presentation">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pets</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Clothes & Toys</a></li>
+                        <li><a href="#">Carriers</a></li>
+                        <li><a href="#">Cages, Kennels & Bedding</a></li>
+                        <li><a href="#">Feeding & Grooming</a></li>
+                        <li><a href="#">Training</a></li>
+                        <li><a href="#">Tanks & Filters</a></li>
+                        <li><a href="#">Pets For Sale</a></li>
+                    </ul>
+
+                </li>
+                <li class="dropdown" role="presentation"><a href="#">Home</a></li>
+                <li class="dropdown" role="presentation"><a href="#">Home Maintenance</a></li>
+                <li class="dropdown" role="presentation"><a href="#">Media</a></li>
+                <li class="dropdown" role="presentation"><a href="#">Toys & Games</a></li>
+                <li class="dropdown" role="presentation"><a href="#">Vehicles</a></li>
+                <li class="dropdown" role="presentation"><a href="#">Sports, Fitness & Outdoors</a></li>
             </ul>
         </div>
     </div>
-    <h2>Dupaco Community-Wide Garage Sales!</h2>
+    <h2 class="down-20">Dupaco Community-Wide Garage Sales!</h2>
     <p class="lead">
         Why garage sales? As a credit union, Dupaco is about people, thrift, and the community. That's also what the Community-Wide Garage Sale is about, and why it's a perfect 
         fit for us.

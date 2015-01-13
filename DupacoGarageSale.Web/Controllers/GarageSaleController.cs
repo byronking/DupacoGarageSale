@@ -888,6 +888,8 @@ namespace DupacoGarageSale.Web.Controllers
 
         #endregion
 
+        #region Garage sale itineraries
+
         [HttpPost]
         public ActionResult AddToItinerary(int saleId, int userId)
         {
@@ -934,5 +936,25 @@ namespace DupacoGarageSale.Web.Controllers
                 id = saleId
             }));
         }
+
+        [HttpGet]
+        public ActionResult GetGarageSaleByAddress(string address)
+        {
+            string[] searchAdddress = address.Split(' ');
+            var garageSaleAddress = new GarageSaleAddress();
+            garageSaleAddress.Address1 = searchAdddress[0] + " " + searchAdddress[1];
+
+            var repository = new GarageSaleRepository();
+            var garageSaleId = repository.GetGarageSaleIdByAddresses(garageSaleAddress.Address1);
+
+            return RedirectToAction("ViewGarageSale", new RouteValueDictionary(new
+            {
+                controller = "GarageSale",
+                action = "ViewGarageSale",
+                id = garageSaleId
+            }));
+        }
+
+        #endregion
     }
 }
