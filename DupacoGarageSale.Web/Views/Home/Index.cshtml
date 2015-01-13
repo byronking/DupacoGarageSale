@@ -3,9 +3,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+<style type="text/css">
+    .nav-tabs li a {font-size:14px;padding: 13px 4px;color:#000000;}
+</style>
+
 <div id="page-wrap" class="jumbotron" style="min-height:550px;">
-    <a href="~/Home/" style="margin-top:-40px;"><img alt="dupaco!" src="~/Content/images/dupaco.png" /></a>
-    <img src="~/Content/images/garagesale.gif" />
+    <div>
+        <a href="~/Home/" style="margin-top:-40px;"><img alt="dupaco!" src="~/Content/images/dupaco.png" /></a>
+        <img src="~/Content/images/garagesale.gif" />
+    </div><br />
+    <div style="background-color:#F9B82F;">
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="~/Home/">Home</a></li>
+                <li role="presentation"><a href="#">Baby</a></li>
+                <li role="presentation"><a href="#">Clothing & Accessories</a></li>
+                <li role="presentation"><a href="#">Electronics</a></li>
+                <li role="presentation"><a href="#">Health & Beauty</a></li>
+                <li role="presentation"><a href="#">Pets</a></li>
+                <li role="presentation"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">Home Maintenance</a></li>
+                <li role="presentation"><a href="#">Media</a></li>
+                <li role="presentation"><a href="#">Toys & Games</a></li>
+                <li role="presentation"><a href="#">Vehicles</a></li>
+                <li role="presentation"><a href="#">Sports, Fitness & Outdoors</a></li>
+            </ul>
+        </div>
+    </div>
     <h2>Dupaco Community-Wide Garage Sales!</h2>
     <p class="lead">
         Why garage sales? As a credit union, Dupaco is about people, thrift, and the community. That's also what the Community-Wide Garage Sale is about, and why it's a perfect 
@@ -13,8 +38,9 @@
     </p>
 
     <div class="container">
-        <div class="row down-40">
-            <p class="lead">Looking for a good buy? Search the sales!</p><br />
+        <div class="row down-20">
+            <p class="lead">Looking for a good buy? Select one of the categories above or click <a href="~/GarageSale/Search">here</a> to search the sales!</p>
+            @*
             @using (Html.BeginForm("Search", "GarageSale", FormMethod.Post, new { @class="form-inline" }))
             {
                 <div class="form-group">
@@ -190,11 +216,19 @@
                     <input type="submit" id="btnSearch" value="Search" class="btn btn-primary" />
                 </div>
             }
+            *@
         </div>
         <div class="row">
             <span class="red hidden" id="validateSearchText">Enter a search term</span><br />
             <span class="red hidden" id="validateSearchCategories">Select a category</span><br />
         </div>
     </div>
+
+    
 </div>
 
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Dupaco 2015</p>
+    </div>
+</footer>

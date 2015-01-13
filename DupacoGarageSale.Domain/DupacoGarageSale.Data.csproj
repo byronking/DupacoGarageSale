@@ -80,6 +80,7 @@
     <Compile Include="Domain\GarageSaleSearchItem.cs" />
     <Compile Include="Domain\GarageSaleSearchResults.cs" />
     <Compile Include="Domain\GarageSaleUser.cs" />
+    <Compile Include="Domain\Itinerary.cs" />
     <Compile Include="Domain\PasswordResetInfo.cs" />
     <Compile Include="Domain\PasswordResetRequest.cs" />
     <Compile Include="Domain\SaleDatesTimes.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Repository\AddressRepository.cs" />
     <Compile Include="Repository\BlogPostRepository.cs" />
     <Compile Include="Repository\GarageSaleRepository.cs" />
+    <Compile Include="Repository\ItineraryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

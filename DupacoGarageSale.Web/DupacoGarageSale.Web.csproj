@@ -230,6 +230,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\default.js" />
+    <Content Include="Scripts\garagesale.itinerary.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -311,6 +312,7 @@
     <Content Include="Views\GarageSale\Search.cshtml" />
     <Content Include="Views\GarageSale\ViewGarageSale.cshtml" />
     <Content Include="Views\Shared\_HomeNavLoggedIn.cshtml" />
+    <Content Include="Views\Shared\_TopNavigation2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

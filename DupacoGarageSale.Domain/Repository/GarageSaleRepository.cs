@@ -711,7 +711,12 @@ namespace DupacoGarageSale.Data.Repository
             return updateSuccessful;
         }
 
-
+        /// <summary>
+        /// This searches the garage sales based on search criteria and item subcategory.
+        /// </summary>
+        /// <param name="searchCriteria"></param>
+        /// <param name="itemSubcategory"></param>
+        /// <returns></returns>
         public GarageSaleSearchResults SearchGarageSales(string searchCriteria, int itemSubcategory)
         {
             var results = new GarageSaleSearchResults()

@@ -19,5 +19,6 @@ namespace DupacoGarageSale.Web.Models
         public List<BlogPost> BlogPosts { get; set; }
         public GarageSaleSearchResults SearchResults { get; set; }
         public List<GarageSaleAddress> GarageSaleAddresses { get; set; }
+        public Itinerary GarageSaleItinerary { get; set; }
     }
 }

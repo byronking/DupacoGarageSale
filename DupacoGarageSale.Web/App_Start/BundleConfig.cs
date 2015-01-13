@@ -24,7 +24,8 @@ namespace DupacoGarageSale.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
-                        "~/Scripts/default.js"));
+                        "~/Scripts/default.js",
+                        "~/Scripts/garagesale.itinerary.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/timepicker").Include(
                         "~/Scripts/jquery.timepicker.js"));
