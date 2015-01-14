@@ -77,5 +77,27 @@
                 <input type="submit" class="btn btn-primary down_30" value="Register" />
             </div>
         }
+        <br />
+        <div>Or, sign up with Facebook</div>
+        <div id="fb-root"></div>
+        <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
     </div>
 </div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1536203933300357',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  };
+
+  (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1536203933300357&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
