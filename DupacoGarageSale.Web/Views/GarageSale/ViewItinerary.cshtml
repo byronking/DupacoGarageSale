@@ -1,0 +1,175 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+@{
+    ViewBag.Title = "View your itinerary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrap" class="jumbotron" style="min-height:500px;">
+    <div class="container">
+        <div class="row">
+            <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@ViewBag.Title</h2>
+            <br />
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Travel itinerary for @Model.User.FirstName @Model.User.LastName</strong></h3>
+                </div>
+                <div class="panel-body">                    
+
+                    @{
+                        var startingAddress =  Model.User.Address.Address1 + " " + Model.User.Address.Address2 + " " + Model.User.Address.City + " " + 
+                        Model.User.Address.State  + " " + Model.User.Address.Zip;
+                    }
+
+                    <input type="hidden" id="hdnStartingAddress" value="@startingAddress" />
+                    <input type="hidden" id="hdnItineraryLegs" value="@Model.GarageSaleItinerary.Count" />
+                       
+                    <form>
+                        <div class="form-group">
+                            <label for="txtStartingAddress">Starting point:</label>
+                            <input type="text" id="txtStartingAddress" class="form-control" style="width:350px;" value="@startingAddress" />
+                        </div>
+
+                        @foreach (var address in Model.GarageSaleItinerary) 
+                        {
+                            var itineraryAddress = address.SaleAddress1 + " " + address.SaleAddress2 + " " + address.SaleCity + " " + address.SaleState + " " + address.SaleZipCode;  
+                                                      
+                            <div class="form-group">
+                                <label for="txtItineraryLeg@(address.ItineraryLegId)">Itinerary leg @address.ItineraryLegId:</label>
+                                <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" class="form-control" style="width:350px;" value="@itineraryAddress" />
+                            </div>
+                        }
+
+                        <input type="button" id="btnMapItinerary" class="btn btn-primary" value="Get directions" onclick="calculateRoute();" />
+                    </form><br /><br />
+
+                    <!-- the map with directions -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="map-itinerary"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="well container-overflow">
+                                <h3>Driving directions:</h3> 
+                                <div id="directions_panel"></div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEuaqeYdUf01yfZX12DIppc6AKHeegvzY"></script>
+<script type="text/javascript"> 
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+    var geocoder;
+
+    function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var dubuque = new google.maps.LatLng(41.850033, -87.6500523);
+        var mapOptions = {
+            zoom: 5,
+            center: dubuque
+        }
+        map = new google.maps.Map(document.getElementById('map-itinerary'), mapOptions);
+        directionsDisplay.setMap(map);
+
+        
+        geoCodeAddress(map);
+    }
+
+    function geoCodeAddress(map) {
+        var address = document.getElementById('hdnStartingAddress').value;
+
+        geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var searchCenter = results[0].geometry.location; // Set the center point of the search.
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+
+                var infowindow = new google.maps.InfoWindow();
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.setContent('Your starting point: ' + results[0].formatted_address);
+                    infowindow.open(map, marker);
+                });
+            }
+        });
+    }
+
+    function calculateRoute() {
+        var start = document.getElementById('hdnStartingAddress').value;
+        var end = document.getElementById('txtItineraryLeg2').value;
+
+        // Push the itinerary legs into the waypoints and then set the last waypoint as the destination.
+        var wayPointsz = [];
+        var wypt1 = document.getElementById('txtItineraryLeg1').value;
+
+        wayPointsz.push({
+            location: wypt1,
+            stopover: true
+        });
+
+        //var checkboxArray = document.getElementById('waypoints');
+        //for (var i = 0; i < checkboxArray.length; i++) {
+        //    if (checkboxArray.options[i].selected == true) {
+        //        waypts.push({
+        //            location: checkboxArray[i].value,
+        //            stopover: true
+        //        });
+        //    }
+        //}
+
+        var request = {
+            origin: start,
+            destination: end,
+            waypoints: wayPointsz,
+            optimizeWaypoints: true,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                var route = response.routes[0];
+                var directionsPanel = document.getElementById('directions_panel');
+                directionsPanel.innerHTML = '';
+
+                // For each route, display summary information.
+                for (var i = 0; i < route.legs.length; i++) {
+                    var routeSegment = i + 1;
+                    directionsPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';
+                    directionsPanel.innerHTML += route.legs[i].start_address + ' to ';
+                    directionsPanel.innerHTML += route.legs[i].end_address + '<br>';
+                    directionsPanel.innerHTML += 'Distance: ' + route.legs[i].distance.text + '<br>';
+
+                    for (x = 0; x < route.legs[i].steps.length; x++) {
+                        directionsPanel.innerHTML += route.legs[i].steps[x].instructions + ' <br>';
+
+                        //debugObject(route.legs[i].steps[x]);
+                    }
+
+                    directionsPanel.innerHTML += ' <br>';
+                }
+            }            
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    function debugObject(inputobject) {
+        obj = inputobject;
+        for (x in obj) {
+            alert(x + ": " + obj[x]);
+        }
+    }
+
+</script>

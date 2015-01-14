@@ -44,6 +44,52 @@ namespace DupacoGarageSale.Data.Repository
             return itinerary;
         }
 
+        /// <summary>
+        /// This returns the user's itinerary with legs.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public List<GarageSaleItinerary> GetItineraryByUserId(int userId)
+        {
+            var itineraryList = new List<GarageSaleItinerary>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetItineraryByOwnerId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@itinerary_owner", SqlDbType.Int).Value = userId;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var itinerary = new GarageSaleItinerary
+                        {
+                            ItineraryId = Convert.ToInt32(reader["itinerary_id"]),
+                            ItineraryLegId = Convert.ToInt32(reader["itinerary_leg_id"]),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            SaleAddress1 = reader["sale_address1"].ToString(),
+                            SaleAddress2 = reader["sale_address2"].ToString(),
+                            SaleCity = reader["sale_city"].ToString(),
+                            SaleState = reader["state_name"].ToString(),
+                            SaleZipCode = reader["sale_zip"].ToString()
+                        };
+
+                        itineraryList.Add(itinerary);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return itineraryList;
+        }
+
         public UserSaveResult SaveItinerary(Itinerary itinerary)
         {
             var saveResult = new UserSaveResult();
@@ -55,8 +101,8 @@ namespace DupacoGarageSale.Data.Repository
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = itinerary.SaleId;
-                    cmd.Parameters.Add("@itinerary_create_date", SqlDbType.Int).Value = itinerary.ItineraryOwner;
-                    cmd.Parameters.Add("@itinerary_modify_date", SqlDbType.Int).Value = itinerary.ItineraryOwner;
+                    cmd.Parameters.Add("@itinerary_create_date", SqlDbType.DateTime).Value = itinerary.ItineraryCreateDate;
+                    cmd.Parameters.Add("@itinerary_modify_date", SqlDbType.DateTime).Value = itinerary.ItineraryModifyDate;
                     cmd.Parameters.Add("@itinerary_owner", SqlDbType.Int).Value = itinerary.ItineraryOwner;
 
                     var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
@@ -81,11 +127,39 @@ namespace DupacoGarageSale.Data.Repository
             return saveResult;
         }
 
-        public int UpdateItinerary(Itinerary itinerary)
+        public UserSaveResult SaveItineraryLeg(int itineraryId, int saleId)
         {
-            var itineraryId = itinerary.ItineraryId;
+            var saveResult = new UserSaveResult();
 
-            return itineraryId;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SaveItineraryLeg", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = saleId;
+                    cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = saleId;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.SaveResultId = (int)returnParameter.Value;
+
+                    if (saveResult.SaveResultId != 0)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return saveResult;
         }
     }
 }

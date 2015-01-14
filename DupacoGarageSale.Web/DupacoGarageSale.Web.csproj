@@ -313,6 +313,7 @@
     <Content Include="Views\GarageSale\ViewGarageSale.cshtml" />
     <Content Include="Views\Shared\_HomeNavLoggedIn.cshtml" />
     <Content Include="Views\Shared\_TopNavigation2.cshtml" />
+    <Content Include="Views\GarageSale\ViewItinerary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

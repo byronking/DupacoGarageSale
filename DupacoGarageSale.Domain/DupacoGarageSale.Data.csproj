@@ -76,6 +76,7 @@
     <Compile Include="Domain\BlogPost.cs" />
     <Compile Include="Domain\GarageSale.cs" />
     <Compile Include="Domain\GarageSaleAddress.cs" />
+    <Compile Include="Domain\GarageSaleItinerary.cs" />
     <Compile Include="Domain\MapAddress.cs" />
     <Compile Include="Domain\GarageSaleItem.cs" />
     <Compile Include="Domain\GarageSaleSearchItem.cs" />

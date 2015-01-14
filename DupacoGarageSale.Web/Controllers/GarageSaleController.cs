@@ -890,6 +890,37 @@ namespace DupacoGarageSale.Web.Controllers
 
         #region Garage sale itineraries
 
+        [HttpGet]
+        public ActionResult ViewItinerary(int id)
+        {
+            if (Session["UserSession"] != null)
+            {
+
+                var session = Session["UserSession"] as UserSession;
+
+                // Get the user's itinerary by user id.
+                var repository = new ItineraryRepository();
+                var itineraryList = repository.GetItineraryByUserId(id);
+
+                // Add it to the viewModel.
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                }
+
+                viewModel.User = session.User;
+                viewModel.GarageSaleItinerary = itineraryList;
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
         [HttpPost]
         public ActionResult AddToItinerary(int saleId, int userId)
         {
@@ -907,7 +938,8 @@ namespace DupacoGarageSale.Web.Controllers
 
             if (itinerary.ItineraryId != 0)
             {
-                // Update the existing itinerary.
+                // Add a new leg to the existing itinerary.
+                var saveResult = repository.SaveItineraryLeg(itinerary.ItineraryId, saleId);
             }
             else
             {
@@ -925,7 +957,9 @@ namespace DupacoGarageSale.Web.Controllers
                 if (saveResult.IsSaveSuccessful)
                 {
                     itinerary.ItineraryId = saveResult.SaveResultId;
-                    viewModel.GarageSaleItinerary = itinerary;
+                    
+                    // Do i even need to do this?
+                    // viewModel.GarageSaleItinerary.Add(itinerary);
                 }
             }
 
@@ -937,6 +971,11 @@ namespace DupacoGarageSale.Web.Controllers
             }));
         }
 
+        /// <summary>
+        /// This gets a single garage sale by map address.
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult GetGarageSaleByAddress(string address)
         {

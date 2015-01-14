@@ -132,10 +132,12 @@ namespace DupacoGarageSale.Web.Controllers
 
                 Session["UserSession"] = session;
 
-                return RedirectToAction("View", new RouteValueDictionary(new
+                // Keep the focus between sellers and buyers. Send the user to the profile page.
+                return RedirectToAction("UserProfile", new RouteValueDictionary(new
                 {
-                    controller = "GarageSale",
-                    action = "View"
+                    controller = "Accounts",
+                    action = "UserProfile",
+                    id = session.User.UserId
                 }));
             }
             else

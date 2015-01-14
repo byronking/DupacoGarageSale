@@ -153,3 +153,13 @@ textarea {
     height: 100%; 
     width: 100%
 }
+
+#map-itinerary { 
+    height: 510px; 
+    width: 535px;
+}
+
+.container-overflow {
+    overflow:auto;
+    max-height:510px;
+}
