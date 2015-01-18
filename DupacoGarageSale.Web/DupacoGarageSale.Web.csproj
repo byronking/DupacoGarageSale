@@ -318,6 +318,8 @@
     <Content Include="Views\GarageSale\SearchResults.cshtml" />
     <Content Include="Views\Shared\_LayoutNoBackground.cshtml" />
     <Content Include="Views\GarageSale\_ItemCategories.cshtml" />
+    <Content Include="Views\GarageSale\_SearchResults.cshtml" />
+    <Content Include="Views\GarageSale\_SearchBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

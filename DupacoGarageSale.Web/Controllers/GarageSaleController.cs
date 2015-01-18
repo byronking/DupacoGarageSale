@@ -867,13 +867,11 @@ namespace DupacoGarageSale.Web.Controllers
 
         public ActionResult Search(FormCollection formCollection)
         {
-            UserSession session = null;
-
             var viewModel = new GarageSaleViewModel();
 
             if (Session["UserSession"] != null)
             {
-                session = Session["UserSession"] as UserSession;
+                var session = Session["UserSession"] as UserSession;
                 viewModel.User = session.User;
 
                 // Get the user's address.
@@ -897,13 +895,6 @@ namespace DupacoGarageSale.Web.Controllers
 
                 var addresses = new List<string>();
 
-                // This gets all the addresses for all the sales.
-                // viewModel.GarageSaleAddresses = repository.GetGarageSaleAddresses();
-                //foreach (var garageSaleAddress in viewModel.GarageSaleAddresses)
-                //{
-                //    addresses.Add(garageSaleAddress.Address);
-                //}  
-
                 // Take all the items in the search results and piece together addresses.
                 foreach (var item in viewModel.SearchResults.GarageSaleItems)
                 {
@@ -916,6 +907,30 @@ namespace DupacoGarageSale.Web.Controllers
             ViewBag.NavSearch = "active";
 
             return View(viewModel);
+        }
+
+        public ActionResult SearchByCriteria(FormCollection formCollection)
+        {
+            var viewModel = new GarageSaleViewModel();
+
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                viewModel.User = session.User;
+
+                // Get the user's address.
+                ViewBag.CenterAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City + " " +
+                    viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
+                var testy = ViewBag.CenterAddress;
+            }
+
+            var repository = new GarageSaleRepository();
+            var searchCriteria = formCollection["txtSearchCriteria"].ToString();
+            viewModel.SearchResults = repository.SearchGarageSales(searchCriteria);
+
+            ViewBag.NavSearch = "active";
+
+            return View("Search", viewModel);
         }
 
         public ActionResult SearchBySubcategory(int itemSubcategoryId)

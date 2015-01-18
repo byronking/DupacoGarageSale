@@ -4,12 +4,12 @@
 {
     if (Model.SearchResults.SpecialItems.Count != 0)
     {
-        <div class="row">          
+        <div class="row">
             <p class="lead">Hot picks</p>
             @foreach (var item in Model.SearchResults.SpecialItems)
             {
-                <div class="col-md-4">
-                    <div class="thumbnail" style="min-height:490px;">
+                <div class="col-md-5">
+                    <div class="thumbnail" style="min-height:530px;max-height:545px;margin-right:4px"> 
                         <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
                         <div class="caption">
                             <h3>@item.Title</h3>
@@ -19,8 +19,9 @@
                         </div>                    
                     </div>
                 </div>
-            }
+            }           
         </div>
+        <hr />
     }
     
     if (Model.SearchResults.GarageSaleItems.Count != 0)
@@ -30,12 +31,12 @@
             @foreach (var item in Model.SearchResults.GarageSaleItems)
             {
                 <div class="col-md-5" style="margin-right:4px;">
-                    <div class="panel panel-warning">
+                    <div class="panel panel-info">
 	                    <div class="panel-heading">
 		                    @item.ItemCategoryName - @item.ItemSubcategoryName
 	                    </div>
 	                    <div class="panel-body">
-		                    @item.Address1<br />
+		                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1<br />
 		                    @if (item.Address2 != string.Empty)
 		                    {                        
 			                    @item.Address2<br />

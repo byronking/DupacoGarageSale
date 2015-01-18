@@ -801,6 +801,90 @@ namespace DupacoGarageSale.Data.Repository
             return results;
         }
 
+        public GarageSaleSearchResults SearchGarageSales(string searchCriteria)
+        {
+            var results = new GarageSaleSearchResults()
+            {
+                GarageSaleItems = new List<GarageSaleSearchItem>(),
+                SpecialItems = new List<SpecialItem>()
+            };
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SearchSpecialItems", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var specialItem = new SpecialItem
+                        {
+                            SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
+                            Title = reader["title"].ToString(),
+                            Description = reader["description"].ToString(),
+                            PictureLink = reader["picture_link"].ToString(),
+                            Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"])
+                        };
+
+                        results.SpecialItems.Add(specialItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItemsByCriteria", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var item = new GarageSaleSearchItem
+                        {
+                            GarageSaleItemsId = Convert.ToInt32(reader["garage_sale_items_id"]),
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemCategoryName = reader["item_category_name"].ToString(),
+                            ItemSubcategoryName = reader["item_subcategory_name"].ToString(),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            Address1 = reader["sale_address1"].ToString(),
+                            Address2 = reader["sale_address2"].ToString(),
+                            City = reader["sale_city"].ToString(),
+                            State = reader["state_name"].ToString(),
+                            ZipCode = reader["sale_zip"].ToString()
+                        };
+
+                        results.GarageSaleItems.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return results;
+        }
+
         public GarageSaleSearchResults SearchGarageSalesBySubcategory(int itemSubcategory)
         {
             var results = new GarageSaleSearchResults()
