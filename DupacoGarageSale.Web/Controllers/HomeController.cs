@@ -1,4 +1,5 @@
 ﻿using DupacoGarageSale.Data.Domain;
+using DupacoGarageSale.Data.Repository;
 using DupacoGarageSale.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,9 @@ namespace DupacoGarageSale.Web.Controllers
         public ActionResult Index()
         {
             UserSession session = null;
-
+            var repository = new GarageSaleRepository();
             var viewModel = new GarageSaleViewModel();
+            viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
 
             if (Session["UserSession"] != null)
             {
@@ -26,7 +28,7 @@ namespace DupacoGarageSale.Web.Controllers
             }
             else
             {
-                return View();
+                return View(viewModel);
             }
         }
 

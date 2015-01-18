@@ -270,6 +270,7 @@
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleSpecialItems.txt" />
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleUser.txt" />
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleUserProfile.txt" />
+    <Content Include="Scripts\sql scripts\sp_SearchSpecialItemsBySubcategory.txt" />
     <Content Include="Scripts\sql scripts\sp_UpdateGarageSale.txt" />
     <Content Include="Scripts\sql scripts\sp_UpdateGarageSaleSpecialItem.txt" />
     <Content Include="Scripts\sql scripts\States insert script.txt" />
@@ -314,6 +315,9 @@
     <Content Include="Views\Shared\_HomeNavLoggedIn.cshtml" />
     <Content Include="Views\Shared\_TopNavigation2.cshtml" />
     <Content Include="Views\GarageSale\ViewItinerary.cshtml" />
+    <Content Include="Views\GarageSale\SearchResults.cshtml" />
+    <Content Include="Views\Shared\_LayoutNoBackground.cshtml" />
+    <Content Include="Views\GarageSale\_ItemCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

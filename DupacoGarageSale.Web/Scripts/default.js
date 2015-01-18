@@ -1,5 +1,127 @@
 ﻿$(document).ready(function () {
 
+    // Show the home page content on click
+    $("#linkCategory1").click(function (e) {
+        var categoryId = $("#hdnCategory1").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
+    $("#linkCategory2").click(function (e) {
+        var categoryId = $("#hdnCategory2").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
+    $("#linkCategory3").click(function (e) {
+        var categoryId = $("#hdnCategory3").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
+    $("#linkCategory4").click(function (e) {
+        var categoryId = $("#hdnCategory4").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
+    $("#linkCategory5").click(function (e) {
+        var categoryId = $("#hdnCategory5").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
+    $("#linkCategory6").click(function (e) {
+        var categoryId = $("#hdnCategory6").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
+    $("#linkCategory7").click(function (e) {
+        var categoryId = $("#hdnCategory7").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
+    $("#linkCategory8").click(function (e) {
+        var categoryId = $("#hdnCategory8").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
+    $("#linkCategory9").click(function (e) {
+        var categoryId = $("#hdnCategory9").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
+    $("#linkCategory10").click(function (e) {
+        var categoryId = $("#hdnCategory10").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
+    $("#linkCategory11").click(function (e) {
+        var categoryId = $("#hdnCategory11").val();
+        $.get('GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+            $("#categoryContent").html(data);
+        });
+
+        e.preventDefault();
+
+        $("#categoryContent").removeClass('invisible');
+    });
+
     // Show the successful save message.
     if (($("#hdnSaveMessage").val() !== undefined)) {
         //alert($("#hdnSaveMessage").val());
@@ -30,7 +152,7 @@
     $('#dayFourEnd').timepicker({ 'scrollDefault': '2000' });
 
     $("#txtDescription").keyup(function () {
-        var max = 300;
+        var max = 100;
         var len = $(this).val().length;
         //alert('length: ' + len);
         if (len >= max) {
@@ -184,14 +306,15 @@
 
     // Validation for the blog post
     $("#btnSaveBlogPost").click(function (e) {
-        if ($('#txtBlogPostTitle').val() == "") {
-            $('#titleValidationMessage').removeClass('invisible');
+        // Disabling this per JH.
+        //if ($('#txtBlogPostTitle').val() == "") {
+        //    $('#titleValidationMessage').removeClass('invisible');
 
-            e.preventDefault();
-        }
-        else {
-            $('#titleValidationMessage').addClass('invisible');
-        }
+        //    e.preventDefault();
+        //}
+        //else {
+        //    $('#titleValidationMessage').addClass('invisible');
+        //}
 
         if ($('#txtBlogPost').val() == "") {
             $('#postValidationMessage').removeClass('invisible');

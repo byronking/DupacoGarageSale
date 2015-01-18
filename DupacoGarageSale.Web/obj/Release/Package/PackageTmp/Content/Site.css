@@ -64,6 +64,10 @@
     color: red;
 }
 
+.down-20 {
+    margin-top: 20px;
+}
+
 .down-40 {
     margin-top: 40px;
 }
@@ -139,4 +143,23 @@ textarea {
 
 .validation-summary-valid {
     display: none;
+}
+
+
+/* Styles for the search page
+-----------------------------------------------------------*/
+
+#map-canvas { 
+    height: 100%; 
+    width: 100%
+}
+
+#map-itinerary { 
+    height: 510px; 
+    width: 535px;
+}
+
+.container-overflow {
+    overflow:auto;
+    max-height:510px;
 }

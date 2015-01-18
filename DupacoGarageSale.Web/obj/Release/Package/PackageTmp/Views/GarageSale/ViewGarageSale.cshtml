@@ -8,8 +8,18 @@
 <div id="page-wrap" class="jumbotron" style="min-height:500px;">
     <div class="container">
         <div class="row">
-            <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@Model.Sale.GarageSaleName</h2>
-            @Model.Sale.SaleDescription<br /><br />
+            <div class="col-md-10">
+                <input type="hidden" id="hdnGarageSaleId" value="@Model.Sale.GarageSaleId" />
+                <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@Model.Sale.GarageSaleName</h2>
+                @Model.Sale.SaleDescription<br /><br />
+            </div>
+            <div class="col-md-2">
+                @if (Model.User != null)
+                {
+                    <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
+                    <a href="#" id="linkAddToItinerary" style="margin-top:5px">Add sale to itinerary</a><br /><br /> <!-- data-toggle="modal" data-target=".add-to-itinerary" -->
+                }
+            </div>
             <div class="col-md-5">
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -156,6 +166,15 @@
                 }
             }
                 
+        </div>
+    </div>
+</div>
+
+<!-- Add to itinerary modal -->
+<div class="modal fade add-to-itinerary" id="addToItineraryModal" tabindex="-1" role="dialog" aria-labelledby="addToItineraryModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">Garage sale added to your itinerary. Click <a href="#">here</a> to view your itinerary.</div>
         </div>
     </div>
 </div>

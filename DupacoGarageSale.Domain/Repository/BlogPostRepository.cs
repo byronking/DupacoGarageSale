@@ -68,7 +68,7 @@ namespace DupacoGarageSale.Data.Repository
                 using (SqlCommand cmd = new SqlCommand("SaveBlogPosts", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@blog_post_title", SqlDbType.VarChar).Value = post.BlogPostTitle;
+                    cmd.Parameters.Add("@blog_post_title", SqlDbType.VarChar).Value = post.BlogPostTitle ?? string.Empty;
                     cmd.Parameters.Add("@media_type_id", SqlDbType.Int).Value = post.MediaTypeId;
                     cmd.Parameters.Add("@image_uri", SqlDbType.VarChar).Value = post.ImageUri ?? string.Empty;
                     cmd.Parameters.Add("@youtube_uri", SqlDbType.VarChar).Value = post.YouTubeUri ?? string.Empty;

@@ -19,8 +19,6 @@ namespace DupacoGarageSale.Data.Domain
         public string ImageUri { get; set; }
         public string YouTubeUri { get; set; }
         public string VineUri { get; set; }
-
-        [Required(ErrorMessage = "Add a title to your post")]
         public string PostMessage { get; set; }
         public int SaleId { get; set; }
     }

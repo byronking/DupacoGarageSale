@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -725,6 +726,26 @@ namespace DupacoGarageSale.Web.Controllers
 
         #endregion
 
+        #region View garage sale categories
+
+        public ActionResult GetItemsByCategory(int categoryId)
+        {
+            var viewModel = new GarageSaleViewModel();
+
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                viewModel.User = session.User;
+            }
+
+            var repository = new GarageSaleRepository();
+            viewModel.SearchResults = repository.SearchGarageSalesByCategory(categoryId);
+
+            return PartialView("_ItemCategories", viewModel);
+        }
+
+        #endregion
+
         #region Garage sale blog posts
 
         /// <summary>
@@ -764,7 +785,18 @@ namespace DupacoGarageSale.Web.Controllers
 
                 if (viewModel.GarageSaleBlogPost.MediaTypeId == 2)
                 {
-                    viewModel.GarageSaleBlogPost.YouTubeUri = TextHelper.EncodeText(viewModel.GarageSaleBlogPost.YouTubeUri);
+                    // Convert the 'watch' url to an 'embed' url.
+                    // https://www.youtube.com/watch?v=3YdeSNcAWos
+                    // https://www.youtube.com/embed/3YdeSNcAWos
+
+                    var youTubeWatchUri = viewModel.GarageSaleBlogPost.YouTubeUri;
+
+                    const string pattern = @"(?:https?:\/\/)?(?:www\.)?(?:(?:(?:youtube.com\/watch\?[^?]*v=|youtu.be\/)([\w\-]+))(?:[^\s?]+)?)";
+                    const string youTubeEmbedUri = "https://www.youtube.com/embed/$1";
+
+                    var rgx = new Regex(pattern);
+                    var result = rgx.Replace(youTubeWatchUri, youTubeEmbedUri);
+                    viewModel.GarageSaleBlogPost.YouTubeUri = TextHelper.EncodeText(result);
                 }
                 else if (viewModel.GarageSaleBlogPost.MediaTypeId == 3)
                 {
@@ -884,6 +916,17 @@ namespace DupacoGarageSale.Web.Controllers
             ViewBag.NavSearch = "active";
 
             return View(viewModel);
+        }
+
+        public ActionResult SearchBySubcategory(int itemSubcategoryId)
+        {
+            var viewModel = new GarageSaleViewModel();
+
+            var repository = new GarageSaleRepository();
+            viewModel.SearchResults = repository.SearchGarageSalesBySubcategory(itemSubcategoryId);
+            viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+
+            return View("SearchResults", viewModel);
         }
 
         #endregion

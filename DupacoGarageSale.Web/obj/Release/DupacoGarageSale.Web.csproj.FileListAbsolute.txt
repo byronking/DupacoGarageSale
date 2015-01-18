@@ -31,3 +31,7 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.WebPages.Razor.
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Release\DupacoGarageSale.Web.csprojResolveAssemblyReference.cache
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Release\DupacoGarageSale.Web.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Release\DupacoGarageSale.Web.pdb
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Microsoft.Web.Helpers.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.pdb
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.xml

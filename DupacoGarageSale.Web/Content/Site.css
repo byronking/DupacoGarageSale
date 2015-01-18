@@ -1,4 +1,6 @@
-﻿#bg {
+﻿
+
+#bg {
   position: fixed; 
   top: -50%; 
   left: -50%; 
@@ -14,6 +16,15 @@
   margin: auto; 
   min-width: 50%;
   min-height: 50%;
+}
+
+/* Open dropdown menus on hover */
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
 }
 
 #page-wrap {
@@ -60,8 +71,16 @@
     display: block;
 }
 
+.gray-background {
+    background-color: #D6D6D6;
+}
+
 .red {
     color: red;
+}
+
+.light-orange {
+    background-color: #F8AF4E;
 }
 
 .down-20 {
@@ -77,6 +96,7 @@
 }
 
 body {
+    padding-top: 70px;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
@@ -92,6 +112,15 @@ body {
 
 header, footer, nav, section {
     display: block;
+}
+
+.list-group-item-orange {
+    background-color: #F8AF4E;
+    border: 1px solid #ddd;
+    display: block;
+    margin-bottom: -1px;
+    padding: 10px 15px;
+    position: relative;
 }
 
 

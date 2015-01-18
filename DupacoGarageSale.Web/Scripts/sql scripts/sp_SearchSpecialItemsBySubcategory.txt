@@ -1,0 +1,26 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[SearchSpecialItemsBySubcategory]    Script Date: 1/17/15 11:58:13 AM ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+create PROCEDURE [dbo].[SearchSpecialItemsBySubcategory]
+
+@item_subcategory_id int
+
+as
+
+begin
+
+set nocount on;
+
+	begin
+		
+		select special_items_id, title, description, picture_link, price, s.sale_id, item_category_id, item_subcategory_id, g.sale_address1,
+			g.sale_address2, g.sale_city, g.sale_state_id, g.sale_zip from SpecialItems s join GarageSales g on s.sale_id = g.sale_id
+			where item_subcategory_id = @item_subcategory_id
+
+	end
+end
