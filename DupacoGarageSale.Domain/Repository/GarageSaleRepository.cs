@@ -801,6 +801,104 @@ namespace DupacoGarageSale.Data.Repository
             return results;
         }
 
+        /// <summary>
+        /// This searches the garage sales based on search criteria and list of item subcategories.
+        /// </summary>
+        /// <param name="searchCriteria"></param>
+        /// <param name="itemSubcategory"></param>
+        /// <returns></returns>
+        public GarageSaleSearchResults SearchGarageSales(string searchCriteria, List<int> itemSubcategories)
+        {
+            var results = new GarageSaleSearchResults()
+            {
+                GarageSaleItems = new List<GarageSaleSearchItem>(),
+                SpecialItems = new List<SpecialItem>()
+            };
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SearchSpecialItems", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var specialItem = new SpecialItem
+                        {
+                            SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
+                            Title = reader["title"].ToString(),
+                            Description = reader["description"].ToString(),
+                            PictureLink = reader["picture_link"].ToString(),
+                            Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"])
+                        };
+
+                        results.SpecialItems.Add(specialItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            try
+            {
+                foreach (var subcategoryId in itemSubcategories)
+                {
+                    using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                    using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItems", conn))
+                    {
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = subcategoryId;
+                        cmd.Connection.Open();
+
+                        var reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            var item = new GarageSaleSearchItem
+                            {
+                                GarageSaleItemsId = Convert.ToInt32(reader["garage_sale_items_id"]),
+                                ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                                ItemCategoryName = reader["item_category_name"].ToString(),
+                                ItemSubcategoryName = reader["item_subcategory_name"].ToString(),
+                                ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                                SaleId = Convert.ToInt32(reader["sale_id"]),
+                                Address1 = reader["sale_address1"].ToString(),
+                                Address2 = reader["sale_address2"].ToString(),
+                                City = reader["sale_city"].ToString(),
+                                State = reader["state_name"].ToString(),
+                                ZipCode = reader["sale_zip"].ToString()
+                            };
+
+                            results.GarageSaleItems.Add(item);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return results;
+        }
+
+        /// <summary>
+        /// This searches the garage sales based on search criteria
+        /// </summary>
+        /// <param name="searchCriteria"></param>
+        /// <returns></returns>
         public GarageSaleSearchResults SearchGarageSales(string searchCriteria)
         {
             var results = new GarageSaleSearchResults()
@@ -1052,31 +1150,31 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
-        /// This gets all the garage sale addresses.
+        /// This gets a garage sale address by sale id.
         /// </summary>
         /// <returns></returns>
-        public List<MapAddress> GetGarageSaleAddresses()
+        public GarageSaleAddress GetGarageSaleAddressBySaleId(int saleId)
         {
-            var garageSalesAddresses = new List<MapAddress>();
+            var garageSalesAddress = new GarageSaleAddress();
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
-                using (SqlCommand cmd = new SqlCommand("GetGarageSaleAddresses", conn))
+                using (SqlCommand cmd = new SqlCommand("GetGarageSaleAddressBySaleId", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = saleId;
                     cmd.Connection.Open();
 
                     var reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        var address = new MapAddress
-                        {
-                            Address = reader["address"].ToString()
-                        };
-
-                        garageSalesAddresses.Add(address);
+                        garageSalesAddress.Address1 = reader["sale_address1"].ToString();
+                        garageSalesAddress.Address2 = reader["sale_address2"].ToString();
+                        garageSalesAddress.City = reader["sale_city"].ToString();
+                        garageSalesAddress.State = reader["state_name"].ToString();
+                        garageSalesAddress.ZipCode = reader["sale_zip"].ToString();
                     }
                 }
             }
@@ -1085,7 +1183,7 @@ namespace DupacoGarageSale.Data.Repository
                 Console.Write(ex.ToString());
             }
 
-            return garageSalesAddresses;
+            return garageSalesAddress;
         }
 
         /// <summary>
