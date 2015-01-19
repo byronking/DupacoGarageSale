@@ -1,5 +1,6 @@
 ﻿using DupacoGarageSale.Data.Domain;
 using DupacoGarageSale.Data.Repository;
+using DupacoGarageSale.Web.Helpers;
 using DupacoGarageSale.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,12 @@ namespace DupacoGarageSale.Web.Controllers
             var repository = new GarageSaleRepository();
             var viewModel = new GarageSaleViewModel();
             viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+
+            // Get some random items for the home page.
+            var randomSpecialItems = ItemsHelper.GetRandomSpecialItems();
+            var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
+
+            viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(randomSpecialItems);
 
             if (Session["UserSession"] != null)
             {

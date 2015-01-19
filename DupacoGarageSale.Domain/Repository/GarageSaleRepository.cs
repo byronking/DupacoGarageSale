@@ -615,6 +615,57 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
+        /// This gets random special items for the home page.
+        /// </summary>
+        /// <param name="sale_id"></param>
+        /// <returns></returns>
+        public List<SpecialItem> GetGarageSaleSpecialItems(List<int> specialItemIds)
+        {
+            var specialItems = new List<SpecialItem>();
+
+            try
+            {
+                foreach (var item in specialItemIds)
+                {
+                    // First, delete any existing garage sale items for this sale.
+                    using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                    using (SqlCommand cmd = new SqlCommand("GetRandomSpecialItems", conn))
+                    {
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@special_items_id", SqlDbType.Int).Value = item;
+                        cmd.Connection.Open();
+
+                        var reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            var specialItem = new SpecialItem
+                            {
+                                SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
+                                Title = reader["title"].ToString(),
+                                Description = reader["description"].ToString(),
+                                PictureLink = reader["picture_link"].ToString(),
+                                Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
+                                SaleId = Convert.ToInt32(reader["sale_id"]),
+                                ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                                ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"])
+                            };
+
+                            specialItems.Add(specialItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return specialItems;
+        }
+
+        /// <summary>
         /// This deletes a garage sale by id.
         /// </summary>
         /// <param name="sale_id"></param>

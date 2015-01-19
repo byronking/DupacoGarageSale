@@ -8,7 +8,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
@@ -19,7 +19,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
@@ -30,7 +30,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
@@ -41,7 +41,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
@@ -52,7 +52,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
@@ -63,7 +63,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
@@ -74,7 +74,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
@@ -85,7 +85,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
@@ -96,7 +96,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
@@ -107,7 +107,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
@@ -118,7 +118,7 @@
         });
 
         e.preventDefault();
-
+        $("#featuredContent").addClass('invisible');
         $("#categoryContent").removeClass('invisible');
     });
 
