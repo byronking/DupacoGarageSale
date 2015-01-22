@@ -146,6 +146,53 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult SignInFacebookUser(string id, string first_name, string last_name, string email)
+        {
+            // Verify an existing user account or send to the login screen.
+            var repository = new AccountsRepository();
+
+            // Create a user session.
+            var user = repository.GetGarageSaleUserByUserName(id);
+
+            var saveResult = new UserSaveResult();
+
+            if (user.UserId == 0)
+            {
+                user = new GarageSaleUser
+                {
+                    Active = true,
+                    Email = email,
+                    FirstName = first_name,
+                    LastName = last_name,
+                    CreateDate = DateTime.Now,
+                    ModifyDate = DateTime.Now,
+                    ModifyUser = id,
+                    UserName = id,
+                    Password = "facebook" + id,
+                    Phone = "563-555-1212"
+                };
+
+                // Save the new user and then send them to the profile page.
+                repository = new AccountsRepository();
+                saveResult = repository.SaveGarageSaleUser(user);
+                user.UserId = saveResult.SaveResultId;
+            }
+
+            // Create a user session.
+            var session = new UserSession
+            {
+                SessionKey = Guid.NewGuid(),
+                SessionStartDate = DateTime.Now,
+                User = user
+            };            
+
+            Session["UserSession"] = session;
+            ViewBag.UserId = user.UserId;
+
+            return Json(new { ok = true, newurl = Url.Action("UserProfile", new { id = user.UserId })});
+        }
+
         /// <summary>
         /// This loads a user profile by id.
         /// </summary>

@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "View your itinerary";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var itineraryLegs = new List<int>();
+    var arrayItineraryLegsJoined = string.Empty;
 }
 
 <div id="page-wrap" class="jumbotron" style="min-height:500px;">
@@ -32,12 +35,20 @@
 
                         @foreach (var address in Model.GarageSaleItinerary) 
                         {
-                            var itineraryAddress = address.SaleAddress1 + " " + address.SaleAddress2 + " " + address.SaleCity + " " + address.SaleState + " " + address.SaleZipCode;  
-                                                      
+                            var itineraryAddress = address.SaleAddress1 + " " + address.SaleAddress2 + " " + address.SaleCity + " " + address.SaleState + " " + address.SaleZipCode;
+
+                            itineraryLegs.Add(address.ItineraryLegId);   
+                                                 
                             <div class="form-group">
                                 <label for="txtItineraryLeg@(address.ItineraryLegId)">Itinerary leg @address.ItineraryLegId:</label>
-                                <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" class="form-control" style="width:350px;" value="@itineraryAddress" />
+                                <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" style="width:350px;" value="@itineraryAddress" />
+                                <a href="#" class="btn btn-xs btn-danger">Delete this leg</a>
                             </div>
+                        }
+
+                        @{
+                            var arrayItineraryLegs = itineraryLegs.ToArray();
+                            arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
                         }
 
                         <input type="button" id="btnMapItinerary" class="btn btn-primary" value="Get directions" onclick="calculateRoute();" />
@@ -77,7 +88,6 @@
         }
         map = new google.maps.Map(document.getElementById('map-itinerary'), mapOptions);
         directionsDisplay.setMap(map);
-
         
         geoCodeAddress(map);
     }
@@ -106,32 +116,38 @@
     }
 
     function calculateRoute() {
+        var itineraryLegs = '@arrayItineraryLegsJoined';
+        var selectedLegs = new Array();
+        selectedLegs = itineraryLegs.split(',');
+        //alert('legs: ' + selectedLegs);
+
         var start = document.getElementById('hdnStartingAddress').value;
-        var end = document.getElementById('txtItineraryLeg2').value;
+        var lastItem = 0;
+        var legsCount = selectedLegs.length;
+
+        //alert('legs count: ' + legsCount);
+        lastItem = selectedLegs[legsCount-1];
+        //alert('last item: ' + lastItem);
+
+        var end = document.getElementById('txtItineraryLeg' + lastItem).value;
+        //alert('end addy: ' + end);
 
         // Push the itinerary legs into the waypoints and then set the last waypoint as the destination.
-        var wayPointsz = [];
-        var wypt1 = document.getElementById('txtItineraryLeg1').value;
+        var wayPointsList = [];        
 
-        wayPointsz.push({
-            location: wypt1,
-            stopover: true
-        });
+        for (var i = 1; i < selectedLegs.length; i++) {
+            var wypt = document.getElementById('txtItineraryLeg' + i).value;
 
-        //var checkboxArray = document.getElementById('waypoints');
-        //for (var i = 0; i < checkboxArray.length; i++) {
-        //    if (checkboxArray.options[i].selected == true) {
-        //        waypts.push({
-        //            location: checkboxArray[i].value,
-        //            stopover: true
-        //        });
-        //    }
-        //}
+            wayPointsList.push({
+                location: wypt,
+                stopover: true
+            });
+        }
 
         var request = {
             origin: start,
             destination: end,
-            waypoints: wayPointsz,
+            waypoints: wayPointsList,
             optimizeWaypoints: true,
             travelMode: google.maps.TravelMode.DRIVING
         };

@@ -117,6 +117,59 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
+        /// This gets an active user by username.
+        /// </summary>
+        /// <param name="user_name"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public GarageSaleUser GetGarageSaleUserByUserName(string user_name)
+        {
+            var user = new GarageSaleUser();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetGarageSaleUserByUserName", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_name", SqlDbType.VarChar).Value = user_name;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        DateTime? modifyDate = null;
+
+                        if (reader["modify_date"] != DBNull.Value)
+                        {
+                            modifyDate = Convert.ToDateTime(reader["modify_date"]);
+                        }
+
+                        user.Active = Convert.ToBoolean(reader["active"]);
+                        user.CreateDate = Convert.ToDateTime(reader["create_date"]);
+                        user.Email = reader["email"].ToString();
+                        user.FirstName = reader["first_name"].ToString();
+                        user.LastName = reader["last_name"].ToString();
+                        user.ModifyDate = modifyDate;
+                        user.ModifyUser = reader["modify_user"].ToString();
+                        user.BytePassword = (byte[])reader["password"];
+                        user.Phone = reader["phone"].ToString();
+                        user.UserId = Convert.ToInt32(reader["user_id"]);
+                        user.UserName = reader["user_name"].ToString();
+                        user.ProfilePicLink = reader["profile_pic_link"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
+            return user;
+        }
+
+        /// <summary>
         /// This gets a user profile by id.
         /// </summary>
         /// <param name="user_id"></param>

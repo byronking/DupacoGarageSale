@@ -15,11 +15,6 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $('#addToItineraryModal').modal('show');
-
-                // The code below loads the home page in the modal (!).
-                //$('.modal-body').load('/home', function (result) {
-                //    $('#addToItineraryModal').modal({ show: true });
-                //});
             },
             error: function (data) {
                 // Do something

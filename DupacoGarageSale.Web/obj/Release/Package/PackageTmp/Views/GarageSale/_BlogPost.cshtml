@@ -12,7 +12,7 @@
             <div class="modal-body" style="margin-left:100px;">
                 @Html.HiddenFor(m => m.GarageSaleBlogPost.SaleId, new { id = "hdnSaleId" })        
                 <div class="form-group" style="width:50%;">
-                    <label for="txtTitle">Title *</label>
+                    <label for="txtTitle">Title</label>
                     @Html.TextBoxFor(m => m.GarageSaleBlogPost.BlogPostTitle, new { @class="form-control", @id="txtBlogPostTitle", placeholder="Enter a title" })
                     <span id="titleValidationMessage" class="red invisible">Please enter a title.</span>
                 </div><br />

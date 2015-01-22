@@ -13,10 +13,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:52</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>01/14/2015 15:47:19</publishTime>
+      <publishTime>01/19/2015 16:42:45</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>01/14/2015 15:47:20</publishTime>
+      <publishTime>01/19/2015 16:42:45</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -142,7 +142,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/19/2014 12:54:56</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>12/23/2014 13:14:57</publishTime>
+      <publishTime>01/17/2015 23:54:12</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
       <publishTime>11/18/2014 14:27:48</publishTime>
@@ -322,7 +322,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2014 09:14:12</publishTime>
     </File>
     <File Include="Scripts/default.js">
-      <publishTime>01/05/2015 09:40:46</publishTime>
+      <publishTime>01/19/2015 16:32:00</publishTime>
     </File>
     <File Include="Scripts/garagesale.itinerary.js">
       <publishTime>01/12/2015 10:09:41</publishTime>
@@ -441,6 +441,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/sql scripts/sp_SaveGarageSaleUserProfile.txt">
       <publishTime>12/16/2014 21:31:29</publishTime>
     </File>
+    <File Include="Scripts/sql scripts/sp_SearchSpecialItemsBySubcategory.txt">
+      <publishTime>01/17/2015 12:03:52</publishTime>
+    </File>
     <File Include="Scripts/sql scripts/sp_UpdateGarageSale.txt">
       <publishTime>12/16/2014 21:32:04</publishTime>
     </File>
@@ -469,7 +472,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/20/2014 18:30:42</publishTime>
     </File>
     <File Include="Views/GarageSale/Add.cshtml">
-      <publishTime>01/04/2015 22:44:56</publishTime>
+      <publishTime>01/15/2015 21:12:27</publishTime>
     </File>
     <File Include="Views/GarageSale/AddSpecialItem.cshtml">
       <publishTime>01/05/2015 11:10:47</publishTime>
@@ -484,22 +487,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/05/2015 16:54:25</publishTime>
     </File>
     <File Include="Views/GarageSale/Search.cshtml">
-      <publishTime>01/13/2015 23:19:32</publishTime>
+      <publishTime>01/18/2015 22:24:17</publishTime>
+    </File>
+    <File Include="Views/GarageSale/SearchResults.cshtml">
+      <publishTime>01/17/2015 17:54:35</publishTime>
     </File>
     <File Include="Views/GarageSale/View.cshtml">
       <publishTime>01/04/2015 22:44:56</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewGarageSale.cshtml">
-      <publishTime>01/12/2015 10:09:41</publishTime>
+      <publishTime>01/17/2015 15:39:43</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewItinerary.cshtml">
       <publishTime>01/14/2015 09:27:05</publishTime>
     </File>
     <File Include="Views/GarageSale/_BlogPost.cshtml">
-      <publishTime>01/04/2015 20:38:16</publishTime>
+      <publishTime>01/15/2015 21:10:56</publishTime>
+    </File>
+    <File Include="Views/GarageSale/_ItemCategories.cshtml">
+      <publishTime>01/17/2015 21:46:22</publishTime>
+    </File>
+    <File Include="Views/GarageSale/_SearchBar.cshtml">
+      <publishTime>01/19/2015 00:02:47</publishTime>
+    </File>
+    <File Include="Views/GarageSale/_SearchResults.cshtml">
+      <publishTime>01/19/2015 14:34:18</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>01/13/2015 00:09:08</publishTime>
+      <publishTime>01/19/2015 16:40:13</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>11/18/2014 14:27:45</publishTime>
@@ -518,6 +533,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>01/12/2015 17:42:45</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutNoBackground.cshtml">
+      <publishTime>01/17/2015 16:03:14</publishTime>
     </File>
     <File Include="Views/Shared/_LoginLayout.cshtml">
       <publishTime>12/20/2014 18:25:40</publishTime>

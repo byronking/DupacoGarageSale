@@ -4,9 +4,9 @@
             <a class="navbar-brand" href="~/Home/">Welcome to the Dupaco Garage Sales!</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            if (Model != null)
+            @if (Model != null)
             {
-                @using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { @class = "navbar-form navbar-right", @role = "form" }))
+                using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { @class = "navbar-form navbar-right", @role = "form" }))
                 {
                     @*<div class="form-group">
                         @Html.ActionLink("Search the sales!", "Search", "GarageSale", null, new { @class="btn btn-warning" }) 
@@ -18,10 +18,87 @@
                         @Html.TextBox("Password", null, new { @class = "form-control", id="txtPassword", type="Password", placeholder="Password", required="" })
                     </div>
                     <input type="submit" class="btn btn-success" value="Sign in" />
-                    
-                    @Html.ActionLink("Sign up for free!", "SignUp", "Accounts", null, new { @class="btn btn-primary" })              
-                }
-            }           
-        </div>
+                    <div class="form-group">
+                        @Html.ActionLink("Sign up for free!", "SignUp", "Accounts", null, new { @class="btn btn-primary" })
+                    </div>
+                    <div class="form-group">
+                        @*<div class="fb-login-button" id="loginbutton" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogin='window.location.reload(true);'></div>*@
+                        <fb:login-button autologoutlink="false"></fb:login-button>
+                        <div id="fb-root"></div>
+                    </div>
+                }             
+            }    
+        </div>        
     </div>
 </nav>
+
+ <script>
+     window.fbAsyncInit = function () {
+         FB.init({
+             appId: '1538676693053081',
+             xfbml: true,
+             version: 'v2.1'
+         });
+
+         // After your onload method has been called and initial login state has
+         // already been determined. (See above about not using these during a page's
+         // init function.)
+         FB.Event.subscribe('auth.authResponseChange', auth_response_change_callback);
+         FB.Event.subscribe('auth.statusChange', auth_status_change_callback);
+     };
+
+     (function (d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) { return; }
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+     // In your JavaScript
+     var auth_response_change_callback = function (response) {
+         console.log("auth_response_change_callback");
+         console.log(response);
+     }
+
+     var auth_status_change_callback = function (response) {
+         console.log("auth_status_change_callback: " + response.status);
+
+         if (response.status === 'unknown') {
+             location.href = '/Home/LogOut';
+         }
+
+         if (response.status === 'connected') {
+             signInFacebookUser();
+         }
+     }
+
+     function signInFacebookUser() {
+         //alert('signing in');
+         console.log('Welcome!  Fetching your information.... ');
+         FB.api('/me', function (response) { // This gets the user's profile info.
+             console.log('Successful login for: ' + response.name);
+
+             var id = response.id;
+             var first_name = response.first_name;
+             var last_name = response.last_name;
+             var email = response.email;
+
+             $.ajax({
+                 url: '/Accounts/SignInFacebookUser/',
+                 type: 'POST',
+                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                 data: { id: id, first_name: first_name, last_name: last_name, email: email },
+                 dataType: 'json',
+                 success: function (data) {
+                     if (data.ok)
+
+                         window.location = data.newurl;
+                     else {
+                         alert(data.message);
+                     }
+                 }
+             });
+         });
+     }
+</script>

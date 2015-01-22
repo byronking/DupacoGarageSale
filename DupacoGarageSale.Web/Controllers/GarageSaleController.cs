@@ -879,10 +879,14 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.User = session.User;
 
                 // Get the user's address.
-                ViewBag.CenterAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City + " " +
-                    viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
-                var testy = ViewBag.CenterAddress;
+                if (viewModel.User.Address != null)
+                {
+                    ViewBag.CenterAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City + " " +
+                        viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
+                }
             }
+
+            var repository = new GarageSaleRepository();
 
             if (formCollection.AllKeys.Count() != 0)
             {
@@ -894,7 +898,7 @@ namespace DupacoGarageSale.Web.Controllers
                 ViewBag.SearchAddress = address;
                 ViewBag.Radius = radius;
 
-                var repository = new GarageSaleRepository();
+                //var repository = new GarageSaleRepository();
                 viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, itemSubcategory);
 
                 var addresses = new List<string>();
@@ -903,9 +907,18 @@ namespace DupacoGarageSale.Web.Controllers
                 foreach (var item in viewModel.SearchResults.GarageSaleItems)
                 {
                     addresses.Add(item.Address1 + ' ' + item.Address2 + ' ' + item.City + ' ' + item.State + ' ' + item.ZipCode);
-                }         
+                }                
 
                 ViewBag.Addresses = addresses.ToArray();
+            }
+            else
+            {
+                // Initialise a container of empty results.
+                viewModel.SearchResults = new GarageSaleSearchResults
+                {
+                    GarageSaleItems = new List<GarageSaleSearchItem>(),
+                    SpecialItems = new List<SpecialItem>()
+                };
             }
 
             ViewBag.NavSearch = "active";
@@ -1052,9 +1065,7 @@ namespace DupacoGarageSale.Web.Controllers
                 if (saveResult.IsSaveSuccessful)
                 {
                     itinerary.ItineraryId = saveResult.SaveResultId;
-                    
-                    // Do i even need to do this?
-                    // viewModel.GarageSaleItinerary.Add(itinerary);
+                    ViewBag.ItineraryId = itinerary.ItineraryId;
                 }
             }
 

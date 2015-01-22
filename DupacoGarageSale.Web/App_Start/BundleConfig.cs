@@ -26,6 +26,7 @@ namespace DupacoGarageSale.Web
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                         "~/Scripts/default.js",
                         "~/Scripts/garagesale.itinerary.js"));
+                        //"~/Scripts/facebook.login.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/timepicker").Include(
                         "~/Scripts/jquery.timepicker.js"));
