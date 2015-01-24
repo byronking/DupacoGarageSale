@@ -129,7 +129,7 @@
         if ($("#hdnSaveMessage").val() == "false") {
             $("#divSaveMessage").removeClass("hidden");
         }
-    }
+    }    
 
     // Make sure a user cannot click the upload button when there is a file attached.
     $("#btnUploadProfileImage").click(function (e) {
@@ -404,4 +404,17 @@
 
         //alert('you searched for: ' + $("#hdnSearchBarCriteria").val());
     });
+
+    $("#btnMapItinerary").click(function () {    
+        $("#driving-directions").removeClass('hidden');
+    });
 });
+
+
+
+function debugObject(inputobject) {
+    obj = inputobject;
+    for (x in obj) {
+        alert(x + ": " + obj[x]);
+    }
+}

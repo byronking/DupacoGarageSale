@@ -404,6 +404,10 @@
 
         //alert('you searched for: ' + $("#hdnSearchBarCriteria").val());
     });
+
+    $("#btnMapItinerary").click(function () {    
+        $("#driving-directions").removeClass('hidden');
+    });
 });
 
 

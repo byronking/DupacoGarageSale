@@ -18,54 +18,68 @@
                     <h3 class="panel-title"><strong>Travel itinerary for @Model.User.FirstName @Model.User.LastName</strong></h3>
                 </div>
                 <div class="panel-body">                    
-
-                    @{
-                        var startingAddress =  Model.User.Address.Address1 + " " + Model.User.Address.Address2 + " " + Model.User.Address.City + " " + 
-                        Model.User.Address.State  + " " + Model.User.Address.Zip;
-                    }
-
-                    <input type="hidden" id="hdnStartingAddress" value="@startingAddress" />
-                    <input type="hidden" id="hdnItineraryLegs" value="@Model.GarageSaleItinerary.Count" />
-                       
-                    <form>
-                        <div class="form-group">
-                            <label for="txtStartingAddress">Starting point:</label>
-                            <input type="text" id="txtStartingAddress" class="form-control" style="width:350px;" value="@startingAddress" />
-                        </div>
-
-                        @foreach (var address in Model.GarageSaleItinerary) 
+                    @{ 
+                        if (Model.User.Address != null)
                         {
-                            var itineraryAddress = address.SaleAddress1 + " " + address.SaleAddress2 + " " + address.SaleCity + " " + address.SaleState + " " + address.SaleZipCode;
+                            
+                            var startingAddress =  Model.User.Address.Address1 + " " + Model.User.Address.Address2 + " " + Model.User.Address.City + " " + 
+                            Model.User.Address.State  + " " + Model.User.Address.Zip;
 
-                            itineraryLegs.Add(address.ItineraryLegId);   
+                            <input type="hidden" id="hdnStartingAddress" value="@startingAddress" />
+                            <input type="hidden" id="hdnItineraryLegs" value="@Model.GarageSaleItinerary.Count" />
+                       
+                            <form>
+                                <div class="form-group">
+                                    <label for="txtStartingAddress">Starting point:</label>
+                                    <input type="text" id="txtStartingAddress" class="form-control" style="width:350px;" value="@startingAddress" />
+                                </div>
+
+                                @foreach (var address in Model.GarageSaleItinerary) 
+                                {
+                                    var itineraryAddress = address.SaleAddress1 + " " + address.SaleAddress2 + " " + address.SaleCity + " " + address.SaleState + " " + address.SaleZipCode;
+
+                                    itineraryLegs.Add(address.ItineraryLegId);   
                                                  
-                            <div class="form-group">
-                                <label for="txtItineraryLeg@(address.ItineraryLegId)">Itinerary leg @address.ItineraryLegId:</label>
-                                <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" style="width:350px;" value="@itineraryAddress" />
-                                <a href="#" class="btn btn-xs btn-danger">Delete this leg</a>
+                                    <div class="form-group">
+                                        <label for="txtItineraryLeg@(address.ItineraryLegId)">Itinerary leg:</label>
+                                        <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" style="width:350px;" value="@itineraryAddress" />
+                                        <a href="/GarageSale/DeleteItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-xs btn-danger">Delete this leg</a>
+                                    </div>
+                                }
+
+                                @{
+                                    var arrayItineraryLegs = itineraryLegs.ToArray();
+                                    arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
+                                }
+
+                                <input type="button" id="btnMapItinerary" class="btn btn-primary" value="Get directions" onclick="calculateRoute();" />
+                            </form><br /><br />
+
+                            <!-- the map with directions -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="map-itinerary"></div>
+                                </div>
+                            </div><br />
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div id="driving-directions" class="container-overflow hidden">
+                                        <h3>Driving directions:</h3> 
+                                        <div id="directions_panel"></div>                                
+                                    </div>
+                                </div>
                             </div>
                         }
-
-                        @{
-                            var arrayItineraryLegs = itineraryLegs.ToArray();
-                            arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
-                        }
-
-                        <input type="button" id="btnMapItinerary" class="btn btn-primary" value="Get directions" onclick="calculateRoute();" />
-                    </form><br /><br />
-
-                    <!-- the map with directions -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div id="map-itinerary"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="well container-overflow">
-                                <h3>Driving directions:</h3> 
-                                <div id="directions_panel"></div>                                
+                        else
+                        {
+                            // Show something here.
+                               <p class="lead">No itinerary available.</p>
+                            <div>
+                                To add itinerary items, first make sure you have an address in your profile, then when shopping, click the 
+                                'Add to itinerary' link on a garage sale home page.
                             </div>
-                        </div>
-                    </div>
+                        }
+                    }
                 </div>
             </div>
         </div>

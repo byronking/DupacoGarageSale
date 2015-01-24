@@ -15,12 +15,12 @@
                         <li><a href="~/GarageSale/View/">View my sales</a></li>
                     </ul>
                 </li>
-                <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search/">Search</a></li>
+                <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1">Search</a></li>
                 @*<li><a href="~/Accounts/SignUp/">Create new account</a></li>*@
             </ul>
             <form class="navbar-form navbar-right" role="form">
                 <div class="form-group">
-                    <button class="btn btn-primary">Signed in as @Model.User.UserName</button>
+                    <button class="btn btn-primary">Signed in as @Model.User.FirstName @Model.User.LastName</button>
                     @Html.ActionLink("Log out", "LogOut", "Home", null, new { @class="btn btn-success" })
                 </div>
             </form>

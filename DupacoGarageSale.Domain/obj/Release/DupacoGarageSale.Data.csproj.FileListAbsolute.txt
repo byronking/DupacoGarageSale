@@ -18,3 +18,4 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\System.Web.Razo
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\System.Web.WebPages.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\System.Web.WebPages.Deployment.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\System.Web.WebPages.Razor.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\log4net.dll

@@ -869,7 +869,12 @@ namespace DupacoGarageSale.Web.Controllers
 
         #region Search sales
 
-        public ActionResult Search(FormCollection formCollection)
+        /// <summary>
+        /// This performs a search by free-text criteria and/or selected subcategories.
+        /// </summary>
+        /// <param name="formCollection"></param>
+        /// <returns></returns>
+        public ActionResult Search(FormCollection formCollection, string s)
         {
             var viewModel = new GarageSaleViewModel();
 
@@ -913,12 +918,26 @@ namespace DupacoGarageSale.Web.Controllers
             }
             else
             {
-                // Initialise a container of empty results.
-                viewModel.SearchResults = new GarageSaleSearchResults
+                // Show some random items
+                if (s != null)
                 {
-                    GarageSaleItems = new List<GarageSaleSearchItem>(),
-                    SpecialItems = new List<SpecialItem>()
-                };
+                    var randomSpecialItems = ItemsHelper.GetRandomSpecialItems();
+                    var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
+                    viewModel.SearchResults = new GarageSaleSearchResults
+                    {
+                        SpecialItems = repository.GetGarageSaleSpecialItems(randomSpecialItems),
+                        GarageSaleItems = new List<GarageSaleSearchItem>()
+                    };
+                }
+                else
+                {
+                    // Initialise a container of empty results.
+                    viewModel.SearchResults = new GarageSaleSearchResults
+                    {
+                        GarageSaleItems = new List<GarageSaleSearchItem>(),
+                        SpecialItems = new List<SpecialItem>()
+                    };
+                }
             }
 
             ViewBag.NavSearch = "active";
@@ -926,6 +945,11 @@ namespace DupacoGarageSale.Web.Controllers
             return View(viewModel);
         }
 
+        /// <summary>
+        /// This performs a search based on free-text criteria.
+        /// </summary>
+        /// <param name="formCollection"></param>
+        /// <returns></returns>
         public ActionResult SearchByCriteria(FormCollection formCollection)
         {
             var viewModel = new GarageSaleViewModel();
@@ -936,8 +960,11 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.User = session.User;
 
                 // Get the user's address.
-                ViewBag.CenterAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City + " " +
-                    viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
+                if (viewModel.User.Address != null)
+                {
+                    ViewBag.CenterAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City + " " +
+                        viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
+                }
             }
 
             var repository = new GarageSaleRepository();
@@ -1003,7 +1030,6 @@ namespace DupacoGarageSale.Web.Controllers
         {
             if (Session["UserSession"] != null)
             {
-
                 var session = Session["UserSession"] as UserSession;
 
                 // Get the user's itinerary by user id.
@@ -1021,6 +1047,7 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.User = session.User;
                 viewModel.GarageSaleItinerary = itineraryList;
 
+                Session["ViewModel"] = viewModel;
                 return View(viewModel);
             }
             else
@@ -1098,6 +1125,33 @@ namespace DupacoGarageSale.Web.Controllers
                 action = "ViewGarageSale",
                 id = garageSaleId
             }));
+        }
+
+        [HttpGet]
+        public ActionResult DeleteItineraryLeg(int legId)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+
+                    // Delete legs, only if it matches the current uset.
+                    var repository = new ItineraryRepository();
+                    var saveResult = repository.DeleteItineraryLeg(legId, viewModel.GarageSaleItinerary[0].ItineraryId, viewModel.GarageSaleItinerary[0].SaleId,
+                        session.User.UserId);
+                }
+
+                return View("ViewItinerary", viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
         }
 
         #endregion

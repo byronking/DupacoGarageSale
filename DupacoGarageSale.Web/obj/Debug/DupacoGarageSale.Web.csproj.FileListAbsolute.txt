@@ -1,7 +1,10 @@
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DupacoGarageSale.Web.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DupacoGarageSale.Web.pdb
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Antlr3.Runtime.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DupacoGarageSale.Data.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\EntityFramework.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Microsoft.Web.Helpers.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Microsoft.Web.Infrastructure.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Newtonsoft.Json.dll
@@ -16,6 +19,9 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.WebPages.Deploy
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.WebPages.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.WebPages.Razor.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\WebGrease.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DupacoGarageSale.Data.pdb
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.pdb
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\EntityFramework.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Newtonsoft.Json.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Net.Http.Formatting.xml
@@ -29,9 +35,4 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.WebPages.Razor.
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.csprojResolveAssemblyReference.cache
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.pdb
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DupacoGarageSale.Data.dll
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DupacoGarageSale.Data.pdb
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.dll
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Microsoft.Web.Helpers.dll
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.pdb
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\log4net.xml

@@ -1,4 +1,5 @@
 ﻿using DupacoGarageSale.Data.Domain;
+using DupacoGarageSale.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -102,7 +103,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return saveResult;
@@ -196,7 +197,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return saveResult;
@@ -263,7 +264,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             try
@@ -363,7 +364,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return garageSalesList;
@@ -404,7 +405,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return subcategoriesList;
@@ -446,7 +447,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return categoriesList;
@@ -479,7 +480,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             // Now, add the newly chosen items.
@@ -515,7 +516,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return savesSuccessful;
@@ -560,7 +561,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return itemSaveResult;
@@ -608,7 +609,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return specialItems;
@@ -659,7 +660,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return specialItems;
@@ -808,7 +809,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             try
@@ -846,7 +847,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return results;
@@ -898,7 +899,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             try
@@ -939,7 +940,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return results;
@@ -990,7 +991,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             try
@@ -1028,7 +1029,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return results;
@@ -1073,7 +1074,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             try
@@ -1111,7 +1112,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return results;
@@ -1156,7 +1157,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             try
@@ -1194,7 +1195,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return results;
@@ -1231,7 +1232,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return garageSalesAddress;
@@ -1264,7 +1265,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return garageSalesId;

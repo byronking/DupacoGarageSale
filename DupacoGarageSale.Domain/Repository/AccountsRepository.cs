@@ -1,4 +1,5 @@
 ﻿using DupacoGarageSale.Data.Domain;
+using DupacoGarageSale.Data.Services;
 using DupacoGarageSale.Domain.Helpers;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return saveResult;
@@ -110,7 +111,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
             
             return user;
@@ -163,7 +164,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return user;
@@ -223,7 +224,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return user;
@@ -280,7 +281,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return saveResult;
@@ -317,7 +318,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return saveResult;
@@ -351,7 +352,7 @@ namespace DupacoGarageSale.Data.Repository
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return address;

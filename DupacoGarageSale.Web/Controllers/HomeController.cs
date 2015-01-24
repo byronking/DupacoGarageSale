@@ -1,5 +1,6 @@
 ﻿using DupacoGarageSale.Data.Domain;
 using DupacoGarageSale.Data.Repository;
+using DupacoGarageSale.Data.Services;
 using DupacoGarageSale.Web.Helpers;
 using DupacoGarageSale.Web.Models;
 using System;

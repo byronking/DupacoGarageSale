@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DupacoGarageSale.Data.Services;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -83,7 +84,7 @@ namespace DupacoGarageSale.Web.Helpers
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                Logger.Log.Error(ex.ToString());
             }
 
             return minAndMax;
