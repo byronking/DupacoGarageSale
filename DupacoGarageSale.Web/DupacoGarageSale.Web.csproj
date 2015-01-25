@@ -326,6 +326,7 @@
     <Content Include="Views\GarageSale\_ItemCategories.cshtml" />
     <Content Include="Views\GarageSale\_SearchResults.cshtml" />
     <Content Include="Views\GarageSale\_SearchBar.cshtml" />
+    <Content Include="Views\Accounts\ProcessPasswordReset.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

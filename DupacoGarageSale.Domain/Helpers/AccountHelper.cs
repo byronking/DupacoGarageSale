@@ -59,7 +59,7 @@ namespace DupacoGarageSale.Domain.Helpers
         /// <returns></returns>
         public static string GeneratePasswordResetToken(int length)
         {
-            string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789!@$?_-*&#+";
+            string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
             char[] chars = new char[length];
             Random rd = new Random();
             for (int i = 0; i < length; i++)

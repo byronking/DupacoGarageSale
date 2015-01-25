@@ -408,6 +408,15 @@
     $("#btnMapItinerary").click(function () {    
         $("#driving-directions").removeClass('hidden');
     });
+
+    if ($("#hdnRequestTooOld").val() == "visible") {
+        $("#resetErrorMessage").removeClass('hidden');
+    }
+
+    if ($("#hdnPasswordResetSuccessful").val() == "visible") {
+        $("#passwordResetSuccessful").removeClass('hidden');
+        $("#loginAlert").addClass('hidden');
+    }
 });
 
 

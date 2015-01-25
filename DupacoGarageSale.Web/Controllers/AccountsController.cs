@@ -1,13 +1,17 @@
 ﻿using DupacoGarageSale.Data.Domain;
 using DupacoGarageSale.Data.Repository;
+using DupacoGarageSale.Data.Services;
 using DupacoGarageSale.Domain.Helpers;
+using DupacoGarageSale.Web.Helpers;
 using DupacoGarageSale.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
+using System.Web.Mail;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -331,15 +335,84 @@ namespace DupacoGarageSale.Web.Controllers
 
                 if (saveResult.IsSaveSuccessful == true)
                 {
-                    // Send password reset email.
+                    try
+                    {
+                        // Send password reset email.
+                        var mailMessage = new System.Net.Mail.MailMessage("Password Reset <password-reset@dupacogaragesales.com>", passwordResetRequest.Email);
+                        mailMessage.Subject = "Password reset request";
+                        mailMessage.Body = @"Here is your password reset request.  Use this link to reset your password: http://localhost:4525/Accounts/ProcessPasswordReset?t=" + token;
+                        mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+
+                        var smtp = new SmtpClient();
+                        smtp.Host = "localhost";  // "smtp.live.com";
+                        //smtp.Port = 587;
+                        //smtp.EnableSsl = true;
+                        //var creds = new System.Net.NetworkCredential("bking@horsetailtech.com", "Nm264718!");
+                        //smtp.Credentials = creds;
+
+                        smtp.Send(mailMessage);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log.Error(ex.ToString());
+                    }
                 }
             }
             else
             {
                 // Invalid account entered.
+                Logger.Log.Warn("Invalid email for password reset request: " + accountInfo.Email);
             }
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult ProcessPasswordReset(string t)
+        {
+            var token = t.Remove(0, 3);
+
+            // Get the user associated with the request.
+            var repository = new AccountsRepository();
+            var request = repository.GetUserByResetToken(token);
+            var requestExpiration = request.RequestDateTime.AddHours(24);
+
+            if (DateTime.Now > requestExpiration)
+            {
+                // The request is too old!
+                ViewBag.ShowError = "visible";
+                Logger.Log.Warn("Password reset request expired or invalid for " + request.UserName + " - " + request.Email);
+            }
+
+            return View(request);
+        }
+
+        [HttpPost]
+        public ActionResult ProcessPasswordReset(PasswordResetRequest request)
+        {
+            // Hash, then update the password.
+            var hashedPassword = AccountHelper.GetSHA1Hash(request.UserName, request.User.Password);
+            var repository = new AccountsRepository();
+
+            try
+            {
+                var saveSuccessful = repository.UpdateUserPassword(request.UserName, hashedPassword);
+
+                if (saveSuccessful)
+                {
+                    TempData["PasswordResetSuccessful"] = "visible";
+                }
+                else
+                {
+                    TempData["PasswordResetSuccessful"] = "hidden";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return RedirectToAction("Login");
         }
     }
 }

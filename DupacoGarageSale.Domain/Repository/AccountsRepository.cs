@@ -357,5 +357,80 @@ namespace DupacoGarageSale.Data.Repository
 
             return address;
         }
+
+        public PasswordResetRequest GetUserByResetToken(string token)
+        {
+            var request = new PasswordResetRequest();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetUserByResetToken", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@reset_token", SqlDbType.VarChar).Value = token;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        request.PasswordResetId = Convert.ToInt32(reader["password_reset_id"]);
+                        request.UserName = reader["user_name"].ToString();
+                        request.Email = reader["email"].ToString();
+                        request.ResetToken = reader["reset_token"].ToString();
+                        request.RequestDateTime = Convert.ToDateTime(reader["request_date_time"]);
+
+                        var user = new GarageSaleUser
+                        {
+                            UserId = Convert.ToInt32(reader["user_id"]),
+                            UserName = reader["user_name"].ToString(),
+                            Email = reader["email"].ToString(),
+                            Active = Convert.ToBoolean(reader["active"]),
+                            CreateDate = Convert.ToDateTime(reader["create_date"]),
+                            FirstName = reader["first_name"].ToString(),
+                            LastName = reader["last_name"].ToString(),
+                            Phone = reader["phone"].ToString(),
+                            ProfilePicLink = reader["profile_pic_link"].ToString()
+                        };
+
+                        request.User = user;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return request;
+        }
+
+        public bool UpdateUserPassword(string userName, byte[] password)
+        {
+            var saveSuccessful = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("UpdateUserPassword", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_name", SqlDbType.VarChar).Value = userName;
+                    cmd.Parameters.Add("@password", SqlDbType.VarBinary).Value = password;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveSuccessful;
+        }
     }
 }
