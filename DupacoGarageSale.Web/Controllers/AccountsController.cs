@@ -340,16 +340,12 @@ namespace DupacoGarageSale.Web.Controllers
                         // Send password reset email.
                         var mailMessage = new System.Net.Mail.MailMessage("Password Reset <password-reset@dupacogaragesales.com>", passwordResetRequest.Email);
                         mailMessage.Subject = "Password reset request";
-                        mailMessage.Body = @"Here is your password reset request.  Use this link to reset your password: http://localhost:4525/Accounts/ProcessPasswordReset?t=" + token;
+                        mailMessage.Body = @"Here is your password reset request.  Use this link to reset your password: " + 
+                            ConfigurationManager.AppSettings["PasswordResetUrl"].ToString() + token;                        
                         mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
 
                         var smtp = new SmtpClient();
-                        smtp.Host = "localhost";  // "smtp.live.com";
-                        //smtp.Port = 587;
-                        //smtp.EnableSsl = true;
-                        //var creds = new System.Net.NetworkCredential("bking@horsetailtech.com", "Nm264718!");
-                        //smtp.Credentials = creds;
-
+                        smtp.Host = "localhost"; 
                         smtp.Send(mailMessage);
                     }
                     catch (Exception ex)
@@ -370,7 +366,16 @@ namespace DupacoGarageSale.Web.Controllers
         [HttpGet]
         public ActionResult ProcessPasswordReset(string t)
         {
-            var token = t.Remove(0, 3);
+            var token = string.Empty;
+
+            if (t.StartsWith("3D="))
+            {
+                token = t.Remove(0, 3);
+            }
+            else
+            {
+                token = t;
+            }
 
             // Get the user associated with the request.
             var repository = new AccountsRepository();

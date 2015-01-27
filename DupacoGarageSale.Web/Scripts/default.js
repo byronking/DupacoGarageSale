@@ -417,6 +417,18 @@
         $("#passwordResetSuccessful").removeClass('hidden');
         $("#loginAlert").addClass('hidden');
     }
+
+    // Monitor the number of characters in the message textarea.
+    $("#txtMessage").keyup(function () {
+        var max = 140;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $("#charNumMessage").text(' you have reached the limit');
+        } else {
+            var char = max - len;
+            $("#charNumMessage").text(char + ' characters left');
+        }
+    });
 });
 
 

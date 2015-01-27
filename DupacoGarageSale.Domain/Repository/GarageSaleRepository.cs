@@ -1270,5 +1270,86 @@ namespace DupacoGarageSale.Data.Repository
 
             return garageSalesId;
         }
+
+        /// <summary>
+        /// This gets the garage sale messages by garage sale id.
+        /// </summary>
+        /// <param name="sale_id"></param>
+        /// <returns></returns>
+        public List<GarageSaleMessage> GetGarageSaleMessages(int sale_id)
+        {
+            var messages = new List<GarageSaleMessage>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetGarageSaleMessagesBySale", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.VarChar).Value = sale_id;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var message = new GarageSaleMessage
+                        {
+                            MessageId = Convert.ToInt32(reader["message_id"]),
+                            MessageFrom = reader["message_from"].ToString(),
+                            MessageText = reader["message_text"].ToString(),
+                            MessageSent = Convert.ToDateTime(reader["message_date"]),
+                            SaleId = Convert.ToInt32(reader["sale_id"])
+                        };
+
+                        messages.Add(message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return messages;
+        }
+
+        public UserSaveResult SaveGarageSaleMessage(GarageSaleMessage message)
+        {
+            var saveResult = new UserSaveResult();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SaveGarageSaleMessage", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@message_from", SqlDbType.VarChar).Value = message.MessageFrom;
+                    cmd.Parameters.Add("@message_text", SqlDbType.VarChar).Value = message.MessageText;
+                    cmd.Parameters.Add("@message_sent", SqlDbType.DateTime).Value = message.MessageSent;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = message.SaleId;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.SaveResultId = (int)returnParameter.Value;
+
+                    if (saveResult.SaveResultId != 0)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveResult;
+        }
     }
 }

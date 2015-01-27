@@ -18,6 +18,7 @@
                 {
                     <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
                     <a href="#" id="linkAddToItinerary" style="margin-top:5px">Add sale to itinerary</a><br /><br /> <!-- data-toggle="modal" data-target=".add-to-itinerary" -->
+                    
                 }
             </div>
             <div class="col-md-5">
@@ -167,6 +168,29 @@
             }
                 
         </div>
+        
+        <div class="row">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Questions and answers about this garage sale</strong></h3>
+                </div>
+                <div class="panel-body">     
+                    Have a question or want to send kudos? Click <a href="#" data-toggle="modal" data-target=".ask-question">here</a>!<br /><br />
+
+                    <div>
+                        @foreach (var message in Model.GarageSaleMessages)
+                        {
+                            <div>
+                                Date: @message.MessageSent <br />
+                                From: @message.MessageFrom <br />
+                                Message: @message.MessageText <br />
+                            </div>                            
+                            <hr />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -175,6 +199,33 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body">Garage sale added to your itinerary. Click <a href="/GarageSale/ViewItinerary/@ViewBag.ItineraryId" id="linkViewItinerary">here</a> to view your itinerary.</div>
+        </div>
+    </div>
+</div>
+
+<!-- Ask a question modal -->
+<div class="modal fade ask-question" id="askQuestionModal" tabindex="-1" role="dialog" aria-labelledby="askQuestionModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("SendGarageSaleMessage", "GarageSale", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+            {
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Ask this seller a question</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.TextAreaFor(m => m.GarageSaleMessage.MessageText, new { @class="form-control", id="txtMessage", placeholder="Brevity is the soul of wit (140 characters max)", 
+                            maxlength="140", @style="margin-left:15px;width:95%;" })
+                        <div id="charNumMessage" style="margin-left:15px;"></div>
+                        <span class="text-error">@Html.ValidationMessageFor(m => m.GarageSaleMessage.MessageText)</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-info" value="Send message" id="btnSendMessage" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                
+                </div>
+            }
         </div>
     </div>
 </div>

@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
+
+    var passwordResetSuccessful = "hidden";
+    if (TempData["PasswordResetSuccessful"] != null)
+    {
+        passwordResetSuccessful = TempData["PasswordResetSuccessful"] as string;
+    }
 }
 
 @Html.Partial("~/Views/Accounts/_ResetPassword.cshtml")
@@ -10,20 +16,23 @@
 <div id="page-wrap" class="jumbotron" style="min-height:500px;">
     <div class="container">
         <div class="row" style="margin-top:40px;">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 text-center">
-                <div class="alert alert-danger" role="alert">
+            <div class="col-md-offset-3 col-md-6 text-center">
+                <div id="loginAlert" class="alert alert-danger" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span class="sr-only">Error:</span>
                     Enter a valid user name and password
                 </div>
-            </div>            
-            <div class="col-md-3"></div>
+                <input type="hidden" id="hdnPasswordResetSuccessful" value="@passwordResetSuccessful" />
+                <div id="passwordResetSuccessful" class="alert alert-success hidden" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Reset successful:</span>
+                    Your password has been successfully reset. Log in with your new password.
+                </div>
+            </div>
         </div>
         
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-offset-3 col-md-6">
                 @using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { @class = "form-signin", @role = "form" }))
                 {
                     <h2 class="form-signin-heading">Please sign in</h2><br />
@@ -42,7 +51,6 @@
                 }
                 <div class="text-center"><a href="#" data-toggle="modal" data-target=".reset-password-modal">Forgot password?</a></div>
             </div>
-            <div class="col-md-5"></div>
         </div>       
     </div>
 </div>

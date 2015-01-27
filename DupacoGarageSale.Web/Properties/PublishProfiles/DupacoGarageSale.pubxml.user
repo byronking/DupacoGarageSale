@@ -13,10 +13,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:52</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>01/23/2015 21:10:10</publishTime>
+      <publishTime>01/26/2015 15:30:32</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>01/23/2015 21:10:10</publishTime>
+      <publishTime>01/26/2015 17:00:50</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -325,7 +325,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2014 09:14:12</publishTime>
     </File>
     <File Include="Scripts/default.js">
-      <publishTime>01/23/2015 10:48:36</publishTime>
+      <publishTime>01/24/2015 23:51:33</publishTime>
     </File>
     <File Include="Scripts/facebook.login.js">
       <publishTime>01/20/2015 22:55:21</publishTime>
@@ -463,7 +463,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:29:21</publishTime>
     </File>
     <File Include="Views/Accounts/Login.cshtml">
-      <publishTime>12/20/2014 18:24:20</publishTime>
+      <publishTime>01/24/2015 23:48:11</publishTime>
+    </File>
+    <File Include="Views/Accounts/ProcessPasswordReset.cshtml">
+      <publishTime>01/24/2015 22:19:00</publishTime>
     </File>
     <File Include="Views/Accounts/ResetPassword.cshtml">
       <publishTime>12/21/2014 22:31:54</publishTime>
@@ -502,7 +505,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/22/2015 09:13:06</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewGarageSale.cshtml">
-      <publishTime>01/19/2015 19:30:36</publishTime>
+      <publishTime>01/26/2015 15:30:02</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewItinerary.cshtml">
       <publishTime>01/23/2015 10:48:52</publishTime>
@@ -571,7 +574,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/23/2015 21:10:10</publishTime>
+      <publishTime>01/26/2015 17:00:50</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -329,6 +329,9 @@ namespace DupacoGarageSale.Web.Controllers
                 var blogRepo = new BlogPostRepository();
                 viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.Sale.GarageSaleId);
 
+                // Get the messages.
+                viewModel.GarageSaleMessages = repository.GetGarageSaleMessages(id);
+
                 // Show the success message if saving the garage sale worked.
                 if (Session["SaveSuccessful"] != null)
                 {
@@ -720,6 +723,9 @@ namespace DupacoGarageSale.Web.Controllers
             var blogRepo = new BlogPostRepository();
             viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.Sale.GarageSaleId);
 
+            // Get the messages.
+            viewModel.GarageSaleMessages = repository.GetGarageSaleMessages(id);
+
             // Save the viewmodel for later use.
             Session["ViewModel"] = viewModel;
 
@@ -851,6 +857,98 @@ namespace DupacoGarageSale.Web.Controllers
                 var saveSuccessful = repository.DeleteBlogPost(id);
 
                 TempData["ItemDeleteSuccessful"] = saveSuccessful;
+
+                return RedirectToAction("Edit", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "Edit",
+                    id = viewModel.Sale.GarageSaleId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        #endregion
+
+        #region Garage sale messages
+
+        [HttpPost]
+        public ActionResult SendGarageSaleMessage(GarageSaleViewModel model)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var userSession = Session["UserSession"] as UserSession;
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                    viewModel.GarageSaleMessage = new GarageSaleMessage();
+                    viewModel.GarageSaleMessage.MessageFrom = userSession.User.UserName;
+                    viewModel.GarageSaleMessage.SaleId = viewModel.Sale.GarageSaleId;
+                    viewModel.GarageSaleMessage.MessageSent = DateTime.Now;
+                    viewModel.GarageSaleMessage.MessageText = model.GarageSaleMessage.MessageText;
+
+                    var repository = new GarageSaleRepository();
+                    var saveResult = repository.SaveGarageSaleMessage(viewModel.GarageSaleMessage);
+
+                    if (saveResult.IsSaveSuccessful)
+                    {
+                        viewModel.GarageSaleMessage.MessageId = saveResult.SaveResultId;
+                        Session["SaveSuccessful"] = true;
+                    }
+                    else
+                    {
+                        // Indicate in some way that the save failed.
+                    }
+                }
+
+                return RedirectToAction("ViewGarageSale", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "ViewGarageSale",
+                    id = viewModel.Sale.GarageSaleId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }            
+        }
+
+        [HttpPost]
+        public ActionResult ReplyToGarageSaleMessage(GarageSaleViewModel model)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var userSession = Session["UserSession"] as UserSession;
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                    viewModel.GarageSaleMessage = new GarageSaleMessage();
+                    viewModel.GarageSaleMessage.MessageFrom = userSession.User.UserName;
+                    viewModel.GarageSaleMessage.SaleId = viewModel.Sale.GarageSaleId;
+                    viewModel.GarageSaleMessage.MessageSent = DateTime.Now;
+                    viewModel.GarageSaleMessage.MessageText = model.GarageSaleMessage.MessageText;
+
+                    var repository = new GarageSaleRepository();
+                    var saveResult = repository.SaveGarageSaleMessage(viewModel.GarageSaleMessage);
+
+                    if (saveResult.IsSaveSuccessful)
+                    {
+                        viewModel.GarageSaleMessage.MessageId = saveResult.SaveResultId;
+                        Session["SaveSuccessful"] = true;
+                    }
+                    else
+                    {
+                        // Indicate in some way that the save failed.
+                    }
+                }
 
                 return RedirectToAction("Edit", new RouteValueDictionary(new
                 {
