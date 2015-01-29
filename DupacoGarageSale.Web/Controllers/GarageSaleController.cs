@@ -1124,7 +1124,7 @@ namespace DupacoGarageSale.Web.Controllers
         #region Garage sale itineraries
 
         [HttpGet]
-        public ActionResult ViewItinerary(int id)
+        public ActionResult ViewItinerary(int? id)
         {
             if (Session["UserSession"] != null)
             {
@@ -1132,7 +1132,16 @@ namespace DupacoGarageSale.Web.Controllers
 
                 // Get the user's itinerary by user id.
                 var repository = new ItineraryRepository();
-                var itineraryList = repository.GetItineraryByUserId(id);
+                var itineraryList = new List<GarageSaleItinerary>();
+
+                if (id != null)
+                {
+                    itineraryList = repository.GetItineraryByUserId(Convert.ToInt32(id));
+                }
+                else
+                {
+                    itineraryList = repository.GetItineraryByUserId(session.User.UserId);
+                }
 
                 // Add it to the viewModel.
                 var viewModel = new GarageSaleViewModel();
@@ -1190,7 +1199,10 @@ namespace DupacoGarageSale.Web.Controllers
                 if (saveResult.IsSaveSuccessful)
                 {
                     itinerary.ItineraryId = saveResult.SaveResultId;
+                    TempData["ItineraryId"] = itinerary.ItineraryId;
                     ViewBag.ItineraryId = itinerary.ItineraryId;
+                    viewModel.UserItinerary = new Itinerary();
+                    viewModel.UserItinerary = itinerary;
                 }
             }
 

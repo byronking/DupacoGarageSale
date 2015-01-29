@@ -48,30 +48,40 @@ namespace DupacoGarageSale.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult RegisterUser(GarageSaleUser model)
+        public ActionResult RegisterUser(GarageSaleViewModel model)
         {
             var errors = ModelState.Where(v => v.Value.Errors.Any());
 
-            model.CreateDate = DateTime.Now;
-            model.ModifyUser = model.UserName;
-            model.Active = true;
+            model.User.CreateDate = DateTime.Now;
+            model.User.ModifyUser = model.User.UserName;
+            model.User.Active = true;
 
-            if (ModelState.IsValid)
+            // Make sure new accounts are unique.
+            var repository = new AccountsRepository();
+
+            if (repository.CheckForExistingAccount(model.User.UserName, model.User.Email))
+            {
+                ViewBag.IsExistingAccount = "true";
+                ViewBag.Username = model.User.UserName;
+                ViewBag.Email = model.User.Email;
+                return View("~/Views/Accounts/SignUp.cshtml", model);
+            }
+            else
             {
                 var saveResult = new UserSaveResult();
 
                 // Save the new user and then send them to the profile page.
-                var repository = new AccountsRepository();
-                saveResult = repository.SaveGarageSaleUser(model);
 
-                model.UserId = saveResult.SaveResultId;
+                saveResult = repository.SaveGarageSaleUser(model.User);
+
+                model.User.UserId = saveResult.SaveResultId;
 
                 // Create a user session.
                 var session = new UserSession
                 {
                     SessionKey = Guid.NewGuid(),
                     SessionStartDate = DateTime.Now,
-                    User = model
+                    User = model.User
                 };
 
                 Session["UserSession"] = session;
@@ -80,12 +90,8 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     controller = "Accounts",
                     action = "UserProfile",
-                    id = model.UserId
+                    id = model.User.UserId
                 }));
-            }
-            else
-            {
-                return View("~/Views/Accounts/SignUp.cshtml", model);
             }
         }
 
@@ -132,11 +138,9 @@ namespace DupacoGarageSale.Web.Controllers
                 };
 
                 // Get the user's address if they log in.
-                session.User.Address = repository.GetUserAddressByUserId(session.User.UserId);                 
+                session.User.Address = repository.GetUserAddressByUserId(session.User.UserId);
+                Session["UserSession"] = session;                
 
-                Session["UserSession"] = session;
-
-                // Keep the focus between sellers and buyers. Send the user to the profile page.
                 return RedirectToAction("UserProfile", new RouteValueDictionary(new
                 {
                     controller = "Accounts",

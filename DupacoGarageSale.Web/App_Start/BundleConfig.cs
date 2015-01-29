@@ -54,6 +54,9 @@ namespace DupacoGarageSale.Web
                        "~/Content/bootstrap/css/bootstrap.css",
                        "~/Content/bootstrap/css/bootstrap-theme.css"));
 
+            bundles.Add(new StyleBundle("~/Content/dashboard/css").Include(
+                        "~/Content/bootstrap/css/dashboard.css"));
+
            bundles.Add(new StyleBundle("~/Content/timepicker/css").Include(
                       "~/Content/timepicker/jquery.timepicker.css"));
         }

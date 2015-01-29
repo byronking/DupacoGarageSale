@@ -47,5 +47,6 @@ namespace DupacoGarageSale.Data.Domain
         public DateTime? ModifyDate { get; set; }
         public string ModifyUser { get; set; }
         public bool Active { get; set; }
+        public int UserTypeId { get; set; }
     }
 }

@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label for="txtStartingAddress">Starting point:</label>
                                     <input type="text" id="txtStartingAddress" class="form-control" style="width:350px;" value="@startingAddress" />
-                                </div>
+                                </div><br />
 
                                 @foreach (var address in Model.GarageSaleItinerary) 
                                 {
@@ -51,7 +51,7 @@
                                     var arrayItineraryLegs = itineraryLegs.ToArray();
                                     arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
                                 }
-
+                                <br />
                                 <input type="button" id="btnMapItinerary" class="btn btn-primary" value="Get directions" onclick="calculateRoute();" />
                             </form><br /><br />
 
@@ -136,6 +136,7 @@
         //alert('legs: ' + selectedLegs);
 
         var start = document.getElementById('hdnStartingAddress').value;
+        alert('starting address: ' + start);
         var lastItem = 0;
         var legsCount = selectedLegs.length;
 
@@ -149,8 +150,10 @@
         // Push the itinerary legs into the waypoints and then set the last waypoint as the destination.
         var wayPointsList = [];        
 
-        for (var i = 1; i < selectedLegs.length; i++) {
-            var wypt = document.getElementById('txtItineraryLeg' + i).value;
+        for (var i = 0; i < selectedLegs.length; i++) {
+
+            var wypt = document.getElementById('txtItineraryLeg' + selectedLegs[i]).value;
+            //alert('waypoint: ' + wypt);
 
             wayPointsList.push({
                 location: wypt,

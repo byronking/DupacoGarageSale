@@ -1,5 +1,10 @@
 ﻿$(document).ready(function () {
 
+    // Show the error message if there is an existing account
+    if ($("#hdnExistingAccountError").val() == "true") {
+        $("#existingAccountError").removeClass('hidden');
+    }
+
     // Show the home page content on click
     $("#linkCategory1").click(function (e) {
         var categoryId = $("#hdnCategory1").val();

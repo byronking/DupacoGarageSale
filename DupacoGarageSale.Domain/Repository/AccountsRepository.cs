@@ -13,6 +13,38 @@ namespace DupacoGarageSale.Data.Repository
 {
     public class AccountsRepository
     {
+        public bool CheckForExistingAccount(string user_name, string email)
+        {
+            var isExistingAccount = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("CheckForExistingAccount", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_name", SqlDbType.VarChar).Value = user_name;
+                    cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var userName = reader["user_name"].ToString();
+                        var emailAddress = reader["email"].ToString();
+
+                        isExistingAccount = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+            return isExistingAccount;
+        }
+
         /// <summary>
         /// This saves a new garage sale user.
         /// </summary>
@@ -88,10 +120,19 @@ namespace DupacoGarageSale.Data.Repository
                     while (reader.Read())
                     {
                         DateTime? modifyDate = null;
-
                         if (reader["modify_date"] != DBNull.Value)
                         {
                             modifyDate = Convert.ToDateTime(reader["modify_date"]);
+                        }
+
+                        int userTypeId = 0;
+                        if (reader["user_type_id"] == DBNull.Value)
+                        {
+                            userTypeId = 2;
+                        }
+                        else
+                        {
+                            userTypeId = Convert.ToInt32(reader["user_type_id"]);
                         }
 
                         user.Active = Convert.ToBoolean(reader["active"]);
@@ -106,6 +147,7 @@ namespace DupacoGarageSale.Data.Repository
                         user.UserId = Convert.ToInt32(reader["user_id"]);
                         user.UserName = reader["user_name"].ToString();
                         user.ProfilePicLink = reader["profile_pic_link"].ToString();
+                        user.UserTypeId = userTypeId;
                     }
                 }
             }
@@ -219,6 +261,7 @@ namespace DupacoGarageSale.Data.Repository
                         user.UserId = Convert.ToInt32(reader["user_id"]);
                         user.UserName = reader["user_name"].ToString();
                         user.ProfilePicLink = reader["profile_pic_link"].ToString();
+                        user.UserTypeId = Convert.ToInt32(reader["user_type_id"]);
                     }
                 }
             }

@@ -139,7 +139,7 @@ namespace DupacoGarageSale.Data.Repository
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = saleId;
-                    cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = saleId;
+                    cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = itineraryId;
 
                     var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;

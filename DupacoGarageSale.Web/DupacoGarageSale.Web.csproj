@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GarageSaleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -145,6 +146,7 @@
     </Compile>
     <Compile Include="Helpers\ItemsHelper.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
+    <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\GarageSaleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -155,6 +157,7 @@
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\css\carousel.css" />
     <Content Include="Content\bootstrap\css\cover.css" />
+    <Content Include="Content\bootstrap\css\dashboard.css" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\dupaco.png" />
     <Content Include="Content\images\dupaco_logo.gif" />
@@ -327,6 +330,10 @@
     <Content Include="Views\GarageSale\_SearchResults.cshtml" />
     <Content Include="Views\GarageSale\_SearchBar.cshtml" />
     <Content Include="Views\Accounts\ProcessPasswordReset.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_AdminNavigation.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

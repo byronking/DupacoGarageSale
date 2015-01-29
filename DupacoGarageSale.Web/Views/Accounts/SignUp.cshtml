@@ -14,6 +14,12 @@
     <img src="~/Content/images/garagesale.gif" />
     <h2 style="margin-left:275px;">@ViewBag.Title</h2><br /><br />
 
+    <input type="hidden" id="hdnExistingAccountError" value="@ViewBag.IsExistingAccount" />
+    <div class="alert alert-danger hidden" id="existingAccountError" role="alert" style="width:50%;margin-left:250px;">
+        <strong>Sorry!</strong>
+        There is already a registered user with user name <strong>@ViewBag.UserName</strong> and email <strong>@ViewBag.Email</strong>. Please try a different user name.
+    </div>
+    <br />
     <div class="marketing well" style="width:50%;margin-left:250px;margin-top:-20px">
         @using (Html.BeginForm("RegisterUser", "Accounts", FormMethod.Post, new { @role="form"}))
         {
