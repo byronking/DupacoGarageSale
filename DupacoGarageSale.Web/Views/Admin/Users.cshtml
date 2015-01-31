@@ -1,6 +1,9 @@
 ﻿@model DupacoGarageSale.Web.Models.AdminViewModel
 
-@{
+@*@using Telerik.Web.Mvc
+@using Telerik.Web.Mvc.Extensions*@
+
+@{    
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -28,11 +31,46 @@
             <h1 class="page-header">Garage Sale Users</h1>
             <form class="form-inline" action="SearchUsers">
                 <div class="form-group">
-                    <input type="text" id="txtSearchUsers" class="form-control" style="width:300px;" placeholder="Search..." /> 
-                    
+                    <input type="text" id="txtSearchUsers" class="form-control" style="width:300px;" placeholder="Search..." />                    
                 </div>
                 <input type="submit" class="btn btn-primary" value="Search" />
             </form>
+
+            <div class="down-20">
+                @(Html.Telerik().Grid(Model.Users)
+                    .Name("grdAllUsers")
+                    .DataKeys(dataKeys => dataKeys.Add(u => u.UserId))
+                    .Columns(columns =>
+                    {
+                        columns.Command(commands =>
+                        {
+                            commands.Custom("EditUser")
+                                .Text("Edit")
+                                .Action("EditUser", "Admin")
+                                .DataRouteValues(route =>
+                                {
+                                    route.Add(u => u.UserId).RouteKey("userId");
+                                });
+                        });
+                        columns.Bound(u => u.UserId).Hidden();
+                        columns.Bound(u => u.FirstName);
+                        columns.Bound(u => u.LastName);
+                        columns.Bound(u => u.UserName);
+                        columns.Bound(u => u.Email);
+                        columns.Bound(u => u.Phone);
+                    })
+                    .Pageable(pager => pager.PageSize(10))
+                    .Sortable()
+                ) 
+            </div>
+
+            <br /><br />
+            @{
+                var showEditUser = ViewData["ShowEditUser"];
+            }
+
+            <input type="hidden" id="hdnShowEditUser" value="@showEditUser" />
+            <div id="editUserDiv" class="hidden">@Html.Partial("~/Views/Admin/_EditUser.cshtml")</div>
         </div>
     </div>
 </div>

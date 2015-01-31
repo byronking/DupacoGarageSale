@@ -1,0 +1,92 @@
+﻿@model DupacoGarageSale.Web.Models.AdminViewModel
+
+<div>
+    @using (Html.BeginForm("SaveUserProfile", "Accounts", FormMethod.Post, new { @class="form-horizontal", @role="form", enctype="multipart/form-data" }))
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">First name</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", id="txtFirstName" })
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label class="col-sm-3 control-label">Last name</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", id="txtLastName" })
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label class="col-sm-3 control-label">User name</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.User.UserName, new { @class = "form-control", id="txtUserName", @readonly="true" })
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control", id="txtEmail", @readonly="true" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-3 control-label">Phone</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.User.Phone, new { @class = "form-control", id="txtPhone" })
+                    </div>
+                </div>  
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">House number & street</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.User.Address.Address1, new { @class = "form-control", id="txtAddress1" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Apt, unit, or condo #</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.User.Address.Address2, new { @class = "form-control", id="txtAddress2" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">City</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.User.Address.City, new { @class = "form-control", id="txtCity" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">State</label>
+                    <div class="col-sm-7">
+                        @Html.DropDownListFor(m => m.User.Address.State, ViewData["StatesList"] as SelectList, "Select...", new { id="ddlStatesList", @class="form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Zip Code</label>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(m => m.User.Address.Zip, new { @class = "form-control", id="txtZip" })
+                    </div>
+                </div>                    
+                                     
+            </div>
+        </div>
+            
+        <div class="row down-40">
+            <div class="col-md-8 col-md-offset-1">
+                <div class="form-group">
+                    <input type="submit" value="Save profile" class="btn btn-primary" />
+                    @*@Html.ActionLink("Change password", "ChangePassword", "Accounts", new { @class="btn btn-success" })*@
+
+                    <button type="button" class="btn btn-success" data-toggle="modal" disabled data-target="#changePasswordModal">
+                        Change password coming soon...
+                    </button>
+                </div>
+            </div>
+        </div>            
+        <div>
+            @Html.HiddenFor(m => m.User.Active)
+            @Html.HiddenFor(m => m.User.CreateDate)
+            @Html.HiddenFor(m => m.User.UserId)
+        </div>
+    }
+</div>

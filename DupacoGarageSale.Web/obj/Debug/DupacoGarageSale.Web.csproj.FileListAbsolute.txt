@@ -36,3 +36,4 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.pdb
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\log4net.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Telerik.Web.Mvc.dll
