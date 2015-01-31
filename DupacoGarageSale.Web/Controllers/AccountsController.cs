@@ -367,6 +367,47 @@ namespace DupacoGarageSale.Web.Controllers
             return View();
         }
 
+        public ActionResult ChangePassword(FormCollection form)
+        {
+            var password = form["Password"].ToString();
+
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                session.User.Password = password;
+
+                // Update the user's password.
+                var repository = new AccountsRepository();
+                var hashedPassword = AccountHelper.GetSHA1Hash(session.User.UserName, password);
+
+                try
+                {
+                    var saveSuccessful = repository.UpdateUserPassword(session.User.UserName, hashedPassword);
+
+                    if (saveSuccessful)
+                    {
+                        Session["SaveSuccessful"] = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log.Error(ex.ToString());
+                }
+
+                return RedirectToAction("UserProfile", new RouteValueDictionary(new
+                {
+                    controller = "Accounts",
+                    action = "UserProfile",
+                    id = session.User.UserId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+            
+        }
+
         [HttpGet]
         public ActionResult ProcessPasswordReset(string t)
         {

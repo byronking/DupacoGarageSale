@@ -91,6 +91,7 @@
     <Compile Include="Domain\PasswordResetRequest.cs" />
     <Compile Include="Domain\SaleDatesTimes.cs" />
     <Compile Include="Domain\SpecialItem.cs" />
+    <Compile Include="Domain\SpecialItemsCount.cs" />
     <Compile Include="Domain\State.cs" />
     <Compile Include="Domain\ItemCategory.cs" />
     <Compile Include="Domain\UserAddress.cs" />

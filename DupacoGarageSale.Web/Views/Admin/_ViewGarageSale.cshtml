@@ -1,9 +1,10 @@
 ﻿@model DupacoGarageSale.Web.Models.AdminViewModel
 
 <div class="row">
+    <h2>Garage sale details:</h2>
     <div class="col-md-10">
         <input type="hidden" id="hdnGarageSaleId" value="@Model.GarageSale.GarageSaleId" />
-        <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@Model.GarageSale.GarageSaleName</h2>
+        <h2>@Model.GarageSale.GarageSaleName</h2>
         @Model.GarageSale.SaleDescription<br /><br />
     </div>
     <div class="col-md-2">

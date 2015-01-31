@@ -1,8 +1,5 @@
 ﻿@model DupacoGarageSale.Web.Models.AdminViewModel
 
-@*@using Telerik.Web.Mvc
-@using Telerik.Web.Mvc.Extensions*@
-
 @{    
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -22,19 +19,19 @@
                 <li>
                     <a href="~/Admin/GarageSales">Garage Sales</a>
                 </li>
-                <li>
-                    <a href="~/Admin/GarageSaleItems">Garage Sale Items</a>
-                </li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Garage Sale Users</h1>
-            <form class="form-inline" action="SearchUsers">
+            @using (Html.BeginForm("SearchUsers", "Admin", FormMethod.Post, new { @class="form-inline" }))
+            {
                 <div class="form-group">
-                    <input type="text" id="txtSearchUsers" class="form-control" style="width:300px;" placeholder="Search..." />                    
+                    @*<input type="text" id="txtSearchUsers" class="form-control" style="width:300px;" placeholder="Search..." /> *@ 
+                    @Html.TextBoxFor(m => m.SearchCriteria, new { @id="txtSearchUsers", @class="form-control", @style="width:300px;", placeholder="Enter a search term" })                
                 </div>
                 <input type="submit" class="btn btn-primary" value="Search" />
-            </form>
+                @Html.ActionLink("Clear", "ClearUserSearch", null, new { @class="btn btn-default" })
+            }
 
             <div class="down-20">
                 @(Html.Telerik().Grid(Model.Users)
@@ -58,6 +55,7 @@
                         columns.Bound(u => u.UserName);
                         columns.Bound(u => u.Email);
                         columns.Bound(u => u.Phone);
+                        columns.Bound(u => u.CreateDate);
                     })
                     .Pageable(pager => pager.PageSize(10))
                     .Sortable()

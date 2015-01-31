@@ -434,6 +434,34 @@
             $("#charNumMessage").text(char + ' characters left');
         }
     });
+
+    // Validation for the change password modal.
+    $("#btnChangePassword").click(function (e) {
+        if ($("#txtPassword").val() == "") {
+            $("#lblPasswordError").removeClass('hidden');
+            e.preventDefault();
+        }
+        else {
+            $("#lblPasswordError").addClass('hidden');
+        }
+
+        if ($("#txtConfirmPassword").val() == "") {
+            $("#lblConfirmPasswordError").removeClass('hidden');
+            e.preventDefault();
+        }
+        else {
+            $("#lblConfirmPasswordError").addClass('hidden');
+        }
+
+        if ($("#txtPassword").val() != $("#txtConfirmPassword").val()) {
+            $("#lblConfirmPasswordError").html('The two passwords must match.');
+            $("#lblConfirmPasswordError").removeClass('hidden');
+            //alert('nope!');
+            e.preventDefault();
+        }
+
+        //e.preventDefault();
+    });
 });
 
 
