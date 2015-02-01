@@ -9,14 +9,125 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>C:\Deployment\DupacoGarageSales</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="App_GlobalResources/EditorLocalization.bg-BG.resx">
+      <publishTime>01/29/2015 14:27:17</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.da-DK.resx">
+      <publishTime>01/29/2015 14:27:17</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.de-DE.resx">
+      <publishTime>01/29/2015 14:27:17</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.en-US.resx">
+      <publishTime>01/29/2015 14:27:17</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.fr-FR.resx">
+      <publishTime>01/29/2015 14:27:16</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.nl-NL.resx">
+      <publishTime>01/29/2015 14:27:16</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.pl-PL.resx">
+      <publishTime>01/29/2015 14:27:16</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.pt-BR.resx">
+      <publishTime>01/29/2015 14:27:16</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.pt-PT.resx">
+      <publishTime>01/29/2015 14:27:15</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.resx">
+      <publishTime>01/29/2015 14:27:15</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.ru-RU.resx">
+      <publishTime>01/29/2015 14:27:15</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.uk-UA.resx">
+      <publishTime>01/29/2015 14:27:15</publishTime>
+    </File>
+    <File Include="App_GlobalResources/EditorLocalization.zh-CN.resx">
+      <publishTime>01/29/2015 14:27:14</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.bg-BG.resx">
+      <publishTime>01/29/2015 14:27:14</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.da-DK.resx">
+      <publishTime>01/29/2015 14:27:14</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.de-DE.resx">
+      <publishTime>01/29/2015 14:27:14</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.en-US.resx">
+      <publishTime>01/29/2015 14:27:13</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.es-ES.resx">
+      <publishTime>01/29/2015 14:27:13</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.fr-FR.resx">
+      <publishTime>01/29/2015 14:27:13</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.nl-NL.resx">
+      <publishTime>01/29/2015 14:27:13</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.pl-PL.resx">
+      <publishTime>01/29/2015 14:27:12</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.pt-BR.resx">
+      <publishTime>01/29/2015 14:27:12</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.pt-PT.resx">
+      <publishTime>01/29/2015 14:27:12</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.resx">
+      <publishTime>01/29/2015 14:27:12</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.ru-RU.resx">
+      <publishTime>01/29/2015 14:27:11</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.uk-UA.resx">
+      <publishTime>01/29/2015 14:27:11</publishTime>
+    </File>
+    <File Include="App_GlobalResources/GridLocalization.zh-CN.resx">
+      <publishTime>01/29/2015 14:27:11</publishTime>
+    </File>
+    <File Include="App_GlobalResources/UploadLocalization.bg-BG.resx">
+      <publishTime>01/29/2015 14:27:10</publishTime>
+    </File>
+    <File Include="App_GlobalResources/UploadLocalization.da-DK.resx">
+      <publishTime>01/29/2015 14:27:10</publishTime>
+    </File>
+    <File Include="App_GlobalResources/UploadLocalization.en-US.resx">
+      <publishTime>01/29/2015 14:27:10</publishTime>
+    </File>
+    <File Include="App_GlobalResources/UploadLocalization.fr-FR.resx">
+      <publishTime>01/29/2015 14:27:10</publishTime>
+    </File>
+    <File Include="App_GlobalResources/UploadLocalization.nl-NL.resx">
+      <publishTime>01/29/2015 14:27:09</publishTime>
+    </File>
+    <File Include="App_GlobalResources/UploadLocalization.pl-PL.resx">
+      <publishTime>01/29/2015 14:27:09</publishTime>
+    </File>
+    <File Include="App_GlobalResources/UploadLocalization.pt-BR.resx">
+      <publishTime>01/29/2015 14:27:09</publishTime>
+    </File>
+    <File Include="App_GlobalResources/UploadLocalization.pt-PT.resx">
+      <publishTime>01/29/2015 14:27:09</publishTime>
+    </File>
+    <File Include="App_GlobalResources/UploadLocalization.ru-RU.resx">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="App_GlobalResources/UploadLocalization.zh-CN.resx">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>11/18/2014 14:27:52</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>01/27/2015 20:43:00</publishTime>
+      <publishTime>01/31/2015 18:43:00</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>01/27/2015 20:43:00</publishTime>
+      <publishTime>01/31/2015 18:43:01</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -69,8 +180,611 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Web.WebPages.Razor.dll">
       <publishTime>11/18/2014 14:27:49</publishTime>
     </File>
+    <File Include="bin/Telerik.Web.Mvc.dll">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>11/18/2014 14:27:52</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Black/editor.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Black/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Black/loading.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Black/slider-h.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Black/slider-v.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Black/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Black/sprite.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Black/treeview-line.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Black/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Black/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Default/editor.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Default/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Default/loading.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Default/slider-h.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Default/slider-v.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Default/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Default/sprite.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Default/treeview-line.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Default/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Default/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Forest/editor.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Forest/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Forest/loading.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Forest/slider-h.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Forest/slider-v.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Forest/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Forest/sprite.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Forest/treeview-line.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Forest/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Forest/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Hay/editor.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Hay/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Hay/loading.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Hay/slider-h.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Hay/slider-v.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Hay/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Hay/sprite.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Hay/treeview-line.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Hay/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Hay/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Metro/editor.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Metro/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Metro/loading.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Metro/slider-h.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Metro/slider-v.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Metro/sprite.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2007/editor.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2007/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2007/loading.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2007/slider-h.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2007/slider-v.gif">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2007/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2007/sprite.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2007/treeview-line.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2007/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2007/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Black/editor.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Black/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Black/loading.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Black/slider-h.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Black/slider-v.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Black/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Black/sprite.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Black/treeview-line.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Black/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Black/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Blue/editor.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Blue/gradient.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Blue/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Blue/loading.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Blue/slider-h.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Blue/slider-v.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Blue/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Blue/sprite.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Silver/editor.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Silver/gradient.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Silver/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Silver/loading.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Silver/slider-h.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Silver/slider-v.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Silver/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Office2010Silver/sprite.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Outlook/editor.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Outlook/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Outlook/loading.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Outlook/slider-h.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Outlook/slider-v.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Outlook/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Outlook/sprite.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Outlook/treeview-line.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Outlook/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Outlook/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Simple/editor.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Simple/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Simple/loading.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Simple/slider-h.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Simple/slider-v.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Simple/sprite.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Simple/treeview-line.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Simple/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Simple/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sitefinity/editor.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sitefinity/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sitefinity/loading.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sitefinity/slider-h.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sitefinity/slider-v.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sitefinity/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sitefinity/sprite.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sitefinity/treeview-line.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sitefinity/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sitefinity/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sunset/editor.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sunset/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sunset/loading.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sunset/slider-h.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sunset/slider-v.gif">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sunset/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sunset/sprite.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sunset/treeview-line.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sunset/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Sunset/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.black.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.common.min.css">
+      <publishTime>01/29/2015 21:26:12</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.default.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.forest.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.hay.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.metro.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.office2007.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.office2010black.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.office2010blue.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.office2010silver.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.outlook.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.rtl.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.simple.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.sitefinity.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.sunset.min.css">
+      <publishTime>01/29/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.telerik.min.css">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.transparent.min.css">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.vista.min.css">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.web20.min.css">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.webblue.min.css">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/telerik.windows7.min.css">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Telerik/editor.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Telerik/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Telerik/loading.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Telerik/slider-h.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Telerik/slider-v.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Telerik/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Telerik/sprite.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Telerik/treeview-line.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Telerik/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Telerik/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/active.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/editor.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/gradient.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/group.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/hover.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/loading.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/selected.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/slider-h.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/slider-v.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/sprite.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/toolbar.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Transparent/widget.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Vista/editor.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Vista/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Vista/loading.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Vista/slider-h.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Vista/slider-v.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Vista/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Vista/sprite.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Web20/editor.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Web20/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Web20/loading.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Web20/slider-h.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Web20/slider-v.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Web20/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Web20/sprite.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Web20/treeview-line.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Web20/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Web20/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/WebBlue/editor.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/WebBlue/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/WebBlue/loading.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/WebBlue/slider-h.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/WebBlue/slider-v.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/WebBlue/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/WebBlue/sprite.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/WebBlue/treeview-line.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/WebBlue/treeview-nodes-rtl.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/WebBlue/treeview-nodes.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Windows7/editor.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Windows7/imagebrowser.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Windows7/loading.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Windows7/slider-h.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Windows7/slider-v.gif">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Windows7/sprite-vertical.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Content/2013.2.611/Windows7/sprite.png">
+      <publishTime>01/29/2015 14:27:06</publishTime>
     </File>
     <File Include="Content/bootstrap/css/bootstrap-theme.css">
       <publishTime>06/26/2014 09:14:10</publishTime>
@@ -95,6 +809,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/bootstrap/css/cover.css">
       <publishTime>11/19/2014 15:49:11</publishTime>
+    </File>
+    <File Include="Content/bootstrap/css/dashboard.css">
+      <publishTime>01/28/2015 20:24:41</publishTime>
     </File>
     <File Include="Content/bootstrap/fonts/glyphicons-halflings-regular.eot">
       <publishTime>06/26/2014 09:14:12</publishTime>
@@ -143,6 +860,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/images/keep-calm-and-come-to-the-dupaco-garage-sale.png">
       <publishTime>11/19/2014 12:54:56</publishTime>
+    </File>
+    <File Include="Content/jquery-ui-timepicker-addon.css">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Content/jquery-ui-timepicker-addon.min.css">
+      <publishTime>01/30/2015 14:05:09</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>01/23/2015 10:38:48</publishTime>
@@ -316,7 +1039,100 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>01/06/2015 11:27:20</publishTime>
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/jquery-1.7.1.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/jquery.validate.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.all.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.autocomplete.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.calendar.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.chart.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.combobox.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.common.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.datepicker.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.datetimepicker.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.draganddrop.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.editor.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.grid.editing.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.grid.filtering.min.js">
+      <publishTime>01/29/2015 14:27:06</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.grid.grouping.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.grid.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.grid.reordering.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.grid.resizing.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.imagebrowser.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.list.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.menu.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.panelbar.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.slider.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.splitter.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.tabstrip.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.textbox.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.timepicker.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.treeview.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.upload.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/2013.2.611/telerik.window.min.js">
+      <publishTime>01/29/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Scripts/admin.js">
+      <publishTime>01/30/2015 21:46:08</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>06/26/2014 09:14:12</publishTime>
@@ -325,7 +1141,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2014 09:14:12</publishTime>
     </File>
     <File Include="Scripts/default.js">
-      <publishTime>01/26/2015 21:33:48</publishTime>
+      <publishTime>01/30/2015 22:54:31</publishTime>
     </File>
     <File Include="Scripts/facebook.login.js">
       <publishTime>01/20/2015 22:55:21</publishTime>
@@ -333,17 +1149,164 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/garagesale.itinerary.js">
       <publishTime>01/19/2015 19:32:39</publishTime>
     </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-addon-i18n.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-addon-i18n.min.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-af.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-am.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-bg.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-ca.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-cs.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-da.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-de.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-el.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-es.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-et.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-eu.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-fi.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-fr.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-gl.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-he.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-hr.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-hu.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-id.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-it.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-ja.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-ko.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-lt.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-lv.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-nl.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-no.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-pl.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-pt-BR.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-pt.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-ro.js">
+      <publishTime>01/30/2015 14:05:09</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-ru.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-sk.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-sl.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-sr-RS.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-sr-YU.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-sv.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-th.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-tr.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-uk.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-vi.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-zh-CN.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/i18n/jquery-ui-timepicker-zh-TW.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
     <File Include="Scripts/jquery-1.8.2.js">
       <publishTime>11/18/2014 14:27:46</publishTime>
     </File>
     <File Include="Scripts/jquery-1.8.2.min.js">
       <publishTime>11/18/2014 14:27:46</publishTime>
     </File>
+    <File Include="Scripts/jquery-1.9.1.js">
+      <publishTime>01/28/2015 23:00:30</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.9.1.min.js">
+      <publishTime>01/28/2015 23:00:30</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.9.1.min.map">
+      <publishTime>01/28/2015 23:00:30</publishTime>
+    </File>
     <File Include="Scripts/jquery-ui-1.8.24.js">
       <publishTime>11/18/2014 14:27:47</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.8.24.min.js">
       <publishTime>11/18/2014 14:27:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-sliderAccess.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-timepicker-addon.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-timepicker-addon.min.js">
+      <publishTime>01/30/2015 14:05:08</publishTime>
     </File>
     <File Include="Scripts/jquery.timepicker.js">
       <publishTime>10/14/2014 18:49:28</publishTime>
@@ -460,7 +1423,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/10/2014 15:59:38</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>11/18/2014 14:29:21</publishTime>
+      <publishTime>01/28/2015 23:00:31</publishTime>
     </File>
     <File Include="Views/Accounts/Login.cshtml">
       <publishTime>01/24/2015 23:48:11</publishTime>
@@ -472,13 +1435,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/21/2014 22:31:54</publishTime>
     </File>
     <File Include="Views/Accounts/SignUp.cshtml">
-      <publishTime>01/20/2015 20:42:26</publishTime>
+      <publishTime>01/28/2015 14:23:38</publishTime>
     </File>
     <File Include="Views/Accounts/UserProfile.cshtml">
-      <publishTime>01/20/2015 22:08:36</publishTime>
+      <publishTime>01/30/2015 22:25:46</publishTime>
     </File>
     <File Include="Views/Accounts/_ResetPassword.cshtml">
       <publishTime>12/20/2014 18:30:42</publishTime>
+    </File>
+    <File Include="Views/Admin/GarageSales.cshtml">
+      <publishTime>01/31/2015 18:22:09</publishTime>
+    </File>
+    <File Include="Views/Admin/Index.cshtml">
+      <publishTime>01/30/2015 21:21:15</publishTime>
+    </File>
+    <File Include="Views/Admin/Users.cshtml">
+      <publishTime>01/31/2015 17:08:56</publishTime>
+    </File>
+    <File Include="Views/Admin/_EditUser.cshtml">
+      <publishTime>01/31/2015 10:45:47</publishTime>
+    </File>
+    <File Include="Views/Admin/_ViewGarageSale.cshtml">
+      <publishTime>01/31/2015 10:45:20</publishTime>
     </File>
     <File Include="Views/GarageSale/Add.cshtml">
       <publishTime>01/15/2015 21:12:27</publishTime>
@@ -528,6 +1506,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
+    <File Include="Views/Shared/_AdminLayout.cshtml">
+      <publishTime>01/30/2015 15:02:59</publishTime>
+    </File>
+    <File Include="Views/Shared/_AdminNavigation.cshtml">
+      <publishTime>01/30/2015 09:43:46</publishTime>
+    </File>
     <File Include="Views/Shared/_FailedDelete.cshtml">
       <publishTime>12/15/2014 23:01:46</publishTime>
     </File>
@@ -535,10 +1519,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/05/2014 20:04:41</publishTime>
     </File>
     <File Include="Views/Shared/_GarageSaleNav.cshtml">
-      <publishTime>01/26/2015 23:03:25</publishTime>
+      <publishTime>01/31/2015 10:36:22</publishTime>
     </File>
     <File Include="Views/Shared/_HomeNavLoggedIn.cshtml">
-      <publishTime>01/22/2015 16:31:52</publishTime>
+      <publishTime>01/28/2015 15:19:35</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>01/12/2015 17:42:45</publishTime>
@@ -565,16 +1549,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/16/2014 10:27:31</publishTime>
     </File>
     <File Include="Views/Shared/_UserProfileNav.cshtml">
-      <publishTime>01/22/2015 18:12:18</publishTime>
+      <publishTime>01/28/2015 19:47:11</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>11/18/2014 14:27:45</publishTime>
+      <publishTime>01/29/2015 14:44:40</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/26/2015 17:00:50</publishTime>
+      <publishTime>01/31/2015 18:43:02</publishTime>
     </File>
   </ItemGroup>
 </Project>

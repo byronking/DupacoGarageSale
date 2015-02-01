@@ -65,7 +65,7 @@
          console.log("auth_status_change_callback: " + response.status);
 
          if (response.status === 'unknown') {
-             location.href = '/Home/LogOut';
+             location.href = '@Url.Content("/Home/LogOut")';
          }
 
          if (response.status === 'connected') {
@@ -85,7 +85,7 @@
              var email = response.email;
 
              $.ajax({
-                 url: '/Accounts/SignInFacebookUser/',
+                 url: '@Url.Content("~/Accounts/SignInFacebookUser/")',
                  type: 'POST',
                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                  data: { id: id, first_name: first_name, last_name: last_name, email: email },

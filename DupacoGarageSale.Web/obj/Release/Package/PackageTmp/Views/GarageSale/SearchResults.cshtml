@@ -1,0 +1,192 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+@using System.Web.Script.Serialization
+
+@{
+    ViewBag.Title = "Search garage sales";
+    Layout = "~/Views/Shared/_LayoutNoBackground.cshtml";
+    
+    var serializer = new JavaScriptSerializer();
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            @{
+                var categories = Model.ItemCategories.Select(x => new { x.ItemCategoryName, x.ItemCategoryId }).Distinct().ToList();
+                var subcategories = Model.ItemCategories.Select(x => x.ItemSubcategoryName).Distinct().ToList();
+            }
+            <ul class="nav nav-sidebar">
+                @foreach (var category in categories)
+                {
+                    <li><a href="#">@category.ItemCategoryName</a></li>
+                }
+            </ul>
+        </div>
+        <div class="col-sm-9 col-md-10">
+            
+        </div>
+    </div>
+</div>
+
+@*
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEuaqeYdUf01yfZX12DIppc6AKHeegvzY"></script>
+<script type="text/javascript">     
+   
+    var mapAddresses = @Html.Raw(new JavaScriptSerializer().Serialize(ViewBag.Addresses))
+    
+    var geocoder;
+    var circle = null;
+    var gmarkers = [];
+
+    function initialize() {
+        // Begin simple test map
+        //var latlng = new google.maps.LatLng(40.716948, -74.003563);
+        //var options = {
+        //    zoom: 14,
+        //    center: latlng,
+        //    mapTypeId: google.maps.MapTypeId.ROADMAP
+        //};
+        //var map = new google.maps.Map(document.getElementById("map-canvas"), options);
+        // End simple test map
+
+        geocoder = new google.maps.Geocoder();
+        //alert(geocoder);
+
+        var map;         
+
+        var myOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng(39.329102, -76.576853),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map($('#map-canvas')[0], myOptions);
+
+        // Sample of hard-coded addresses
+        //var addresses = ['7 Saint Paul St. Baltimore MD 21202', '2201 Lake Ave Baltimore MD 21213', '4846 Western Ave Bethesda MD 20816', '201 State Rd Rehoboth DE 19971', '2804 Hyson Lane Falls Church VA 22043'];
+
+        var addresses = mapAddresses;
+
+        if (addresses != null)
+        {
+            var marker, x;
+            var infowindow = new google.maps.InfoWindow();
+
+            for (x = 0; x < addresses.length; x++) {
+                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=false', null, function (data) {
+
+                    var p = data.results[0].geometry.location
+
+                    //alert(data.results[0].formatted_address);  // This will alert the individual addresses.
+
+                    //debugObject(data.results[0].formatted_address);
+                    var latlng = new google.maps.LatLng(p.lat, p.lng);
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+                        title: data.results[0].formatted_address
+                    });
+
+                    // Add the markers to the gmarkers array.
+                    gmarkers.push(marker);
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.setContent(data.results[0].formatted_address + ' <br/><a href="~/GarageSale/GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>');
+                        infowindow.open(map, marker);
+                    });
+                });            
+            }
+
+            geoCodeAddress(map);
+
+            // Jump to the map.
+            //window.location = $('#mappy').attr('href');
+        }
+    }    
+
+    initialize();
+
+    function geoCodeAddress(map) {
+        var address = document.getElementById('hdnSearchAddress').value;
+        var radius = parseInt(document.getElementById('hdnRadius').value, 10)*1000;
+        //var address = document.getElementById("hdnCenterAddress").value;
+
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) 
+            {
+                map.setCenter(results[0].geometry.location);
+                var searchCenter = results[0].geometry.location; // Added for the radius circle.
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+
+                var infowindow = new google.maps.InfoWindow();
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.setContent('Your starting point: ' + results[0].formatted_address);
+                    infowindow.open(map, marker);
+                });
+
+                if (circle) 
+                {
+                    circle.setMap(null); // Clear the previous circle.
+                }
+
+                circle = new google.maps.Circle({center:searchCenter,
+                    radius: radius,
+                    fillOpacity: 0.35,
+                    fillColor: "#FF0000",
+                    map: map
+                });
+
+                //alert('zoom: ' + map.getZoom());
+
+                var bounds = new google.maps.LatLngBounds();
+
+                var foundMarkers = 0;
+                for (var i=0; i<gmarkers.length;i++) 
+                {
+                    if (google.maps.geometry.spherical.computeDistanceBetween(gmarkers[i].getPosition(),searchCenter) < radius) {
+                        bounds.extend(gmarkers[i].getPosition())
+                        gmarkers[i].setMap(map);
+                        // add a line to the side_bar html
+                        //side_bar_html += '<a href="javascript:myclick(' + i + ')">' + gmarkers[i].title + '<\/a><br>';
+                        foundMarkers++;
+                    } 
+                    else 
+                    {
+                        gmarkers[i].setMap(null);
+                    }
+                }
+                // put the assembled side_bar_html contents into the side_bar div
+                //document.getElementById("side_bar").innerHTML = side_bar_html;
+                if (foundMarkers > 0) 
+                {
+                    map.fitBounds(bounds);
+                    //alert('zoom: ' + map.getZoom());
+                    //map.setZoom(map.getZoom()+5);
+                } 
+                else 
+                {
+                    //alert('zoom else: ' + map.getZoom());
+                    map.fitBounds(circle.getBounds());
+                }
+                // makeSidebar();
+                google.maps.event.addListenerOnce(map, 'bounds_changed', makeSidebar);
+            }
+            else
+            {
+                alert("Geocode was not successful for the following reason: " + status);
+            }            
+        });
+    }
+
+    function debugObject(inputobject) {
+        obj = inputobject;
+        for (x in obj) {
+            alert(x + ": " + obj[x]);
+        }
+    }
+
+</script>
+*@

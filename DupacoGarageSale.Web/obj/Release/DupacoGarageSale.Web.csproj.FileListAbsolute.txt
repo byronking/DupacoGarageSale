@@ -35,3 +35,4 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Microsoft.Web.Helpers.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.pdb
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMapsApi.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Telerik.Web.Mvc.dll

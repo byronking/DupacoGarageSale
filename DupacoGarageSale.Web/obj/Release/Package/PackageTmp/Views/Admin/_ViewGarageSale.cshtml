@@ -1,0 +1,188 @@
+﻿@model DupacoGarageSale.Web.Models.AdminViewModel
+
+<div class="row">
+    <h2>Garage sale details:</h2>
+    <div class="col-md-10">
+        <input type="hidden" id="hdnGarageSaleId" value="@Model.GarageSale.GarageSaleId" />
+        <h2>@Model.GarageSale.GarageSaleName</h2>
+        @Model.GarageSale.SaleDescription<br /><br />
+    </div>
+    <div class="col-md-2">
+        @if (Model.User != null)
+        {
+            <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
+            <a href="#" id="linkAddToItinerary" style="margin-top:5px">Add sale to itinerary</a><br /><br /> <!-- data-toggle="modal" data-target=".add-to-itinerary" -->
+                    
+        }
+    </div>
+    <div class="col-md-5">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong>Sale address</strong></h3>
+            </div>
+            <div class="panel-body">
+                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @Model.GarageSale.SaleAddress1<br />
+
+                @if (Model.GarageSale.SaleAddress2 != string.Empty)
+                {
+                    @Model.GarageSale.SaleAddress2;
+                    Response.Write("<br/>");
+                }
+
+                @Model.GarageSale.SaleCity, @Model.GarageSale.SaleState @Model.GarageSale.SaleZip <br /> 
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong>Items for sale</strong></h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    @foreach (var item in Model.GarageSale.GarageSaleItems)
+                    {
+                        <li>@item.ItemSubcategoryName</li>
+                    }
+                </ul>                        
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong>Sale dates/times</strong></h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">                            
+                    <tr>
+                        <td class="text-center">@Model.GarageSale.DatesTimes.SaleDateOne.ToLongDateString()</td>
+                        <td class="text-center">@Model.GarageSale.DatesTimes.SaleDateTwo.ToLongDateString()</td>
+                        <td class="text-center">@Model.GarageSale.DatesTimes.SaleDateThree.ToLongDateString()</td>
+                        <td class="text-center">@Model.GarageSale.DatesTimes.SaleDateFour.ToLongDateString()</td>
+                    </tr>
+                    <tr>
+                        <td>Start:<br />@Model.GarageSale.DatesTimes.DayOneStart</td>
+                        <td>Start:<br />@Model.GarageSale.DatesTimes.DayTwoStart</td>
+                        <td>Start:<br />@Model.GarageSale.DatesTimes.DayThreeStart</td>
+                        <td>Start:<br />@Model.GarageSale.DatesTimes.DayFourStart</td>
+                    </tr>
+                    <tr>
+                        <td>End:<br />@Model.GarageSale.DatesTimes.DayOneEnd</td>
+                        <td>End:<br />@Model.GarageSale.DatesTimes.DayTwoEnd</td>
+                        <td>End:<br />@Model.GarageSale.DatesTimes.DayThreeEnd</td>
+                        <td>End:<br />@Model.GarageSale.DatesTimes.DayFourEnd</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    @{ if (Model.GarageSaleSpecialItems.Count > 0)
+        {
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Hot picks!</strong></h3>
+                </div>
+                <div class="panel-body">                   
+                    @foreach (var item in Model.GarageSaleSpecialItems)
+                    {
+                        <div class="col-md-3">
+                            <div class="thumbnail" style="min-height:500px;">
+                                <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+                                <div class="caption">
+                                    <h3>@item.Title</h3>
+                                    @item.Description<br /><br />
+                                    <p><span>$</span> @item.Price</p>                   
+                                </div>                    
+                            </div>
+                        </div>
+                    }                        
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div class="row">
+@{
+    if (Model.BlogPosts != null && Model.BlogPosts.Count > 0)
+    {
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong>What's going on at our sale!</strong></h3>
+            </div>
+            <div class="panel-body">                    
+                @foreach (var post in Model.BlogPosts)
+                {
+                    <div>
+                        @Html.Hidden("hdnBlogPostId", post.BlogPostId)
+                        <h3>@post.BlogPostTitle</h3> 
+                        <small>Posted by @post.BlogPostUser @@ @post.PostDateTime</small><br /><br />
+                                
+                        @if (@post.MediaTypeId == 1)
+                        {
+                            if (@post.ImageUri != string.Empty)
+                            {
+                                <div>                                            
+                                    <img alt="@post.ImageUri" data-src="holder.js/200%x200" style="display: block;" 
+                                        class="img-thumbnail" src="~/Content/images/garage_sale_pictures/@post.ImageUri">
+                                </div>
+                            }
+                                        
+                        }
+                        else if (@post.MediaTypeId == 2)
+                        {
+                            if (@post.YouTubeUri != string.Empty)
+                            {
+                                <div class="embed-responsive embed-responsive-4by3">
+                                    <iframe class="embed-responsive-item" allowfullscreen="" src="@post.YouTubeUri"></iframe>
+                                </div>
+                            }
+                        }
+                        else if (@post.MediaTypeId == 3)
+                        {
+                            if (@post.VineUri != string.Empty)
+                            {
+                                <div>
+                                    <iframe class="vine-embed" src="@post.VineUri" width="600" height="600" frameborder="0"></iframe>
+                                    <script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>
+                                </div>
+                            }
+                        }
+                        <div style="margin-top:15px;">
+                            @post.PostMessage
+                        </div>
+                    </div>
+                <hr />
+                }
+            </div>
+        </div>
+    }
+}
+                
+</div>
+        
+<div class="row">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title"><strong>Questions and answers about this garage sale</strong></h3>
+        </div>
+        <div class="panel-body">     
+            Have a question or want to send kudos? Click <a href="#" data-toggle="modal" data-target=".ask-question">here</a>!<br /><br />
+
+            <div>
+                @foreach (var message in Model.GarageSaleMessages)
+                {
+                    <div>
+                        Date: @message.MessageSent <br />
+                        From: @message.MessageFrom <br />
+                        Message: @message.MessageText <br />
+                    </div>                            
+                    <hr />
+                }
+            </div>
+        </div>
+    </div>
+</div>

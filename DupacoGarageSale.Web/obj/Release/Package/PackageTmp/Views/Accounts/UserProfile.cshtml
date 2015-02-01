@@ -24,12 +24,6 @@
                     {
                         <div class="row">
                             <div class="col-md-6">
-                                @*<div class="form-group">
-                                    <label class="col-sm-3 control-label">Account Type</label>
-                                    <div class="col-sm-7">
-                                        @Html.TextBoxFor(m => m.UserType, new { @class = "form-control", id="txtAccountType", @readonly="true" })
-                                    </div>
-                                </div>*@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">First name</label>
                                     <div class="col-sm-7">
@@ -112,10 +106,10 @@
                             <div class="col-md-12 text-center">
                                 <div class="form-group">
                                     <input type="submit" value="Save profile" class="btn btn-primary" />
-                                    @*@Html.ActionLink("Change password", "ChangePassword", "Accounts", new { @class="btn btn-success" })*@
+                                    @*Html.ActionLink("Change password", "ChangePassword", "Accounts", new { @class="btn btn-success" })*@
 
-                                    <button type="button" class="btn btn-success" data-toggle="modal" disabled data-target="#changePasswordModal">
-                                        Change password coming soon...
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".changePasswordModal">
+                                        Change password
                                     </button>
                                 </div>
                             </div>
@@ -128,14 +122,40 @@
                     }
                 </div>
             </div>
-    </div>    
+        </div>    
+    </div>
 </div>
 
 <!-- Change password model -->
-<div id="changePasswordModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      Change your password!
+@using (Html.BeginForm("ChangePassword", "Accounts", FormMethod.Post, new { @class="form-horizontal", @role="form" }))
+{
+    <div class="modal fade changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Change your password</h4>
+            </div>
+            <div class="modal-body" style="margin-left:50px;">
+                <div class="form-group">
+                    Enter a new password, then confirm it.<br />
+                </div>
+                <div class="form-group" style="width:60%;">
+                    <label for="txtPassword">Password *</label>
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", id="txtPassword", @type="password" })
+                    <span id="lblPasswordError" class="red hidden">Please enter a password.</span>
+                </div>            
+                <div class="form-group" style="width:60%;">
+                    <label for="txtConfirmPassword">Confirm password *</label>
+                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", id="txtConfirmPassword", @type="password" })
+                    <span id="lblConfirmPasswordError" class="red hidden">Please confirm your password.</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Change password" id="btnChangePassword" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>   
+            </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+}

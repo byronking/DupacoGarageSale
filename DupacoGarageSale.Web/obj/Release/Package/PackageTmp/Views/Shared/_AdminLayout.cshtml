@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap/css")
+    @Styles.Render("~/Content/dashboard/css")
+    @*@Styles.Render("~/Content/timepicker/css")*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/js")*@
+    @*@Scripts.Render("~/bundles/timepicker")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/adminjs")
+
+    @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.windows7.css").Combined(true).Compress(true)))
+</head>
+<body>
+
+    @Html.Partial("~/Views/Shared/_AdminNavigation.cshtml")
+    
+    @RenderBody()
+
+    @RenderSection("scripts", required: false)
+
+    @(Html.Telerik().ScriptRegistrar())
+</body>
+</html>

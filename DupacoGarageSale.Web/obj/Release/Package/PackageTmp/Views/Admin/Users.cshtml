@@ -1,0 +1,74 @@
+﻿@model DupacoGarageSale.Web.Models.AdminViewModel
+
+@{    
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li>
+                    <a href="~/Admin/Index">Overview
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="~/Admin/Users" id="linkUsers">Garage Sale Users</a>
+                </li>
+                <li>
+                    <a href="~/Admin/GarageSales">Garage Sales</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Garage Sale Users</h1>
+            @using (Html.BeginForm("SearchUsers", "Admin", FormMethod.Post, new { @class="form-inline" }))
+            {
+                <div class="form-group">
+                    @*<input type="text" id="txtSearchUsers" class="form-control" style="width:300px;" placeholder="Search..." /> *@ 
+                    @Html.TextBoxFor(m => m.SearchCriteria, new { @id="txtSearchUsers", @class="form-control", @style="width:300px;", placeholder="Enter a search term" })                
+                </div>
+                <input type="submit" class="btn btn-primary" value="Search" />
+                @Html.ActionLink("Clear", "ClearUserSearch", null, new { @class="btn btn-default" })
+            }
+
+            <div class="down-20">
+                @(Html.Telerik().Grid(Model.Users)
+                    .Name("grdAllUsers")
+                    .DataKeys(dataKeys => dataKeys.Add(u => u.UserId))
+                    .Columns(columns =>
+                    {
+                        columns.Command(commands =>
+                        {
+                            commands.Custom("EditUser")
+                                .Text("Edit")
+                                .Action("EditUser", "Admin")
+                                .DataRouteValues(route =>
+                                {
+                                    route.Add(u => u.UserId).RouteKey("userId");
+                                });
+                        });
+                        columns.Bound(u => u.UserId).Hidden();
+                        columns.Bound(u => u.FirstName);
+                        columns.Bound(u => u.LastName);
+                        columns.Bound(u => u.UserName);
+                        columns.Bound(u => u.Email);
+                        columns.Bound(u => u.Phone);
+                        columns.Bound(u => u.CreateDate);
+                    })
+                    .Pageable(pager => pager.PageSize(10))
+                    .Sortable()
+                ) 
+            </div>
+
+            <br /><br />
+            @{
+                var showEditUser = ViewData["ShowEditUser"];
+            }
+
+            <input type="hidden" id="hdnShowEditUser" value="@showEditUser" />
+            <div id="editUserDiv" class="hidden">@Html.Partial("~/Views/Admin/_EditUser.cshtml")</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@model DupacoGarageSale.Web.Models.AdminViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active">
+                    <a href="#">Overview
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Admin/Users" id="linkUsers">Garage Sale Users</a>
+                </li>
+                <li>
+                    <a href="~/Admin/GarageSales">Garage Sales</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Garage Sales Admin Dashboard</h1>
+            <p class="lead">General statistics:</p>
+            There are currently <strong>@Model.UserCount</strong> registered users<br />
+            There are currently <strong>@Model.GarageSaleCount</strong> active garage sales.<br /><br /><br />
+            
+            <p class="lead">Hot picks statistics:</p>
+            There are currently <strong>@Model.SpecialItemsCount.Count</strong> hot pick items spanning <strong>@Model.SpecialItemsCount.Categories</strong> categories.<br /><br />
+
+        </div>
+    </div>
+</div>

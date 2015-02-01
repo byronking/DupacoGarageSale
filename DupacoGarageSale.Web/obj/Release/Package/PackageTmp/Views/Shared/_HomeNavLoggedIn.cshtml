@@ -7,6 +7,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                @{
+                    if (Model.User.UserTypeId == 1)
+                    {
+                        <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index">Admin</a></li>
+                    }
+                }
                 <li class="@ViewBag.NavProfile"><a href="~/Accounts/UserProfile/@Model.User.UserId">My profile</a></li>
                 <li class="dropdown @ViewBag.NavGarageSales">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Garage sales <span class="caret"></span></a>
@@ -16,7 +22,6 @@
                     </ul>
                 </li>
                 <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1">Search</a></li>
-                @*<li><a href="~/Accounts/SignUp/">Create new account</a></li>*@
             </ul>
             <form class="navbar-form navbar-right" role="form">
                 <div class="form-group">

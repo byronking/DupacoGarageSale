@@ -1,0 +1,12 @@
+﻿<div class="col-md-7" style="margin-left:-15px;">
+    @using (Html.BeginForm("SearchByCriteria", "GarageSale", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <div class="input-group">
+            <input class="form-control" type="text" id="txtSearchCriteria" name="txtSearchCriteria" style="width:375px" placeholder="What are you looking for?">
+            <span class="input-group-btn">
+                <input type="submit" id="btnSearchBarFind" class="btn btn-primary" value="Find it!" />
+            </span>
+        </div><br /><br />
+    }
+    <input type="hidden" id="hdnSearchBarCriteria" value="@ViewBag.SearchCriteria" />
+</div>

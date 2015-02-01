@@ -1,5 +1,10 @@
 ﻿$(document).ready(function () {
 
+    // Show the error message if there is an existing account
+    if ($("#hdnExistingAccountError").val() == "true") {
+        $("#existingAccountError").removeClass('hidden');
+    }
+
     // Show the home page content on click
     $("#linkCategory1").click(function (e) {
         var categoryId = $("#hdnCategory1").val();
@@ -428,6 +433,34 @@
             var char = max - len;
             $("#charNumMessage").text(char + ' characters left');
         }
+    });
+
+    // Validation for the change password modal.
+    $("#btnChangePassword").click(function (e) {
+        if ($("#txtPassword").val() == "") {
+            $("#lblPasswordError").removeClass('hidden');
+            e.preventDefault();
+        }
+        else {
+            $("#lblPasswordError").addClass('hidden');
+        }
+
+        if ($("#txtConfirmPassword").val() == "") {
+            $("#lblConfirmPasswordError").removeClass('hidden');
+            e.preventDefault();
+        }
+        else {
+            $("#lblConfirmPasswordError").addClass('hidden');
+        }
+
+        if ($("#txtPassword").val() != $("#txtConfirmPassword").val()) {
+            $("#lblConfirmPasswordError").html('The two passwords must match.');
+            $("#lblConfirmPasswordError").removeClass('hidden');
+            //alert('nope!');
+            e.preventDefault();
+        }
+
+        //e.preventDefault();
     });
 });
 
