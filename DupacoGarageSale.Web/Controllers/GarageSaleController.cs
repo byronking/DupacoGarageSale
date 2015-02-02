@@ -1038,6 +1038,8 @@ namespace DupacoGarageSale.Web.Controllers
                 }
             }
 
+            viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+
             ViewBag.NavSearch = "active";
 
             return View(viewModel);

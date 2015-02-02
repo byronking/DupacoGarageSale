@@ -106,8 +106,6 @@
                             <div class="col-md-12 text-center">
                                 <div class="form-group">
                                     <input type="submit" value="Save profile" class="btn btn-primary" />
-                                    @*Html.ActionLink("Change password", "ChangePassword", "Accounts", new { @class="btn btn-success" })*@
-
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target=".changePasswordModal">
                                         Change password
                                     </button>
@@ -126,7 +124,7 @@
     </div>
 </div>
 
-<!-- Change password model -->
+<!-- Change password modal -->
 @using (Html.BeginForm("ChangePassword", "Accounts", FormMethod.Post, new { @class="form-horizontal", @role="form" }))
 {
     <div class="modal fade changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">

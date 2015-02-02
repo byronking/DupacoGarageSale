@@ -1,5 +1,7 @@
 ﻿using DupacoGarageSale.Data.Domain;
 using DupacoGarageSale.Data.Repository;
+using DupacoGarageSale.Data.Services;
+using DupacoGarageSale.Domain.Helpers;
 using DupacoGarageSale.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -68,6 +70,20 @@ namespace DupacoGarageSale.Web.Controllers
                 var addressRepository = new AddressRepository();
                 var statesList = addressRepository.GetStates();
                 ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+
+                // Show the success message if the sale worked.
+                if (Session["ChangePasswordSuccessful"] != null)
+                {
+                    var saveSuccessful = Convert.ToBoolean(Session["ChangePasswordSuccessful"]);
+
+                    if (saveSuccessful)
+                    {
+                        ViewBag.Invisible = "false";
+                    }
+                }
+
+                // Clear the session object.
+                Session["SaveSuccessful"] = null;
 
                 Session["ViewModel"] = viewModel;
 
@@ -352,6 +368,47 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 return View("~/Views/Accounts/Login.cshtml");
             }
+        }
+
+        public ActionResult ChangePassword(FormCollection form)
+        {
+            var password = form["User.Password"].ToString();
+
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                session.User.Password = password;
+
+                // Update the user's password.
+                var repository = new AccountsRepository();
+                var hashedPassword = AccountHelper.GetSHA1Hash(session.User.UserName, password);
+
+                try
+                {
+                    var saveSuccessful = repository.UpdateUserPassword(session.User.UserName, hashedPassword);
+
+                    if (saveSuccessful)
+                    {
+                        Session["ChangePasswordSuccessful"] = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log.Error(ex.ToString());
+                }
+
+                return RedirectToAction("Users", new RouteValueDictionary(new
+                {
+                    controller = "Admin",
+                    action = "Users",
+                    userId = session.User.UserId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+
         }
     }
 }
