@@ -929,3 +929,36 @@ Error Number:201,State:4,Class:16
    at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
    at System.Convert.ToInt32(Object value)
    at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-02-02 12:53:54,369 [11] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'CheckForExistingAccount' expects parameter '@user_name', which was not supplied.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at DupacoGarageSale.Data.Repository.AccountsRepository.CheckForExistingAccount(String user_name, String email) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 30
+ClientConnectionId:2c4204b5-b404-48b1-b864-aaa8f34b009a
+Error Number:201,State:4,Class:16
+2015-02-02 12:53:54,485 [11] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'SaveGarageSaleUser' expects parameter '@first_name', which was not supplied.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DupacoGarageSale.Data.Repository.AccountsRepository.SaveGarageSaleUser(GarageSaleUser user) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 80
+ClientConnectionId:2c4204b5-b404-48b1-b864-aaa8f34b009a
+Error Number:201,State:4,Class:16
+2015-02-05 16:26:33,785 [16] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264

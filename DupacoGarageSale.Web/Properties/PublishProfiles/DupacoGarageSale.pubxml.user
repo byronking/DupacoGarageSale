@@ -127,7 +127,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/31/2015 18:43:00</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>01/31/2015 18:43:01</publishTime>
+      <publishTime>02/02/2015 09:56:48</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -1132,7 +1132,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/29/2015 14:27:05</publishTime>
     </File>
     <File Include="Scripts/admin.js">
-      <publishTime>01/30/2015 21:46:08</publishTime>
+      <publishTime>02/02/2015 09:53:53</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>06/26/2014 09:14:12</publishTime>
@@ -1438,7 +1438,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 14:23:38</publishTime>
     </File>
     <File Include="Views/Accounts/UserProfile.cshtml">
-      <publishTime>01/30/2015 22:25:46</publishTime>
+      <publishTime>02/01/2015 10:42:07</publishTime>
     </File>
     <File Include="Views/Accounts/_ResetPassword.cshtml">
       <publishTime>12/20/2014 18:30:42</publishTime>
@@ -1450,10 +1450,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/30/2015 21:21:15</publishTime>
     </File>
     <File Include="Views/Admin/Users.cshtml">
-      <publishTime>01/31/2015 17:08:56</publishTime>
+      <publishTime>02/02/2015 09:45:07</publishTime>
     </File>
     <File Include="Views/Admin/_EditUser.cshtml">
-      <publishTime>01/31/2015 10:45:47</publishTime>
+      <publishTime>02/01/2015 10:43:44</publishTime>
     </File>
     <File Include="Views/Admin/_ViewGarageSale.cshtml">
       <publishTime>01/31/2015 10:45:20</publishTime>
@@ -1540,7 +1540,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/15/2014 23:01:28</publishTime>
     </File>
     <File Include="Views/Shared/_TopNavigation.cshtml">
-      <publishTime>01/21/2015 21:34:50</publishTime>
+      <publishTime>01/31/2015 19:11:15</publishTime>
     </File>
     <File Include="Views/Shared/_TopNavigation2.cshtml">
       <publishTime>01/12/2015 17:32:51</publishTime>

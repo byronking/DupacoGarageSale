@@ -100,9 +100,18 @@ namespace DupacoGarageSale.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult Login(string redirectId)
         {
-            return View("~/Views/Accounts/Login.cshtml");
+            if (redirectId != null)
+            {
+                // do something
+                Session["RedirectId"] = redirectId;
+                return View("~/Views/Accounts/Login.cshtml");
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
         }
 
         /// <summary>
@@ -139,14 +148,28 @@ namespace DupacoGarageSale.Web.Controllers
 
                 // Get the user's address if they log in.
                 session.User.Address = repository.GetUserAddressByUserId(session.User.UserId);
-                Session["UserSession"] = session;                
+                Session["UserSession"] = session;
 
-                return RedirectToAction("UserProfile", new RouteValueDictionary(new
+                if (Session["RedirectId"] != null)
                 {
-                    controller = "Accounts",
-                    action = "UserProfile",
-                    id = session.User.UserId
-                }));
+                    var redirectId = Convert.ToInt32(Session["RedirectId"]);
+
+                    return RedirectToAction("ViewGarageSale", new RouteValueDictionary(new
+                    {
+                        controller = "GarageSale",
+                        action = "ViewGarageSale",
+                        id = redirectId
+                    }));
+                }
+                else
+                {
+                    return RedirectToAction("UserProfile", new RouteValueDictionary(new
+                    {
+                        controller = "Accounts",
+                        action = "UserProfile",
+                        id = session.User.UserId
+                    }));
+                }
             }
             else
             {

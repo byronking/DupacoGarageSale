@@ -174,8 +174,15 @@
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong>Questions and answers about this garage sale</strong></h3>
                 </div>
-                <div class="panel-body">     
-                    Have a question or want to send kudos? Click <a href="#" data-toggle="modal" data-target=".ask-question">here</a>!<br /><br />
+                <div class="panel-body">
+                    @if(Model.User == null)
+                    {
+                        <span>Have a question or want to send kudos? You need to <a href="/Accounts/Login?redirectId=@Model.Sale.GarageSaleId">log in </a>first.</span><br /><br />
+                    }
+                    else
+                    {     
+                        <span>Have a question or want to send kudos? Click <a href="#" data-toggle="modal" data-target=".ask-question">here</a>!</span><br /><br />
+                    }
 
                     <div>
                         @foreach (var message in Model.GarageSaleMessages)

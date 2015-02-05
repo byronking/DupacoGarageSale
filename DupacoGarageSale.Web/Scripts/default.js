@@ -404,10 +404,14 @@
         }
     }
 
-    $("#btnSearchBarFind").click(function () {
-        $("#hdnSearchBarCriteria").val($("#txtSearchCriteria").val());
-
-        //alert('you searched for: ' + $("#hdnSearchBarCriteria").val());
+    $("#btnSearchBarFind").click(function (e) {
+        if ($("#txtSearchCriteria").val() == "") {
+            $("#searchValidation").removeClass('hidden');
+            e.preventDefault();
+        }
+        else {
+            $("#hdnSearchBarCriteria").val($("#txtSearchCriteria").val());
+        }
     });
 
     $("#btnMapItinerary").click(function () {    
