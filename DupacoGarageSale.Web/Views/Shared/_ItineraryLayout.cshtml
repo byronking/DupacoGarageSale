@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/bootstrap/css")
     @Styles.Render("~/Content/timepicker/css")
+    @Styles.Render("~/Content/lightbox/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/modernizr")
@@ -14,7 +15,7 @@
     @Scripts.Render("~/bundles/timepicker")
     @Scripts.Render("~/bundles/bootstrap")
 </head>
-<body>
+<body style="background-color:#F5F5F5;">
     @if (Session["UserSession"] != null)
     {
         @Html.Partial("~/Views/Shared/_HomeNavLoggedIn.cshtml")
@@ -24,14 +25,7 @@
         @Html.Partial("~/Views/Shared/_TopNavigation.cshtml")
     }
     
-    @*<div class="container" style="margin-top:60px;">*@
-    <div class="container" style="margin-top:40px;">
-        <div id="bg">
-          <img src="~/Content/images/Insulators-3080-Karen-St-DBQ.jpg" alt="">
-        </div>
-
-        @RenderBody()
-    </div>
+    @RenderBody()
 
     @RenderSection("scripts", required: false)
 </body>

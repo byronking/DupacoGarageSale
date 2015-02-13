@@ -127,7 +127,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/31/2015 18:43:00</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>02/02/2015 09:56:48</publishTime>
+      <publishTime>02/05/2015 20:17:00</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -1141,7 +1141,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2014 09:14:12</publishTime>
     </File>
     <File Include="Scripts/default.js">
-      <publishTime>01/30/2015 22:54:31</publishTime>
+      <publishTime>02/05/2015 16:24:53</publishTime>
     </File>
     <File Include="Scripts/facebook.login.js">
       <publishTime>01/20/2015 22:55:21</publishTime>
@@ -1483,7 +1483,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/22/2015 09:13:06</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewGarageSale.cshtml">
-      <publishTime>01/27/2015 15:19:16</publishTime>
+      <publishTime>02/05/2015 18:51:07</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewItinerary.cshtml">
       <publishTime>01/27/2015 17:04:09</publishTime>
@@ -1495,7 +1495,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/17/2015 21:46:22</publishTime>
     </File>
     <File Include="Views/GarageSale/_SearchBar.cshtml">
-      <publishTime>01/19/2015 00:02:47</publishTime>
+      <publishTime>02/05/2015 16:26:03</publishTime>
     </File>
     <File Include="Views/GarageSale/_SearchResults.cshtml">
       <publishTime>01/23/2015 07:53:28</publishTime>
@@ -1525,7 +1525,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 15:19:35</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/12/2015 17:42:45</publishTime>
+      <publishTime>02/02/2015 12:57:12</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutNoBackground.cshtml">
       <publishTime>01/17/2015 16:03:14</publishTime>

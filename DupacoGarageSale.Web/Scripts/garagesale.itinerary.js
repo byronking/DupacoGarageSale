@@ -24,7 +24,13 @@
         });
     });
 
-    //$("#linkTesty").click(function
+    // Show the itinerary leg deleted message.
+    if (($("#hdnLegDeletedMessage").val() !== undefined)) {
+
+        if ($("#hdnLegDeletedMessage").val() == "false") {
+            $("#divLegDeletedMessage").removeClass("hidden");
+        }
+    }
 
 });
 

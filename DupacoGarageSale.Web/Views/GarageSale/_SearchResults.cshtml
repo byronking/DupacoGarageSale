@@ -1,10 +1,10 @@
 ﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
 
-<div class="panel panel-warning">
+@*<div class="panel panel-warning">
     <div class="panel-heading">
         <h3 class="panel-title"><b>Search results</b></h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body">*@
         <div class="row">        
             <div id="results-filter" class="col-md-3">
                 <p class="lead">Filter results</p>
@@ -398,8 +398,8 @@
                 }
             </div>
         </div>
-    </div>
-</div>
+    @*</div>
+</div>*@
 
 <input type="hidden" value="@ViewBag.SearchAddress" id="hdnSearchAddress" />
 <input type="hidden" value="@ViewBag.Radius" id="hdnRadius" />
@@ -550,7 +550,7 @@
             }
             else
             {
-                alert("Geocode was not successful for the following reason: " + status);
+                // alert("Geocode was not successful for the following reason: " + status);
             }            
         });
     }
