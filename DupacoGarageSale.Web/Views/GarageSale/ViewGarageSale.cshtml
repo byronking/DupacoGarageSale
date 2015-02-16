@@ -17,8 +17,8 @@
                 @if (Model.User != null)
                 {
                     <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
-                    <a href="#" id="linkAddToItinerary" style="margin-top:5px">Add sale to itinerary</a><br /><br /> <!-- data-toggle="modal" data-target=".add-to-itinerary" -->
-                    
+                    <a href="#" id="linkAddToItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Add sale to itinerary</a><br />
+                    <a href="#" id="linkAddToFaves" style="margin-top:5px"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Add sale to faves</a><br /><br />
                 }
             </div>
             <div class="col-md-5">
@@ -64,7 +64,7 @@
                                 <td class="text-center">@Model.Sale.DatesTimes.SaleDateTwo.ToLongDateString()</td>
                                 <td class="text-center">@Model.Sale.DatesTimes.SaleDateThree.ToLongDateString()</td>
                                 <td class="text-center">@Model.Sale.DatesTimes.SaleDateFour.ToLongDateString()</td>
-                            </tr>
+                            </tr><br />
                             <tr>
                                 <td>Start:<br />@Model.Sale.DatesTimes.DayOneStart</td>
                                 <td>Start:<br />@Model.Sale.DatesTimes.DayTwoStart</td>
