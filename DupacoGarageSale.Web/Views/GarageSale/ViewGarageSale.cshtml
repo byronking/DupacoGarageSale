@@ -17,12 +17,26 @@
                 @if (Model.User != null)
                 {
                     <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
-                    <a href="#" id="linkAddToItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Add sale to itinerary</a><br />
+                    
+                    if (Model.GarageSaleItinerary.Count > 0)
+                    {
+                        var sale = Model.GarageSaleItinerary.Find(m => m.SaleId == Model.Sale.GarageSaleId);
+                        if (sale != null) 
+                        {   
+                            <input type="hidden" id="hdnItineraryId" value="@sale.ItineraryId" />                         
+                            <a href="#" id="linkRemoveFromItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Remove sale from itinerary</a><br />
+                        }
+                        else
+                        {
+                            <a href="#" id="linkAddToItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Add sale to itinerary</a><br />
+                        }
+                    }                    
                     
                     if (Model.FaveGarageSales != null)
                     {
                         if (Model.FaveGarageSales.Count > 0)
                         {
+                            <input type="hidden" id="hdnFaveSaleId" value="@ViewBag.FavedGarageSale" />
                             <a href="#" id="linkRemoveFromFaves" style="margin-top:5px"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Remove sale from faves</a><br /><br />
                         }
                     }
@@ -231,6 +245,17 @@
         <div class="modal-content">
             <div class="modal-body">
                 Garage sale added to your faves!
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Remove from faves modal -->
+<div class="modal fade remove-from-faves" id="removeFromFavesModal" tabindex="-1" role="dialog" aria-labelledby="removeFromFavesModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                Garage sale removed from your faves!
             </div>
         </div>
     </div>

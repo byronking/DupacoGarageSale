@@ -163,6 +163,36 @@ namespace DupacoGarageSale.Data.Repository
             return saveResult;
         }
 
+        public UserSaveResult DeleteFromItinerary(int itineraryId, int saleId)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("DeleteFromItinerary", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = itineraryId;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = saleId;
+
+                    //var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    //returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.IsSaveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveResult;
+        }
+
         public UserSaveResult DeleteItineraryLeg(int itineraryLegId, int itineraryId, int saleId, int userId)
         {
             var saveResult = new UserSaveResult();
@@ -173,7 +203,6 @@ namespace DupacoGarageSale.Data.Repository
                 using (SqlCommand cmd = new SqlCommand("DeleteItineraryLeg", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    //cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = saleId;
                     cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = itineraryId;
                     cmd.Parameters.Add("@itinerary_leg_id", SqlDbType.Int).Value = itineraryLegId;
                     cmd.Parameters.Add("@itinerary_owner", SqlDbType.Int).Value = userId;

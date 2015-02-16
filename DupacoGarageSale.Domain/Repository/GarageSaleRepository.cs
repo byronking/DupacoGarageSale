@@ -1408,7 +1408,33 @@ namespace DupacoGarageSale.Data.Repository
                 using (SqlCommand cmd = new SqlCommand("DeleteFaveGarageSale", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@fave_id", SqlDbType.Int).Value = faveId;
+                    cmd.Parameters.Add("@favorite_id", SqlDbType.Int).Value = faveId;
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return saveSuccessful;
+        }
+
+        public bool RemoveFaveGarageSale(int userId, int saleId)
+        {
+            var saveSuccessful = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("DeleteFaveGarageSaleByUserId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_id", SqlDbType.Int).Value = userId;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = saleId;
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
 
@@ -1459,6 +1485,72 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return faveGarageSale;
+        }
+
+        /// <summary>
+        /// This gets a list of the user's fave garage sales.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public List<GarageSale> GetFavoriteGarageSales(int userId)
+        {
+            var faveGarageSales = new List<GarageSale>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetFaveGarageSalesByUserId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_id", SqlDbType.VarChar).Value = userId;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var saleDatesTimes = new SaleDatesTimes();
+                        saleDatesTimes.SaleDateTimeId = Convert.ToInt32(reader["sale_date_time_id"]);
+                        saleDatesTimes.SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]);
+                        saleDatesTimes.DayOneStart = reader["day_one_start"].ToString();
+                        saleDatesTimes.DayOneEnd = reader["day_one_end"].ToString();
+                        saleDatesTimes.SaleDateTwo = Convert.ToDateTime(reader["sale_date_two"]);
+                        saleDatesTimes.DayTwoStart = reader["day_two_start"].ToString();
+                        saleDatesTimes.DayTwoEnd = reader["day_two_end"].ToString();
+                        saleDatesTimes.SaleDateThree = Convert.ToDateTime(reader["sale_date_three"]);
+                        saleDatesTimes.DayThreeStart = reader["day_three_start"].ToString();
+                        saleDatesTimes.DayThreeEnd = reader["day_three_end"].ToString();
+                        saleDatesTimes.SaleDateFour = Convert.ToDateTime(reader["sale_date_four"]);
+                        saleDatesTimes.DayFourStart = reader["day_four_start"].ToString();
+                        saleDatesTimes.DayFourEnd = reader["day_four_end"].ToString();
+
+                        var garageSale = new GarageSale
+                        {
+                            CreateDate = Convert.ToDateTime(reader["create_date"]),
+                            DatesTimes = saleDatesTimes,
+                            GarageSaleId = Convert.ToInt32(reader["sale_id"]),
+                            GarageSaleName = reader["sale_name"].ToString(),
+                            ModifyDate = Convert.ToDateTime(reader["modify_date"]),
+                            ModifyUser = reader["modify_user"].ToString(),
+                            SaleAddress1 = reader["sale_address1"].ToString(),
+                            SaleAddress2 = reader["sale_address2"].ToString(),
+                            SaleCity = reader["sale_city"].ToString(),
+                            SaleDescription = reader["sale_description"].ToString(),
+                            SaleState = reader["state_name"].ToString(),
+                            SaleStateId = Convert.ToInt32(reader["state_id"]),
+                            SaleZip = reader["sale_zip"].ToString()
+                        };
+
+                        faveGarageSales.Add(garageSale);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return faveGarageSales;
         }
     }
 }

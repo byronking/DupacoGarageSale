@@ -710,7 +710,14 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     viewModel.FaveGarageSales = new List<FavoriteGarageSale>();
                     viewModel.FaveGarageSales.Add(faveGarageSale);
+                    ViewBag.FavedGarageSale = faveGarageSale.FavoriteId;
                 }
+
+                // Get the user's itinerary by user id.
+                var itineraryRepository = new ItineraryRepository();
+                var itineraryList = new List<GarageSaleItinerary>();
+                itineraryList = itineraryRepository.GetItineraryByUserId(viewModel.User.UserId);
+                viewModel.GarageSaleItinerary = itineraryList;
             }
 
             foreach (var itemId in viewModel.Sale.GarageSaleItems)
@@ -1138,6 +1145,11 @@ namespace DupacoGarageSale.Web.Controllers
 
         #region Garage sale itineraries
 
+        /// <summary>
+        /// This loads the user's itinerary.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult ViewItinerary(int? id)
         {
@@ -1178,6 +1190,10 @@ namespace DupacoGarageSale.Web.Controllers
                         ViewBag.Invisible = "false";
                     }                    
                 }
+
+                // Get the user's fave garage sales.
+                var saleRepository = new GarageSaleRepository();
+                viewModel.FavoriteGarageSales = saleRepository.GetFavoriteGarageSales(viewModel.User.UserId);
 
                 // Cleanup.
                 Session["ItineraryLegDeleted"] = null;
@@ -1350,6 +1366,41 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 id = saleId
             }));
+        }
+
+        [HttpPost]
+        public ActionResult RemoveFromItinerary(int itineraryId, int saleId)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+
+                    // Delete legs, only if it matches the current user.
+                    var repository = new ItineraryRepository();
+                    var saveResult = repository.DeleteFromItinerary(itineraryId, saleId);
+
+                    if (saveResult.IsSaveSuccessful)
+                    {
+                        Session["ItineraryLegDeleted"] = true;
+                    }
+                }
+
+                return RedirectToAction("ViewGarageSale", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "ViewGarageSale",
+                    id = saleId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
         }
 
         /// <summary>
@@ -1546,6 +1597,12 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// This removes a garage sale from the user's faves.
+        /// </summary>
+        /// <param name="faveId"></param>
+        /// <param name="saleId"></param>
+        /// <returns></returns>
         public ActionResult RemoveSaleFromFaves(int faveId, int saleId)
         {
             if (Session["UserSession"] != null)
@@ -1560,6 +1617,34 @@ namespace DupacoGarageSale.Web.Controllers
                     controller = "GarageSale",
                     action = "ViewGarageSale",
                     id = saleId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        /// <summary>
+        /// This removes a garage sale from the user's faves.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="saleId"></param>
+        /// <returns></returns>
+        public ActionResult RemoveSaleFromFavesByUserId(int userId, int saleId)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+
+                var repository = new GarageSaleRepository();
+                var saveResult = repository.RemoveFaveGarageSale(userId, saleId);
+
+                return RedirectToAction("ViewItinerary", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "ViewItinerary",
+                    id = userId
                 }));
             }
             else

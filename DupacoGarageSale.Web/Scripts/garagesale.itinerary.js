@@ -24,6 +24,30 @@
         });
     });
 
+    $("#linkRemoveFromItinerary").click(function (e) {
+        var sale_id = $("#hdnGarageSaleId").val();
+        var itinerary_id = $("#hdnItineraryId").val();
+        var url = "/GarageSale/RemoveFromItinerary/";
+        $.ajax({
+            type: "post",
+            data: JSON.stringify({
+                saleId: sale_id,
+                itineraryId: itinerary_id
+            }),
+            url: url,
+            //dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $('#removeFromItineraryModal').modal('show');
+            },
+            error: function (data) {
+                // Do something
+                //debugObject(data);
+                alert('There was a problem removing your itinerary item.');
+            }
+        });
+    });
+
     // Show the itinerary leg deleted message.
     if (($("#hdnLegDeletedMessage").val() !== undefined)) {
 
@@ -48,6 +72,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $('#addToFavesModal').modal('show');
+                //location.href = "/GarageSale/ViewGarageSale/" + sale_id;
             },
             error: function (data) {
                 // Do something
@@ -56,7 +81,38 @@
             }
         });
     });
+
+    // Remove the garage sale from the users' faves.
+    $("#linkRemoveFromFaves").click(function (e) {
+        var sale_id = $("#hdnGarageSaleId").val();
+        var user_id = $("#hdnUserId").val();
+        var fave_id = $("#hdnFaveSaleId").val();
+        var url = "/GarageSale/RemoveSaleFromFaves/" + sale_id;
+        $.ajax({
+            type: "post",
+            data: JSON.stringify({
+                saleId: sale_id,
+                faveId: fave_id
+            }),
+            url: url,
+            //dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $('#removeFromFavesModal').modal('show');
+                //location.href = "/GarageSale/ViewGarageSale/" + sale_id;
+            },
+            error: function (data) {
+                // Do something
+                //debugObject(data);
+                alert('There was a problem removing the garage sale from your faves.');
+            }
+        });
+    });
 });
+
+$(function () {
+    $('[data-toggle="popover"]').popover()
+})
 
 function debugObject(inputobject) {
     obj = inputobject;

@@ -211,7 +211,37 @@
                 <h3 class="panel-title">Favorite garage sales</h3>
                 </div>
                 <div class="panel-body">
-                    No faves yet.  What are you thinking?
+                    @if (Model.FavoriteGarageSales != null)
+                    {
+                        if (Model.FavoriteGarageSales.Count > 0)
+                        {
+                            <ul class="list-group">
+                                @foreach (var sale in Model.FavoriteGarageSales)
+                                {
+                                    <li class="list-group-item">
+                                        <div>
+                                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @sale.SaleAddress1<br />
+		                                    @if (sale.SaleAddress2 != string.Empty)
+		                                    {                        
+			                                    @sale.SaleAddress2<br />
+		                                    }
+		                                    @sale.SaleCity, @sale.SaleState @sale.SaleZip<br /><br />
+		                                    <div>
+                                                <button type="button"class="btn btn-default btn-xs" data-toggle="popover" title="@sale.GarageSaleName" data-placement="top"
+                                                    data-content="@sale.SaleDescription">Quick view</button>
+                                                <a href="~/GarageSale/ViewGarageSale/@sale.GarageSaleId" class="btn btn-primary btn-xs">Visit this garage sale</a>
+                                                <a href="~/GarageSale/RemoveSaleFromFavesByUserId?saleId=@sale.GarageSaleId&userId=@Model.User.UserId" class="btn btn-danger btn-xs">Remove</a>
+                                            </div>
+                                        </div> 
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <span>No favorites yet. Let's get shopping!</span>
+                        }
+                    }                    
                 </div>
             </div>
         </div>        
