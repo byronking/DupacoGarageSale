@@ -145,9 +145,7 @@
                                     {
                                         <li class="list-group-item">
                                             <div class="form-inline">
-                                                <div class="form-group">
-                                                    @*<img alt="item pic" class="img-rounded" data-src="holder.js/100x100" style="height:100px; width:100px; display: block;" 
-                                                        src="~/Content/images/garage_sale_pictures/@item.PictureLink" />*@
+                                                <div class="form-group">                                                    
                                                     <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
                                                         <img alt="item pic" class="img-rounded" data-src="holder.js/100x120" style="height:100px; width:120px; display: block;" 
                                                             src="~/Content/images/garage_sale_pictures/@item.PictureLink" />
@@ -166,6 +164,33 @@
                                         </li>
                                     }
                                 </ul>                            
+                            }
+                        </div>
+                        <div>
+                            @if (Model.SearchResults != null)
+                            {
+                                <ul class="list-group">
+                                    @foreach (var item in Model.SearchResults.GarageSaleItems)
+                                    {
+                                        <li class="list-group-item">
+                                            <div>
+                                                @item.ItemCategoryName - @item.ItemSubcategoryName
+                                            </div>
+                                            <div>
+                                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1<br />
+		                                        @if (item.Address2 != string.Empty)
+		                                        {                        
+			                                        @item.Address2<br />
+		                                        }
+		                                        @item.City, @item.State @item.ZipCode<br /><br />
+		                                        <div>
+                                                    <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-primary btn-xs">Visit this garage sale</a>
+                                                    <a href="~/GarageSale/AddToUserItinerary?saleId=@item.SaleId&userId=@Model.User.UserId" class="btn btn-primary btn-xs">Add to itinerary</a>
+                                                </div>
+                                            </div>                                            
+                                        </li>
+                                    }
+                                </ul>
                             }
                         </div>
                     }
