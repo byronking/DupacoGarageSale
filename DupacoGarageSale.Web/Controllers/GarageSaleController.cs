@@ -703,6 +703,14 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 session = Session["UserSession"] as UserSession;
                 viewModel.User = session.User;
+
+                // Check to see if the current user has fave'd this garage sale.
+                var faveGarageSale = repository.CheckForFavedGarageSale(id, viewModel.User.UserId);
+                if (faveGarageSale.FavoriteId != 0)
+                {
+                    viewModel.FaveGarageSales = new List<FavoriteGarageSale>();
+                    viewModel.FaveGarageSales.Add(faveGarageSale);
+                }
             }
 
             foreach (var itemId in viewModel.Sale.GarageSaleItems)
@@ -1510,6 +1518,54 @@ namespace DupacoGarageSale.Web.Controllers
             ViewBag.Radius = radius;
 
             return View("Search", viewModel);
+        }
+
+        #endregion
+
+        #region Add to faves
+
+        public ActionResult AddSaleToFaves(int saleId, int userId)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+
+                var repository = new GarageSaleRepository();
+                var saveResult = repository.SaveFaveGarageSale(saleId, userId);
+
+                return RedirectToAction("ViewGarageSale", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "ViewGarageSale",
+                    id = saleId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        public ActionResult RemoveSaleFromFaves(int faveId, int saleId)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+
+                var repository = new GarageSaleRepository();
+                var saveResult = repository.RemoveFaveGarageSale(faveId);
+
+                return RedirectToAction("ViewGarageSale", new RouteValueDictionary(new
+                {
+                    controller = "GarageSale",
+                    action = "ViewGarageSale",
+                    id = saleId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
         }
 
         #endregion

@@ -1351,5 +1351,114 @@ namespace DupacoGarageSale.Data.Repository
 
             return saveResult;
         }
+
+        /// <summary>
+        /// This saves a user's fave garage sale
+        /// </summary>
+        /// <param name="saleId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public UserSaveResult SaveFaveGarageSale(int saleId, int userId)
+        {
+            var saveResult = new UserSaveResult();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SaveFaveGarageSale", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = saleId;
+                    cmd.Parameters.Add("@user_id", SqlDbType.Int).Value = userId;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.SaveResultId = (int)returnParameter.Value;
+
+                    if (saveResult.SaveResultId != 0)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveResult;
+        }
+
+        /// <summary>
+        /// This removes a fave'd garage sale
+        /// </summary>
+        /// <param name="faveId"></param>
+        /// <returns></returns>
+        public bool RemoveFaveGarageSale(int faveId)
+        {
+            var saveSuccessful = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("DeleteFaveGarageSale", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@fave_id", SqlDbType.Int).Value = faveId;
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return saveSuccessful;
+        }
+
+        /// <summary>
+        /// This checks to see if the current garage sale is a favorite.
+        /// </summary>
+        /// <param name="saleId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public FavoriteGarageSale CheckForFavedGarageSale(int saleId, int userId)
+        {
+            var faveGarageSale = new FavoriteGarageSale();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("CheckForFavedGarageSale", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.VarChar).Value = saleId;
+                    cmd.Parameters.Add("@user_id", SqlDbType.VarChar).Value = userId;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        faveGarageSale.FavoriteId = Convert.ToInt32(reader["favorite_id"]);
+                        faveGarageSale.GarageSaleId = Convert.ToInt32(reader["garage_sale_id"]);
+                        faveGarageSale.UserId = Convert.ToInt32(reader["user_id"]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return faveGarageSale;
+        }
     }
 }

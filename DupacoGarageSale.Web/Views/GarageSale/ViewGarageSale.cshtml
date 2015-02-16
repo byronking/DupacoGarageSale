@@ -8,17 +8,28 @@
 <div id="page-wrap" class="jumbotron" style="min-height:500px;">
     <div class="container">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <input type="hidden" id="hdnGarageSaleId" value="@Model.Sale.GarageSaleId" />
                 <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@Model.Sale.GarageSaleName</h2>
                 @Model.Sale.SaleDescription<br /><br />
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 @if (Model.User != null)
                 {
                     <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
                     <a href="#" id="linkAddToItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Add sale to itinerary</a><br />
-                    <a href="#" id="linkAddToFaves" style="margin-top:5px"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Add sale to faves</a><br /><br />
+                    
+                    if (Model.FaveGarageSales != null)
+                    {
+                        if (Model.FaveGarageSales.Count > 0)
+                        {
+                            <a href="#" id="linkRemoveFromFaves" style="margin-top:5px"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Remove sale from faves</a><br /><br />
+                        }
+                    }
+                    else
+                    {
+                        <a href="#" id="linkAddToFaves" style="margin-top:5px"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Add sale to faves</a><br /><br />
+                    }
                 }
             </div>
             <div class="col-md-5">
@@ -209,6 +220,17 @@
         <div class="modal-content">
             <div class="modal-body">
                 Garage sale added to your itinerary! Click <a href="/GarageSale/ViewItinerary">here</a> to view your itinerary.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add to faves modal -->
+<div class="modal fade add-to-faves" id="addToFavesModal" tabindex="-1" role="dialog" aria-labelledby="addToFavesModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                Garage sale added to your faves!
             </div>
         </div>
     </div>

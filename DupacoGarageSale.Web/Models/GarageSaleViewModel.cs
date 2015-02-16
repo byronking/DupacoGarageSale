@@ -23,5 +23,6 @@ namespace DupacoGarageSale.Web.Models
         public GarageSaleMessage GarageSaleMessage { get; set; }
         public List<GarageSaleMessage> GarageSaleMessages { get; set; }
         public Itinerary UserItinerary { get; set; }
+        public List<FavoriteGarageSale> FaveGarageSales { get; set; }
     }
 }
