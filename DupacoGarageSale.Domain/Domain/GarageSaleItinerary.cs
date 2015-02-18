@@ -10,6 +10,8 @@ namespace DupacoGarageSale.Data.Domain
     {
         public int ItineraryId { get; set; }
         public int ItineraryLegId { get; set; }
+        public int ItineraryLegOrder { get; set; }
+        public int ItineraryLegsCount { get; set; }
         public int SaleId { get; set; }
         public string SaleAddress1 { get; set; }
         public string SaleAddress2 { get; set; }

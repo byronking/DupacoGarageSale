@@ -18,8 +18,8 @@
                 {
                     <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
                     
-                    if (Model.GarageSaleItinerary.Count > 0)
-                    {
+                    //if (Model.GarageSaleItinerary.Count > 0)
+                    //{
                         var sale = Model.GarageSaleItinerary.Find(m => m.SaleId == Model.Sale.GarageSaleId);
                         if (sale != null) 
                         {   
@@ -30,7 +30,7 @@
                         {
                             <a href="#" id="linkAddToItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Add sale to itinerary</a><br />
                         }
-                    }                    
+                    //}                    
                     
                     if (Model.FaveGarageSales != null)
                     {

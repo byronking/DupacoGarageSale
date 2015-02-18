@@ -303,5 +303,95 @@ namespace DupacoGarageSale.Data.Repository
 
             return itemsCount;
         }
+
+        /// <summary>
+        /// This gets all the blog posts for the admin view.
+        /// </summary>
+        /// <returns></returns>
+        public List<BlogPost> GetAllBlogPosts()
+        {
+            var blogPostsList = new List<BlogPost>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetAllBlogPosts", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var blogPost = new BlogPost
+                        {
+                            BlogPostId = Convert.ToInt32(reader["blog_post_id"]),
+                            BlogPostTitle = reader["blog_post_title"].ToString(),
+                            MediaTypeId = Convert.ToInt32(reader["media_type_id"]),
+                            ImageUri = reader["image_uri"].ToString(),
+                            YouTubeUri = reader["youtube_uri"].ToString(),
+                            VineUri = reader["vine_uri"].ToString(),
+                            PostMessage = reader["post_message"].ToString(),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            PostDateTime = Convert.ToDateTime(reader["blog_post_date_time"]),
+                            BlogPostUser = reader["blog_post_user_id"].ToString()
+                        };
+
+                        blogPostsList.Add(blogPost);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return blogPostsList;
+        }
+
+        /// <summary>
+        /// This gets an indivudal blog post by id.
+        /// </summary>
+        /// <param name="blog_post_id"></param>
+        /// <returns></returns>
+        public BlogPost GetBlogPost(int blog_post_id)
+        {
+            var blogPost = new BlogPost();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetBlogPost", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@blog_post_id", SqlDbType.Int).Value = blog_post_id;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        blogPost = new BlogPost
+                        {
+                            BlogPostId = Convert.ToInt32(reader["blog_post_id"]),
+                            BlogPostTitle = reader["blog_post_title"].ToString(),
+                            MediaTypeId = Convert.ToInt32(reader["media_type_id"]),
+                            ImageUri = reader["image_uri"].ToString(),
+                            YouTubeUri = reader["youtube_uri"].ToString(),
+                            VineUri = reader["vine_uri"].ToString(),
+                            PostMessage = reader["post_message"].ToString(),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            PostDateTime = Convert.ToDateTime(reader["blog_post_date_time"]),
+                            BlogPostUser = reader["blog_post_user"].ToString()
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return blogPost;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model DupacoGarageSale.Web.Models.AdminViewModel
 
 @{
-    ViewBag.Title = "Garage Sales";
+    ViewBag.Title = "BlogPosts";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -17,49 +17,48 @@
                 <li>
                     <a href="~/Admin/Users" id="linkUsers">Garage Sale Users</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="~/Admin/GarageSales">Garage Sales</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="~/Admin/BlogPosts">Blog Posts</a>
                 </li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Garage Sales</h1>
-            @using (Html.BeginForm("SearchGarageSales", "Admin", FormMethod.Post, new { @class="form-inline" }))
+            @using (Html.BeginForm("SearchBlogPosts", "Admin", FormMethod.Post, new { @class="form-inline" }))
             {
                 <div class="form-group">
-                    @Html.TextBoxFor(m => m.SearchCriteria, new { @id="txtSearchGarageSales", @class="form-control", @style="width:300px;", placeholder="Enter a search term" })                
+                    @Html.TextBoxFor(m => m.SearchCriteria, new { @id="txtSearchBlogPosts", @class="form-control", @style="width:300px;", placeholder="Enter a search term" })                
                 </div>
                 <input type="submit" class="btn btn-primary" value="Search" />
-                @Html.ActionLink("Clear", "ClearSalesSearch", null, new { @class="btn btn-default" })
+                @Html.ActionLink("Clear", "ClearBlogPostsSearch", null, new { @class="btn btn-default" })
             }
 
             <div class="down-20">
-                @(Html.Telerik().Grid(Model.GarageSales)
-                    .Name("grdAllGarageSales")
-                    .DataKeys(dataKeys => dataKeys.Add(m => m.GarageSaleId))
+                @(Html.Telerik().Grid(Model.BlogPosts)
+                    .Name("grdAllBlogPosts")
+                    .DataKeys(dataKeys => dataKeys.Add(m => m.SaleId))
                     .Columns(columns =>
                     {
                         columns.Command(commands =>
                         {
                             commands.Custom("ViewGarageSale")
                                 .Text("View")
-                                .Action("ViewGarageSale", "Admin")
+                                .Action("ViewBlogPost", "Admin")
                                 .DataRouteValues(route =>
                                 {
-                                    route.Add(m => m.GarageSaleId).RouteKey("saleId");
+                                    route.Add(m => m.BlogPostId).RouteKey("blog_post_id");
                                 });
                         });
-                        columns.Bound(m => m.GarageSaleId).Hidden();
-                        columns.Bound(m => m.GarageSaleName);
-                        columns.Bound(m => m.SaleDescription);
-                        columns.Bound(m => m.SaleAddress1);
-                        columns.Bound(m => m.SaleAddress2);
-                        columns.Bound(m => m.SaleCity);
-                        columns.Bound(m => m.SaleState);
-                        columns.Bound(m => m.SaleZip);
+                        columns.Bound(m => m.BlogPostId).Hidden();
+                        columns.Bound(m => m.BlogPostTitle);
+                        columns.Bound(m => m.ImageUri);
+                        columns.Bound(m => m.YouTubeUri);
+                        columns.Bound(m => m.VineUri);
+                        columns.Bound(m => m.PostMessage);
+                        columns.Bound(m => m.PostDateTime);
                     })
                     .Pageable(pager => pager.PageSize(10))
                     .Sortable()
@@ -68,13 +67,13 @@
 
             <br /><br />
             @{
-                var showEditGarageSale = ViewData["ShowEditGarageSale"];            
+                var showBlogPosts = ViewData["ShowBlogPost"];            
 
-                <input type="hidden" id="hdnShowEditGarageSale" value="@showEditGarageSale" />
+                <input type="hidden" id="hdnShowBlogPosts" value="@showBlogPosts" />
 
-                if (Model.GarageSale != null)
+                if (Model.BlogPost != null)
                 {
-                    <div id="editGarageSaleDiv" class="hidden">@Html.Partial("~/Views/Admin/_ViewGarageSale.cshtml")</div>
+                    <div id="showBlogPostDiv" class="hidden">@Html.Partial("~/Views/Admin/_ViewBlogPost.cshtml")</div>
                 }
             }
         </div>

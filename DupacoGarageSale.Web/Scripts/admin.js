@@ -11,6 +11,12 @@
         $("#editGarageSaleDiv").removeClass('hidden');
     }
 
+    // Show the blog post view fields.
+    if ($("#hdnShowBlogPosts").val() == "true") {
+        //alert('value: ' + $("#hdnShowBlogPosts").val());
+        $("#showBlogPostDiv").removeClass('hidden');
+    }
+
     // Show the successful save message.
     if (($("#hdnSaveMessage").val() !== undefined)) {
         //alert($("#hdnSaveMessage").val());

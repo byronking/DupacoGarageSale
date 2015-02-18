@@ -330,6 +330,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GarageSaleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItineraryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -835,6 +836,8 @@
     <Content Include="Views\Admin\GarageSales.cshtml" />
     <Content Include="Views\Admin\_ViewGarageSale.cshtml" />
     <Content Include="Views\Shared\_ItineraryLayout.cshtml" />
+    <Content Include="Views\Admin\BlogPosts.cshtml" />
+    <Content Include="Views\Admin\_ViewBlogPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -22,7 +22,7 @@
                     </ul>
                 </li>
                 <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1">Search</a></li>
-                @if(Model.Address.AddressId != 0)
+                @if(Model.Address != null)
                 {
                     <li class="@ViewBag.NavCreateItinerary"><a href="~/GarageSale/ViewItinerary/@Model.UserId">View itinerary</a></li>
                 }

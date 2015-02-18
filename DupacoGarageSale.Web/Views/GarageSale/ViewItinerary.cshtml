@@ -71,7 +71,39 @@
                                         <label for="txtItineraryLeg@(address.ItineraryLegId)">Itinerary leg:</label>
                                         <div class="form-inline">
                                             <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" class="form-control input-sm" style="width:350px;" value="@itineraryAddress" />
-                                            <a href="/GarageSale/DeleteItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-danger btn-sm">Delete this leg</a>
+                                            @*<a href="/Itinerary/SaveItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-primary btn-sm">Save</a>*@
+                                            <a href="/GarageSale/DeleteItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-danger btn-sm">Delete</a>
+
+                                            @{
+                                                var legOrder = address.ItineraryLegOrder;
+                                                var legsCount = address.ItineraryLegsCount;
+                                                
+                                                if (legOrder == 1 && legsCount == 1)
+                                                {
+                                                    // Move along...   
+                                                }
+                                                else if (legOrder == 1 && legsCount > 1)
+                                                {
+                                                    <a href="~/Itinerary/MoveDown?legId=@(address.ItineraryLegId)&legOrder=@(address.ItineraryLegOrder)" class="btn btn-sm btn-default">
+                                                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                                    </a>
+                                                }
+                                                else if (legOrder == legsCount)
+                                                {
+                                                    <a href="~/Itinerary/MoveUp?legId=@(address.ItineraryLegId)&legOrder=@(address.ItineraryLegOrder)" class="btn btn-sm btn-default">
+                                                        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/Itinerary/MoveUp?legId=@(address.ItineraryLegId)&legOrder=@(address.ItineraryLegOrder)" class="btn btn-sm btn-default">
+                                                        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                                    </a>
+                                                    <a href="~/Itinerary/MoveDown?legId=@(address.ItineraryLegId)&legOrder=@(address.ItineraryLegOrder)" class="btn btn-sm btn-default">
+                                                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                                    </a>
+                                                }
+                                            }
                                         </div>
                                     </div>
                                 }
@@ -79,8 +111,8 @@
                         </div>
 
                         @{
-                            var arrayItineraryLegs = itineraryLegs.ToArray();
-                            arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
+                                var arrayItineraryLegs = itineraryLegs.ToArray();
+                                arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
                         }
 
                         <input type="button" id="btnMapItinerary" class="btn btn-primary" value="Get directions" onclick="calculateRoute();" /><br /><br />
@@ -179,9 +211,9 @@
                                             <div>
                                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1<br />
 		                                        @if (item.Address2 != string.Empty)
-		                                        {                        
+                                          {                        
 			                                        @item.Address2<br />
-		                                        }
+                                          }
 		                                        @item.City, @item.State @item.ZipCode<br /><br />
 		                                        <div>
                                                     <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-primary btn-xs">Visit this garage sale</a>
@@ -222,9 +254,9 @@
                                         <div>
                                             <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @sale.SaleAddress1<br />
 		                                    @if (sale.SaleAddress2 != string.Empty)
-		                                    {                        
+                                      {                        
 			                                    @sale.SaleAddress2<br />
-		                                    }
+                                      }
 		                                    @sale.SaleCity, @sale.SaleState @sale.SaleZip<br /><br />
 		                                    <div>
                                                 <button type="button"class="btn btn-default btn-xs" data-toggle="popover" title="@sale.GarageSaleName" data-placement="top"

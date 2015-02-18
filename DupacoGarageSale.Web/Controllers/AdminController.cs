@@ -309,7 +309,7 @@ namespace DupacoGarageSale.Web.Controllers
 
                 viewModel.AdminUser = session.User;
 
-                if (Session["ViewModel"] == null)
+                if (Session["ViewModel"] != null)
                 {
                     viewModel = Session["ViewModel"] as AdminViewModel;
                 }
@@ -409,6 +409,75 @@ namespace DupacoGarageSale.Web.Controllers
                 return RedirectToAction("Login");
             }
 
+        }
+
+        /// <summary>
+        /// This gets all the blog posts for the admin view.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BlogPosts()
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var viewModel = new AdminViewModel();
+
+                viewModel.AdminUser = session.User;
+
+                // Load all the blog posts.
+                var repository = new AdminRepository();
+                viewModel.BlogPosts = repository.GetAllBlogPosts();
+
+                Session["AllBlogPosts"] = viewModel.BlogPosts;
+                Session["ViewModel"] = viewModel;
+                ViewData["ShowBlogPost"] = "true";
+
+                ViewBag.NavAdmin = "active";
+                return View(viewModel);
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
+        }
+
+        /// <summary>
+        /// This gets a blog post by id.
+        /// </summary>
+        /// <param name="blog_post_id"></param>
+        /// <returns></returns>
+        public ActionResult ViewBlogPost(int blog_post_id)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var viewModel = new AdminViewModel();
+
+                viewModel.AdminUser = session.User;
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as AdminViewModel;
+
+                    // Get the blog post.
+                    var blogRepo = new AdminRepository();
+                    viewModel.BlogPost = blogRepo.GetBlogPost(blog_post_id);
+                    Session["ViewModel"] = viewModel;
+                }
+
+                if (Session["AllBlogPosts"] != null)
+                {
+                    viewModel.BlogPosts = Session["AllBlogPosts"] as List<BlogPost>;
+                }
+
+                ViewData["ShowBlogPost"] = "true";
+
+                return View("BlogPosts", viewModel); 
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
         }
     }
 }

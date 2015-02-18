@@ -71,6 +71,8 @@ namespace DupacoGarageSale.Data.Repository
                         {
                             ItineraryId = Convert.ToInt32(reader["itinerary_id"]),
                             ItineraryLegId = Convert.ToInt32(reader["itinerary_leg_id"]),
+                            ItineraryLegOrder = Convert.ToInt32(reader["leg_order"]),
+                            ItineraryLegsCount = Convert.ToInt32(reader["legs_count"]),
                             SaleId = Convert.ToInt32(reader["sale_id"]),
                             SaleAddress1 = reader["sale_address1"].ToString(),
                             SaleAddress2 = reader["sale_address2"].ToString(),
@@ -176,9 +178,6 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = itineraryId;
                     cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = saleId;
 
-                    //var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
-                    //returnParameter.Direction = ParameterDirection.ReturnValue;
-
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
 
@@ -209,6 +208,72 @@ namespace DupacoGarageSale.Data.Repository
 
                     var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.IsSaveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveResult;
+        }
+
+        /// <summary>
+        /// This decreases the order for a particular leg id.
+        /// </summary>
+        /// <param name="itineraryLegId"></param>
+        /// <param name="legOrder"></param>
+        /// <returns></returns>
+        public UserSaveResult DecreaseItineraryLegOrder(int itineraryLegId, int legOrder)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("DecreaseItineraryLegOrder", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@itinerary_leg_id", SqlDbType.Int).Value = itineraryLegId;
+                    cmd.Parameters.Add("@leg_order", SqlDbType.Int).Value = legOrder;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.IsSaveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveResult;
+        }
+
+        /// <summary>
+        /// This increases the order for a particular leg id.
+        /// </summary>
+        /// <param name="itineraryLegId"></param>
+        /// <param name="legOrder"></param>
+        /// <returns></returns>
+        public UserSaveResult IncreaseItineraryLegOrder(int itineraryLegId, int legOrder)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("IncreaseItineraryLegOrder", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@itinerary_leg_id", SqlDbType.Int).Value = itineraryLegId;
+                    cmd.Parameters.Add("@leg_order", SqlDbType.Int).Value = legOrder;
 
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
