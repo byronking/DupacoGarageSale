@@ -25,18 +25,7 @@
         {
             <p class="lead">
                 Register to be able to publish a sale or to search garage sales and save your favorites. Registration is free!
-            </p>
-            
-            @*<div class="form-group">
-                <label class="radio-inline">
-                    @Html.RadioButtonFor(m => m.UserTypeId, 3, new { @checked = "checked" }) I am a buyer
-                </label>
-
-                <label class="radio-inline">
-                    @Html.RadioButtonFor(m => m.UserTypeId, 2) I am a seller
-                </label>
-            </div>*@
-            
+            </p>            
             <div class="form-group">
                 <label for="txtFirstName">First Name *</label>
                 @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", id="txtFirstName" })

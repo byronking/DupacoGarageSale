@@ -442,7 +442,9 @@
                             {
                                 <div class="col-md-4">
                                     <div class="thumbnail" style="min-height:535px;">
-                                        <img alt="hot pick image" data-src="holder.js/200x200" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+                                        <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
+                                            <img alt="hot pick image" data-src="holder.js/200x200" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+                                        </a>
                                         <div class="caption">
                                             <h3>@item.Title</h3>
                                             @item.Description<br /><br />
@@ -491,9 +493,11 @@
                                     {
                                         if (@post.ImageUri != string.Empty)
                                         {
-                                            <div>                                            
+                                            <div>
+                                                <a href="~/Content/images/garage_sale_pictures/@post.ImageUri" data-lightbox="@post.ImageUri">                                            
                                                 <img alt="@post.ImageUri" data-src="holder.js/200%x200" style="display: block;" 
                                                     class="img-thumbnail" src="~/Content/images/garage_sale_pictures/@post.ImageUri">
+                                                </a>
                                             </div>
                                         }
                                         

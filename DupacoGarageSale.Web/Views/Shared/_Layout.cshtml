@@ -22,17 +22,20 @@
     }
     else
     {
-        @Html.Partial("~/Views/Shared/_TopNavigation.cshtml")
+        @*@@Html.Partial("~/Views/Shared/_TopNavigation.cshtml")*@
+        @Html.Partial("~/Views/Shared/_DupacoColorBarNav.cshtml")
     }
     
-    @*<div class="container" style="margin-top:60px;">*@
+    @*<div class="container" style="margin-top:60px;">
     <div class="container" style="margin-top:40px;">
         <div id="bg">
           <img src="~/Content/images/Insulators-3080-Karen-St-DBQ.jpg" alt="">
         </div>
 
         @RenderBody()
-    </div>
+    </div>*@
+
+     @RenderBody()
 
     @RenderSection("scripts", required: false)
 </body>

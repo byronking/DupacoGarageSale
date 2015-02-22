@@ -549,6 +549,7 @@
     <Content Include="Content\bootstrap\css\cover.css" />
     <Content Include="Content\bootstrap\css\dashboard.css" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\custom.css" />
     <Content Include="Content\images\dupaco.png" />
     <Content Include="Content\images\dupaco_logo.gif" />
     <Content Include="Content\images\garage-sale-1.jpg" />
@@ -556,13 +557,18 @@
     <Content Include="Content\images\garage-sale-3.jpg" />
     <Content Include="Content\images\garage-sale-4.jpg" />
     <Content Include="Content\images\garagesale.gif" />
+    <Content Include="Content\images\header_bg.jpg" />
     <Content Include="Content\images\iowa.jpg" />
     <Content Include="Content\images\iowa.png" />
     <Content Include="Content\images\iowa2.jpg" />
     <Content Include="Content\images\keep-calm-and-come-to-our-garage-sale.png" />
     <Content Include="Content\images\keep-calm-and-come-to-the-dupaco-garage-sale.png" />
+    <Content Include="Content\images\left.jpg" />
+    <Content Include="Content\images\right.jpg" />
+    <Content Include="Content\images\shim.gif" />
     <Content Include="Content\jquery-ui-timepicker-addon.css" />
     <Content Include="Content\jquery-ui-timepicker-addon.min.css" />
+    <Content Include="Content\layout.css" />
     <Content Include="Content\lightbox\css\lightbox.css" />
     <Content Include="Content\lightbox\css\screen.css" />
     <Content Include="Content\lightbox\img\close.png" />
@@ -586,6 +592,7 @@
     <Content Include="Content\lightbox\js\jquery-1.11.0.min.js" />
     <Content Include="Content\lightbox\js\lightbox.js" />
     <Content Include="Content\lightbox\js\lightbox.min.js" />
+    <Content Include="Content\standard.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -838,6 +845,7 @@
     <Content Include="Views\Shared\_ItineraryLayout.cshtml" />
     <Content Include="Views\Admin\BlogPosts.cshtml" />
     <Content Include="Views\Admin\_ViewBlogPost.cshtml" />
+    <Content Include="Views\Shared\_DupacoColorBarNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

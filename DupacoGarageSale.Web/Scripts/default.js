@@ -5,6 +5,26 @@
         $("#existingAccountError").removeClass('hidden');
     }
 
+    // Show an error if a user does not enter a user name or password.
+    $("#btnSignIn").click(function () {
+        if ($("#txtUserName").val() == "")
+        {
+            $("#txtUserName").popover({
+                content: "Enter your user name!", placement: "bottom",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#txtUserName").popover('show');
+        }
+
+        if ($("#txtPassword").val() == "") {
+            $("#txtPassword").popover({
+                content: "Enter your password!", placement: "bottom",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#txtPassword").popover('show');
+        }
+    });
+
     // Show the home page content on click
     $("#linkCategory1").click(function (e) {
         var categoryId = $("#hdnCategory1").val();
