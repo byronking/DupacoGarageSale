@@ -82,7 +82,7 @@
     <Compile Include="Domain\GarageSaleAddress.cs" />
     <Compile Include="Domain\GarageSaleItinerary.cs" />
     <Compile Include="Domain\GarageSaleMessage.cs" />
-    <Compile Include="Domain\MapAddress.cs" />
+    <Compile Include="Domain\MappingData.cs" />
     <Compile Include="Domain\GarageSaleItem.cs" />
     <Compile Include="Domain\GarageSaleSearchItem.cs" />
     <Compile Include="Domain\GarageSaleSearchResults.cs" />

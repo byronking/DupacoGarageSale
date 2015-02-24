@@ -9,32 +9,24 @@
     @Styles.Render("~/Content/timepicker/css")
     @Styles.Render("~/Content/lightbox/css")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/modernizr")    
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/timepicker")
+    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/js")
-    
-    
-
-    @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.windows7.css").Combined(true).Compress(true)))
+    @Scripts.Render("~/bundles/timepicker")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
-<body>
+<body style="background-color:#F5F5F5;">
     @if (Session["UserSession"] != null)
     {
-        @Html.Partial("~/Views/Shared/_DupacoColorBarNavLoggedIn.cshtml")
+        @Html.Partial("~/Views/Shared/_HomeNavLoggedIn.cshtml")
     }
     else
     {
-        @Html.Partial("~/Views/Shared/_DupacoColorBarNav.cshtml")
+        @Html.Partial("~/Views/Shared/_TopNavigation.cshtml")
     }
-
+    
     @RenderBody()
 
     @RenderSection("scripts", required: false)
-
-    <!-- This breaks the order of the loading of the js scripts -->
-    @*@(Html.Telerik().ScriptRegistrar())*@
 </body>
 </html>

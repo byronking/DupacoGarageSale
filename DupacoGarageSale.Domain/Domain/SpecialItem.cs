@@ -27,5 +27,7 @@ namespace DupacoGarageSale.Data.Domain
         public int SaleId { get; set; }
         public int ItemCategoryId { get; set; }
         public int ItemSubcategoryId { get; set; }
+
+        public GarageSaleAddress SpecialItemAddress { get; set; }
     }
 }

@@ -1,0 +1,39 @@
+﻿<link rel="stylesheet" type="text/css" href="~/Content/layout.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/custom.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/standard.css" />
+
+<div class="home_header">
+    <div class="header_inner">
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                @{
+                    if (Model.User.UserTypeId == 1)
+                    {
+                        <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index">Admin</a></li>
+                    }
+                }
+                <li class="@ViewBag.NavProfile"><a href="~/Accounts/UserProfile/@Model.User.UserId">My profile</a></li>
+                <li class="dropdown @ViewBag.NavGarageSales">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Garage sales <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="~/GarageSale/Add/">Add a new sale</a></li>
+                        <li><a href="~/GarageSale/View/">View my sales</a></li>
+                    </ul>
+                </li>
+                <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1">Search</a></li>
+                @if(Model.User.Address != null)
+                {
+                    <li class="@ViewBag.NavCreateItinerary"><a href="~/GarageSale/ViewItinerary/@Model.User.UserId">View itinerary</a></li>
+                }
+            </ul>
+            <form class="navbar-form navbar-right" role="form">
+                <div class="form-group">
+                    <button class="btn btn-primary">Signed in as @Model.User.FirstName @Model.User.LastName</button>
+                    @Html.ActionLink("Log out", "LogOut", "Home", null, new { @class="btn btn-success" })
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="home_logo left"><a href="www.dupaco.com"><img class="logo" alt="Dupaco Community Credit Union®" src="/Content/images/shim.gif"></a></div>
+    <div class="head_tag left"></div>
+</div>

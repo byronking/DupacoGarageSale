@@ -42,7 +42,7 @@
                 @Html.ActionLink("Clear", "ClearUserSearch", null, new { @class="btn btn-default" })
             }
 
-            <div class="down-20">
+            <div class="down_20">
                 @(Html.Telerik().Grid(Model.Users)
                     .Name("grdAllUsers")
                     .DataKeys(dataKeys => dataKeys.Add(u => u.UserId))

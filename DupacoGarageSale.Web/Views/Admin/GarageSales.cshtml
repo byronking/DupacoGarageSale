@@ -36,7 +36,7 @@
                 @Html.ActionLink("Clear", "ClearSalesSearch", null, new { @class="btn btn-default" })
             }
 
-            <div class="down-20">
+            <div class="down_20">
                 @(Html.Telerik().Grid(Model.GarageSales)
                     .Name("grdAllGarageSales")
                     .DataKeys(dataKeys => dataKeys.Add(m => m.GarageSaleId))

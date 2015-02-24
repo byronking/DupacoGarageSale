@@ -846,6 +846,8 @@
     <Content Include="Views\Admin\BlogPosts.cshtml" />
     <Content Include="Views\Admin\_ViewBlogPost.cshtml" />
     <Content Include="Views\Shared\_DupacoColorBarNav.cshtml" />
+    <Content Include="Views\Shared\_DupacoColorBarNavLoggedIn.cshtml" />
+    <Content Include="Views\Shared\_CategoriesMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

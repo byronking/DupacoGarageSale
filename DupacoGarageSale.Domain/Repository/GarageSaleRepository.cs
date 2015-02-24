@@ -412,6 +412,48 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
+        /// This gets all the subcategories by category id.
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <returns></returns>
+        public List<ItemCategory> GetCategoriesAndSubcategoriesById(int categoryId)
+        {
+            var subcategoriesList = new List<ItemCategory>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetCategoriesAndSubcategoriesById", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@categoryId", SqlDbType.Int).Value = categoryId;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var subcategory = new ItemCategory
+                        {
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemCategoryName = reader["item_category_name"].ToString(),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            ItemSubcategoryName = reader["item_subcategory_name"].ToString()
+                        };
+
+                        subcategoriesList.Add(subcategory);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return subcategoriesList;
+        }
+
+        /// <summary>
         /// This gets the subcategories by category id.
         /// </summary>
         /// <param name="category_id"></param>
@@ -628,7 +670,6 @@ namespace DupacoGarageSale.Data.Repository
             {
                 foreach (var item in specialItemIds)
                 {
-                    // First, delete any existing garage sale items for this sale.
                     using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
                     using (SqlCommand cmd = new SqlCommand("GetRandomSpecialItems", conn))
                     {
@@ -641,6 +682,15 @@ namespace DupacoGarageSale.Data.Repository
 
                         while (reader.Read())
                         {
+                            var garageSaleAddress = new GarageSaleAddress
+                            {
+                                Address1 = reader["sale_address1"].ToString(),
+                                Address2 = reader["sale_address2"].ToString(),
+                                City = reader["sale_city"].ToString(),
+                                State = reader["state_name"].ToString(),
+                                ZipCode = reader["sale_zip"].ToString()
+                            };
+
                             var specialItem = new SpecialItem
                             {
                                 SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
@@ -650,7 +700,8 @@ namespace DupacoGarageSale.Data.Repository
                                 Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
                                 SaleId = Convert.ToInt32(reader["sale_id"]),
                                 ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
-                                ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"])
+                                ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                                SpecialItemAddress = garageSaleAddress
                             };
 
                             specialItems.Add(specialItem);
@@ -881,6 +932,15 @@ namespace DupacoGarageSale.Data.Repository
 
                     while (reader.Read())
                     {
+                        var garageSaleAddress = new GarageSaleAddress
+                        {
+                            Address1 = reader["sale_address1"].ToString(),
+                            Address2 = reader["sale_address2"].ToString(),
+                            City = reader["sale_city"].ToString(),
+                            State = reader["state_name"].ToString(),
+                            ZipCode = reader["sale_zip"].ToString()
+                        };
+
                         var specialItem = new SpecialItem
                         {
                             SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
@@ -890,7 +950,8 @@ namespace DupacoGarageSale.Data.Repository
                             Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
                             SaleId = Convert.ToInt32(reader["sale_id"]),
                             ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
-                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"])
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            SpecialItemAddress = garageSaleAddress
                         };
 
                         results.SpecialItems.Add(specialItem);
@@ -973,6 +1034,15 @@ namespace DupacoGarageSale.Data.Repository
 
                     while (reader.Read())
                     {
+                        var garageSaleAddress = new GarageSaleAddress
+                        {
+                            Address1 = reader["sale_address1"].ToString(),
+                            Address2 = reader["sale_address2"].ToString(),
+                            City = reader["sale_city"].ToString(),
+                            State = reader["state_name"].ToString(),
+                            ZipCode = reader["sale_zip"].ToString()
+                        };
+
                         var specialItem = new SpecialItem
                         {
                             SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
@@ -982,7 +1052,8 @@ namespace DupacoGarageSale.Data.Repository
                             Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
                             SaleId = Convert.ToInt32(reader["sale_id"]),
                             ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
-                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"])
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            SpecialItemAddress = garageSaleAddress
                         };
 
                         results.SpecialItems.Add(specialItem);

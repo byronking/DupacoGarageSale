@@ -25,127 +25,153 @@
         }
     });
 
-    // Show the home page content on click
-    $("#linkCategory1").click(function (e) {
-        var categoryId = $("#hdnCategory1").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
-
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
+    $("#btnFilter").click(function () {
+        //alert($("#txtSearchCriteria").val());
+        $("#hdnSearchCriteria").val($("#txtSearchCriteria").val());
     });
 
-    $("#linkCategory2").click(function (e) {
-        var categoryId = $("#hdnCategory2").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
 
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
-    });
+    //$("#linkCategory1").click(function (e) {
+    //    var categoryId = $("#hdnCategory1").val();
+    //    $.get('/Home/GetCategoriesByCategoryId?categoryId=1', function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
 
-    $("#linkCategory3").click(function (e) {
-        var categoryId = $("#hdnCategory3").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
+    //});
 
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
-    });
+    //$("#linkCategory2").click(function (e) {
+    //    var categoryId = $("#hdnCategory2").val();
+    //    $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
 
-    $("#linkCategory4").click(function (e) {
-        var categoryId = $("#hdnCategory4").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
 
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
-    });
+    //    $(element).popover({
+    //        content: contentHtml, placement: 'right', animate: 'true', trigger: 'manual'
+    //    }).click(function (e) {
+    //        e.preventDefault();
+    //        $(this).popover('show');            
+    //    });
+    //});
 
-    $("#linkCategory5").click(function (e) {
-        var categoryId = $("#hdnCategory5").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
+    //$("#linkCategory3").click(function (e) {
+    //    var categoryId = $("#hdnCategory3").val();
+    //    $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
 
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
-    });
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
 
-    $("#linkCategory6").click(function (e) {
-        var categoryId = $("#hdnCategory6").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
+    //    $(element).popover({
+    //        content: contentHtml, placement: 'right', animate: 'true', trigger: 'manual'
+    //    }).click(function (e) {
+    //        e.preventDefault();
+    //        $(this).popover('show');
+    //    });
+    //});
 
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
-    });
+    //$("#linkCategory4").click(function (e) {
+    //   var categoryId = $("#hdnCategory4").val();
+    //    $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
 
-    $("#linkCategory7").click(function (e) {
-        var categoryId = $("#hdnCategory7").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
 
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
-    });
+    //    $(element).popover({
+    //        content: contentHtml, placement: 'right', animate: 'true', trigger: 'manual'
+    //    }).click(function (e) {
+    //        e.preventDefault();
+    //        $(this).popover('show');
+    //    });
+    //});
 
-    $("#linkCategory8").click(function (e) {
-        var categoryId = $("#hdnCategory8").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
+    //$("#linkCategory5").click(function (e) {
+    //    var categoryId = $("#hdnCategory5").val();
+    //    $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
 
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
-    });
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
+    //});
 
-    $("#linkCategory9").click(function (e) {
-        var categoryId = $("#hdnCategory9").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
+    //$("#linkCategory6").click(function (e) {
+    //    var categoryId = $("#hdnCategory6").val();
+    //    $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
 
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
-    });
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
+    //});
 
-    $("#linkCategory10").click(function (e) {
-        var categoryId = $("#hdnCategory10").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
+    //$("#linkCategory7").click(function (e) {
+    //    var categoryId = $("#hdnCategory7").val();
+    //    $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
 
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
-    });
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
+    //});
 
-    $("#linkCategory11").click(function (e) {
-        var categoryId = $("#hdnCategory11").val();
-        $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
-            $("#categoryContent").html(data);
-        });
+    //$("#linkCategory8").click(function (e) {
+    //    var categoryId = $("#hdnCategory8").val();
+    //    $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
 
-        e.preventDefault();
-        $("#featuredContent").addClass('invisible');
-        $("#categoryContent").removeClass('invisible');
-    });
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
+    //});
+
+    //$("#linkCategory9").click(function (e) {
+    //    var categoryId = $("#hdnCategory9").val();
+    //    $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
+
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
+    //});
+
+    //$("#linkCategory10").click(function (e) {
+    //    var categoryId = $("#hdnCategory10").val();
+    //    $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
+
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
+    //});
+
+    //$("#linkCategory11").click(function (e) {
+    //    var categoryId = $("#hdnCategory11").val();
+    //    $.get('/GarageSale/GetItemsByCategory?categoryId=' + categoryId, function (data) {
+    //        $("#categoryContent").html(data);
+    //    });
+
+    //    e.preventDefault();
+    //    $("#featuredContent").addClass('invisible');
+    //    $("#categoryContent").removeClass('invisible');
+    //}); 
 
     // Show the successful save message.
     if (($("#hdnSaveMessage").val() !== undefined)) {
@@ -416,7 +442,7 @@
     if ($("#hdnShowMap").val() !== undefined) {
         if ($("#hdnShowMap").val() == "true") {
 
-            //alert('show map: ' + $("#hdnShowMap").val());
+            alert('show map: ' + $("#hdnShowMap").val());
             $("#map-canvas").removeClass('hidden');
         }
         else {
@@ -487,8 +513,6 @@
         //e.preventDefault();
     });
 });
-
-
 
 function debugObject(inputobject) {
     obj = inputobject;

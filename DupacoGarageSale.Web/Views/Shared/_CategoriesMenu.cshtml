@@ -1,0 +1,16 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        @{ if (Model.FilteredItemCategories != null)
+            {                           
+                <div>@Model.FilteredItemCategories[0].ItemCategoryName</div>  
+                foreach (var subCat in Model.FilteredItemCategories)
+                {
+                    <div>@subCat.ItemSubcategoryName</div>
+                }   
+                <br />      
+            }
+        }
+    </div>
+</div>
