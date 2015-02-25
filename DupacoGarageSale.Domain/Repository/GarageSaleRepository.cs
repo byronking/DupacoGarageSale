@@ -920,41 +920,44 @@ namespace DupacoGarageSale.Data.Repository
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
-                using (SqlCommand cmd = new SqlCommand("SearchSpecialItems", conn))
+                if (searchCriteria != string.Empty)
                 {
-
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
-                    cmd.Connection.Open();
-
-                    var reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
+                    using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                    using (SqlCommand cmd = new SqlCommand("SearchSpecialItems", conn))
                     {
-                        var garageSaleAddress = new GarageSaleAddress
-                        {
-                            Address1 = reader["sale_address1"].ToString(),
-                            Address2 = reader["sale_address2"].ToString(),
-                            City = reader["sale_city"].ToString(),
-                            State = reader["state_name"].ToString(),
-                            ZipCode = reader["sale_zip"].ToString()
-                        };
 
-                        var specialItem = new SpecialItem
-                        {
-                            SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
-                            Title = reader["title"].ToString(),
-                            Description = reader["description"].ToString(),
-                            PictureLink = reader["picture_link"].ToString(),
-                            Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
-                            SaleId = Convert.ToInt32(reader["sale_id"]),
-                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
-                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
-                            SpecialItemAddress = garageSaleAddress
-                        };
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
+                        cmd.Connection.Open();
 
-                        results.SpecialItems.Add(specialItem);
+                        var reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            var garageSaleAddress = new GarageSaleAddress
+                            {
+                                Address1 = reader["sale_address1"].ToString(),
+                                Address2 = reader["sale_address2"].ToString(),
+                                City = reader["sale_city"].ToString(),
+                                State = reader["state_name"].ToString(),
+                                ZipCode = reader["sale_zip"].ToString()
+                            };
+
+                            var specialItem = new SpecialItem
+                            {
+                                SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
+                                Title = reader["title"].ToString(),
+                                Description = reader["description"].ToString(),
+                                PictureLink = reader["picture_link"].ToString(),
+                                Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
+                                SaleId = Convert.ToInt32(reader["sale_id"]),
+                                ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                                ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                                SpecialItemAddress = garageSaleAddress
+                            };
+
+                            results.SpecialItems.Add(specialItem);
+                        }
                     }
                 }
             }

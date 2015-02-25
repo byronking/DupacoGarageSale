@@ -45,8 +45,9 @@ namespace DupacoGarageSale.Web.Controllers
                     }
                 }
 
-                var selectedCategories = viewModel.SelectedCategories.ToArray();
-                ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+                // Not sure I need to do this when the page loads...
+                //var selectedCategories = viewModel.SelectedCategories.ToArray();
+                //ViewBag.SelectedCategories = string.Join(",", selectedCategories);
             }
             else
             {
@@ -72,12 +73,15 @@ namespace DupacoGarageSale.Web.Controllers
                 ViewBag.SelectedCategories = string.Join(",", selectedCategories);
                 ViewBag.SearchResults = viewModel.SearchResults;
 
-                if (viewModel.MappingData.Addresses.Count > 0)
+                if (viewModel.MappingData != null)
                 {
-                    ViewBag.Addresses = viewModel.MappingData.Addresses.ToArray();
-                    ViewBag.SearchAddress = viewModel.MappingData.StartingAddress;
-                    ViewBag.Radius = viewModel.MappingData.Radius;
-                    ViewBag.ShowMap = "true";
+                    if (viewModel.MappingData.Addresses.Count > 0)
+                    {
+                        ViewBag.Addresses = viewModel.MappingData.Addresses.ToArray();
+                        ViewBag.SearchAddress = viewModel.MappingData.StartingAddress;
+                        ViewBag.Radius = viewModel.MappingData.Radius;
+                        ViewBag.ShowMap = "true";
+                    }
                 }
             }
 
@@ -171,14 +175,10 @@ namespace DupacoGarageSale.Web.Controllers
         {
             var searchCriteria = string.Empty;
 
-            if (form["hdnSearchCriteria"] != null)
+            if (form["txtSearchWithFilters"] != null)
             {
-                searchCriteria = form["hdnSearchCriteria"].ToString();
+                searchCriteria = form["txtSearchWithFilters"].ToString();
             }
-            //else
-            //{
-            //    searchCriteria = form["hdnSearchResults"].ToString();
-            //}
 
             var radius = form["ddlRadius"].ToString();
             var address = form["txtAddress"].ToString();
@@ -195,22 +195,20 @@ namespace DupacoGarageSale.Web.Controllers
                 }
             }
 
-            var viewModel = new GarageSaleViewModel();
-            viewModel.MappingData = new MappingData();
-            viewModel.MappingData.StartingAddress = address;
-            viewModel.MappingData.Radius = radius;
+            var viewModel = new GarageSaleViewModel();            
 
             if (Session["ViewModel"] != null)
             {
                 viewModel = Session["ViewModel"] as GarageSaleViewModel;
             }
 
-            var repository = new GarageSaleRepository();
-            viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList);
-
-            // if address != null compute the radius
-            //var addresses = new List<string>();
+            viewModel.MappingData = new MappingData();
+            viewModel.MappingData.StartingAddress = address;
+            viewModel.MappingData.Radius = radius;
             viewModel.MappingData.Addresses = new List<string>();
+
+            var repository = new GarageSaleRepository();
+            viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList);            
 
             // Instantiate the selected categories.
             viewModel.SelectedCategories = new List<int>();

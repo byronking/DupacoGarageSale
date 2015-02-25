@@ -25,9 +25,17 @@
         }
     });
 
-    $("#btnFilter").click(function () {
+    $("#btnFilter").click(function (e) {
         //alert($("#txtSearchCriteria").val());
-        $("#hdnSearchCriteria").val($("#txtSearchCriteria").val());
+        //$("#hdnSearchCriteria").val($("#txtSearchCriteria").val());
+        if ($("#txtAddress").val() == "") {
+            $("#txtAddress").popover({
+                content: "Enter a starting point", placement: "bottom",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#txtAddress").popover('show');
+            e.preventDefault();
+        }
     });
 
 
@@ -442,13 +450,19 @@
     if ($("#hdnShowMap").val() !== undefined) {
         if ($("#hdnShowMap").val() == "true") {
 
-            alert('show map: ' + $("#hdnShowMap").val());
+            //alert('show map: ' + $("#hdnShowMap").val());
             $("#map-canvas").removeClass('hidden');
         }
         else {
             $("#map-canvas").addClass('hidden');
         }
     }
+
+    $("#btnClearSearch").click(function () {
+        $("#accordion input[type=checkbox]").each(function () {
+            $(this).prop("checked", false);
+        });
+    });
 
     $("#btnSearchBarFind").click(function (e) {
         if ($("#txtSearchCriteria").val() == "") {
