@@ -379,7 +379,6 @@
 
                     if (Model.SearchResults.GarageSaleItems.Count > 0)
                     {
-                        @*<input type="hidden" name="hdnSearchCriteria" id="hdnSearchCriteria" value="@Model.SearchResults.GarageSaleItems[0].ItemCategoryName" />*@
                         <input type="hidden" name="hdnSearchCriteria" id="hdnSearchCriteria" value="@ViewBag.SearchCriteria" />
                     }
                     else
@@ -408,10 +407,8 @@
             </div>
 
             <input type="hidden" id="hdnSearchBarCriteria" value="@ViewBag.SearchCriteria" />
-
             <input type="hidden" id="hdnShowMap" value="@ViewBag.ShowMap" />                
             <input type="hidden" id="hdnSearchResultsCount" value="@ViewBag.SearchResultsCount" />
-
             
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -513,7 +510,7 @@
                     }                    
 
                     <!-- This shows the featured hot picks for the home page. -->
-                    @if (Model.GarageSaleSpecialItems != null)
+                    @if (Model.GarageSaleSpecialItems != null && Model.SearchResults == null)
                     {
                         if (Model.GarageSaleSpecialItems.Count > 0)
                         {

@@ -1029,6 +1029,49 @@ namespace DupacoGarageSale.Web.Controllers
 
                 ViewBag.Addresses = addresses.ToArray();
             }
+            else if (Session["ViewModel"] != null)
+            {
+                viewModel = Session["ViewModel"] as GarageSaleViewModel;
+
+                if (viewModel.SearchResults != null)
+                {
+                    if (viewModel.SelectedCategories != null)
+                    {
+                        // Set the selected categories for the special items.
+                        if (viewModel.SearchResults.SpecialItems.Count > 0)
+                        {
+                            foreach (var item in viewModel.SearchResults.SpecialItems)
+                            {
+                                viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                            }
+                        }
+
+                        // Set the selected categories for the regular items.
+                        if (viewModel.SearchResults.GarageSaleItems.Count > 0)
+                        {
+                            foreach (var item in viewModel.SearchResults.GarageSaleItems)
+                            {
+                                viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                            }
+                        }
+
+                        var selectedCategories = viewModel.SelectedCategories.ToArray();
+                        ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+                        ViewBag.SearchResults = viewModel.SearchResults;
+
+                        if (viewModel.MappingData != null)
+                        {
+                            if (viewModel.MappingData.Addresses.Count > 0)
+                            {
+                                ViewBag.Addresses = viewModel.MappingData.Addresses.ToArray();
+                                ViewBag.SearchAddress = viewModel.MappingData.StartingAddress;
+                                ViewBag.Radius = viewModel.MappingData.Radius;
+                                ViewBag.ShowMap = "true";
+                            }
+                        }
+                    }
+                }
+            }
             else
             {
                 // Show some random items as you land on the page for the first time.
@@ -1054,10 +1097,28 @@ namespace DupacoGarageSale.Web.Controllers
             }
 
             viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
-
+            Session["ViewModel"] = viewModel;
             ViewBag.NavSearch = "active";
 
             return View(viewModel);
+        }
+
+        /// <summary>
+        /// This searches the garage sales by category.
+        /// </summary>
+        /// <param name="itemSubcategoryId"></param>
+        /// <returns></returns>
+        public ActionResult SearchBySubcategory(int itemSubcategoryId)
+        {
+            var viewModel = new GarageSaleViewModel();
+
+            var repository = new GarageSaleRepository();
+            viewModel.SearchResults = repository.SearchGarageSalesBySubcategory(itemSubcategoryId);
+            viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+
+            Session["ViewModel"] = viewModel;
+
+            return View("SearchResults", viewModel);
         }
 
         /// <summary>
@@ -1085,8 +1146,8 @@ namespace DupacoGarageSale.Web.Controllers
             var repository = new GarageSaleRepository();
             var searchCriteria = formCollection["txtSearchCriteria"].ToString();
             ViewBag.SearchCriteria = searchCriteria;
-            ViewBag.SearchResults = searchCriteria;
             viewModel.SearchResults = repository.SearchGarageSales(searchCriteria);
+            ViewBag.SearchResults = viewModel.SearchResults;
             viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
 
             if (viewModel.SearchResults.SpecialItems.Count == 0 && viewModel.SearchResults.GarageSaleItems.Count == 0)
@@ -1120,25 +1181,110 @@ namespace DupacoGarageSale.Web.Controllers
             Session["ViewModel"] = viewModel;
             ViewBag.NavSearch = "active";
 
-            return View("Search", viewModel);
+            return RedirectToAction("Search", viewModel);
         }
 
         /// <summary>
-        /// This searches the garage sales by category.
+        /// This allows the user to perform a search with filters.
         /// </summary>
-        /// <param name="itemSubcategoryId"></param>
+        /// <param name="form"></param>
         /// <returns></returns>
-        public ActionResult SearchBySubcategory(int itemSubcategoryId)
+        [HttpPost]
+        public ActionResult FilterResults(FormCollection form)
         {
+            var searchCriteria = string.Empty;
+
+            if (form["txtSearchWithFilters"] != null)
+            {
+                searchCriteria = form["txtSearchWithFilters"].ToString();
+            }
+
+            var radius = form["ddlRadius"].ToString();
+            var address = form["txtAddress"].ToString();
+            var saleDates = new Dictionary<string, string>();
+
+            var saleDateOne = "off";
+            if (form["saleDateOne"] != null)
+            {
+                saleDateOne = form["saleDateOne"].ToString();
+                saleDates.Add("saleDateOne", System.Configuration.ConfigurationManager.AppSettings["SaleDateOne"].ToString());
+            }
+
+            var saleDateTwo = "off";
+            if (form["saleDateTwo"] != null)
+            {
+                saleDateTwo = form["saleDateTwo"].ToString();
+                saleDates.Add("saleDateTwo", System.Configuration.ConfigurationManager.AppSettings["SaleDateTwo"].ToString());
+            }
+
+            var saleDateThree = "off";
+            if (form["saleDateThree"] != null)
+            {
+                saleDateThree = form["saleDateThree"].ToString();
+                saleDates.Add("saleDateThree", System.Configuration.ConfigurationManager.AppSettings["SaleDateThree"].ToString());
+            }
+
+            var saleDateFour = "off";
+            if (form["saleDateFour"] != null)
+            {
+                saleDateFour = form["saleDateFour"].ToString();
+                saleDates.Add("saleDateFour", System.Configuration.ConfigurationManager.AppSettings["SaleDateFour"].ToString());
+            }
+
+            var categoryIdList = new List<int>();
+
+            foreach (var key in form.AllKeys)
+            {
+                int categoryId;
+
+                if (Int32.TryParse(key, out categoryId))
+                {
+                    categoryIdList.Add(categoryId);
+                }
+            }
+
             var viewModel = new GarageSaleViewModel();
 
+            if (Session["ViewModel"] != null)
+            {
+                viewModel = Session["ViewModel"] as GarageSaleViewModel;
+            }
+
+            viewModel.MappingData = new MappingData();
+            viewModel.MappingData.StartingAddress = address;
+            viewModel.MappingData.Radius = radius;
+            viewModel.MappingData.Addresses = new List<string>();
+
             var repository = new GarageSaleRepository();
-            viewModel.SearchResults = repository.SearchGarageSalesBySubcategory(itemSubcategoryId);
-            viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+            viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList, saleDates);
+
+            // Instantiate the selected categories.
+            viewModel.SelectedCategories = new List<int>();
+
+            // Take all the items in the search results and piece together addresses.
+            foreach (var item in viewModel.SearchResults.GarageSaleItems)
+            {
+                viewModel.MappingData.Addresses.Add(item.Address1 + ' ' + item.Address2 + ' ' + item.City + ' ' + item.State + ' ' + item.ZipCode);
+                viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+            }
+
+            // Get the special items addresses
+            if (viewModel.SearchResults.SpecialItems.Count > 0)
+            {
+                foreach (var item in viewModel.SearchResults.SpecialItems)
+                {
+                    var saleAddress = repository.GetGarageSaleAddressBySaleId(item.SaleId);
+                    viewModel.MappingData.Addresses.Add(saleAddress.Address1 + ' ' + saleAddress.Address2 + ' ' + saleAddress.City + ' ' + saleAddress.State + ' ' + saleAddress.ZipCode);
+                    viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                }
+            }
+
+            var selectedCategories = viewModel.SelectedCategories.ToArray();
+            ViewBag.SelectedCategories = string.Join(",", selectedCategories);
 
             Session["ViewModel"] = viewModel;
 
-            return View("SearchResults", viewModel);
+            return RedirectToAction("Search", viewModel);
         }
 
         #endregion
@@ -1490,85 +1636,6 @@ namespace DupacoGarageSale.Web.Controllers
             Session["ViewModel"] = viewModel;
 
             return RedirectToAction("ViewItinerary", viewModel);
-        }
-
-        #endregion
-
-        #region Filter results
-
-        [HttpPost]
-        public ActionResult FilterResults(FormCollection form)
-        {
-            var searchCriteria = string.Empty;
-
-            if (form["hdnSearchCriteria"] != null)
-            {
-                searchCriteria = form["hdnSearchCriteria"].ToString();
-            }
-            else
-            {
-                searchCriteria = form["hdnSearchResults"].ToString();
-            }
-
-            var radius = form["ddlRadius"].ToString();
-            var address = form["txtAddress"].ToString();
-
-            var categoryIdList = new List<int>();
-
-            foreach (var key in form.AllKeys)
-            {
-                int categoryId;
-
-                if (Int32.TryParse(key, out categoryId))
-                {
-                    categoryIdList.Add(categoryId);
-                }
-            }
-
-            var viewModel = new GarageSaleViewModel();
-
-            if (Session["ViewModel"] != null)
-            {
-                viewModel = Session["ViewModel"] as GarageSaleViewModel;
-            }
-
-            var repository = new GarageSaleRepository();
-            //viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList);
-
-            // if address != null compute the radius
-            var addresses = new List<string>();
-
-            // Take all the items in the search results and piece together addresses.
-            foreach (var item in viewModel.SearchResults.GarageSaleItems)
-            {
-                addresses.Add(item.Address1 + ' ' + item.Address2 + ' ' + item.City + ' ' + item.State + ' ' + item.ZipCode);
-                viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
-            }
-
-            // Get the special items addresses
-            if (viewModel.SearchResults.SpecialItems.Count > 0)
-            {
-                foreach (var item in viewModel.SearchResults.SpecialItems)
-                {
-                    var saleAddress = repository.GetGarageSaleAddressBySaleId(item.SaleId);
-                    addresses.Add(saleAddress.Address1 + ' ' + saleAddress.Address2 + ' ' + saleAddress.City + ' ' + saleAddress.State + ' ' + saleAddress.ZipCode);
-                    viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
-                }
-            }
-
-            var selectedCategories = viewModel.SelectedCategories.ToArray();
-            ViewBag.SelectedCategories = string.Join(",", selectedCategories);
-
-            if (addresses.Count > 0)
-            {
-                ViewBag.Addresses = addresses.ToArray();
-                ViewBag.ShowMap = "true";
-            }
-
-            ViewBag.SearchAddress = address;
-            ViewBag.Radius = radius;
-
-            return View("Search", viewModel);
         }
 
         #endregion

@@ -34,6 +34,7 @@
                 template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
             });
             $("#txtAddress").popover('show');
+            $("#txtAddress").focus();
             e.preventDefault();
         }
     });
