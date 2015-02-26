@@ -23,11 +23,11 @@
 <body>
     @if (Session["UserSession"] != null)
     {
-        @Html.Partial("~/Views/Shared/_DupacoColorBarNavLoggedIn.cshtml")
+        @Html.Partial("~/Views/Shared/_HomeNavLoggedIn.cshtml")
     }
     else
     {
-        @Html.Partial("~/Views/Shared/_DupacoColorBarNav.cshtml")
+        @Html.Partial("~/Views/Shared/_TopNavigation.cshtml")
     }
 
     @RenderBody()

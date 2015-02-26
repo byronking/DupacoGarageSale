@@ -1533,7 +1533,7 @@ namespace DupacoGarageSale.Web.Controllers
             }
 
             var repository = new GarageSaleRepository();
-            viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList);
+            //viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList);
 
             // if address != null compute the radius
             var addresses = new List<string>();

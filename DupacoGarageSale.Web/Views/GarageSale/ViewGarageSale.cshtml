@@ -102,10 +102,10 @@
                             <td>Start:<br />@Model.Sale.DatesTimes.DayFourStart</td>
                         </tr>
                         <tr>
-                            <td>End:<br />@Model.Sale.DatesTimes.DayOneEnd</td>
-                            <td>End:<br />@Model.Sale.DatesTimes.DayTwoEnd</td>
-                            <td>End:<br />@Model.Sale.DatesTimes.DayThreeEnd</td>
-                            <td>End:<br />@Model.Sale.DatesTimes.DayFourEnd</td>
+                            <td>End:<br />@string.Format("{0:t}", Model.Sale.DatesTimes.DayOneEnd)</td>
+                            <td>End:<br />@string.Format("{0:t}", Model.Sale.DatesTimes.DayTwoEnd)</td>
+                            <td>End:<br />@string.Format("{0:t}", Model.Sale.DatesTimes.DayThreeEnd)</td>
+                            <td>End:<br />@string.Format("{0:t}", Model.Sale.DatesTimes.DayFourEnd)</td>
                         </tr>
                     </table>
                 </div>
@@ -234,10 +234,39 @@
 
 <!-- Add to itinerary modal -->
 <div class="modal fade add-to-itinerary" id="addToItineraryModal" tabindex="-1" role="dialog" aria-labelledby="addToItineraryModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add garage sale to itinerary</h3>
+            </div>
             <div class="modal-body">
-                Garage sale added to your itinerary! Click <a href="/GarageSale/ViewItinerary">here</a> to view your itinerary.
+                <form action="CreateOrAddToItinerary" method="post">
+                    @*Garage sale added to your itinerary! Click <a href="/GarageSale/ViewItinerary">here</a> to view your itinerary.*@                
+                    <h4>Existing itineraries</h4>
+                    <div>
+                        @*<span class="margin_bottom_40">No itineraries.  Let's create one!</span>*@
+                        <table class="table-hover table-bordered table-condensed margin_bottom_30">
+                            <tr>
+                                <th></th>
+                                <th>Itinerary name</th>
+                                <th>Itinerary create date</th>
+                            </tr> 
+                            <tr>
+                                <td><input type="submit" value="View itinerary" class="btn btn-xs btn-primary" /></td>
+                                <td>Saturday itinerary</td>
+                                <td>2/3/2015</td>
+                            </tr>                            
+                        </table>
+                    </div><br />
+                    <h4>Create a new itinerary</h4>
+                
+                    <div class="form-group">
+                        <label for="txtItineraryName">Itinerary name</label>
+                        <input type="text" class="form-control" style="width:70%;" />
+                    </div>
+                    <br />              
+                    <input type="submit" value="Add to itinerary" class="btn btn-sm btn-primary" />
+                </form>                                
             </div>
         </div>
     </div>
