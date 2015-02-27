@@ -716,7 +716,7 @@ namespace DupacoGarageSale.Web.Controllers
                 // Get the user's itinerary by user id.
                 var itineraryRepository = new ItineraryRepository();
                 var itineraryList = new List<GarageSaleItinerary>();
-                itineraryList = itineraryRepository.GetItineraryByUserId(viewModel.User.UserId);
+                itineraryList = itineraryRepository.GetItinerariesByUserId(viewModel.User.UserId);
                 viewModel.GarageSaleItinerary = itineraryList;
             }
 
@@ -1071,6 +1071,29 @@ namespace DupacoGarageSale.Web.Controllers
                         }
                     }
                 }
+                else
+                {
+                    // Show some random items as you land on the page for the first time.
+                    if (s != null)
+                    {
+                        var randomSpecialItems = ItemsHelper.GetRandomSpecialItems();
+                        var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
+                        viewModel.SearchResults = new GarageSaleSearchResults
+                        {
+                            SpecialItems = repository.GetGarageSaleSpecialItems(randomSpecialItems),
+                            GarageSaleItems = new List<GarageSaleSearchItem>()
+                        };
+                    }
+                    else
+                    {
+                        // Initialise a container of empty results.
+                        viewModel.SearchResults = new GarageSaleSearchResults
+                        {
+                            GarageSaleItems = new List<GarageSaleSearchItem>(),
+                            SpecialItems = new List<SpecialItem>()
+                        };
+                    }
+                }
             }
             else
             {
@@ -1292,74 +1315,12 @@ namespace DupacoGarageSale.Web.Controllers
         #region Garage sale itineraries
 
         /// <summary>
-        /// This loads the user's itinerary.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult ViewItinerary(int? id)
-        {
-            if (Session["UserSession"] != null)
-            {
-                var session = Session["UserSession"] as UserSession;
-
-                // Get the user's itinerary by user id.
-                var repository = new ItineraryRepository();
-                var itineraryList = new List<GarageSaleItinerary>();
-
-                if (id != null)
-                {
-                    itineraryList = repository.GetItineraryByUserId(Convert.ToInt32(id));
-                }
-                else
-                {
-                    itineraryList = repository.GetItineraryByUserId(session.User.UserId);
-                }
-
-                // Add it to the viewModel.
-                var viewModel = new GarageSaleViewModel();
-
-                if (Session["ViewModel"] != null)
-                {
-                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
-                }
-
-                viewModel.User = session.User;
-                viewModel.GarageSaleItinerary = itineraryList;
-
-                if (Session["ItineraryLegDeleted"] != null)
-                {
-                    var deleteSuccessful = Convert.ToBoolean(Session["ItineraryLegDeleted"]);
-
-                    if (deleteSuccessful)
-                    {
-                        ViewBag.Invisible = "false";
-                    }                    
-                }
-
-                // Get the user's fave garage sales.
-                var saleRepository = new GarageSaleRepository();
-                viewModel.FavoriteGarageSales = saleRepository.GetFavoriteGarageSales(viewModel.User.UserId);
-
-                // Cleanup.
-                Session["ItineraryLegDeleted"] = null;
-
-                Session["ViewModel"] = viewModel;
-                return View(viewModel);
-            }
-            else
-            {
-                return RedirectToAction("Login", "Accounts");
-            }
-        }
-
-        /// <summary>
         /// This adds a new, blank itinerary leg.
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult AddToItinerary(int userId)
+        public ActionResult AddNewItineraryLeg(int userId)
         {
             var viewModel = new GarageSaleViewModel();
 
@@ -1412,6 +1373,12 @@ namespace DupacoGarageSale.Web.Controllers
             }));
         }
 
+        /// <summary>
+        /// THis adds a garage sale to user's itinerary from the itinerary page.
+        /// </summary>
+        /// <param name="saleId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult AddToUserItinerary(int saleId, int userId)
         {
@@ -1461,92 +1428,6 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 id = userId
             }));
-        }
-
-        [HttpPost]
-        public ActionResult AddToItinerary(int saleId, int userId)
-        {
-            var viewModel = new GarageSaleViewModel();
-
-            if (Session["ViewModel"] != null)
-            {
-                viewModel = Session["ViewModel"] as GarageSaleViewModel;
-            }
-
-            // Check to see if the user has an itinerary. If not, create a new one. If so, update the existing one.
-            var repository = new ItineraryRepository();
-
-            var itinerary = repository.CheckForItinerary(userId);
-
-            if (itinerary.ItineraryId != 0)
-            {
-                // Add a new leg to the existing itinerary.
-                var saveResult = repository.SaveItineraryLeg(itinerary.ItineraryId, saleId);
-            }
-            else
-            {
-                // Create a new itinerary.
-                itinerary = new Itinerary
-                {
-                    SaleId = saleId,
-                    ItineraryCreateDate = DateTime.Now,
-                    ItineraryModifyDate = DateTime.Now,
-                    ItineraryOwner = userId
-                };
-
-                var saveResult = repository.SaveItinerary(itinerary);
-
-                if (saveResult.IsSaveSuccessful)
-                {
-                    itinerary.ItineraryId = saveResult.SaveResultId;
-                    TempData["ItineraryId"] = itinerary.ItineraryId;
-                    ViewBag.ItineraryId = itinerary.ItineraryId;
-                    viewModel.UserItinerary = new Itinerary();
-                    viewModel.UserItinerary = itinerary;
-                }
-            }
-
-            Session["ViewModel"] = viewModel;
-
-            return RedirectToAction("ViewGarageSale", new RouteValueDictionary(new
-            {
-                id = saleId
-            }));
-        }
-
-        [HttpPost]
-        public ActionResult RemoveFromItinerary(int itineraryId, int saleId)
-        {
-            if (Session["UserSession"] != null)
-            {
-                var session = Session["UserSession"] as UserSession;
-                var viewModel = new GarageSaleViewModel();
-
-                if (Session["ViewModel"] != null)
-                {
-                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
-
-                    // Delete legs, only if it matches the current user.
-                    var repository = new ItineraryRepository();
-                    var saveResult = repository.DeleteFromItinerary(itineraryId, saleId);
-
-                    if (saveResult.IsSaveSuccessful)
-                    {
-                        Session["ItineraryLegDeleted"] = true;
-                    }
-                }
-
-                return RedirectToAction("ViewGarageSale", new RouteValueDictionary(new
-                {
-                    controller = "GarageSale",
-                    action = "ViewGarageSale",
-                    id = saleId
-                }));
-            }
-            else
-            {
-                return RedirectToAction("Login", "Accounts");
-            }
         }
 
         /// <summary>

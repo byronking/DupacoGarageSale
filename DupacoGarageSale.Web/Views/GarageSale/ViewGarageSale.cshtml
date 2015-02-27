@@ -240,32 +240,46 @@
                 <h3>Add garage sale to itinerary</h3>
             </div>
             <div class="modal-body">
-                <form action="CreateOrAddToItinerary" method="post">
-                    @*Garage sale added to your itinerary! Click <a href="/GarageSale/ViewItinerary">here</a> to view your itinerary.*@                
+                <form action="~/Itinerary/CreateOrAddToItinerary" method="post">            
                     <h4>Existing itineraries</h4>
                     <div>
-                        @*<span class="margin_bottom_40">No itineraries.  Let's create one!</span>*@
-                        <table class="table-hover table-bordered table-condensed margin_bottom_30">
-                            <tr>
-                                <th></th>
-                                <th>Itinerary name</th>
-                                <th>Itinerary create date</th>
-                            </tr> 
-                            <tr>
-                                <td><input type="submit" value="View itinerary" class="btn btn-xs btn-primary" /></td>
-                                <td>Saturday itinerary</td>
-                                <td>2/3/2015</td>
-                            </tr>                            
-                        </table>
+                        @if(Model.GarageSaleItinerary != null)
+                        {   
+                            if (Model.GarageSaleItinerary.Count == 0)
+                            {
+                                <span class="margin_bottom_40">No itineraries.  Let's create one!</span>
+                            }
+                            else
+                            {
+                                <table class="table-hover table-bordered table-condensed margin_bottom_30">
+                                    <tr>
+                                        <th></th>
+                                        <th>Itinerary name</th>
+                                        <th>Itinerary create date</th>
+                                    </tr>
+                                    @foreach(var itinerary in Model.GarageSaleItinerary)
+                                    {
+                                        <tr>
+                                            <td>@Html.ActionLink("View itinerary", "GetItineraryByItineraryId", "Itinerary", new { id = @itinerary.ItineraryId }, 
+                                                new { @class="btn btn-xs btn-info" })</td>
+                                            <td>@itinerary.ItineraryName</td>
+                                            <td>@itinerary.ItineraryCreatedDate</td>
+                                        </tr>
+                                    }                            
+                                </table>
+                            }
+                        }
                     </div><br />
+                    @Html.HiddenFor(m => m.Sale.GarageSaleId)
+                    @Html.HiddenFor(m => m.User.UserId)
                     <h4>Create a new itinerary</h4>
                 
                     <div class="form-group">
                         <label for="txtItineraryName">Itinerary name</label>
-                        <input type="text" class="form-control" style="width:70%;" />
+                        @Html.TextBoxFor(m => m.UserItinerary.ItineraryName, new { @class="form-control", @style="width:70%;" })
                     </div>
-                    <br />              
-                    <input type="submit" value="Add to itinerary" class="btn btn-sm btn-primary" />
+                    <br />
+                    <input type="submit" value="Add to itinerary" class="btn btn-sm btn-info" />
                 </form>                                
             </div>
         </div>

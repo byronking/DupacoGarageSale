@@ -12,6 +12,11 @@ namespace DupacoGarageSale.Data.Repository
 {
     public class ItineraryRepository
     {
+        /// <summary>
+        /// This checks for an existing itinerary for the user.
+        /// </summary>
+        /// <param name="itineraryOwner"></param>
+        /// <returns></returns>
         public Itinerary CheckForItinerary(int itineraryOwner)
         {
             var itinerary = new Itinerary();
@@ -46,11 +51,11 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
-        /// This returns the user's itinerary with legs.
+        /// This returns the user's itinerary with legs by itineraryId.
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public List<GarageSaleItinerary> GetItineraryByUserId(int userId)
+        public List<GarageSaleItinerary> GetItinerariesByUserId(int userId)
         {
             var itineraryList = new List<GarageSaleItinerary>();
 
@@ -70,6 +75,8 @@ namespace DupacoGarageSale.Data.Repository
                         var itinerary = new GarageSaleItinerary
                         {
                             ItineraryId = Convert.ToInt32(reader["itinerary_id"]),
+                            ItineraryName = reader["itinerary_name"].ToString(),
+                            ItineraryCreatedDate = Convert.ToDateTime(reader["itinerary_create_date"]),
                             ItineraryLegId = Convert.ToInt32(reader["itinerary_leg_id"]),
                             ItineraryLegOrder = Convert.ToInt32(reader["leg_order"]),
                             ItineraryLegsCount = Convert.ToInt32(reader["legs_count"]),
@@ -93,6 +100,109 @@ namespace DupacoGarageSale.Data.Repository
             return itineraryList;
         }
 
+        /// <summary>
+        /// This returns the user's itinerary with legs by itineraryId.
+        /// </summary>
+        /// <param name="itineraryId"></param>
+        /// <returns></returns>
+        public List<GarageSaleItinerary> GetItinerariesByItineraryId(int itineraryId)
+        {
+            var itineraryList = new List<GarageSaleItinerary>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetItinerariesByItineraryId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = itineraryId;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var itinerary = new GarageSaleItinerary
+                        {
+                            ItineraryId = Convert.ToInt32(reader["itinerary_id"]),
+                            ItineraryName = reader["itinerary_name"].ToString(),
+                            ItineraryCreatedDate = Convert.ToDateTime(reader["itinerary_create_date"]),
+                            ItineraryLegId = Convert.ToInt32(reader["itinerary_leg_id"]),
+                            ItineraryLegOrder = Convert.ToInt32(reader["leg_order"]),
+                            ItineraryLegsCount = Convert.ToInt32(reader["legs_count"]),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            SaleAddress1 = reader["sale_address1"].ToString(),
+                            SaleAddress2 = reader["sale_address2"].ToString(),
+                            SaleCity = reader["sale_city"].ToString(),
+                            SaleState = reader["state_name"].ToString(),
+                            SaleZipCode = reader["sale_zip"].ToString()
+                        };
+
+                        itineraryList.Add(itinerary);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return itineraryList;
+        }
+
+        /// <summary>
+        /// This gets an itinerary by itinerary id.
+        /// </summary>
+        /// <param name="itineraryId"></param>
+        /// <returns></returns>
+        public GarageSaleItinerary GetItineraryByItineraryId(int itineraryId)
+        {
+            var itinerary = new GarageSaleItinerary();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetItineraryByItineraryId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = itineraryId;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        itinerary = new GarageSaleItinerary
+                        {
+                            ItineraryId = Convert.ToInt32(reader["itinerary_id"]),
+                            ItineraryName = reader["itinerary_name"].ToString(),
+                            ItineraryCreatedDate = Convert.ToDateTime(reader["itinerary_create_date"]),
+                            ItineraryLegId = Convert.ToInt32(reader["itinerary_leg_id"]),
+                            ItineraryLegOrder = Convert.ToInt32(reader["leg_order"]),
+                            ItineraryLegsCount = Convert.ToInt32(reader["legs_count"]),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            SaleAddress1 = reader["sale_address1"].ToString(),
+                            SaleAddress2 = reader["sale_address2"].ToString(),
+                            SaleCity = reader["sale_city"].ToString(),
+                            SaleState = reader["state_name"].ToString(),
+                            SaleZipCode = reader["sale_zip"].ToString()
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return itinerary;
+        }
+
+        /// <summary>
+        /// This saves a user's new itinerary nad first itinerary leg.
+        /// </summary>
+        /// <param name="itinerary"></param>
+        /// <returns></returns>
         public UserSaveResult SaveItinerary(Itinerary itinerary)
         {
             var saveResult = new UserSaveResult();
@@ -103,6 +213,7 @@ namespace DupacoGarageSale.Data.Repository
                 using (SqlCommand cmd = new SqlCommand("SaveItinerary", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@itinerary_name", SqlDbType.VarChar).Value = itinerary.ItineraryName;
                     cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = itinerary.SaleId;
                     cmd.Parameters.Add("@itinerary_create_date", SqlDbType.DateTime).Value = itinerary.ItineraryCreateDate;
                     cmd.Parameters.Add("@itinerary_modify_date", SqlDbType.DateTime).Value = itinerary.ItineraryModifyDate;

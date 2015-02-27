@@ -504,7 +504,7 @@
                     }                    
 
                     <!-- This shows the featured hot picks for the home page. -->
-                    @if (Model.GarageSaleSpecialItems != null)
+                    @if (Model.GarageSaleSpecialItems != null && Model.SearchResults == null)
                     {
                         if (Model.GarageSaleSpecialItems.Count > 0)
                         {

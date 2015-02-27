@@ -1,0 +1,27 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+@{
+    ViewBag.Title = "User Itineraries";
+    Layout = "~/Views/Shared/_ItineraryLayout.cshtml";
+}
+
+<div class="container">
+    <div>
+        <img src="~/Content/images/garagesale.gif" alt="dupaco garage sales!" class="down_30" />
+        <h1>Here are your itineraries</h1>
+    </div><br />
+   
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @foreach(var itinerary in Model.GarageSaleItinerary)
+            {
+                <h3>@itinerary.ItineraryName</h3>
+                <span>Created: @itinerary.ItineraryCreatedDate</span><br /><br />
+                    
+                @Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, 
+                        new { @class="btn btn-xs btn-info" })<br />
+                <hr />
+            }
+        </div>
+    </div>
+</div>

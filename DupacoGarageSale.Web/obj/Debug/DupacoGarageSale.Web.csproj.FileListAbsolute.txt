@@ -1,4 +1,3 @@
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.csprojResolveAssemblyReference.cache
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DupacoGarageSale.Web.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DupacoGarageSale.Web.pdb
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\Antlr3.Runtime.dll
@@ -34,5 +33,6 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.Razor.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.WebPages.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.WebPages.Deployment.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.WebPages.Razor.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.csprojResolveAssemblyReference.cache
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.pdb

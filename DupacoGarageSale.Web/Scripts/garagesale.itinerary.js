@@ -29,7 +29,7 @@
     $("#linkRemoveFromItinerary").click(function (e) {
         var sale_id = $("#hdnGarageSaleId").val();
         var itinerary_id = $("#hdnItineraryId").val();
-        var url = "/GarageSale/RemoveFromItinerary/";
+        var url = "/Itinerary/RemoveFromItinerary/";
         $.ajax({
             type: "post",
             data: JSON.stringify({

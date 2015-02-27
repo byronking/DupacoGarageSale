@@ -9,6 +9,8 @@ namespace DupacoGarageSale.Data.Domain
     public class GarageSaleItinerary
     {
         public int ItineraryId { get; set; }
+        public string ItineraryName { get; set; }
+        public DateTime ItineraryCreatedDate { get; set; }
         public int ItineraryLegId { get; set; }
         public int ItineraryLegOrder { get; set; }
         public int ItineraryLegsCount { get; set; }

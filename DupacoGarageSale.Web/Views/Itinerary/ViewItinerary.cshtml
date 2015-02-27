@@ -10,7 +10,7 @@
 
 <div class="container-fluid">
     <div class="row" style="margin-left:10px;">
-        <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@ViewBag.Title</h2>
+        <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@ViewBag.Title / @Model.GarageSaleItinerary[0].ItineraryName</h2>
         <br />                
         @{ 
             if (Model.User.Address != null)
@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <!-- Adding an itinerary here means it is not tied to any particular sale -->
-                                @Html.ActionLink("Add new itinerary leg", "AddToItinerary", new { userId = @Model.User.UserId }, new { @class="btn btn-default" })
+                                @Html.ActionLink("Add new itinerary leg", "AddNewItineraryLeg", new { userId = @Model.User.UserId }, new { @class="btn btn-default" })
                             </div>
                             </div>
                         </div>                            

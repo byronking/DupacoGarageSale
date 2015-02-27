@@ -90,17 +90,17 @@
                             <div aria-labelledby="headingOne" role="tabpanel" class="panel-collapse collapse" id="collapseOne">
                                 <div class="list-group">
                                     @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
+                                        if (Model.ItemCategories != null)
+                                        {
+                                            var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
 
-                    foreach (var category in categories1)
-                    {
+                                            foreach (var category in categories1)
+                                            {
                                                 <div class="row" style="margin-left:5px;">
                                                     <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
                                                 </div>
-                    }
-                }
+                                            }
+                                        }
                                     }
                                 </div>
                             </div>
@@ -116,17 +116,17 @@
                                 <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo">
                                     <div class="list-group">
                                         @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories2 = Model.ItemCategories.Where(m => m.ItemCategoryId == 2);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories2 = Model.ItemCategories.Where(m => m.ItemCategoryId == 2);
 
-                    foreach (var category in categories2)
-                    {
+                                                foreach (var category in categories2)
+                                                {
                                                     <div class="row" style="margin-left:5px;">
                                                         <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
                                                     </div>
-                    }
-                }
+                                                }
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -142,17 +142,17 @@
                             <div aria-labelledby="headingThree" role="tabpanel" class="panel-collapse collapse" id="collapseThree">
                                 <div class="list-group">
                                     @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
+                                        if (Model.ItemCategories != null)
+                                        {
+                                            var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
 
-                    foreach (var category in categories3)
-                    {
-                                                <div class="row" style="margin-left:5px;">
-                                                    <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                </div>
-                    }
-                }
+                                            foreach (var category in categories3)
+                                            {
+                                            <div class="row" style="margin-left:5px;">
+                                                <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
+                                            </div>
+                                            }
+                                        }
                                     }
                                 </div>
                             </div>
@@ -168,17 +168,17 @@
                             <div aria-labelledby="headingFour" role="tabpanel" class="panel-collapse collapse" id="collapseFour">
                                 <div class="list-group">
                                     @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories4 = Model.ItemCategories.Where(m => m.ItemCategoryId == 4);
+                                        if (Model.ItemCategories != null)
+                                        {
+                                            var categories4 = Model.ItemCategories.Where(m => m.ItemCategoryId == 4);
 
-                    foreach (var category in categories4)
-                    {
+                                            foreach (var category in categories4)
+                                            {
                                                 <div class="row" style="margin-left:5px;">
                                                     <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
                                                 </div>
-                    }
-                }
+                                            }
+                                        }
                                     }
                                 </div>
                             </div>
@@ -194,17 +194,17 @@
                                 <div aria-labelledby="headingFive" role="tabpanel" class="panel-collapse collapse" id="collapseFive">
                                     <div class="list-group">
                                         @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories5 = Model.ItemCategories.Where(m => m.ItemCategoryId == 5);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories5 = Model.ItemCategories.Where(m => m.ItemCategoryId == 5);
 
-                    foreach (var category in categories5)
-                    {
+                                                foreach (var category in categories5)
+                                                {
                                                     <div class="row" style="margin-left:5px;">
                                                         <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
                                                     </div>
-                    }
-                }
+                                                }
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -220,17 +220,17 @@
                                 <div aria-labelledby="headingSix" role="tabpanel" class="panel-collapse collapse" id="collapseSix">
                                     <div class="list-group">
                                         @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories6 = Model.ItemCategories.Where(m => m.ItemCategoryId == 6);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories6 = Model.ItemCategories.Where(m => m.ItemCategoryId == 6);
 
-                    foreach (var category in categories6)
-                    {
+                                                foreach (var category in categories6)
+                                                {
                                                     <div class="row" style="margin-left:5px;">
                                                         <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
                                                     </div>
-                    }
-                }
+                                                }
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -246,17 +246,17 @@
                                 <div aria-labelledby="headingSeven" role="tabpanel" class="panel-collapse collapse" id="collapseSeven">
                                     <div class="list-group">
                                         @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories7 = Model.ItemCategories.Where(m => m.ItemCategoryId == 7);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories7 = Model.ItemCategories.Where(m => m.ItemCategoryId == 7);
 
-                    foreach (var category in categories7)
-                    {
+                                                foreach (var category in categories7)
+                                                {
                                                     <div class="row" style="margin-left:5px;">
                                                         <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
                                                     </div>
-                    }
-                }
+                                                }
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -272,17 +272,17 @@
                                 <div aria-labelledby="headingEight" role="tabpanel" class="panel-collapse collapse" id="collapseEight">
                                     <div class="list-group">
                                         @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
 
-                    foreach (var category in categories8)
-                    {
+                                                foreach (var category in categories8)
+                                                {
                                                     <div class="row" style="margin-left:5px;">
                                                         <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
                                                     </div>
-                    }
-                }
+                                                }
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -298,17 +298,17 @@
                                 <div aria-labelledby="headingNine" role="tabpanel" class="panel-collapse collapse" id="collapseNine">
                                     <div class="list-group">
                                         @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories9 = Model.ItemCategories.Where(m => m.ItemCategoryId == 9);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories9 = Model.ItemCategories.Where(m => m.ItemCategoryId == 9);
 
-                    foreach (var category in categories9)
-                    {
+                                                foreach (var category in categories9)
+                                                {
                                                     <div class="row" style="margin-left:5px;">
                                                         <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
                                                     </div>
-                    }
-                }
+                                                }
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -324,17 +324,17 @@
                                 <div aria-labelledby="headingTen" role="tabpanel" class="panel-collapse collapse" id="collapseTen">
                                     <div class="list-group">
                                         @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories10 = Model.ItemCategories.Where(m => m.ItemCategoryId == 10);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories10 = Model.ItemCategories.Where(m => m.ItemCategoryId == 10);
 
-                    foreach (var category in categories10)
-                    {
+                                                foreach (var category in categories10)
+                                                {
                                                     <div class="row" style="margin-left:5px;">
                                                         <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
                                                     </div>
-                    }
-                }
+                                                }
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -350,17 +350,17 @@
                                 <div aria-labelledby="headingEleven" role="tabpanel" class="panel-collapse collapse" id="collapseEleven">
                                     <div class="list-group">
                                         @{
-                if (Model.ItemCategories != null)
-                {
-                    var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
 
-                    foreach (var category in categories11)
-                    {
+                                                foreach (var category in categories11)
+                                                {
                                                     <div class="row" style="margin-left:5px;">
                                                         <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
                                                     </div>
-                    }
-                }
+                                                }
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -382,8 +382,7 @@
                         <input type="hidden" name="hdnSearchCriteria" id="hdnSearchCriteria" value="@ViewBag.SearchCriteria" />
                     }
                     else
-                    {
-                            
+                    {                            
                         <input type="hidden" name="hdnSearchResults" id="hdnSearchResults" value="@ViewBag.SearchResults" /> <!-- This is the free text search string -->
                     }
                 }

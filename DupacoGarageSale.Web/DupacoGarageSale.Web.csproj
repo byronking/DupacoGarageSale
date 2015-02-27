@@ -829,7 +829,7 @@
     <Content Include="Views\GarageSale\ViewGarageSale.cshtml" />
     <Content Include="Views\Shared\_HomeNavLoggedIn.cshtml" />
     <Content Include="Views\Shared\_TopNavigation2.cshtml" />
-    <Content Include="Views\GarageSale\ViewItinerary.cshtml" />
+    <Content Include="Views\Itinerary\ViewItinerary.cshtml" />
     <Content Include="Views\GarageSale\SearchResults.cshtml" />
     <Content Include="Views\Shared\_LayoutNoBackground.cshtml" />
     <Content Include="Views\GarageSale\_ItemCategories.cshtml" />
@@ -849,6 +849,7 @@
     <Content Include="Views\Shared\_DupacoColorBarNav.cshtml" />
     <Content Include="Views\Shared\_DupacoColorBarNavLoggedIn.cshtml" />
     <Content Include="Views\Shared\_CategoriesMenu.cshtml" />
+    <Content Include="Views\Itinerary\UserItineraries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -32,7 +32,7 @@
                 <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1" class="white">Search</a></li>
                 @if(Model.Address != null)
                 {
-                    <li class="@ViewBag.NavCreateItinerary"><a href="~/GarageSale/ViewItinerary/@Model.UserId" class="white">View itinerary</a></li>
+                    <li class="@ViewBag.NavCreateItinerary"><a href="~/Itinerary/GetUserItineraries/@Model.UserId" class="white">View itineraries</a></li>
                 }
                 
             </ul>
