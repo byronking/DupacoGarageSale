@@ -85,7 +85,7 @@
                             var arrayItineraryLegs = itineraryLegs.ToArray();
                             arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
                         }
-                        <input type="button" id="btnSaveItineraryOrder" class="btn btn-primary hidden" value="Save order" />
+                        
                         <input type="button" id="btnMapItinerary" class="btn btn-primary" value="Get directions" onclick="calculateRoute();" /><br /><br />
                     </form>
                 </div>
@@ -348,7 +348,7 @@
             itineraryLegs = $("#hdnNewItineraryLegs").val();
         }
 
-        alert('itineraryLegs: ' + itineraryLegs);
+        //alert('itineraryLegs: ' + itineraryLegs);
 
         var selectedLegs = new Array();
         selectedLegs = itineraryLegs.split(',');

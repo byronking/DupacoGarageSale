@@ -163,10 +163,10 @@ namespace DupacoGarageSale.Web.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("UserProfile", new RouteValueDictionary(new
+                    return RedirectToAction("UserHome", new RouteValueDictionary(new
                     {
                         controller = "Accounts",
-                        action = "UserProfile",
+                        action = "UserHome",
                         id = session.User.UserId
                     }));
                 }
@@ -222,6 +222,57 @@ namespace DupacoGarageSale.Web.Controllers
             ViewBag.UserId = user.UserId;
 
             return Json(new { ok = true, newurl = Url.Action("UserProfile", new { id = user.UserId })});
+        }
+
+        /// <summary>
+        /// This is the user's home page.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult UserHome(int? id)
+        {
+            var viewModel = new GarageSaleViewModel();
+            var user = new GarageSaleUser();
+
+            if (Session["UserSession"] != null)
+            {
+                // Load a saved user by id.
+                var repository = new AccountsRepository();
+                user = repository.GetUserProfileInfoById((int)id);
+                viewModel.User = user;
+
+                // Set the default profile pic
+                if (user.ProfilePicLink == string.Empty)
+                {
+                    user.ProfilePicLink = "keep-calm-and-come-to-the-dupaco-garage-sale.png";
+                }
+
+                var garageSaleRepository = new GarageSaleRepository();
+                viewModel.GarageSales = garageSaleRepository.GetGarageSaleByUserName(viewModel.User.UserName);
+                viewModel.FavoriteGarageSales = garageSaleRepository.GetFavoriteGarageSales(viewModel.User.UserId);
+
+                ViewBag.NavProfile = "active";
+
+                // Show the success message if the sale worked.
+                if (Session["SaveSuccessful"] != null)
+                {
+                    var saveSuccessful = Convert.ToBoolean(Session["SaveSuccessful"]);
+
+                    if (saveSuccessful)
+                    {
+                        ViewBag.Invisible = "false";
+                    }
+                }
+
+                // Clear the session object.
+                Session["SaveSuccessful"] = null;
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
         }
 
         /// <summary>

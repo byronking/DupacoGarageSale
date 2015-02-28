@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_GarageSaleLayout.cshtml";
 }
 
-<div id="page-wrap" class="jumbotron" style="min-height:500px;">
+@*<div id="page-wrap" class="jumbotron" style="min-height:500px;">*@
     <div class="container">
         <div class="row" style="margin-bottom:40px;">
             <h2><a href="~/Home" style="text-decoration:none;">Home / </a>View your existing garage sales</h2><br />
@@ -13,7 +13,7 @@
                 @{                    
                     if (Model.GarageSales.Count > 0)
                     {
-                        <div class="col-md-9" style="margin-left:135px;">
+                        <div class="col-md-11" style="margin-left:0px;">
                             <div class="form-group">
                             @{
                                 if (TempData["SaveSuccessful"] != null)
@@ -90,4 +90,4 @@
                 }
         </div>
     </div>
-</div>
+@*</div>*@

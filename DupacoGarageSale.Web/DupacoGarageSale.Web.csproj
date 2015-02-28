@@ -830,6 +830,9 @@
     <Content Include="Views\Shared\_DupacoColorBarNavLoggedIn.cshtml" />
     <Content Include="Views\Shared\_CategoriesMenu.cshtml" />
     <Content Include="Views\Itinerary\UserItineraries.cshtml" />
+    <Content Include="Views\Accounts\UserHome.cshtml" />
+    <Content Include="Views\Shared\_UserHomeLayout.cshtml" />
+    <Content Include="Views\Shared\_UserHomeNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

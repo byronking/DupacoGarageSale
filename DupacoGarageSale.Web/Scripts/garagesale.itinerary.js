@@ -122,24 +122,15 @@
 
                     //var field = $(this).find("input").attr('id');
                     var field = $(this).find("input:hidden").val();
-                    alert(field);
+                    //alert(field);
 
                     newWayPointsList.push(field);
                 });
 
                 $("#hdnNewItineraryLegs").val(newWayPointsList);
-                alert('new order: ' + $("#hdnNewItineraryLegs").val());
-
-                $("#btnSaveItineraryOrder").removeClass('hidden');
+                //alert('new order: ' + $("#hdnNewItineraryLegs").val());
             }
         })
-    });
-
-    // Save the new ordering of the itinerary legs.
-    $("#btnSaveItineraryOrder").click(function () {
-        //alert('New ordering saved!');
-
-        $("#btnSaveItineraryOrder").addClass('hidden');
     });
 });
 
