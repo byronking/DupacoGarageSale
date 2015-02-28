@@ -110,6 +110,30 @@
             }
         });
     });
+
+    $(function () {
+        $("#sortable").sortable({
+            stop: function (event, ui) {
+                var data = "";
+
+                $("#sortable li").each(function (i, el) {
+                    var p = $(el).html();
+
+                    var field = $(this).find("input").attr('id');
+                    alert(field);
+                });
+
+                $("#btnSaveItineraryOrder").removeClass('hidden');
+            }
+        })
+    });
+
+    // Save the new ordering of the itinerary legs.
+    $("#btnSaveItineraryOrder").click(function () {
+        //alert('New ordering saved!');
+
+        $("#btnSaveItineraryOrder").addClass('hidden');
+    });
 });
 
 $(function () {

@@ -18,19 +18,16 @@
             {
                 <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
                     
-                //if (Model.GarageSaleItinerary.Count > 0)
-                //{
-                    var sale = Model.GarageSaleItinerary.Find(m => m.SaleId == Model.Sale.GarageSaleId);
-                    if (sale != null) 
-                    {   
-                        <input type="hidden" id="hdnItineraryId" value="@sale.ItineraryId" />                         
-                        <a href="#" id="linkRemoveFromItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Remove sale from itinerary</a><br />
-                    }
-                    else
-                    {
-                        <a href="#" id="linkAddToItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Add sale to itinerary</a><br />
-                    }
-                //}                    
+                var sale = Model.GarageSaleItinerary.Find(m => m.SaleId == Model.Sale.GarageSaleId);
+                if (sale != null) 
+                {   
+                    <input type="hidden" id="hdnItineraryId" value="@sale.ItineraryId" />                         
+                    <a href="#" id="linkRemoveFromItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Remove sale from itinerary</a><br />
+                }
+                else
+                {
+                    <a href="#" id="linkAddToItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Add sale to itinerary</a><br />
+                }                
                     
                 if (Model.FaveGarageSales != null)
                 {
@@ -254,14 +251,15 @@
                                 <table class="table-hover table-bordered table-condensed margin_bottom_30">
                                     <tr>
                                         <th></th>
+                                        <th></th>
                                         <th>Itinerary name</th>
                                         <th>Itinerary create date</th>
                                     </tr>
                                     @foreach(var itinerary in Model.GarageSaleItinerary)
                                     {
                                         <tr>
-                                            <td>@Html.ActionLink("View itinerary", "GetItineraryByItineraryId", "Itinerary", new { id = @itinerary.ItineraryId }, 
-                                                new { @class="btn btn-xs btn-info" })</td>
+                                            <td>@Html.ActionLink("Save to this itinerary", "AddToUserItinerary", "GarageSale", new { saleId = Model.Sale.GarageSaleId, itineraryId = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>
+                                            <td>@Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>
                                             <td>@itinerary.ItineraryName</td>
                                             <td>@itinerary.ItineraryCreatedDate</td>
                                         </tr>

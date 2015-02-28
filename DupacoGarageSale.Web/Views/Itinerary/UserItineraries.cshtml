@@ -13,14 +13,21 @@
    
     <div class="panel panel-default">
         <div class="panel-body">
-            @foreach(var itinerary in Model.GarageSaleItinerary)
+            @if (Model.GarageSaleItinerary.Count == 0)
             {
-                <h3>@itinerary.ItineraryName</h3>
-                <span>Created: @itinerary.ItineraryCreatedDate</span><br /><br />
+                <h3>You have no itineraries!  Time to get shopping!</h3>
+            }
+            else
+            {
+                foreach(var itinerary in Model.GarageSaleItinerary)
+                {
+                    <h3>@itinerary.ItineraryName</h3>
+                    <span>Created: @itinerary.ItineraryCreatedDate</span><br /><br />
                     
-                @Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, 
-                        new { @class="btn btn-xs btn-info" })<br />
-                <hr />
+                    @Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, 
+                            new { @class="btn btn-xs btn-info" })<br />
+                    <hr />
+                }
             }
         </div>
     </div>

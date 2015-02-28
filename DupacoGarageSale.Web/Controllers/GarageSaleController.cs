@@ -1033,6 +1033,12 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 viewModel = Session["ViewModel"] as GarageSaleViewModel;
 
+                if (Session["UserSession"] != null)
+                {
+                    var session = Session["UserSession"] as UserSession;
+                    viewModel.User = session.User;
+                }
+
                 if (viewModel.SearchResults != null)
                 {
                     if (viewModel.SelectedCategories != null)
@@ -1380,7 +1386,7 @@ namespace DupacoGarageSale.Web.Controllers
         /// <param name="userId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult AddToUserItinerary(int saleId, int userId)
+        public ActionResult AddToUserItinerary(int itineraryId, int saleId)
         {
             var viewModel = new GarageSaleViewModel();
 
@@ -1392,41 +1398,43 @@ namespace DupacoGarageSale.Web.Controllers
             // Check to see if the user has an itinerary. If not, create a new one. If so, update the existing one.
             var repository = new ItineraryRepository();
 
-            var itinerary = repository.CheckForItinerary(userId);
+            //var itinerary = repository.CheckForItinerary(userId);
 
-            if (itinerary.ItineraryId != 0)
-            {
+            //if (itinerary.ItineraryId != 0)
+            //{
                 // Add a new leg to the existing itinerary.
-                var saveResult = repository.SaveItineraryLeg(itinerary.ItineraryId, saleId);
-            }
-            else
-            {
-                // Create a new itinerary.
-                itinerary = new Itinerary
-                {
-                    SaleId = saleId,
-                    ItineraryCreateDate = DateTime.Now,
-                    ItineraryModifyDate = DateTime.Now,
-                    ItineraryOwner = userId
-                };
+                var saveResult = repository.SaveItineraryLeg(itineraryId, saleId);
+            //}
+            //else
+            //{
+            //    // Create a new itinerary.
+            //    itinerary = new Itinerary
+            //    {
+            //        SaleId = saleId,
+            //        ItineraryCreateDate = DateTime.Now,
+            //        ItineraryModifyDate = DateTime.Now,
+            //        ItineraryOwner = userId
+            //    };
 
-                var saveResult = repository.SaveItinerary(itinerary);
+            //    var saveResult = repository.SaveItinerary(itinerary);
 
-                if (saveResult.IsSaveSuccessful)
-                {
-                    itinerary.ItineraryId = saveResult.SaveResultId;
-                    TempData["ItineraryId"] = itinerary.ItineraryId;
-                    ViewBag.ItineraryId = itinerary.ItineraryId;
-                    viewModel.UserItinerary = new Itinerary();
-                    viewModel.UserItinerary = itinerary;
-                }
-            }
+            //    if (saveResult.IsSaveSuccessful)
+            //    {
+            //        itinerary.ItineraryId = saveResult.SaveResultId;
+            //        TempData["ItineraryId"] = itinerary.ItineraryId;
+            //        ViewBag.ItineraryId = itinerary.ItineraryId;
+            //        viewModel.UserItinerary = new Itinerary();
+            //        viewModel.UserItinerary = itinerary;
+            //    }
+            //}
 
             Session["ViewModel"] = viewModel;
 
             return RedirectToAction("ViewItinerary", new RouteValueDictionary(new
             {
-                id = userId
+                controller = "Itinerary",
+                action = "ViewItinerary",
+                id = itineraryId
             }));
         }
 
@@ -1451,73 +1459,7 @@ namespace DupacoGarageSale.Web.Controllers
                 action = "ViewGarageSale",
                 id = garageSaleId
             }));
-        }
-
-        [HttpGet]
-        public ActionResult DeleteItineraryLeg(int legId)
-        {
-            if (Session["UserSession"] != null)
-            {
-                var session = Session["UserSession"] as UserSession;
-
-                var viewModel = new GarageSaleViewModel();
-
-                if (Session["ViewModel"] != null)
-                {
-                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
-
-                    // Delete legs, only if it matches the current user.
-                    var repository = new ItineraryRepository();
-                    var saveResult = repository.DeleteItineraryLeg(legId, viewModel.GarageSaleItinerary[0].ItineraryId, viewModel.GarageSaleItinerary[0].SaleId,
-                        session.User.UserId);
-
-                    if (saveResult.IsSaveSuccessful)
-                    {
-                        Session["ItineraryLegDeleted"] = true;
-                    }
-                }
-
-                return RedirectToAction("ViewItinerary", new RouteValueDictionary(new
-                {
-                    controller = "GarageSale",
-                    action = "ViewItinerary"
-                }));
-            }
-            else
-            {
-                return RedirectToAction("Login", "Accounts");
-            }
-        }
-
-        /// <summary>
-        /// This is the search page from the itinerary page.
-        /// </summary>
-        /// <param name="formCollection"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult ItineraryPageSearch(FormCollection formCollection)
-        {
-            var viewModel = new GarageSaleViewModel();
-
-            if (Session["ViewModel"] != null)
-            {
-                viewModel = Session["ViewModel"] as GarageSaleViewModel;
-            }
-
-            if (Session["UserSession"] != null)
-            {
-                var session = Session["UserSession"] as UserSession;
-                viewModel.User = session.User;
-
-                var repository = new GarageSaleRepository();
-                var searchCriteria = formCollection["txtSearchCriteria"].ToString();
-                viewModel.SearchResults = repository.SearchGarageSales(searchCriteria);
-            }
-
-            Session["ViewModel"] = viewModel;
-
-            return RedirectToAction("ViewItinerary", viewModel);
-        }
+        }       
 
         #endregion
 

@@ -30,95 +30,65 @@
                             </div>
                             <div class="panel-body">
                                 <div class="form-group">
-                                @*<label for="txtStartingAddress">Starting point:</label>*@
-                                <input type="text" id="txtStartingAddress" class="form-control" style="width:400px;" value="@startingAddress" />
-                            </div>
-                            <div class="form-group">
-                                <!-- Adding an itinerary here means it is not tied to any particular sale -->
-                                @Html.ActionLink("Add new itinerary leg", "AddNewItineraryLeg", new { userId = @Model.User.UserId }, new { @class="btn btn-default" })
-                            </div>
+                                    <input type="text" id="txtStartingAddress" class="form-control" style="width:400px;" value="@startingAddress" />
+                                </div>
+                                <div class="form-group">
+                                    <!-- Adding an itinerary here means it is not tied to any particular sale -->
+                                    @Html.ActionLink("Add new stopover", "AddNewItineraryLeg", new { userId = @Model.User.UserId }, new { @class="btn btn-default" })
+                                </div>
                             </div>
                         </div>                            
                         <br />
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Your current itinerary</h3>
+                                <h3 class="panel-title">Your stopovers</h3>
                             </div>
-                            <div class="panel-body container-overflow" style="max-height:260px;">
+                            <div class="panel-body container-overflow" style="min-height:260px;">
                                 <input id="hdnLegDeletedMessage" type="hidden" value="@ViewBag.Invisible" />
                                 <div class="alert alert-success hidden" role="alert" id="divLegDeletedMessage" style="width:60%;">
                                     <strong>Nice work!</strong>
                                     Itinerary leg deleted.
                                 </div>
 
-                                @foreach (var address in Model.GarageSaleItinerary) 
-                                {
-                                    var itineraryAddress = string.Empty;
-
-                                    if (address.SaleAddress1 == "null_sale")
+                                <!-- begin itinerary legs code -->
+                                @*<ul class="list-group" id="sortable">*@
+                                <ul id="sortable" class="list-group" >
+                                    @foreach (var address in Model.GarageSaleItinerary) 
                                     {
-                                        // Continue.
-                                    }
-                                    else
-                                    {
-                                        itineraryAddress = address.SaleAddress1 + " " + address.SaleAddress2 + " " + address.SaleCity + " " + address.SaleState + " " + address.SaleZipCode;
-                                    }
+                                        var itineraryAddress = string.Empty;                                                                                   
 
-                                    itineraryLegs.Add(address.ItineraryLegId);
-                                                
-                                    <div class="form-group">
-                                        <label for="txtItineraryLeg@(address.ItineraryLegId)">Itinerary leg:</label>
-                                        <div class="form-inline">
-                                            <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" class="form-control input-sm" style="width:350px;" value="@itineraryAddress" />
-                                            @*<a href="/Itinerary/SaveItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-primary btn-sm">Save</a>*@
-                                            <a href="/GarageSale/DeleteItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-danger btn-sm">Delete</a>
+                                        if (address.SaleAddress1 == "null_sale")
+                                        {
+                                            // Continue.
+                                        }
+                                        else
+                                        {
+                                            itineraryAddress = address.SaleAddress1 + " " + address.SaleAddress2 + " " + address.SaleCity + " " + address.SaleState + " " + address.SaleZipCode;
+                                        }
 
-                                            @{
-                                                var legOrder = address.ItineraryLegOrder;
-                                                var legsCount = address.ItineraryLegsCount;
-                                                
-                                                if (legOrder == 1 && legsCount == 1)
-                                                {
-                                                    // Move along...   
-                                                }
-                                                else if (legOrder == 1 && legsCount > 1)
-                                                {
-                                                    <a href="~/Itinerary/MoveDown?legId=@(address.ItineraryLegId)&legOrder=@(address.ItineraryLegOrder)" class="btn btn-sm btn-default">
-                                                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
-                                                    </a>
-                                                }
-                                                else if (legOrder == legsCount)
-                                                {
-                                                    <a href="~/Itinerary/MoveUp?legId=@(address.ItineraryLegId)&legOrder=@(address.ItineraryLegOrder)" class="btn btn-sm btn-default">
-                                                        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="~/Itinerary/MoveUp?legId=@(address.ItineraryLegId)&legOrder=@(address.ItineraryLegOrder)" class="btn btn-sm btn-default">
-                                                        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-                                                    </a>
-                                                    <a href="~/Itinerary/MoveDown?legId=@(address.ItineraryLegId)&legOrder=@(address.ItineraryLegOrder)" class="btn btn-sm btn-default">
-                                                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
-                                                    </a>
-                                                }
-                                            }
-                                        </div>
-                                    </div>
-                                }
+                                        itineraryLegs.Add(address.ItineraryLegId);
+                                        <li class="list-group-item">
+                                            <label for="txtItineraryLeg@(address.ItineraryLegId)">Stopover:</label>
+                                            <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" class="input-sm" style="width:350px;" value="@itineraryAddress" />
+                                            <a href="/Itinerary/DeleteItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-danger btn-sm">Delete</a>
+                                            <input type="hidden" id="hdnItineraryLeg@(address.ItineraryLegId)" value="@address.ItineraryLegId" />
+                                        </li>
+                                    }
+                                </ul>
+                                <!-- end itinerary legs code -->
                             </div>
                         </div>
 
                         @{
-                                var arrayItineraryLegs = itineraryLegs.ToArray();
-                                arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
+                            var arrayItineraryLegs = itineraryLegs.ToArray();
+                            arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
                         }
-
+                        <input type="button" id="btnSaveItineraryOrder" class="btn btn-primary hidden" value="Save order" />
                         <input type="button" id="btnMapItinerary" class="btn btn-primary" value="Get directions" onclick="calculateRoute();" /><br /><br />
                     </form>
                 </div>
-                
+                                    
                 <div class="col-md-7"> 
                     <!-- the map with directions -->
                     <div class="row">
@@ -160,7 +130,7 @@
                 <h3 class="panel-title">Search garage sales</h3>
                 </div>
                 <div class="panel-body">
-                    @using (Html.BeginForm("ItineraryPageSearch", "GarageSale", FormMethod.Post, new { @class = "form-inline" }))
+                    @using (Html.BeginForm("ItineraryPageSearch", "Itinerary", FormMethod.Post, new { @class = "form-inline" }))
                     {
                         <div class="input-group">
                             <input class="form-control" type="text" id="txtSearchCriteria" name="txtSearchCriteria" style="width:375px" placeholder="What are you looking for?">
@@ -170,10 +140,10 @@
                         </div><br /><br />
                         
                         <div>
-                            @if (Model.SearchResults != null)
+                            @if (Model.ItinerarySearchResults != null)
                             {
                                 <ul class="list-group">
-                                    @foreach (var item in Model.SearchResults.SpecialItems)
+                                    @foreach (var item in Model.ItinerarySearchResults.ItinerarySpecialItems)
                                     {
                                         <li class="list-group-item">
                                             <div class="form-inline">
@@ -187,11 +157,33 @@
                                                     <h4>@item.Title</h4>
                                                     <h4>$ @item.Price</h4>
                                                 </div>
-                                            </div>
-                                            <span>@item.Description</span><br /> <br /> 
+                                            </div><br />
+                                            <span>@item.Description</span><br /><br />
+                                            <div>
+                                                <table class="table table-bordered table-condensed">                            
+                                                    <tr>
+                                                        <td class="text-center">@item.SaleDatesTimes.SaleDateOne.DayOfWeek <br /> @item.SaleDatesTimes.SaleDateOne.ToLongDateString()</td>
+                                                        <td class="text-center">@item.SaleDatesTimes.SaleDateTwo.DayOfWeek <br /> @item.SaleDatesTimes.SaleDateTwo.ToLongDateString()</td>
+                                                        <td class="text-center">@item.SaleDatesTimes.SaleDateThree.DayOfWeek <br /> @item.SaleDatesTimes.SaleDateThree.ToLongDateString()</td>
+                                                        <td class="text-center">@item.SaleDatesTimes.SaleDateFour.DayOfWeek <br /> @item.SaleDatesTimes.SaleDateFour.ToLongDateString()</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">Start: @item.SaleDatesTimes.DayOneStart</td>
+                                                        <td class="text-center">Start: @item.SaleDatesTimes.DayTwoStart</td>
+                                                        <td class="text-center">Start: @item.SaleDatesTimes.DayThreeStart</td>
+                                                        <td class="text-center">Start: @item.SaleDatesTimes.DayFourStart</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center">End: @item.SaleDatesTimes.DayOneEnd</td>
+                                                        <td class="text-center">End: @item.SaleDatesTimes.DayTwoEnd</td>
+                                                        <td class="text-center">End: @item.SaleDatesTimes.DayThreeEnd</td>
+                                                        <td class="text-center">End: @item.SaleDatesTimes.DayFourEnd</td>
+                                                    </tr>
+                                                </table>
+                                            </div> 
                                             <div>
                                                 <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-primary btn-xs">Visit this garage sale</a>
-                                                <a href="~/GarageSale/AddToUserItinerary?saleId=@item.SaleId&userId=@Model.User.UserId" class="btn btn-primary btn-xs">Add to itinerary</a>
+                                                <a href="~/GarageSale/AddToUserItinerary?saleId=@item.SaleId&itineraryId=@Model.GarageSaleItinerary[0].ItineraryId" class="btn btn-primary btn-xs">Add to itinerary</a>
                                             </div> 
                                         </li>
                                     }
@@ -199,25 +191,50 @@
                             }
                         </div>
                         <div>
-                            @if (Model.SearchResults != null)
+                            @if (Model.ItinerarySearchResults != null)
                             {
                                 <ul class="list-group">
-                                    @foreach (var item in Model.SearchResults.GarageSaleItems)
+                                    @foreach (var item in Model.ItinerarySearchResults.ItineraryGarageSaleItems)
                                     {
                                         <li class="list-group-item">
+                                            <a href="~/Content/images/keep-calm-and-come-to-the-dupaco-garage-sale.png" data-lightbox="dupaco_garage_sale">
+                                                <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/keep-calm-and-come-to-the-dupaco-garage-sale.png" />
+                                            </a><br /><br />
                                             <div>
                                                 @item.ItemCategoryName - @item.ItemSubcategoryName
                                             </div>
                                             <div>
                                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1<br />
 		                                        @if (item.Address2 != string.Empty)
-                                          {                        
+                                                {                        
 			                                        @item.Address2<br />
-                                          }
+                                                }
 		                                        @item.City, @item.State @item.ZipCode<br /><br />
+                                                <div>
+                                                    <table class="table table-bordered table-condensed">                            
+                                                        <tr>
+                                                            <td class="text-center">@item.SaleDatesTimes.SaleDateOne.DayOfWeek <br /> @item.SaleDatesTimes.SaleDateOne.ToLongDateString()</td>
+                                                            <td class="text-center">@item.SaleDatesTimes.SaleDateTwo.DayOfWeek <br /> @item.SaleDatesTimes.SaleDateTwo.ToLongDateString()</td>
+                                                            <td class="text-center">@item.SaleDatesTimes.SaleDateThree.DayOfWeek <br /> @item.SaleDatesTimes.SaleDateThree.ToLongDateString()</td>
+                                                            <td class="text-center">@item.SaleDatesTimes.SaleDateFour.DayOfWeek <br /> @item.SaleDatesTimes.SaleDateFour.ToLongDateString()</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-center">Start: @item.SaleDatesTimes.DayOneStart</td>
+                                                            <td class="text-center">Start: @item.SaleDatesTimes.DayTwoStart</td>
+                                                            <td class="text-center">Start: @item.SaleDatesTimes.DayThreeStart</td>
+                                                            <td class="text-center">Start: @item.SaleDatesTimes.DayFourStart</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-center">End: @item.SaleDatesTimes.DayOneEnd</td>
+                                                            <td class="text-center">End: @item.SaleDatesTimes.DayTwoEnd</td>
+                                                            <td class="text-center">End: @item.SaleDatesTimes.DayThreeEnd</td>
+                                                            <td class="text-center">End: @item.SaleDatesTimes.DayFourEnd</td>
+                                                        </tr>
+                                                    </table>
+                                                </div> 
 		                                        <div>
                                                     <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-primary btn-xs">Visit this garage sale</a>
-                                                    <a href="~/GarageSale/AddToUserItinerary?saleId=@item.SaleId&userId=@Model.User.UserId" class="btn btn-primary btn-xs">Add to itinerary</a>
+                                                    <a href="~/GarageSale/AddToUserItinerary?saleId=@item.SaleId&itineraryId=@Model.GarageSaleItinerary[0].ItineraryId" class="btn btn-primary btn-xs">Add to itinerary</a>
                                                 </div>
                                             </div>                                            
                                         </li>
@@ -327,7 +344,7 @@
         var itineraryLegs = '@arrayItineraryLegsJoined';
         var selectedLegs = new Array();
         selectedLegs = itineraryLegs.split(',');
-        // alert('legs: ' + selectedLegs);
+        //alert('legs: ' + selectedLegs);
 
         var start = document.getElementById('hdnStartingAddress').value;
         // alert('starting address: ' + start);
