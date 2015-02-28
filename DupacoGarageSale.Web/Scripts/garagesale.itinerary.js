@@ -115,13 +115,20 @@
         $("#sortable").sortable({
             stop: function (event, ui) {
                 var data = "";
+                var newWayPointsList = [];
 
                 $("#sortable li").each(function (i, el) {
                     var p = $(el).html();
 
-                    var field = $(this).find("input").attr('id');
+                    //var field = $(this).find("input").attr('id');
+                    var field = $(this).find("input:hidden").val();
                     alert(field);
+
+                    newWayPointsList.push(field);
                 });
+
+                $("#hdnNewItineraryLegs").val(newWayPointsList);
+                alert('new order: ' + $("#hdnNewItineraryLegs").val());
 
                 $("#btnSaveItineraryOrder").removeClass('hidden');
             }

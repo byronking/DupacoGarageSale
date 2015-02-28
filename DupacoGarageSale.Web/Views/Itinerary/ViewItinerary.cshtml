@@ -76,6 +76,7 @@
                                         </li>
                                     }
                                 </ul>
+                                <input type="hidden" id="hdnNewItineraryLegs" />
                                 <!-- end itinerary legs code -->
                             </div>
                         </div>
@@ -342,6 +343,13 @@
 
     function calculateRoute() {
         var itineraryLegs = '@arrayItineraryLegsJoined';
+
+        if ($("#hdnNewItineraryLegs").val() != "") {
+            itineraryLegs = $("#hdnNewItineraryLegs").val();
+        }
+
+        alert('itineraryLegs: ' + itineraryLegs);
+
         var selectedLegs = new Array();
         selectedLegs = itineraryLegs.split(',');
         //alert('legs: ' + selectedLegs);
@@ -403,7 +411,11 @@
 
                     directionsPanel.innerHTML += ' <br>';
                 }
-            }            
+            }
+            else {
+                alert('problem: ' + status);
+                directionsPanel.innerHTML += 'There was a problem getting the directions. <br>';
+            }
         });
     }
 
