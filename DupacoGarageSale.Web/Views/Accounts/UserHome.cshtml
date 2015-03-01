@@ -9,7 +9,12 @@
     <div class="row" style="margin-bottom:20px">
         <h2><a href="~/Home" style="text-decoration:none;">Home / </a>View profile / Account info for @Model.User.FirstName @Model.User.LastName</h2><br />
     </div>
-
+    <div class="row">
+        <div role="alert" class="alert alert-info">
+          <strong>Hey, garage salers!</strong> @Model.HeadlineNews
+        </div>
+    </div>
+    <hr />
     <div class="row">
         <div class="col-md-5">
             <p class="lead">Sales I'm hosting</p>

@@ -39,7 +39,6 @@ namespace DupacoGarageSale.Web.Controllers
 
 
                 // Get the time/date of the last created account.
-
                  
 
                 ViewBag.NavAdmin = "active";
@@ -71,7 +70,7 @@ namespace DupacoGarageSale.Web.Controllers
                 var statesList = addressRepository.GetStates();
                 ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
 
-                // Show the success message if the sale worked.
+                // Show the success message if the save worked.
                 if (Session["ChangePasswordSuccessful"] != null)
                 {
                     var saveSuccessful = Convert.ToBoolean(Session["ChangePasswordSuccessful"]);
@@ -473,6 +472,73 @@ namespace DupacoGarageSale.Web.Controllers
                 ViewData["ShowBlogPost"] = "true";
 
                 return View("BlogPosts", viewModel); 
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
+        }
+
+
+        public ActionResult HeadlineNews()
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var viewModel = new AdminViewModel();
+                viewModel.AdminUser = session.User;
+
+                // Show the success message if the save worked.
+                if (Session["PublishHeadlineNews"] != null)
+                {
+                    var saveSuccessful = Convert.ToBoolean(Session["PublishHeadlineNews"]);
+
+                    if (saveSuccessful)
+                    {
+                        ViewBag.Invisible = "false";
+                    }
+                }
+
+                ViewBag.NavAdmin = "active";
+                return View(viewModel);
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult PublishHeadlineNews(string headlineNews)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var saveResult = new UserSaveResult();
+                var repository = new AdminRepository();
+
+                var message = new AdminMessage
+                {
+                    MessageText = headlineNews,
+                    MessageCreateDate = DateTime.Now,
+                    MessagePublishDate = DateTime.Now,
+                    MessageType = "headline"
+                };
+
+                saveResult = repository.SaveAdminMessage(message);
+
+                if (saveResult.IsSaveSuccessful)
+                {
+                    Session["PublishHeadlineNews"] = true;
+                }
+
+                return RedirectToAction("HeadlineNews", new RouteValueDictionary(new
+                {
+                    controller = "Admin",
+                    action = "HeadlineNews",
+                    userId = session.User.UserId
+                }));
+
             }
             else
             {

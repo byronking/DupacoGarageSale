@@ -51,4 +51,26 @@
             e.preventDefault();
         }
     });
+
+    // Character counter for the admin headline news.
+    $("#txtHeadlineNews").keyup(function () {
+        var max = 500;
+        var len = $(this).val().length;
+        //alert('length: ' + len);
+        if (len >= max) {
+            $("#charNumHeadlineNews").text(' you have reached the limit');
+        } else {
+            var char = max - len;
+            $("#charNumHeadlineNews").text(char + ' characters left');
+        }
+    });
+
+    // Validation for the headline news
+    $("#btnPublishMessage").click(function (e) {
+        if ($("#txtHeadlineNews").val() == "")
+        {
+            $("#headlineNewsValidationMessage").removeClass('invisible');
+            e.preventDefault();
+        }
+    });
 });

@@ -23,5 +23,6 @@ namespace DupacoGarageSale.Web.Models
         public int GarageSaleCount { get; set; }
         public SpecialItemsCount SpecialItemsCount { get; set; }
         public string SearchCriteria { get; set; }
+        public string HeadlineNews { get; set; }
     }
 }

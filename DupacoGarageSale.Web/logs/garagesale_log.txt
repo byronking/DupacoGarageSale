@@ -2762,3 +2762,19 @@ Error Number:201,State:4,Class:16
    at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
    at System.Convert.ToInt32(Object value)
    at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-02-28 17:19:13,312 [51] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-02-28 17:21:25,504 [51] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-02-28 19:15:34,086 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-02-28 20:16:45,595 [27] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264

@@ -27,5 +27,6 @@ namespace DupacoGarageSale.Web.Models
         public Itinerary UserItinerary { get; set; }
         public List<FavoriteGarageSale> FaveGarageSales { get; set; }
         public List<GarageSale> FavoriteGarageSales { get; set; }
+        public string HeadlineNews { get; set; }
     }
 }

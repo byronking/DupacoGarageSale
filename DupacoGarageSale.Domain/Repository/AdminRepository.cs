@@ -357,6 +357,7 @@ namespace DupacoGarageSale.Data.Repository
         public BlogPost GetBlogPost(int blog_post_id)
         {
             var blogPost = new BlogPost();
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
@@ -392,6 +393,44 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return blogPost;
+        }
+
+
+        public UserSaveResult SaveAdminMessage(AdminMessage message)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SaveAdminMessage", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@message_text", SqlDbType.VarChar).Value = message.MessageText;
+                    cmd.Parameters.Add("@message_create_date", SqlDbType.DateTime).Value = message.MessageCreateDate;
+                    cmd.Parameters.Add("@message_publish_date", SqlDbType.DateTime).Value = message.MessagePublishDate;
+                    cmd.Parameters.Add("@message_type", SqlDbType.VarChar).Value = message.MessageType;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.SaveResultId = (int)returnParameter.Value;
+
+                    if (saveResult.SaveResultId != 0)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }   
+
+            return saveResult;
         }
     }
 }
