@@ -34,7 +34,8 @@
                                 </div>
                                 <div class="form-group">
                                     <!-- Adding an itinerary here means it is not tied to any particular sale -->
-                                    @Html.ActionLink("Add new stopover", "AddNewItineraryLeg", new { userId = @Model.User.UserId }, new { @class="btn btn-default" })
+                                    @Html.ActionLink("Add new garage sale", "Search", "GarageSale", new { s=1 }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("Add new stopover", "AddNewItineraryLeg", new { userId = @Model.User.UserId }, new { @class="btn btn-primary" })
                                 </div>
                             </div>
                         </div>                            
@@ -42,7 +43,7 @@
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Your stopovers</h3>
+                                <h3 class="panel-title">Your stopovers - drag to rearrange your route</h3>
                             </div>
                             <div class="panel-body container-overflow" style="min-height:260px;">
                                 <input id="hdnLegDeletedMessage" type="hidden" value="@ViewBag.Invisible" />

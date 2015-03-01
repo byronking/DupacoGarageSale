@@ -1029,7 +1029,7 @@ namespace DupacoGarageSale.Web.Controllers
 
                 ViewBag.Addresses = addresses.ToArray();
             }
-            else if (Session["ViewModel"] != null)
+            else if (Session["ViewModel"] != null && s == null)
             {
                 viewModel = Session["ViewModel"] as GarageSaleViewModel;
 
@@ -1076,6 +1076,7 @@ namespace DupacoGarageSale.Web.Controllers
                             }
                         }
                     }
+
                 }
                 else
                 {

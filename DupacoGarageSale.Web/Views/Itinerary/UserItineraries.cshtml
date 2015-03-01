@@ -11,24 +11,26 @@
         <h1>Here are your itineraries</h1>
     </div><br />
    
-    <div class="panel panel-default">
-        <div class="panel-body">
-            @if (Model.GarageSaleItinerary.Count == 0)
-            {
-                <h3>You have no itineraries!  Time to get shopping!</h3>
-            }
-            else
-            {
-                foreach(var itinerary in Model.GarageSaleItinerary)
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @if (Model.GarageSaleItinerary.Count == 0)
                 {
-                    <h3>@itinerary.ItineraryName</h3>
-                    <span>Created: @itinerary.ItineraryCreatedDate</span><br /><br />
-                    
-                    @Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, 
-                            new { @class="btn btn-xs btn-info" })<br />
-                    <hr />
+                    <h3>You have no itineraries!  Time to get shopping!</h3>
                 }
-            }
+                else
+                {
+                    foreach(var itinerary in Model.GarageSaleItinerary)
+                    {
+                        <h3>@itinerary.ItineraryName</h3>
+                        <span>Created: @itinerary.ItineraryCreatedDate</span><br /><br />
+                    
+                        @Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, 
+                                new { @class="btn btn-xs btn-info" })<br />
+                        <hr />
+                    }
+                }
+            </div>
         </div>
     </div>
 </div>
