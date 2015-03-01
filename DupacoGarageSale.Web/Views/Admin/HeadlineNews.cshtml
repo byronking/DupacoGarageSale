@@ -1,7 +1,7 @@
 ﻿@model DupacoGarageSale.Web.Models.AdminViewModel
 
 @{
-    ViewBag.Title = "Set headline news";
+    ViewBag.Title = "Publish headline news";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -51,6 +51,20 @@
             <hr />
 
             <p class="lead">Past headlines</p>
+            <div class="down_20">
+                @(Html.Telerik().Grid(Model.AdminMessages)
+                    .Name("grdAdminMessages")
+                    .DataKeys(dataKeys => dataKeys.Add(m => m.MessageId))
+                    .Columns(columns =>
+                    {
+                        columns.Bound(m => m.MessageId).Hidden();
+                        columns.Bound(m => m.MessageText);
+                        columns.Bound(m => m.MessageCreateDate);
+                    })
+                    .Pageable(pager => pager.PageSize(10))
+                    .Sortable()
+                ) 
+            </div>
         </div>
     </div>
 </div>

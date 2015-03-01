@@ -488,6 +488,9 @@ namespace DupacoGarageSale.Web.Controllers
                 var viewModel = new AdminViewModel();
                 viewModel.AdminUser = session.User;
 
+                var repository = new AdminRepository();
+                viewModel.AdminMessages = repository.GetAdminMessages();
+
                 // Show the success message if the save worked.
                 if (Session["PublishHeadlineNews"] != null)
                 {

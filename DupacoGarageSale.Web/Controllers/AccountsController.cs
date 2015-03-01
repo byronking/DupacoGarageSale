@@ -251,6 +251,11 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.GarageSales = garageSaleRepository.GetGarageSaleByUserName(viewModel.User.UserName);
                 viewModel.FavoriteGarageSales = garageSaleRepository.GetFavoriteGarageSales(viewModel.User.UserId);
 
+                // Load any headlines, if any.
+                var adminRepository = new AdminRepository();
+                var adminMessages = adminRepository.GetAdminMessages();
+                viewModel.HeadlineNews = adminMessages[0].MessageText;
+
                 ViewBag.NavProfile = "active";
 
                 // Show the success message if the sale worked.

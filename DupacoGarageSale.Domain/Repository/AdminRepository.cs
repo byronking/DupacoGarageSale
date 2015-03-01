@@ -395,7 +395,51 @@ namespace DupacoGarageSale.Data.Repository
             return blogPost;
         }
 
+        /// <summary>
+        /// This gets the admin messages.
+        /// </summary>
+        /// <returns></returns>
+        public List<AdminMessage> GetAdminMessages()
+        {
+            var adminMessages = new List<AdminMessage>();
 
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetAdminMessages", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var message = new AdminMessage
+                        {
+                            MessageText = reader["message_text"].ToString(),
+                            MessageCreateDate = Convert.ToDateTime(reader["message_create_date"]),
+                            MessagePublishDate = Convert.ToDateTime(reader["message_publish_date"]),
+                            MessageType = reader["message_type"].ToString()
+                        };
+
+                        adminMessages.Add(message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return adminMessages;
+        }
+
+        /// <summary>
+        /// This saves admin messages, be they for the user home page or for the main home page.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public UserSaveResult SaveAdminMessage(AdminMessage message)
         {
             var saveResult = new UserSaveResult();
