@@ -111,6 +111,7 @@
         });
     });
 
+    // This handles sorting the itinerary routes.
     $(function () {
         $("#sortable").sortable({
             stop: function (event, ui) {
@@ -132,6 +133,19 @@
             }
         })
     });
+
+    // This loads the add stopover modal
+    $('#btnAddStopover').click(function () {
+        //alert('hi');
+        var url = $('#addStopoverToItineraryModal').data('url');
+
+        $.get(url, function (data) {
+            $('#gameContainer').html(data);
+
+            $('#addStopoverToItineraryModal').modal('show');
+        });
+    });
+
 });
 
 $(function () {

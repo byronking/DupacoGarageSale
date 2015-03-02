@@ -179,7 +179,7 @@ namespace DupacoGarageSale.Data.Repository
                             ItineraryCreatedDate = Convert.ToDateTime(reader["itinerary_create_date"]),
                             ItineraryLegId = Convert.ToInt32(reader["itinerary_leg_id"]),
                             ItineraryLegOrder = Convert.ToInt32(reader["leg_order"]),
-                            ItineraryLegsCount = Convert.ToInt32(reader["legs_count"]),
+                            //ItineraryLegsCount = Convert.ToInt32(reader["legs_count"]),
                             SaleId = Convert.ToInt32(reader["sale_id"]),
                             SaleAddress1 = reader["sale_address1"].ToString(),
                             SaleAddress2 = reader["sale_address2"].ToString(),
@@ -332,11 +332,9 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return saveResult;
-        }
+        }        
 
-        
-
-            /// <summary>
+        /// <summary>
         /// This searches the garage sales based on search criteria
         /// </summary>
         /// <param name="searchCriteria"></param>
@@ -472,28 +470,36 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
-        /// This decreases the order for a particular leg id.
+        /// This saves the user's selected waypoints.
         /// </summary>
-        /// <param name="itineraryLegId"></param>
-        /// <param name="legOrder"></param>
+        /// <param name="waypointAddress"></param>
+        /// <param name="itineraryId"></param>
         /// <returns></returns>
-        public UserSaveResult DecreaseItineraryLegOrder(int itineraryLegId, int legOrder)
+        public UserSaveResult SaveItineraryWaypoints(string waypointAddress, int itineraryId)
         {
             var saveResult = new UserSaveResult();
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
-                using (SqlCommand cmd = new SqlCommand("DecreaseItineraryLegOrder", conn))
+                using (SqlCommand cmd = new SqlCommand("SaveItineraryWaypoints", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@itinerary_leg_id", SqlDbType.Int).Value = itineraryLegId;
-                    cmd.Parameters.Add("@leg_order", SqlDbType.Int).Value = legOrder;
+                    cmd.Parameters.Add("@waypoint_address", SqlDbType.VarChar).Value = waypointAddress;
+                    cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = itineraryId;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
 
-                    saveResult.IsSaveSuccessful = true;
+                    saveResult.SaveResultId = (int)returnParameter.Value;
+
+                    if (saveResult.SaveResultId != 0)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
                 }
             }
             catch (Exception ex)
@@ -505,23 +511,58 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
-        /// This increases the order for a particular leg id.
+        /// This gets the waypoints saved by the user.
         /// </summary>
-        /// <param name="itineraryLegId"></param>
-        /// <param name="legOrder"></param>
+        /// <param name="itineraryId"></param>
         /// <returns></returns>
-        public UserSaveResult IncreaseItineraryLegOrder(int itineraryLegId, int legOrder)
+        public List<string> GetItineraryWaypoints(int itineraryId)
+        {
+            var itineraryWaypoints = new List<string>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetWaypointsByItineraryId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = itineraryId;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var waypoint = reader["waypoint_address"].ToString();
+                        itineraryWaypoints.Add(waypoint);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return itineraryWaypoints;
+        }
+
+        /// <summary>
+        /// This deletes the user's waypoint.
+        /// </summary>
+        /// <param name="waypointAddress"></param>
+        /// <param name="itineraryId"></param>
+        /// <returns></returns>
+        public UserSaveResult DeleteItineraryWaypoints(string waypointAddress, int itineraryId)
         {
             var saveResult = new UserSaveResult();
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
-                using (SqlCommand cmd = new SqlCommand("IncreaseItineraryLegOrder", conn))
+                using (SqlCommand cmd = new SqlCommand("DeleteItineraryWaypoints", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@itinerary_leg_id", SqlDbType.Int).Value = itineraryLegId;
-                    cmd.Parameters.Add("@leg_order", SqlDbType.Int).Value = legOrder;
+                    cmd.Parameters.Add("@waypoint_address", SqlDbType.VarChar).Value = waypointAddress;
+                    cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = itineraryId;
 
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();

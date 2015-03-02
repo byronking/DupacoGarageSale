@@ -14,13 +14,13 @@
     <div class="col-md-8">
         <div class="panel panel-default">
             <div class="panel-body">
-                @if (Model.GarageSaleItinerary.Count == 0)
+                @if (Model.GarageSaleItineraries.Count == 0)
                 {
                     <h3>You have no itineraries!  Time to get shopping!</h3>
                 }
                 else
                 {
-                    foreach(var itinerary in Model.GarageSaleItinerary)
+                    foreach(var itinerary in Model.GarageSaleItineraries)
                     {
                         <h3>@itinerary.ItineraryName</h3>
                         <span>Created: @itinerary.ItineraryCreatedDate</span><br /><br />

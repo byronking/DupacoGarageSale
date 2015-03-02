@@ -2830,3 +2830,185 @@ Error Number:201,State:4,Class:16
    at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
    at System.Convert.ToInt32(Object value)
    at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 13:11:25,688 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 13:12:04,558 [14] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 13:38:19,730 [105] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 13:55:20,002 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 13:57:58,689 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 14:10:44,741 [9] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 14:14:29,804 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 14:46:58,850 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 15:29:22,183 [9] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 15:41:23,655 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 17:29:15,669 [11] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 18:02:10,160 [47] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 18:15:24,781 [56] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 18:19:00,650 [11] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 18:40:22,557 [19] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 20:40:10,598 [83] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 21:22:10,795 [91] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 21:27:33,973 [9] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 22:01:13,845 [38] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 22:22:30,031 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 22:31:58,076 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 22:38:32,880 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 22:46:23,403 [6] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 22:48:04,462 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 22:50:13,991 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 22:54:23,835 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 22:56:41,185 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 23:04:11,528 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 23:06:22,296 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 23:26:29,206 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 23:27:40,979 [11] ERROR DupacoGarageSale.Data.Services.Logger System.FormatException: Failed to convert parameter value from a String to a Int32. ---> System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at System.Data.SqlClient.SqlParameter.CoerceValue(Object value, MetaType destinationType, Boolean& coercedToDataFeed, Boolean& typeChanged, Boolean allowStreaming)
+   --- End of inner exception stack trace ---
+   at System.Data.SqlClient.SqlParameter.CoerceValue(Object value, MetaType destinationType, Boolean& coercedToDataFeed, Boolean& typeChanged, Boolean allowStreaming)
+   at System.Data.SqlClient.SqlParameter.GetCoercedValue()
+   at System.Data.SqlClient.SqlParameter.Validate(Int32 index, Boolean isCommandProc)
+   at System.Data.SqlClient.SqlCommand.SetUpRPCParameters(_SqlRPC rpc, Int32 startCount, Boolean inSchema, SqlParameterCollection parameters)
+   at System.Data.SqlClient.SqlCommand.BuildRPC(Boolean inSchema, SqlParameterCollection parameters, _SqlRPC& rpc)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DupacoGarageSale.Data.Repository.ItineraryRepository.SaveItineraryWaypoints(String waypointAddress, Int32 itineraryId) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\ItineraryRepository.cs:line 491
+2015-03-01 23:28:18,177 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 23:31:12,868 [11] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Conversion failed when converting the varchar value '438 East Belvedere Avenue, Baltimore, MD 21212, United States' to data type int.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DupacoGarageSale.Data.Repository.ItineraryRepository.SaveItineraryWaypoints(String waypointAddress, Int32 itineraryId) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\ItineraryRepository.cs:line 491
+ClientConnectionId:ed9d9f76-f457-46a5-82d2-ee462d66f655
+Error Number:245,State:1,Class:16
+2015-03-01 23:31:29,866 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 23:55:13,460 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-01 23:59:08,555 [6] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 00:11:12,323 [9] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 00:13:01,605 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 00:15:04,950 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 00:16:25,215 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264

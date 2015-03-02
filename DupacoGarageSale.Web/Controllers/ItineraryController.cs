@@ -80,7 +80,7 @@ namespace DupacoGarageSale.Web.Controllers
                 }
 
                 viewModel.User = session.User;
-                viewModel.GarageSaleItinerary = itineraryList;
+                viewModel.GarageSaleItineraries = itineraryList;
 
                 //if (Session["ItineraryLegDeleted"] != null)
                 //{
@@ -142,7 +142,7 @@ namespace DupacoGarageSale.Web.Controllers
                 }
 
                 viewModel.User = session.User;
-                viewModel.GarageSaleItinerary = itineraryList;
+                viewModel.GarageSaleItineraries = itineraryList;
 
                 if (Session["ItineraryLegDeleted"] != null)
                 {
@@ -197,7 +197,23 @@ namespace DupacoGarageSale.Web.Controllers
                 }
 
                 viewModel.User = session.User;
-                viewModel.GarageSaleItinerary = itineraryList;
+                // Add the current itinerary as well.
+                viewModel.GarageSaleItinerary = repository.GetItineraryByItineraryId(id);
+                viewModel.GarageSaleItineraries = itineraryList;
+
+                // Get the waypoints, if any and then add them to the itineraries list.
+                var waypoints = repository.GetItineraryWaypoints(id);
+
+                foreach (var waypoint in waypoints)
+                {
+                    var itinerary = new GarageSaleItinerary
+                    {
+                        SaleId = 7777777,
+                        SaleAddress1 = waypoint
+                    };
+
+                    viewModel.GarageSaleItineraries.Add(itinerary);
+                }
 
                 if (Session["ItineraryLegDeleted"] != null)
                 {
@@ -226,7 +242,7 @@ namespace DupacoGarageSale.Web.Controllers
         }
 
         /// <summary>
-        /// THIS IS NOT YES IN USE!!
+        /// THIS IS NOT IN USE!!
         /// </summary>
         /// <param name="legId"></param>
         /// <returns></returns>
@@ -269,7 +285,7 @@ namespace DupacoGarageSale.Web.Controllers
 
                     // Delete legs, only if it matches the current user.
                     var repository = new ItineraryRepository();
-                    var saveResult = repository.DeleteItineraryLeg(legId, viewModel.GarageSaleItinerary[0].ItineraryId, viewModel.GarageSaleItinerary[0].SaleId,
+                    var saveResult = repository.DeleteItineraryLeg(legId, viewModel.GarageSaleItineraries[0].ItineraryId, viewModel.GarageSaleItineraries[0].SaleId,
                         session.User.UserId);
 
                     if (saveResult.IsSaveSuccessful)
@@ -282,7 +298,7 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     controller = "Itinerary",
                     action = "ViewItinerary",
-                    id = viewModel.GarageSaleItinerary[0].ItineraryId
+                    id = viewModel.GarageSaleItineraries[0].ItineraryId
                 }));
             }
             else
@@ -363,30 +379,71 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     controller = "Itinerary",
                     action = "ViewItinerary",
-                    id = viewModel.GarageSaleItinerary[0].ItineraryId
+                    id = viewModel.GarageSaleItineraries[0].ItineraryId
                 }));
         }
 
         /// <summary>
-        /// This moves an itinerary leg up in the order.
+        /// This allows users to add a waypoint to the itinerary that is not a garage sale.
         /// </summary>
-        /// <param name="legId"></param>
-        /// <param name="legOrder"></param>
         /// <returns></returns>
-        public ActionResult MoveUp(int legId, int legOrder)
+        [HttpGet]
+        public ActionResult AddStopover()
         {
+            var viewModel = new GarageSaleViewModel();
+
             if (Session["UserSession"] != null)
             {
                 var session = Session["UserSession"] as UserSession;
 
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                    viewModel.User = session.User;
+                }
+
+                Session["ViewModel"] = viewModel;
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        /// <summary>
+        /// This saves the address of the waypoint selected by the user.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult AddItineraryWaypoint(int id, string address)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var viewModel = new GarageSaleViewModel();                
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                    viewModel.User = session.User;
+                }
+
                 var repository = new ItineraryRepository();
-                var saveResult = repository.DecreaseItineraryLegOrder(legId, legOrder);
+                var saveResult = repository.SaveItineraryWaypoints(address, id);
+
+                if (saveResult.IsSaveSuccessful)
+                {
+                    Session["WaypointSaved"] = true;
+                }
+
+                Session["ViewModel"] = viewModel;
 
                 return RedirectToAction("ViewItinerary", new RouteValueDictionary(new
                 {
-                    controller = "GarageSale",
+                    controller = "Itinerary",
                     action = "ViewItinerary",
-                    id = session.User.UserId
+                    id = viewModel.GarageSaleItinerary.ItineraryId
                 }));
             }
             else
@@ -396,25 +453,37 @@ namespace DupacoGarageSale.Web.Controllers
         }
 
         /// <summary>
-        /// This moves an itinerary leg down in the order.
+        /// This deletes a waypoint from the user's itinerary.
         /// </summary>
-        /// <param name="legId"></param>
-        /// <param name="legOrder"></param>
+        /// <param name="id"></param>
+        /// <param name="address"></param>
         /// <returns></returns>
-        public ActionResult MoveDown(int legId, int legOrder)
+        public ActionResult DeleteWaypoint(int id, string address)
         {
             if (Session["UserSession"] != null)
             {
                 var session = Session["UserSession"] as UserSession;
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                    viewModel.User = session.User;
+                }
 
                 var repository = new ItineraryRepository();
-                var saveResult = repository.IncreaseItineraryLegOrder(legId, legOrder);
+                var saveResult = repository.DeleteItineraryWaypoints(address, id);
+
+                if (saveResult.IsSaveSuccessful)
+                {
+                    Session["WaypointSaved"] = true;
+                }
 
                 return RedirectToAction("ViewItinerary", new RouteValueDictionary(new
                 {
-                    controller = "GarageSale",
+                    controller = "Itinerary",
                     action = "ViewItinerary",
-                    id = session.User.UserId
+                    id = id
                 }));
             }
             else

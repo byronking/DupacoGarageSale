@@ -717,7 +717,7 @@ namespace DupacoGarageSale.Web.Controllers
                 var itineraryRepository = new ItineraryRepository();
                 var itineraryList = new List<GarageSaleItinerary>();
                 itineraryList = itineraryRepository.GetItinerariesByUserId(viewModel.User.UserId);
-                viewModel.GarageSaleItinerary = itineraryList;
+                viewModel.GarageSaleItineraries = itineraryList;
             }
 
             foreach (var itemId in viewModel.Sale.GarageSaleItems)

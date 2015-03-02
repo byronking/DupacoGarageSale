@@ -21,10 +21,11 @@ namespace DupacoGarageSale.Web.Models
         public GarageSaleSearchResults SearchResults { get; set; }
         public ItinerarySearchResults ItinerarySearchResults { get; set; }
         public MappingData MappingData { get; set; }
-        public List<GarageSaleItinerary> GarageSaleItinerary { get; set; }
+        public List<GarageSaleItinerary> GarageSaleItineraries { get; set; }
         public GarageSaleMessage GarageSaleMessage { get; set; }
         public List<GarageSaleMessage> GarageSaleMessages { get; set; }
         public Itinerary UserItinerary { get; set; }
+        public GarageSaleItinerary GarageSaleItinerary { get; set; }
         public List<FavoriteGarageSale> FaveGarageSales { get; set; }
         public List<GarageSale> FavoriteGarageSales { get; set; }
         public string HeadlineNews { get; set; }
