@@ -241,6 +241,12 @@ namespace DupacoGarageSale.Data.Repository
                             addressId = Convert.ToInt32(reader["address_id"]);
                         }
 
+                        var userType = 2;
+                        if (reader["user_type_id"] != DBNull.Value)
+                        {
+                            userType = Convert.ToInt32(reader["user_type_id"]);
+                        }
+
                         var address = new UserAddress
                         {
                             AddressId = addressId,
@@ -261,7 +267,7 @@ namespace DupacoGarageSale.Data.Repository
                         user.UserId = Convert.ToInt32(reader["user_id"]);
                         user.UserName = reader["user_name"].ToString();
                         user.ProfilePicLink = reader["profile_pic_link"].ToString();
-                        user.UserTypeId = Convert.ToInt32(reader["user_type_id"]);
+                        user.UserTypeId = userType;
                     }
                 }
             }

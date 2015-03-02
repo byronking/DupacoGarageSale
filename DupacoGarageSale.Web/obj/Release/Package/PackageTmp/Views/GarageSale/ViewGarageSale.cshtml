@@ -18,7 +18,7 @@
             {
                 <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
                     
-                var sale = Model.GarageSaleItinerary.Find(m => m.SaleId == Model.Sale.GarageSaleId);
+                var sale = Model.GarageSaleItineraries.Find(m => m.SaleId == Model.Sale.GarageSaleId);
                 if (sale != null) 
                 {   
                     <input type="hidden" id="hdnItineraryId" value="@sale.ItineraryId" />                         
@@ -242,7 +242,7 @@
                     <div>
                         @if(Model.GarageSaleItinerary != null)
                         {   
-                            if (Model.GarageSaleItinerary.Count == 0)
+                            if (Model.GarageSaleItineraries.Count == 0)
                             {
                                 <span class="margin_bottom_40">No itineraries.  Let's create one!</span>
                             }
@@ -255,7 +255,7 @@
                                         <th>Itinerary name</th>
                                         <th>Itinerary create date</th>
                                     </tr>
-                                    @foreach(var itinerary in Model.GarageSaleItinerary)
+                                    @foreach(var itinerary in Model.GarageSaleItineraries)
                                     {
                                         <tr>
                                             <td>@Html.ActionLink("Save to this itinerary", "AddToUserItinerary", "GarageSale", new { saleId = Model.Sale.GarageSaleId, itineraryId = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>

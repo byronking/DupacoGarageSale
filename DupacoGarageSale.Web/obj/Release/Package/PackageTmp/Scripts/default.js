@@ -46,6 +46,62 @@
         }
     });
 
+    // This provides validation for the user profile fields.
+    $("#btnSaveProfile").click(function (e) {
+        if ($('#txtFirstName').val() == "") {
+            $("#txtFirstName").popover({
+                content: "Please enter a first name", placement: "top",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#txtFirstName").popover('show');
+            e.preventDefault();
+        }
+
+        if ($('#txtLastName').val() == "") {
+            $("#txtLastName").popover({
+                content: "Please enter a last name", placement: "top",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#txtLastName").popover('show');
+            e.preventDefault();
+        }
+        if ($('#txtAddress1').val() == "") {
+            $("#txtAddress1").popover({
+                content: "Please enter a house number & street", placement: "top",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#txtAddress1").popover('show');
+            e.preventDefault();
+        }
+
+        if ($('#txtCity').val() == "") {
+            $("#txtCity").popover({
+                content: "Please enter a city", placement: "top",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#txtCity").popover('show');
+            e.preventDefault();
+        }
+
+        if ($('#ddlStatesList option:selected').text() == "Select...") {
+            $("#ddlStatesList").popover({
+                content: "Please enter a state", placement: "top",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#ddlStatesList").popover('show');
+            e.preventDefault();
+        }
+
+        if ($('#txtZip').val() == "") {
+            $("#txtZip").popover({
+                content: "Please enter a zip code", placement: "top",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#txtZip").popover('show');
+            e.preventDefault();
+        }
+    });
+
     $("#btnFilter").click(function (e) {
         //alert($("#txtSearchCriteria").val());
         //$("#hdnSearchCriteria").val($("#txtSearchCriteria").val());
