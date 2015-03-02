@@ -3,17 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/bootstrap/css")
     @Styles.Render("~/Content/timepicker/css")
     @Styles.Render("~/Content/lightbox/css")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/js")
-    @Scripts.Render("~/bundles/timepicker")
+    @Scripts.Render("~/bundles/modernizr")    
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/timepicker")
+    @Scripts.Render("~/bundles/js")
+    
+    
+
+    @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.windows7.css").Combined(true).Compress(true)))
 </head>
 <body>
     @if (Session["UserSession"] != null)
@@ -24,16 +30,12 @@
     {
         @Html.Partial("~/Views/Shared/_TopNavigation.cshtml")
     }
-    
-    @*<div class="container" style="margin-top:60px;">*@
-    <div class="container" style="margin-top:40px;">
-        <div id="bg">
-          <img src="~/Content/images/Insulators-3080-Karen-St-DBQ.jpg" alt="">
-        </div>
 
-        @RenderBody()
-    </div>
+    @RenderBody()
 
     @RenderSection("scripts", required: false)
+
+    <!-- This breaks the order of the loading of the js scripts -->
+    @*@(Html.Telerik().ScriptRegistrar())*@
 </body>
 </html>

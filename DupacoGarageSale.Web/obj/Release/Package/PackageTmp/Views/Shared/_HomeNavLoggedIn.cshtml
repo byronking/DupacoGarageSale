@@ -1,30 +1,37 @@
 ﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar dupaco_colors navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="~/Home/">Welcome to the Dupaco Garage Sales!</a>
+            <a class="navbar-brand" href="~/Home/" style="color:white;font-weight:bold;font-size:24px;">Say hello to a good buy!</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+        <div id="navbar" class="navbar-collapse collapse" style="color:white;">
+            <ul class="nav navbar-nav white">
                 @{
                     if (Model.User.UserTypeId == 1)
                     {
-                        <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index">Admin</a></li>
+                        <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index" class="white">Admin</a></li>
                     }
                 }
-                <li class="@ViewBag.NavProfile"><a href="~/Accounts/UserProfile/@Model.User.UserId">My profile</a></li>
-                <li class="dropdown @ViewBag.NavGarageSales">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Garage sales <span class="caret"></span></a>
+                <li class="dropdown @ViewBag.NavProfile">
+                    <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false">My profile <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="~/GarageSale/Add/">Add a new sale</a></li>
-                        <li><a href="~/GarageSale/View/">View my sales</a></li>
+                        <li><a href="~/Accounts/UserHome/@Model.User.UserId">View profile</a></li>
+                        <li><a href="~/Accounts/UserProfile/@Model.User.UserId">Edit profile</a></li>
+                        <li><a href="~/Accounts/SignUp/">Create account</a></li>
                     </ul>
                 </li>
-                <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1">Search</a></li>
-                @if(Model.User.Address.AddressId != 0)
+                <li class="dropdown @ViewBag.NavGarageSales white">
+                    <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false">Garage sales <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="~/GarageSale/Add/" class="white">Add a new sale</a></li>
+                        <li><a href="~/GarageSale/View/" class="white">View my sales</a></li>
+                    </ul>
+                </li>
+                <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1" class="white">Search</a></li>
+                @if(Model.User.Address != null)
                 {
-                    <li class="@ViewBag.NavCreateItinerary"><a href="~/GarageSale/ViewItinerary/@Model.User.UserId">View itinerary</a></li>
+                    <li class="@ViewBag.NavCreateItinerary"><a href="~/Itinerary/GetUserItineraries/@Model.User.UserId" class="white">View itineraries</a></li>
                 }
             </ul>
             <form class="navbar-form navbar-right" role="form">

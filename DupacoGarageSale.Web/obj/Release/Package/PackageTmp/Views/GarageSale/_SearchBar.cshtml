@@ -1,4 +1,4 @@
-﻿<div class="col-md-10" style="margin-left:-15px;">
+﻿@*<div class="col-md-10" style="margin-left:-15px;">*@
     @using (Html.BeginForm("SearchByCriteria", "GarageSale", FormMethod.Post, new { @class = "form-inline" }))
     {
         <div class="input-group">
@@ -9,10 +9,10 @@
         </div><br /><br />
     }
 
-    <div id="searchValidation" class="hidden alert alert-danger fade in" role="alert" style="width:444px;"">
+    <div id="searchValidation" class="hidden alert alert-danger fade in" role="alert" style="width:444px;">
         <strong>Oops!</strong>
         Please enter search criteria.
     </div>
 
     <input type="hidden" id="hdnSearchBarCriteria" value="@ViewBag.SearchCriteria" />
-</div>
+@*</div>*@

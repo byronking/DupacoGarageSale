@@ -71,6 +71,18 @@
     display: block;
 }
 
+.dupaco_colors {
+    background-color: #87C440;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.navbar-brand-dupaco {
+    color:white;
+    font-weight: bold;
+    font-size:28px;
+}
+
 .gray-background {
     background-color: #D6D6D6;
 }
@@ -79,24 +91,40 @@
     color: red;
 }
 
+.white {
+    color: white;
+}
+
 .light-orange {
     background-color: #F8AF4E;
 }
 
-.down-20 {
+.down_20 {
     margin-top: 20px;
 }
 
-.down-40 {
+.down_30 {
+    margin-top: 30px;
+}
+
+.down_40 {
     margin-top: 40px;
 }
 
-.down-70 {
+.down_70 {
     margin-top: 70px;
 }
 
 .over-30 {
     margin-right: 30px;
+}
+
+.margin_bottom_30 {
+    margin-bottom: 30px;
+}
+
+.margin_bottom_40 {
+    margin-bottom: 40px;
 }
 
 body {
@@ -127,6 +155,9 @@ header, footer, nav, section {
     position: relative;
 }
 
+/*#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#sortable li span { position: absolute; margin-left: -1.3em; }*/
 
 /* Styles for basic forms
 -----------------------------------------------------------*/

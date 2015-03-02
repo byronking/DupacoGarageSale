@@ -3012,3 +3012,294 @@ Error Number:245,State:1,Class:16
    at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
    at System.Convert.ToInt32(Object value)
    at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 00:23:25,908 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 00:43:41,421 [30] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 00:47:51,443 [10] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'SearchSpecialItemsByCriteria'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1049
+ClientConnectionId:c33ec53b-77d6-47e7-b112-0b9b201fd802
+Error Number:2812,State:62,Class:16
+2015-03-02 00:48:08,833 [9] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 00:51:07,782 [17] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Conversion failed when converting the varchar value '245 U.S. 151 Business Suite 100, Platteville, WI 53818, United States' to data type int.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DupacoGarageSale.Data.Repository.ItineraryRepository.SaveItineraryWaypoints(String waypointAddress, Int32 itineraryId) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\ItineraryRepository.cs:line 495
+ClientConnectionId:c33ec53b-77d6-47e7-b112-0b9b201fd802
+Error Number:245,State:1,Class:16
+2015-03-02 00:56:07,892 [29] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 00:56:13,055 [25] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 00:57:06,862 [29] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Procedure or function SearchSpecialItems has too many arguments specified.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, Dictionary`2 saleDates) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 936
+ClientConnectionId:2a70489b-d177-4e3c-98dd-7b7d15691da7
+Error Number:8144,State:2,Class:16
+2015-03-02 00:57:07,082 [29] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'SearchGarageSaleItemsByDate'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, Dictionary`2 saleDates) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 987
+ClientConnectionId:2a70489b-d177-4e3c-98dd-7b7d15691da7
+Error Number:2812,State:62,Class:16
+2015-03-02 00:57:21,136 [24] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Procedure or function SearchSpecialItems has too many arguments specified.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, Dictionary`2 saleDates) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 936
+ClientConnectionId:2a70489b-d177-4e3c-98dd-7b7d15691da7
+Error Number:8144,State:2,Class:16
+2015-03-02 00:57:29,002 [29] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'SearchSpecialItemsByCriteria'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1049
+ClientConnectionId:2a70489b-d177-4e3c-98dd-7b7d15691da7
+Error Number:2812,State:62,Class:16
+2015-03-02 00:58:34,583 [24] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'SearchSpecialItemsByCriteria'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1049
+ClientConnectionId:2a70489b-d177-4e3c-98dd-7b7d15691da7
+Error Number:2812,State:62,Class:16
+2015-03-02 00:59:40,157 [24] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'SearchSpecialItemsByCriteria'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1049
+ClientConnectionId:2a70489b-d177-4e3c-98dd-7b7d15691da7
+Error Number:2812,State:62,Class:16
+2015-03-02 01:00:19,021 [13] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Procedure or function SearchSpecialItems has too many arguments specified.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, Dictionary`2 saleDates) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 936
+ClientConnectionId:2a70489b-d177-4e3c-98dd-7b7d15691da7
+Error Number:8144,State:2,Class:16
+2015-03-02 01:00:19,237 [13] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'SearchGarageSaleItemsByDate'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, Dictionary`2 saleDates) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 987
+ClientConnectionId:2a70489b-d177-4e3c-98dd-7b7d15691da7
+Error Number:2812,State:62,Class:16
+2015-03-02 09:22:16,900 [134] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 10:18:50,824 [181] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:19:06,978 [289] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:19:15,315 [288] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'SaveGarageSaleUserProfile' expects parameter '@address1', which was not supplied.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DupacoGarageSale.Data.Repository.AccountsRepository.SaveGarageSaleUserProfile(GarageSaleUser user) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 315
+ClientConnectionId:5cfa8e77-6467-43b1-8aa6-6c800064dd78
+Error Number:201,State:4,Class:16
+2015-03-02 11:19:15,523 [290] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:29:07,119 [301] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:29:25,061 [293] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:29:55,963 [294] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:31:28,114 [291] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:31:48,843 [293] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:32:30,886 [295] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:32:33,630 [291] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:32:37,295 [297] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): Procedure or function 'SaveGarageSaleUserProfile' expects parameter '@address1', which was not supplied.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DupacoGarageSale.Data.Repository.AccountsRepository.SaveGarageSaleUserProfile(GarageSaleUser user) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 315
+ClientConnectionId:a74a37f1-bb81-4caa-b6d1-b8ff5f8c0619
+Error Number:201,State:4,Class:16
+2015-03-02 11:32:37,564 [291] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:34:26,282 [295] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:35:32,685 [290] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:39:14,748 [287] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:41:02,375 [291] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:41:48,079 [294] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:44:31,275 [291] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:45:12,990 [291] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:45:18,652 [287] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 11:46:10,028 [289] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264
+2015-03-02 12:00:13,571 [280] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 264

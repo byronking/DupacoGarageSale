@@ -1,33 +1,35 @@
 ﻿$(document).ready(function () {
 
     $("#linkAddToItinerary").click(function (e) {
-        var sale_id = $("#hdnGarageSaleId").val();
-        var user_id = $("#hdnUserId").val();
-        var url = "/GarageSale/AddToItinerary/" + sale_id;
-        $.ajax({
-            type: "post",
-            data: JSON.stringify({
-                saleId: sale_id,
-                userId: user_id
-            }),
-            url: url,
-            //dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $('#addToItineraryModal').modal('show');
-            },
-            error: function (data) {
-                // Do something
-                //debugObject(data);
-                alert('There was a problem adding your itinerary item.');
-            }
-        });
+        $('#addToItineraryModal').modal('show');
+
+        //var sale_id = $("#hdnGarageSaleId").val();
+        //var user_id = $("#hdnUserId").val();
+        //var url = "/GarageSale/AddToItinerary/" + sale_id;
+        //$.ajax({
+        //    type: "post",
+        //    data: JSON.stringify({
+        //        saleId: sale_id,
+        //        userId: user_id
+        //    }),
+        //    url: url,
+        //    //dataType: 'json',
+        //    contentType: 'application/json; charset=utf-8',
+        //    success: function (data) {
+        //        $('#addToItineraryModal').modal('show');
+        //    },
+        //    error: function (data) {
+        //        // Do something
+        //        //debugObject(data);
+        //        alert('There was a problem adding your itinerary item.');
+        //    }
+        //});
     });
 
     $("#linkRemoveFromItinerary").click(function (e) {
         var sale_id = $("#hdnGarageSaleId").val();
         var itinerary_id = $("#hdnItineraryId").val();
-        var url = "/GarageSale/RemoveFromItinerary/";
+        var url = "/Itinerary/RemoveFromItinerary/";
         $.ajax({
             type: "post",
             data: JSON.stringify({
@@ -108,6 +110,42 @@
             }
         });
     });
+
+    // This handles sorting the itinerary routes.
+    $(function () {
+        $("#sortable").sortable({
+            stop: function (event, ui) {
+                var data = "";
+                var newWayPointsList = [];
+
+                $("#sortable li").each(function (i, el) {
+                    var p = $(el).html();
+
+                    //var field = $(this).find("input").attr('id');
+                    var field = $(this).find("input:hidden").val();
+                    //alert(field);
+
+                    newWayPointsList.push(field);
+                });
+
+                $("#hdnNewItineraryLegs").val(newWayPointsList);
+                //alert('new order: ' + $("#hdnNewItineraryLegs").val());
+            }
+        })
+    });
+
+    // This loads the add stopover modal
+    $('#btnAddStopover').click(function () {
+        //alert('hi');
+        var url = $('#addStopoverToItineraryModal').data('url');
+
+        $.get(url, function (data) {
+            $('#gameContainer').html(data);
+
+            $('#addStopoverToItineraryModal').modal('show');
+        });
+    });
+
 });
 
 $(function () {

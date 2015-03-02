@@ -7,7 +7,9 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/bootstrap/css")
     @Styles.Render("~/Content/timepicker/css")
+    @Styles.Render("~/Content/lightbox/css")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/js")
     @Scripts.Render("~/bundles/timepicker")
@@ -15,14 +17,8 @@
 </head>
 <body>
     @Html.Partial("~/Views/Shared/_GarageSaleNav.cshtml")
-    
-    <div class="container" style="margin-top:60px;">
-        <div id="bg">
-          <img src="~/Content/images/iowa.jpg" alt="">
-        </div>
 
-        @RenderBody()
-    </div>    
+    @RenderBody()  
     
     @RenderSection("scripts", required: false)
 </body>

@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_UserProfileLayout.cshtml";
 }
 
-<div id="page-wrap" class="jumbotron" style="min-height:500px;">
+<div>
     <div class="container">
         <div class="row" style="margin-bottom:20px">
-            <h2><a href="~/Home" style="text-decoration:none;">Home / </a>Account info for @Model.FirstName @Model.LastName</h2><br />
+            <h2><a href="~/Home" style="text-decoration:none;">Home / </a>Edit profile / Account info for @Model.FirstName @Model.LastName</h2><br />
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong>View / update your account info</strong></h3>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
             
-                        <div class="row down-40">
+                        <div class="row down_40">
                             <div class="col-md-12 text-center">
                                 <div class="form-group">
                                     <input type="submit" value="Save profile" class="btn btn-primary" />

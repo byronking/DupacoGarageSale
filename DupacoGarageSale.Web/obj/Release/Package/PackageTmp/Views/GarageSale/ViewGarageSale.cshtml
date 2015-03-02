@@ -5,223 +5,224 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="page-wrap" class="jumbotron" style="min-height:500px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                <input type="hidden" id="hdnGarageSaleId" value="@Model.Sale.GarageSaleId" />
-                <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@Model.Sale.GarageSaleName</h2>
-                @Model.Sale.SaleDescription<br /><br />
-            </div>
-            <div class="col-md-3">
-                @if (Model.User != null)
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <input type="hidden" id="hdnGarageSaleId" value="@Model.Sale.GarageSaleId" />
+            <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@Model.Sale.GarageSaleName</h2>
+            @Model.Sale.SaleDescription <br /><br />
+        </div>
+        <div class="col-md-3">
+            @if (Model.User != null)
+            {
+                <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
+                    
+                var sale = Model.GarageSaleItinerary.Find(m => m.SaleId == Model.Sale.GarageSaleId);
+                if (sale != null) 
+                {   
+                    <input type="hidden" id="hdnItineraryId" value="@sale.ItineraryId" />                         
+                    <a href="#" id="linkRemoveFromItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Remove sale from itinerary</a><br />
+                }
+                else
                 {
-                    <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
+                    <a href="#" id="linkAddToItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Add sale to itinerary</a><br />
+                }                
                     
-                    if (Model.GarageSaleItinerary.Count > 0)
+                if (Model.FaveGarageSales != null)
+                {
+                    if (Model.FaveGarageSales.Count > 0)
                     {
-                        var sale = Model.GarageSaleItinerary.Find(m => m.SaleId == Model.Sale.GarageSaleId);
-                        if (sale != null) 
-                        {   
-                            <input type="hidden" id="hdnItineraryId" value="@sale.ItineraryId" />                         
-                            <a href="#" id="linkRemoveFromItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Remove sale from itinerary</a><br />
-                        }
-                        else
-                        {
-                            <a href="#" id="linkAddToItinerary" style="margin-top:5px"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Add sale to itinerary</a><br />
-                        }
-                    }                    
-                    
-                    if (Model.FaveGarageSales != null)
-                    {
-                        if (Model.FaveGarageSales.Count > 0)
-                        {
-                            <input type="hidden" id="hdnFaveSaleId" value="@ViewBag.FavedGarageSale" />
-                            <a href="#" id="linkRemoveFromFaves" style="margin-top:5px"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Remove sale from faves</a><br /><br />
-                        }
-                    }
-                    else
-                    {
-                        <a href="#" id="linkAddToFaves" style="margin-top:5px"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Add sale to faves</a><br /><br />
+                        <input type="hidden" id="hdnFaveSaleId" value="@ViewBag.FavedGarageSale" />
+                        <a href="#" id="linkRemoveFromFaves" style="margin-top:5px"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Remove sale from faves</a><br /><br />
                     }
                 }
-            </div>
-            <div class="col-md-5">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Sale address</strong></h3>
-                    </div>
-                    <div class="panel-body">
-                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @Model.Sale.SaleAddress1<br />
-
-                        @if (Model.Sale.SaleAddress2 != string.Empty)
-                        {
-                            @Model.Sale.SaleAddress2;
-                            Response.Write("<br/>");
-                        }
-
-                        @Model.Sale.SaleCity, @Model.Sale.SaleState @Model.Sale.SaleZip <br /> 
-                    </div>
-                </div>
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Items for sale</strong></h3>
-                    </div>
-                    <div class="panel-body">
-                        <ul>
-                            @foreach (var item in Model.Sale.GarageSaleItems)
-                            {
-                                <li>@item.ItemSubcategoryName</li>
-                            }
-                        </ul>                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Sale dates/times</strong></h3>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-bordered">                            
-                            <tr>
-                                <td class="text-center">@Model.Sale.DatesTimes.SaleDateOne.ToLongDateString()</td>
-                                <td class="text-center">@Model.Sale.DatesTimes.SaleDateTwo.ToLongDateString()</td>
-                                <td class="text-center">@Model.Sale.DatesTimes.SaleDateThree.ToLongDateString()</td>
-                                <td class="text-center">@Model.Sale.DatesTimes.SaleDateFour.ToLongDateString()</td>
-                            </tr><br />
-                            <tr>
-                                <td>Start:<br />@Model.Sale.DatesTimes.DayOneStart</td>
-                                <td>Start:<br />@Model.Sale.DatesTimes.DayTwoStart</td>
-                                <td>Start:<br />@Model.Sale.DatesTimes.DayThreeStart</td>
-                                <td>Start:<br />@Model.Sale.DatesTimes.DayFourStart</td>
-                            </tr>
-                            <tr>
-                                <td>End:<br />@Model.Sale.DatesTimes.DayOneEnd</td>
-                                <td>End:<br />@Model.Sale.DatesTimes.DayTwoEnd</td>
-                                <td>End:<br />@Model.Sale.DatesTimes.DayThreeEnd</td>
-                                <td>End:<br />@Model.Sale.DatesTimes.DayFourEnd</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            @{ if (Model.GarageSaleSpecialItems.Count > 0)
-               {
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><strong>Hot picks!</strong></h3>
-                        </div>
-                        <div class="panel-body">                   
-                            @foreach (var item in Model.GarageSaleSpecialItems)
-                            {
-                                <div class="col-md-4">
-                                    <div class="thumbnail" style="min-height:500px;">
-                                        <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                        <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
-                                        </a>
-                                        <div class="caption">
-                                            <h3>@item.Title</h3>
-                                            @item.Description<br /><br />
-                                            <p><span>$</span> @item.Price</p>                   
-                                        </div>                    
-                                    </div>
-                                </div>
-                            }                        
-                        </div>
-                    </div>
+                else
+                {
+                    <a href="#" id="linkAddToFaves" style="margin-top:5px"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Add sale to faves</a><br /><br />
                 }
             }
         </div>
+    </div>
 
-        <div class="row">
-            @{
-                if (Model.BlogPosts != null && Model.BlogPosts.Count > 0)
-                {
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><strong>What's going on at our sale!</strong></h3>
-                        </div>
-                        <div class="panel-body">                    
-                            @foreach (var post in Model.BlogPosts)
-                            {
-                                <div>
-                                    @Html.Hidden("hdnBlogPostId", post.BlogPostId)
-                                    <h3>@post.BlogPostTitle</h3> 
-                                    <small>Posted by @post.BlogPostUser @@ @post.PostDateTime</small><br /><br />
-                                
-                                    @if (@post.MediaTypeId == 1)
-                                    {
-                                        if (@post.ImageUri != string.Empty)
-                                        {
-                                            <div>                                            
-                                                <img alt="@post.ImageUri" data-src="holder.js/200%x200" style="display: block;" 
-                                                    class="img-thumbnail" src="~/Content/images/garage_sale_pictures/@post.ImageUri">
-                                            </div>
-                                        }
-                                        
-                                    }
-                                    else if (@post.MediaTypeId == 2)
-                                    {
-                                        if (@post.YouTubeUri != string.Empty)
-                                        {
-                                            <div class="embed-responsive embed-responsive-4by3">
-                                                <iframe class="embed-responsive-item" allowfullscreen="" src="@post.YouTubeUri"></iframe>
-                                            </div>
-                                        }
-                                    }
-                                    else if (@post.MediaTypeId == 3)
-                                    {
-                                        if (@post.VineUri != string.Empty)
-                                        {
-                                            <div>
-                                                <iframe class="vine-embed" src="@post.VineUri" width="600" height="600" frameborder="0"></iframe>
-                                                <script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>
-                                            </div>
-                                        }
-                                    }
-                                    <div style="margin-top:15px;">
-                                        @post.PostMessage
-                                    </div>
-                                </div>
-                            <hr />
-                            }
-                        </div>
-                    </div>
-                }
-            }
-                
-        </div>
-        
-        <div class="row">
+    
+    <div class="row">
+        <div class="col-md-5">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Questions and answers about this garage sale</strong></h3>
+                    <h3 class="panel-title"><strong>Sale address</strong></h3>
                 </div>
                 <div class="panel-body">
-                    @if(Model.User == null)
+                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @Model.Sale.SaleAddress1<br />
+
+                    @if (Model.Sale.SaleAddress2 != string.Empty)
                     {
-                        <span>Have a question or want to send kudos? You need to <a href="/Accounts/Login?redirectId=@Model.Sale.GarageSaleId">log in </a>first.</span><br /><br />
-                    }
-                    else
-                    {     
-                        <span>Have a question or want to send kudos? Click <a href="#" data-toggle="modal" data-target=".ask-question">here</a>!</span><br /><br />
+                        @Model.Sale.SaleAddress2;
+                        Response.Write("<br/>");
                     }
 
-                    <div>
-                        @foreach (var message in Model.GarageSaleMessages)
+                    @Model.Sale.SaleCity, @Model.Sale.SaleState @Model.Sale.SaleZip <br /> 
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Items for sale</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        @foreach (var item in Model.Sale.GarageSaleItems)
+                        {
+                            <li>@item.ItemSubcategoryName</li>
+                        }
+                    </ul>                        
+                </div>
+            </div>
+        </div>
+            
+        <div class="col-md-7">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Sale dates/times</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">                            
+                        <tr>
+                            <td class="text-center">@Model.Sale.DatesTimes.SaleDateOne.ToLongDateString()</td>
+                            <td class="text-center">@Model.Sale.DatesTimes.SaleDateTwo.ToLongDateString()</td>
+                            <td class="text-center">@Model.Sale.DatesTimes.SaleDateThree.ToLongDateString()</td>
+                            <td class="text-center">@Model.Sale.DatesTimes.SaleDateFour.ToLongDateString()</td>
+                        </tr><br />
+                        <tr>
+                            <td>Start:<br />@Model.Sale.DatesTimes.DayOneStart</td>
+                            <td>Start:<br />@Model.Sale.DatesTimes.DayTwoStart</td>
+                            <td>Start:<br />@Model.Sale.DatesTimes.DayThreeStart</td>
+                            <td>Start:<br />@Model.Sale.DatesTimes.DayFourStart</td>
+                        </tr>
+                        <tr>
+                            <td>End:<br />@string.Format("{0:t}", Model.Sale.DatesTimes.DayOneEnd)</td>
+                            <td>End:<br />@string.Format("{0:t}", Model.Sale.DatesTimes.DayTwoEnd)</td>
+                            <td>End:<br />@string.Format("{0:t}", Model.Sale.DatesTimes.DayThreeEnd)</td>
+                            <td>End:<br />@string.Format("{0:t}", Model.Sale.DatesTimes.DayFourEnd)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        @{ if (Model.GarageSaleSpecialItems.Count > 0)
+            {
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Hot picks!</strong></h3>
+                    </div>
+                    <div class="panel-body">                   
+                        @foreach (var item in Model.GarageSaleSpecialItems)
+                        {
+                            <div class="col-md-4">
+                                <div class="thumbnail" style="min-height:500px;">
+                                    <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
+	                                    <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+                                    </a>
+                                    <div class="caption">
+                                        <h3>@item.Title</h3>
+                                        @item.Description<br /><br />
+                                        <p><span>$</span> @item.Price</p>                   
+                                    </div>                    
+                                </div>
+                            </div>
+                        }                        
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="row">
+        @{
+            if (Model.BlogPosts != null && Model.BlogPosts.Count > 0)
+            {
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>What's going on at our sale!</strong></h3>
+                    </div>
+                    <div class="panel-body">                    
+                        @foreach (var post in Model.BlogPosts)
                         {
                             <div>
-                                Date: @message.MessageSent <br />
-                                From: @message.MessageFrom <br />
-                                Message: @message.MessageText <br />
-                            </div>                            
-                            <hr />
+                                @Html.Hidden("hdnBlogPostId", post.BlogPostId)
+                                <h3>@post.BlogPostTitle</h3> 
+                                <small>Posted by @post.BlogPostUser @@ @post.PostDateTime</small><br /><br />
+                                
+                                @if (@post.MediaTypeId == 1)
+                                {
+                                    if (@post.ImageUri != string.Empty)
+                                    {
+                                        <div>                                            
+                                            <img alt="@post.ImageUri" data-src="holder.js/200%x200" style="display: block;" 
+                                                class="img-thumbnail" src="~/Content/images/garage_sale_pictures/@post.ImageUri">
+                                        </div>
+                                    }
+                                        
+                                }
+                                else if (@post.MediaTypeId == 2)
+                                {
+                                    if (@post.YouTubeUri != string.Empty)
+                                    {
+                                        <div class="embed-responsive embed-responsive-4by3">
+                                            <iframe class="embed-responsive-item" allowfullscreen="" src="@post.YouTubeUri"></iframe>
+                                        </div>
+                                    }
+                                }
+                                else if (@post.MediaTypeId == 3)
+                                {
+                                    if (@post.VineUri != string.Empty)
+                                    {
+                                        <div>
+                                            <iframe class="vine-embed" src="@post.VineUri" width="600" height="600" frameborder="0"></iframe>
+                                            <script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>
+                                        </div>
+                                    }
+                                }
+                                <div style="margin-top:15px;">
+                                    @post.PostMessage
+                                </div>
+                            </div>
+                        <hr />
                         }
                     </div>
+                </div>
+            }
+        }
+                
+    </div>
+        
+    <div class="row">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong>Questions and answers about this garage sale</strong></h3>
+            </div>
+            <div class="panel-body">
+                @if(Model.User == null)
+                {
+                    <span>Have a question or want to send kudos? You need to <a href="/Accounts/Login?redirectId=@Model.Sale.GarageSaleId">log in </a>first.</span><br /><br />
+                }
+                else
+                {     
+                    <span>Have a question or want to send kudos? Click <a href="#" data-toggle="modal" data-target=".ask-question">here</a>!</span><br /><br />
+                }
+
+                <div>
+                    @foreach (var message in Model.GarageSaleMessages)
+                    {
+                        <div>
+                            Date: @message.MessageSent <br />
+                            From: @message.MessageFrom <br />
+                            Message: @message.MessageText <br />
+                        </div>                            
+                        <hr />
+                    }
                 </div>
             </div>
         </div>
@@ -230,10 +231,54 @@
 
 <!-- Add to itinerary modal -->
 <div class="modal fade add-to-itinerary" id="addToItineraryModal" tabindex="-1" role="dialog" aria-labelledby="addToItineraryModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add garage sale to itinerary</h3>
+            </div>
             <div class="modal-body">
-                Garage sale added to your itinerary! Click <a href="/GarageSale/ViewItinerary">here</a> to view your itinerary.
+                <form action="~/Itinerary/CreateOrAddToItinerary" method="post">            
+                    <h4>Existing itineraries</h4>
+                    <div>
+                        @if(Model.GarageSaleItinerary != null)
+                        {   
+                            if (Model.GarageSaleItinerary.Count == 0)
+                            {
+                                <span class="margin_bottom_40">No itineraries.  Let's create one!</span>
+                            }
+                            else
+                            {
+                                <table class="table-hover table-bordered table-condensed margin_bottom_30">
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Itinerary name</th>
+                                        <th>Itinerary create date</th>
+                                    </tr>
+                                    @foreach(var itinerary in Model.GarageSaleItinerary)
+                                    {
+                                        <tr>
+                                            <td>@Html.ActionLink("Save to this itinerary", "AddToUserItinerary", "GarageSale", new { saleId = Model.Sale.GarageSaleId, itineraryId = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>
+                                            <td>@Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>
+                                            <td>@itinerary.ItineraryName</td>
+                                            <td>@itinerary.ItineraryCreatedDate</td>
+                                        </tr>
+                                    }                            
+                                </table>
+                            }
+                        }
+                    </div><br />
+                    @Html.HiddenFor(m => m.Sale.GarageSaleId)
+                    @Html.HiddenFor(m => m.User.UserId)
+                    <h4>Create a new itinerary</h4>
+                
+                    <div class="form-group">
+                        <label for="txtItineraryName">Itinerary name</label>
+                        @Html.TextBoxFor(m => m.UserItinerary.ItineraryName, new { @class="form-control", @style="width:70%;" })
+                    </div>
+                    <br />
+                    <input type="submit" value="Add to itinerary" class="btn btn-sm btn-info" />
+                </form>                                
             </div>
         </div>
     </div>

@@ -1,16 +1,13 @@
-﻿<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+﻿<nav class="navbar navbar-fixed-top dupaco_colors" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="~/Home/">Welcome to the Dupaco Garage Sales!</a>
+            <a class="navbar-brand" href="~/Home/" style="color:white;font-weight:bold;font-size:26px;">Say hello to a good buy!</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             @if (Model != null)
             {
                 using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { @class = "navbar-form navbar-right", @role = "form" }))
                 {
-                    @*<div class="form-group">
-                        @Html.ActionLink("Search the sales!", "Search", "GarageSale", null, new { @class="btn btn-warning" }) 
-                    </div>*@
                     <div class="form-group">
                         @Html.TextBox("UserName", null, new { @class = "form-control", id="txtUserName", placeholder="User Name", required="" })
                     </div>

@@ -221,7 +221,7 @@ namespace DupacoGarageSale.Web.Controllers
             Session["UserSession"] = session;
             ViewBag.UserId = user.UserId;
 
-            return Json(new { ok = true, newurl = Url.Action("UserProfile", new { id = user.UserId })});
+            return Json(new { ok = true, newurl = Url.Action("UserHome", new { id = user.UserId })});
         }
 
         /// <summary>
@@ -254,7 +254,10 @@ namespace DupacoGarageSale.Web.Controllers
                 // Load any headlines, if any.
                 var adminRepository = new AdminRepository();
                 var adminMessages = adminRepository.GetAdminMessages();
-                viewModel.HeadlineNews = adminMessages[0].MessageText;
+                if (viewModel.HeadlineNews != null)
+                {
+                    viewModel.HeadlineNews = adminMessages[0].MessageText;
+                }
 
                 ViewBag.NavProfile = "active";
 
