@@ -39,8 +39,8 @@ namespace DupacoGarageSale.Web.Controllers
 
 
                 // Get the time/date of the last created account.
-                 
 
+                ViewBag.OverviewActive = "active";
                 ViewBag.NavAdmin = "active";
                 return View(viewModel);
             }
@@ -86,6 +86,7 @@ namespace DupacoGarageSale.Web.Controllers
 
                 Session["ViewModel"] = viewModel;
 
+                ViewBag.UsersActive = "active";
                 ViewBag.NavAdmin = "active";
                 return View(viewModel);
             }
@@ -258,6 +259,7 @@ namespace DupacoGarageSale.Web.Controllers
 
                 Session["ViewModel"] = viewModel;
 
+                ViewBag.GarageSalesActive = "active";
                 ViewBag.NavAdmin = "active";
                 return View(viewModel);
             }
@@ -431,6 +433,7 @@ namespace DupacoGarageSale.Web.Controllers
                 Session["ViewModel"] = viewModel;
                 ViewData["ShowBlogPost"] = "true";
 
+                ViewBag.BlogPostsActive = "active";
                 ViewBag.NavAdmin = "active";
                 return View(viewModel);
             }
@@ -479,7 +482,7 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
-
+        #region Headline news
         public ActionResult HeadlineNews()
         {
             if (Session["UserSession"] != null)
@@ -502,6 +505,7 @@ namespace DupacoGarageSale.Web.Controllers
                     }
                 }
 
+                ViewBag.HeadlinesActive = "active";
                 ViewBag.NavAdmin = "active";
                 return View(viewModel);
             }
@@ -548,5 +552,63 @@ namespace DupacoGarageSale.Web.Controllers
                 return View("~/Views/Accounts/Login.cshtml");
             }
         }
+        #endregion
+
+        #region Message center
+        [HttpGet]
+        public ActionResult MessageCenter()
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var viewModel = new AdminViewModel();
+                viewModel.AdminUser = session.User;
+
+                var repository = new AdminRepository();
+                viewModel.ContactUsMessages = repository.GetContactUsMessages();
+
+                ViewBag.MessageCenterActive = "active"; 
+                return View(viewModel);
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
+        }
+
+        public ActionResult SendContactUsMessage(FormCollection form)
+        {
+            if (form != null)
+            {
+                var contactName = form["txtContactName"].ToString();
+                var contactEmail = form["txtContactEmail"].ToString();
+                var contactPhone = form["txtContactPhone"].ToString();
+                var contactMessage = form["txtContactUsMessage"].ToString();
+
+                var message = new ContactUsMessage
+                {
+                    ContactName = contactName,
+                    ContactEmail = contactEmail,
+                    ContactPhone = contactPhone,
+                    MessageText = contactMessage,
+                    MessageSentDateTime = DateTime.Now
+                };
+
+                var repository = new AdminRepository();
+                var saveResult = repository.SaveContactUsMessage(message);
+
+                if (saveResult.IsSaveSuccessful)
+                {
+                    ViewBag.Message = "Message sent! Someone will get back to you soon!";
+                }
+                else
+                {
+                    ViewBag.Message = "There was a problem sending your message.  We are aware of the problem.  Please try again later.";
+                }
+            }
+
+            return View("~/Views/Admin/MessageSent.cshtml");
+        }
+        #endregion
     }
 }

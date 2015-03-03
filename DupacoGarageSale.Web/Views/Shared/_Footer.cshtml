@@ -1,0 +1,49 @@
+﻿<hr />
+<footer class="footer" style="background-color:#F7941D">
+    <div class="container">        
+        <h4>Dupaco 2015  |  Have a question? Send us a message <a href="#" data-toggle="modal" data-target="#contactUsModal"> here.</a></h4>
+        
+    </div>
+</footer>
+
+<!-- Ask a question modal -->
+<div class="modal fade ask-question" id="contactUsModal" tabindex="-1" role="dialog" aria-labelledby="askQuestionModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("SendContactUsMessage", "Admin", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+            {
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Send a note to Dupaco</h4>
+                </div>
+                <div class="modal-body" style="margin-left:15px;">
+                    <div class="form-group">
+                        <label>Name <span class="red">*</span></label>
+                        <input type="text" id="txtContactName" name="txtContactName" class="form-control" style="width:80%;" />
+                        <span id="nameValidationMessage" class="red invisible">Please enter your name.</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email <span class="red">*</span></label>
+                        <input type="text" id="txtContactEmail" name="txtContactEmail" class="form-control" style="width:80%;" />
+                        <span id="emailValidationMessage" class="red invisible">Please enter your email.</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone </label>
+                        <input type="text" id="txtContactPhone" name="txtContactPhone" class="form-control" style="width:80%;" />
+                    </div>
+                    <div class="form-group">
+                        <label>Message <span class="red">*</span></label>
+                        <textarea class="form-control" id="txtContactUsMessage" name="txtContactUsMessage" placeholder="Brevity is the soul of wit (140 characters max)" rows="4" maxlength="140" style="width:80%;"></textarea>
+                        <span id="contactValidationMessage" class="red invisible">Please enter your message.</span>
+                        <div id="charNumContactMessage"></div>
+                    </div>
+                    <div class="form-group"></div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-info" value="Send message" id="btnSendContactUsMessage" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                
+                </div>
+            }
+        </div>
+    </div>
+</div>

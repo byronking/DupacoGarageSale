@@ -9,11 +9,14 @@
     <div class="row" style="margin-bottom:20px">
         <h2><a href="~/Home" style="text-decoration:none;">Home / </a>View profile / Account info for @Model.User.FirstName @Model.User.LastName</h2><br />
     </div>
-    <div class="row">
-        <div role="alert" class="alert alert-info">
-          <strong>Hey, garage salers!</strong> @Model.HeadlineNews
-        </div>
-    </div>
+    @if (Model.HeadlineNews != null)
+    {
+        <div class="row">
+            <div role="alert" class="alert alert-info">
+              <strong>Hey, garage salers!</strong> @Model.HeadlineNews
+            </div>
+        </div>       
+    }
     <hr />
     <div class="row">
         <div class="col-md-5">
@@ -80,8 +83,8 @@
                                         </table>
                                     </div><br />
                                     <div>
-                                        @Html.ActionLink("Edit this garage sale", "Edit", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-info" })
-                                        @Html.ActionLink("Delete garage sale", "Delete", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-danger" })
+                                        @Html.ActionLink("Spruce up this garage sale", "Edit", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-info" })
+                                        @Html.ActionLink("Delete this garage sale", "Delete", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-danger" })
                                     </div>
                                 </div>
                             </div>

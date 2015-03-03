@@ -254,7 +254,7 @@ namespace DupacoGarageSale.Web.Controllers
                 // Load any headlines, if any.
                 var adminRepository = new AdminRepository();
                 var adminMessages = adminRepository.GetAdminMessages();
-                if (viewModel.HeadlineNews != null)
+                if (adminMessages.Count > 0)
                 {
                     viewModel.HeadlineNews = adminMessages[0].MessageText;
                 }

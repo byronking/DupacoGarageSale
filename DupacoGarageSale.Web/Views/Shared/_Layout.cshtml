@@ -33,6 +33,8 @@
 
     @RenderBody()
 
+    @Html.Partial("~/Views/Shared/_Footer.cshtml")
+
     @RenderSection("scripts", required: false)
 
     <!-- This breaks the order of the loading of the js scripts -->

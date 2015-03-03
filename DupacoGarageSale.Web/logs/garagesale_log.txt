@@ -1,0 +1,5 @@
+2015-03-03 10:09:57,763 [11] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: message_create_date
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.AdminRepository.GetContactUsMessages() in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AdminRepository.cs:line 543

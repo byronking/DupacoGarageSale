@@ -1,0 +1,77 @@
+﻿@model DupacoGarageSale.Web.Models.AdminViewModel
+
+@{
+    ViewBag.Title = "Message center";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            @Html.Partial("~/Views/Shared/_AdminSideNavigation.cshtml")
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Message center</h1>
+            <p class="lead">Here you will find messages sent from garage sale users through the site.</p>
+
+            <div class="down_20">
+                @(Html.Telerik().Grid(Model.ContactUsMessages)
+                    .Name("grdContactUsMessages")
+                    .DataKeys(dataKeys => dataKeys.Add(m => m.MessageId))
+                    .Columns(columns =>
+                    {
+                        columns.Command(commands =>
+                        {
+                            commands.Custom("ReplyToContactUsMessage")
+                                .Text("Reply")
+                                .Action("ReplyToContactUsMessage", "Admin")
+                                .DataRouteValues(route =>
+                                {
+                                    route.Add(m => m.MessageId).RouteKey("messageId");
+                                });
+                        });
+                    })
+                    .RowTemplate(grid => @<text>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <strong>@item.ContactName</strong><br />
+                                    @item.ContactEmail<br />
+                                    @item.ContactPhone<br /><br />
+                                </div>
+                                <div class="col-sm-2">
+                                    @item.MessageSentDateTime
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    @item.MessageText
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">                                
+                                <strong>Reply from Dupaco</strong><br /><br />
+                                @if (item.ReplyText != null)
+                                {
+                                    <div class="col-sm-8">                    
+                                        @item.ReplyFrom<br />
+                                        @item.ReplyText<br />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @item.ReplyDateTime
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span>No reply yet.</span>   
+                                }                   
+                            </div>
+                    </text>
+                    )
+                    .Pageable(pager => pager.PageSize(10))
+                    .Sortable()
+                ) 
+            </div>
+        </div>
+    </div>
+</div>

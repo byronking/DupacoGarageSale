@@ -476,5 +476,89 @@ namespace DupacoGarageSale.Data.Repository
 
             return saveResult;
         }
+
+        /// <summary>
+        /// This saves the contact us messages from the users.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public UserSaveResult SaveContactUsMessage(ContactUsMessage message)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SaveContactUsMessages", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@contact_name", SqlDbType.VarChar).Value = message.ContactName;
+                    cmd.Parameters.Add("@contact_email", SqlDbType.VarChar).Value = message.ContactEmail;
+                    cmd.Parameters.Add("@contact_phone", SqlDbType.VarChar).Value = message.ContactPhone;
+                    cmd.Parameters.Add("@message_text", SqlDbType.VarChar).Value = message.MessageText;
+                    cmd.Parameters.Add("@message_sent_date", SqlDbType.DateTime).Value = message.MessageSentDateTime;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.SaveResultId = (int)returnParameter.Value;
+
+                    if (saveResult.SaveResultId != 0)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }   
+
+            return saveResult;
+        }
+
+        /// <summary>
+        /// This gets the contact us messages.
+        /// </summary>
+        /// <returns></returns>
+        public List<ContactUsMessage> GetContactUsMessages()
+        {
+            var contactUsMessages = new List<ContactUsMessage>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetContactUsMessages", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var message = new ContactUsMessage
+                        {
+                            ContactName = reader["contact_name"].ToString(),
+                            ContactEmail = reader["contact_email"].ToString(),
+                            ContactPhone = reader["contact_phone"].ToString(),
+                            MessageText = reader["message_text"].ToString(),
+                            MessageSentDateTime = Convert.ToDateTime(reader["message_sent_date"])
+                        };
+
+                        contactUsMessages.Add(message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return contactUsMessages;
+        }
     }
 }
