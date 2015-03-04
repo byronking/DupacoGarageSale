@@ -26,7 +26,6 @@ namespace DupacoGarageSale.Web.Controllers
             }
 
             viewModel.SelectedCategories = new List<int>();
-
             viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
 
             if (viewModel.SearchResults == null)

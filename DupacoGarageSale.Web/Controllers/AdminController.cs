@@ -141,6 +141,11 @@ namespace DupacoGarageSale.Web.Controllers
             return RedirectToAction("Users");
         }
 
+        /// <summary>
+        /// This loads a user for editing.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public ActionResult EditUser(int userId)
         {
             if (Session["UserSession"] != null)
