@@ -102,6 +102,44 @@
         }
     });
 
+    // This provides validation for the contact us form.
+    $("#btnSendContactUsMessage").click(function (e) {
+        if ($('#txtContactName').val() == "") {
+            $('#nameValidationMessage').removeClass('invisible');
+            e.preventDefault();
+        }
+        else {
+            $('#nameValidationMessage').addClass('invisible');
+        }
+
+        if ($('#txtContactEmail').val() == "") {
+            $('#emailValidationMessage').removeClass('invisible');
+            e.preventDefault();
+        }
+        else {
+            $('#emailValidationMessage').addClass('invisible');
+        }
+        if ($('#txtContactUsMessage').val() == "") {
+            $('#contactValidationMessage').removeClass('invisible');
+            e.preventDefault();
+        }
+        else {
+            $('#contactValidationMessage').addClass('invisible');
+        }
+    });
+
+    $("#txtContactUsMessage").keyup(function () {
+        var max = 140;
+        var len = $(this).val().length;
+        //alert('length: ' + len);
+        if (len >= max) {
+            $("#charNumContactMessage").text(' you have reached the limit');
+        } else {
+            var char = max - len;
+            $("#charNumContactMessage").text(char + ' characters left');
+        }
+    });
+
     $("#btnFilter").click(function (e) {
         //alert($("#txtSearchCriteria").val());
         //$("#hdnSearchCriteria").val($("#txtSearchCriteria").val());

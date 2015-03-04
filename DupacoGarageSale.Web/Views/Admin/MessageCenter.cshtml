@@ -14,7 +14,7 @@
             <h1 class="page-header">Message center</h1>
             <p class="lead">Here you will find messages sent from garage sale users through the site.</p>
 
-            <div class="down_20">
+            <div class="down_20" id="">
                 @(Html.Telerik().Grid(Model.ContactUsMessages)
                     .Name("grdContactUsMessages")
                     .DataKeys(dataKeys => dataKeys.Add(m => m.MessageId))
@@ -34,10 +34,14 @@
                     .RowTemplate(grid => @<text>
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-sm-10">
                                     <strong>@item.ContactName</strong><br />
                                     @item.ContactEmail<br />
-                                    @item.ContactPhone<br /><br />
+                                    @if (item.ContactPhone != string.Empty)
+                                    {
+                                        @item.ContactPhone<br />
+                                    }
+                                    <br />
                                 </div>
                                 <div class="col-sm-2">
                                     @item.MessageSentDateTime
@@ -48,30 +52,64 @@
                                     @item.MessageText
                                 </div>
                             </div>
-                            <hr />
-                            <div class="row">                                
-                                <strong>Reply from Dupaco</strong><br /><br />
-                                @if (item.ReplyText != null)
+                            <hr style="border-color:lightgray;" />
+                            <div class="row">
+                                <div class="col-sm-10">                                
+                                    <strong>Reply from Dupaco:</strong><br />
+                                </div>
+                            </div>
+                            @if (item.MessageReplies.Count > 0)
+                            {
+                                foreach (var reply in item.MessageReplies)
                                 {
-                                    <div class="col-sm-8">                    
-                                        @item.ReplyFrom<br />
-                                        @item.ReplyText<br />
-                                    </div>
-                                    <div class="col-sm-2">
-                                        @item.ReplyDateTime
+                                    <div class="row">
+                                        <div class="col-sm-10">                    
+                                            @reply.ReplyDateTime<br />
+                                            @reply.ReplyFrom<br />
+                                            @reply.ReplyText<br /><br />
+                                        </div>
                                     </div>
                                 }
-                                else
-                                {
-                                    <span>No reply yet.</span>   
-                                }                   
-                            </div>
+                            }   
+                            else
+                            {
+                                <span>No reply yet. Click <a href="#" class="replyLink" id="linkReplyToModal" data-value="@item.MessageId" data-toggle="modal" data-target="#replyModal">here</a> to reply.</span><br /><br /> 
+                            }
                     </text>
                     )
-                    .Pageable(pager => pager.PageSize(10))
+                    .Pageable(pager => pager.PageSize(5))
                     .Sortable()
                 ) 
             </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- Reply to a question modal -->
+<div class="modal fade reply-to-question" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("ReplyToContactUsMessage", "Admin", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+            {   <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Reply to a message</h4>
+                </div>
+                <div class="modal-body" style="margin-left:15px;">
+                    <div class="form-group">
+                        <input type="hidden" id="hdnMessageId" name="hdnMessageId" />
+                        <label>Message <span class="red">*</span></label>
+                        <textarea class="form-control" id="txtReplyMessage" name="txtReplyMessage" placeholder="Brevity is the soul of wit (500 characters max)" rows="6" maxlength="140" style="width:80%;"></textarea>
+                        <span id="contactValidationMessage" class="red invisible">Please enter your message.</span>
+                        <div id="charNumContactMessage"></div>
+                    </div>
+                    <div class="form-group"></div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-info" value="Send message" id="btnSendContactUsMessage" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                
+                </div>
+            }
         </div>
     </div>
 </div>

@@ -73,4 +73,28 @@
             e.preventDefault();
         }
     });
+
+    // This responds to clicking the reply link on the message center page.
+    $('#grdContactUsMessages').on('click', 'a.replyLink', function () {
+        var value = $(this).attr('data-value');
+        //alert('value: ' + value);
+
+        $("#hdnMessageId").val(value);
+    });
+
+    //$("#linkReplyToModal").click(function (e) {
+    //    //alert('hi');
+    //    //$('div[id^="list_"]')
+    //    var hdnMessageId = $('input[id^="hdnMessageId"').val();
+    //    $("#txtMessageId").text(hdnMessageId);
+    //    alert(hdnMessageId);
+    //    e.preventDefault();
+    //});
 });
+
+function debugObject(inputobject) {
+    obj = inputobject;
+    for (x in obj) {
+        alert(x + ": " + obj[x]);
+    }
+}

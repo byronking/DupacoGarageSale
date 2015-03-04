@@ -14,8 +14,6 @@ namespace DupacoGarageSale.Data.Domain
         public string ContactPhone { get; set; }
         public string MessageText { get; set; }
         public DateTime MessageSentDateTime { get; set; }
-        public string ReplyFrom { get; set; }
-        public DateTime? ReplyDateTime { get; set; }
-        public string ReplyText { get; set; }
+        public List<MessageReply> MessageReplies { get; set; }
     }
 }

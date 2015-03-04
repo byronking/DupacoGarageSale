@@ -542,6 +542,7 @@ namespace DupacoGarageSale.Data.Repository
                     {
                         var message = new ContactUsMessage
                         {
+                            MessageId = Convert.ToInt32(reader["message_id"]),
                             ContactName = reader["contact_name"].ToString(),
                             ContactEmail = reader["contact_email"].ToString(),
                             ContactPhone = reader["contact_phone"].ToString(),
@@ -549,6 +550,7 @@ namespace DupacoGarageSale.Data.Repository
                             MessageSentDateTime = Convert.ToDateTime(reader["message_sent_date"])
                         };
 
+                        message.MessageReplies = GetMessageReplies(message.MessageId);
                         contactUsMessages.Add(message);
                     }
                 }
@@ -559,6 +561,79 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return contactUsMessages;
+        }
+
+        public List<MessageReply> GetMessageReplies(int messageId)
+        {
+            var replies = new List<MessageReply>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetContactUsReplies", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@message_id", SqlDbType.Int).Value = messageId;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var reply = new MessageReply
+                        {
+                            ReplyId = Convert.ToInt32(reader["reply_id"]),
+                            MessageId = Convert.ToInt32(reader["message_id"]),
+                            ReplyFrom = reader["reply_from"].ToString(),
+                            ReplyDateTime = Convert.ToDateTime(reader["reply_date"]),
+                            ReplyText = reader["reply_text"].ToString()
+                        };
+
+                        replies.Add(reply);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return replies;
+        }
+
+        /// <summary>
+        /// This updates the contact us messages.
+        /// </summary>
+        /// <returns></returns>
+        public UserSaveResult SaveContactUsReplies(MessageReply reply)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("SaveContactUsReplies", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@reply_from", SqlDbType.VarChar).Value = reply.ReplyFrom;
+                    cmd.Parameters.Add("@reply_date", SqlDbType.DateTime).Value = reply.ReplyDateTime;
+                    cmd.Parameters.Add("@reply_text", SqlDbType.VarChar).Value = reply.ReplyText;
+                    cmd.Parameters.Add("@message_id", SqlDbType.Int).Value = reply.MessageId;
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    if (saveResult.SaveResultId != 0)
+                    {
+                        saveResult.IsSaveSuccessful = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveResult;
         }
     }
 }

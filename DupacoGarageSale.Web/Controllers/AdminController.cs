@@ -16,6 +16,10 @@ namespace DupacoGarageSale.Web.Controllers
 {
     public class AdminController : Controller
     {
+        /// <summary>
+        /// This loads the admin main page.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             if (Session["UserSession"] != null)
@@ -37,7 +41,6 @@ namespace DupacoGarageSale.Web.Controllers
 
                 // Get the time/date of the first created account.
 
-
                 // Get the time/date of the last created account.
 
                 ViewBag.OverviewActive = "active";
@@ -51,6 +54,10 @@ namespace DupacoGarageSale.Web.Controllers
         }
 
         #region Garage sale users
+        /// <summary>
+        /// This loads the garage sale users page.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Users()
         {
             if (Session["UserSession"] != null)
@@ -236,7 +243,10 @@ namespace DupacoGarageSale.Web.Controllers
         #endregion
 
         #region Garage sales
-
+        /// <summary>
+        /// This loads the garage sales page.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GarageSales()
         {
             if (Session["UserSession"] != null)
@@ -354,6 +364,10 @@ namespace DupacoGarageSale.Web.Controllers
 
         #endregion
 
+        /// <summary>
+        /// This loadsthe garage sale items page.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GarageSaleItems()
         {
             if (Session["UserSession"] != null)
@@ -371,6 +385,11 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// This allows for changing of user passwords.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
         public ActionResult ChangePassword(FormCollection form)
         {
             var password = form["User.Password"].ToString();
@@ -483,6 +502,10 @@ namespace DupacoGarageSale.Web.Controllers
         }
 
         #region Headline news
+        /// <summary>
+        /// This loads the headline news page.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult HeadlineNews()
         {
             if (Session["UserSession"] != null)
@@ -515,6 +538,11 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// This saves a new headline news message.
+        /// </summary>
+        /// <param name="headlineNews"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult PublishHeadlineNews(string headlineNews)
         {
@@ -555,6 +583,10 @@ namespace DupacoGarageSale.Web.Controllers
         #endregion
 
         #region Message center
+        /// <summary>
+        /// This loads the message center page.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult MessageCenter()
         {
@@ -567,6 +599,14 @@ namespace DupacoGarageSale.Web.Controllers
                 var repository = new AdminRepository();
                 viewModel.ContactUsMessages = repository.GetContactUsMessages();
 
+                if (Session["ReplySuccessful"] != null)
+                {
+                    if (Convert.ToBoolean(Session["ReplySuccessful"]))
+                    {
+                        ViewBag.ReplySuccessful = "visible";
+                    }
+                }
+
                 ViewBag.MessageCenterActive = "active"; 
                 return View(viewModel);
             }
@@ -576,6 +616,12 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// This sends a message from the user pages to the admins.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
+        [HttpPost]
         public ActionResult SendContactUsMessage(FormCollection form)
         {
             if (form != null)
@@ -608,6 +654,49 @@ namespace DupacoGarageSale.Web.Controllers
             }
 
             return View("~/Views/Admin/MessageSent.cshtml");
+        }
+
+        /// <summary>
+        /// This provides a mechanism for admins to reply to users messages.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ReplyToContactUsMessage(FormCollection form)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+
+                if (form != null)
+                {
+                    //var messageId = Convert.ToInt32(form["hdnMessageId"]);
+                    var messageId = form["hdnMessageId"];
+                    string messageText = form["txtReplyMessage"].ToString();
+
+                    var reply = new MessageReply
+                    {
+                        MessageId = Convert.ToInt32(messageId),
+                        ReplyText = messageText,
+                        ReplyFrom = session.User.FirstName + " " + session.User.LastName,
+                        ReplyDateTime = DateTime.Now
+                    };
+
+                    var repository = new AdminRepository();
+                    var saveResult = repository.SaveContactUsReplies(reply);
+
+                    if (saveResult.IsSaveSuccessful)
+                    {
+                        Session["ReplySuccessful"] = true;
+                    }
+                }
+
+                return RedirectToAction("MessageCenter");
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
         }
         #endregion
     }

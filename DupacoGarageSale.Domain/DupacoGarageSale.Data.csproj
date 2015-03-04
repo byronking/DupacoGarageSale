@@ -93,6 +93,7 @@
     <Compile Include="Domain\GarageSaleSearchResults.cs" />
     <Compile Include="Domain\GarageSaleUser.cs" />
     <Compile Include="Domain\Itinerary.cs" />
+    <Compile Include="Domain\MessageReply.cs" />
     <Compile Include="Domain\PasswordResetInfo.cs" />
     <Compile Include="Domain\PasswordResetRequest.cs" />
     <Compile Include="Domain\SaleDatesTimes.cs" />
