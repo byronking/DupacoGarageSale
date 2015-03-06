@@ -5,41 +5,44 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="~/Home/" style="color:white;font-weight:bold;font-size:24px;">Say hello to a good buy!</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse" style="color:white;">
-            <ul class="nav navbar-nav white">
-                @{
-                    if (Model.User.UserTypeId == 1)
-                    {
-                        <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index" class="white">Admin</a></li>
+        @if (Model != null)
+        {
+            <div id="navbar" class="navbar-collapse collapse" style="color:white;">
+                <ul class="nav navbar-nav white">
+                    @{
+                        if (Model.User.UserTypeId == 1)
+                        {
+                            <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index" class="white">Admin</a></li>
+                        }
                     }
-                }
-                <li class="dropdown @ViewBag.NavProfile">
-                    <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false">My profile <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="~/Accounts/UserHome/@Model.User.UserId">View profile</a></li>
-                        <li><a href="~/Accounts/UserProfile/@Model.User.UserId">Edit profile</a></li>
-                        <li><a href="~/Accounts/SignUp/">Create account</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown @ViewBag.NavGarageSales white">
-                    <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false">Garage sales <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="~/GarageSale/Add/" class="white">Add a new sale</a></li>
-                        <li><a href="~/GarageSale/View/" class="white">View my sales</a></li>
-                    </ul>
-                </li>
-                <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1" class="white">Search</a></li>
-                @if(Model.User.Address != null)
-                {
-                    <li class="@ViewBag.NavCreateItinerary"><a href="~/Itinerary/GetUserItineraries/@Model.User.UserId" class="white">View itineraries</a></li>
-                }
-            </ul>
-            <form class="navbar-form navbar-right" role="form">
-                <div class="form-group">
-                    <button class="btn btn-primary">Signed in as @Model.User.FirstName @Model.User.LastName</button>
-                    @Html.ActionLink("Log out", "LogOut", "Home", null, new { @class="btn btn-success" })
-                </div>
-            </form>
-        </div>
+                    <li class="dropdown @ViewBag.NavProfile">
+                        <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false">My profile <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="~/Accounts/UserHome/@Model.User.UserId">View profile</a></li>
+                            <li><a href="~/Accounts/UserProfile/@Model.User.UserId">Edit profile</a></li>
+                            <li><a href="~/Accounts/SignUp/">Create account</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown @ViewBag.NavGarageSales white">
+                        <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false">Garage sales <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="~/GarageSale/Add/" class="white">Add a new sale</a></li>
+                            <li><a href="~/GarageSale/View/" class="white">View my sales</a></li>
+                        </ul>
+                    </li>
+                    <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1" class="white">Search</a></li>
+                    @if(Model.User.Address != null)
+                    {
+                        <li class="@ViewBag.NavCreateItinerary"><a href="~/Itinerary/GetUserItineraries/@Model.User.UserId" class="white">View itineraries</a></li>
+                    }
+                </ul>
+                <form class="navbar-form navbar-right" role="form">
+                    <div class="form-group">
+                        <button class="btn btn-primary">Signed in as @Model.User.FirstName @Model.User.LastName</button>
+                        @Html.ActionLink("Log out", "LogOut", "Home", null, new { @class="btn btn-success" })
+                    </div>
+                </form>
+            </div>
+        }
     </div>
 </nav>

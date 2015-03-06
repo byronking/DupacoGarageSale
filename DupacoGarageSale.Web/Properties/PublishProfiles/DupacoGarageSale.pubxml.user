@@ -124,10 +124,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:52</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>03/03/2015 15:46:01</publishTime>
+      <publishTime>03/03/2015 22:39:06</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>03/03/2015 15:46:03</publishTime>
+      <publishTime>03/03/2015 22:39:07</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -1636,7 +1636,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/02/2015 22:09:56</publishTime>
     </File>
     <File Include="Views/Admin/MessageCenter.cshtml">
-      <publishTime>03/03/2015 13:52:41</publishTime>
+      <publishTime>03/03/2015 21:41:07</publishTime>
     </File>
     <File Include="Views/Admin/MessageSent.cshtml">
       <publishTime>03/03/2015 09:34:43</publishTime>
@@ -1786,7 +1786,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/03/2015 15:46:03</publishTime>
+      <publishTime>03/03/2015 22:39:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -94,14 +94,15 @@
                             <div class="col-sm-6 col-md-3" style="margin-left:136px;">
                                 <div class="thumbnail">
                                     <a href="~/Content/images/profile_pictures/@Model.ProfilePicLink" data-lightbox="@Model.ProfilePicLink">
-	                                    <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" 
+	                                    <img alt="my profile pic!" style="display: block;" class="img-responsive"
                                             src="~/Content/images/profile_pictures/@Model.ProfilePicLink" data-holder-rendered="true">
                                     </a>                                    
                                     <div class="caption">
                                         <h3>Profile pic <small>(optional)</small></h3>
                                         <input type="file" id="fileUpload" name="fileUpload" style="width:185px;" />
-                                    </div>
+                                    </div>                                    
                                 </div>
+                                <div id="uploadPreview"></div>
                             </div>
                         </div>
             

@@ -46,6 +46,35 @@
         }
     });
 
+    // This handles the profile picture upload.
+    function readImage(file) {
+
+        var reader = new FileReader();
+        var image = new Image();
+
+        reader.readAsDataURL(file);
+        reader.onload = function (_file) {
+            image.src = _file.target.result;              // url.createObjectURL(file);
+            image.onload = function () {
+                var w = this.width,
+                    h = this.height,
+                    t = file.type,                           // ext only: // file.type.split('/')[1],
+                    n = file.name,
+                    s = ~~(file.size / 1024) + 'KB';
+                $('#uploadPreview').append('<img src="' + this.src + '"> ' + w + 'x' + h + ' ' + s + ' ' + t + ' ' + n + '<br>');
+            };
+            image.onerror = function () {
+                alert('Invalid file type: ' + file.type);
+            };
+        };
+
+    }
+    $("#fileUpload").change(function (e) {
+        if (this.disabled) return alert('File upload not supported!');
+        var F = this.files;
+        if (F && F[0]) for (var i = 0; i < F.length; i++) readImage(F[i]);
+    });
+
     // This provides validation for the user profile fields.
     $("#btnSaveProfile").click(function (e) {
         if ($('#txtFirstName').val() == "") {
@@ -140,9 +169,16 @@
         }
     });
 
+    //alert($("#hdnNoAddress").val());
+    if ($("#hdnNoAddress").val() == "true") {
+        $("#txtAddress").val('');
+    }
+
+    // This shows a popover message if the user does not enter an address when searching.
     $("#btnFilter").click(function (e) {
         //alert($("#txtSearchCriteria").val());
         //$("#hdnSearchCriteria").val($("#txtSearchCriteria").val());
+        //alert($("#txtAddress").val());
         if ($("#txtAddress").val() == "") {
             $("#txtAddress").popover({
                 content: "Enter a starting point", placement: "bottom",
@@ -174,6 +210,7 @@
         }
     });
 
+    // Set the range of available times.
     $('#dayOneStart').timepicker({ 'scrollDefault': '800' });
     $('#dayOneEnd').timepicker({ 'scrollDefault': '2000' });
     $('#dayTwoStart').timepicker({ 'scrollDefault': '800' });
@@ -183,6 +220,7 @@
     $('#dayFourStart').timepicker({ 'scrollDefault': '800' });
     $('#dayFourEnd').timepicker({ 'scrollDefault': '2000' });
 
+    // Character count for the garage sale description.
     $("#txtDescription").keyup(function () {
         var max = 100;
         var len = $(this).val().length;
@@ -203,12 +241,35 @@
         }
     });
 
+    // Validation for the garage sale dates and times.
+    $("#btnSaveGargeSale").click(function (e) {
+
+        if (($('#dayOneStart').val() == "" || $('#dayOneEnd').val() == "") && ($('#dayTwoStart').val() == "" || $('#dayTwoEnd').val() == "") && ($('#dayThreeStart').val() == "" || $('#dayThreeEnd').val() == "") && ($('#dayFourStart').val() == "" || $('#dayFourEnd').val() == "")) {
+            $("#alertDatesTimes").removeClass("hidden");
+            e.preventDefault();
+        }
+        else {
+            $("#alertDatesTimes").addClass("hidden");
+        }
+    });
+
     // Set the selected item categories.
     if ($("#hdnSelectedCategories").val() !== undefined) {
         var selectedCategories = new Array();
         selectedCategories = $("#hdnSelectedCategories").val().split(',');
+        //alert(selectedCategories);
+
         for (x in selectedCategories) {
             $("input:checkbox[value=" + selectedCategories[x] + "]").attr("checked", true);
+
+            var panelCollapse = $("input:checkbox[value=" + selectedCategories[x] + "]").closest('div.panel-collapse').attr('id');
+            $(panelCollapse).collapse('show');
+            //alert($(panelCollapse).prop('tagName'));
+
+            //$("#collapseNine").collapse('show');
+            //$("#collapseTen").collapse('show');
+
+            //alert($("#collapseNine").prop('tagName'));
         }
     }
 
@@ -223,6 +284,7 @@
         $('#txtVideoFileName').val(label);
     });
 
+    // This provides validation for the hot picks fields. 
     $("#btnSaveSpecialItem").click(function (e) {
         if ($('#txtSpecialItemFileName').val() == "") {
             $('#imgUploadValidationMessage').removeClass('invisible');
@@ -287,6 +349,7 @@
         }
     });
 
+    // Character counter for the hot pick description.
     $("#txtSpecialItemDescription").keyup(function () {
         var max = 300;
         var len = $(this).val().length;
@@ -336,7 +399,7 @@
         $("#divVine").removeClass('hidden');
     });
 
-    // Validation for the blog post
+    // Validation for the blog post.
     $("#btnSaveBlogPost").click(function (e) {
         // Disabling this per JH.
         //if ($('#txtBlogPostTitle').val() == "") {
@@ -358,6 +421,7 @@
         }
     });
     
+    // This counts the characters for the 
     $("#txtBlogPost").keyup(function () {
         var max = 300;
         var len = $(this).val().length;
@@ -431,12 +495,14 @@
         }
     }
 
+    // This clears the checked selections.
     $("#btnClearSearch").click(function () {
         $("#accordion input[type=checkbox]").each(function () {
             $(this).prop("checked", false);
         });
     });
 
+    // Show an error if the user doesn't enter text when using the search bar.
     $("#btnSearchBarFind").click(function (e) {
         if ($("#txtSearchCriteria").val() == "") {
             $("#searchValidation").removeClass('hidden');

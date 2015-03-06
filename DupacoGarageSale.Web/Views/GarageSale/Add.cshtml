@@ -65,15 +65,12 @@
                             <div class="table-scrollable">
                                 <p class="lead">Enter start and end times for the dates of your sale:</p>
                                 <table class="table table-bordered">
-                                @*<thead>*@
                                     <tr>
                                         <th>Thu April 23rd</th>
                                         <th>Fri April 24th</th>
                                         <th>Sat April 25th</th>
                                         <th>Sun April 26th</th>
                                     </tr>
-                                @*</thead>*@
-                                @*<tbody style="width:auto">*@
                                     <tr>
                                         <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayOneStart, new { id="dayOneStart", @class="ninety-eight-wide" })</td>
                                         <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayTwoStart, new { id="dayTwoStart", @class="ninety-eight-wide" })</td>
@@ -86,8 +83,8 @@
                                         <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayThreeEnd, new { id="dayThreeEnd", @class="ninety-eight-wide" })</td>
                                         <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayFourEnd, new { id="dayFourEnd", @class="ninety-eight-wide" })</td>
                                     </tr>
-                                @*</tbody>*@
-                                </table> 
+                                </table>
+                                <span id="alertDatesTimes" class="red hidden">Please enter at least one starting and ending date for your sale</span>
                             </div>                               
                         </div>
                     </div>               
@@ -386,7 +383,7 @@
                     </div>
                 </div>
                                        
-                <input type="submit" value="Save garage sale" class="btn btn-primary" />
+                <input id="btnSaveGargeSale" type="submit" value="Save garage sale" class="btn btn-primary" />
                 @*@Html.ActionLink("Next, add items to your sale", "AddItems", "GarageSale", new { @class="btn btn-success", id="btnAddSaleItems" })*@
             </div>
         }

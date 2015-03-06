@@ -44,7 +44,15 @@
                                 <option value="500">500 miles</option>
                             </select>
                             <br />
-                            <textarea class="form-control" style="width:230px;" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code"></textarea>                       
+                            <input type="hidden" id="hdnNoAddress" value="@ViewBag.NoAddress" />
+                            <textarea class="form-control" style="width:230px;" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
+                                @{
+                                    if (TempData["UserAddress"] != null)
+                                    {
+                                        @TempData["UserAddress"].ToString() 
+                                    }
+                                }
+                            </textarea>                       
                         </div>                            
                         <div>
                             Sale dates:
@@ -431,7 +439,8 @@
                                             <div class="col-md-5">
                                                 <div class="thumbnail" style="min-height:510px;"> 
                                                     <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                                    <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+	                                                    @*<img alt="100%x200" class="img-responsive" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">*@
+                                                        <img alt="@item.Title" class="img-responsive" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
                                                     </a> 
                                                     <div class="caption">
                                                         <h3>@item.Title</h3>
@@ -521,9 +530,9 @@
                             foreach (var item in Model.GarageSaleSpecialItems)
                             {
                                 <div class="col-md-5">
-                                    <div class="thumbnail" style="min-height:510px;">
+                                    <div class="thumbnail" style="min-height:650px;">
                                         <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                        <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+	                                        <img alt="@item.Title" class="img-responsive" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
                                         </a>                                                
                                         <div class="caption">
                                             <h3>@item.Title</h3>

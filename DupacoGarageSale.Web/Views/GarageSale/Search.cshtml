@@ -38,7 +38,14 @@
                                 <option value="500">500 miles</option>
                             </select>
                             <br />
-                            <textarea class="form-control" style="width:230px;" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code"></textarea>                       
+                            <textarea class="form-control" style="width:230px;" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
+                                @{
+                                    if (TempData["UserAddress"] != null)
+                                    {
+                                        @TempData["UserAddress"].ToString() 
+                                    }
+                                }
+                            </textarea>                       
                         </div>                            
                         <div>
                             Sale dates:

@@ -656,6 +656,8 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     ViewBag.Message = "There was a problem sending your message.  We are aware of the problem.  Please try again later.";
                 }
+
+
             }
 
             return View("~/Views/Admin/MessageSent.cshtml");
