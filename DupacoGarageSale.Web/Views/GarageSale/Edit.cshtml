@@ -18,11 +18,11 @@
                 <h3 class="panel-title"><strong>Garage sale basics</strong></h3>
             </div>
             <div class="panel-body">
-                <input id="hdnSaveMessage" type="hidden" value="@ViewBag.Invisible" />
+                @*<input id="hdnSaveMessage" type="hidden" value="@ViewBag.Invisible" />
                 <div class="alert alert-success hidden" role="alert" id="divSaveMessage" style="width:40%;">
                     <strong>Nice work!</strong>
                     Your garage sale was successfully updated!
-                </div>
+                </div>*@
                 <div class="form-group">
                     @{
                         if (TempData["ItemDeleteSuccessful"] != null)
@@ -417,8 +417,14 @@
                         <input type="submit" value="Update garage sale" class="btn btn-primary" />
                     </div>
                 }
-            </div>
+            </div>            
         </div>
+    </div>
+    <a name="hotpicks" id="hotpicks"></a>
+    <input id="hdnSaveMessage" type="hidden" value="@ViewBag.Invisible" />
+    <div class="alert alert-success hidden" role="alert" id="divSaveMessage" style="width:40%;">
+        <strong>Nice work!</strong>
+        Your garage sale was successfully updated!
     </div>
     <hr />
     <div class="row" style="margin-top:20px;"> <!-- width:92% -->

@@ -196,6 +196,8 @@
 
         if ($("#hdnSaveMessage").val() == "false") {
             $("#divSaveMessage").removeClass("hidden");
+            location.href = "#hotpicks";
+            //$("#hotpicks").focus();
         }
     }    
 
