@@ -1,0 +1,66 @@
+﻿@model DupacoGarageSale.Web.Models.AdminViewModel
+
+@{
+    ViewBag.Title = "BlogPosts";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            @Html.Partial("~/Views/Shared/_AdminSideNavigation.cshtml")         
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Garage Sales</h1>
+            @using (Html.BeginForm("SearchBlogPosts", "Admin", FormMethod.Post, new { @class="form-inline" }))
+            {
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.SearchCriteria, new { @id="txtSearchBlogPosts", @class="form-control", @style="width:300px;", placeholder="Enter a search term" })                
+                </div>
+                <input type="submit" class="btn btn-primary" value="Search" />
+                @Html.ActionLink("Clear", "ClearBlogPostsSearch", null, new { @class="btn btn-default" })
+            }
+
+            <div class="down_20">
+                @(Html.Telerik().Grid(Model.BlogPosts)
+                    .Name("grdAllBlogPosts")
+                    .DataKeys(dataKeys => dataKeys.Add(m => m.SaleId))
+                    .Columns(columns =>
+                    {
+                        columns.Command(commands =>
+                        {
+                            commands.Custom("ViewGarageSale")
+                                .Text("View")
+                                .Action("ViewBlogPost", "Admin")
+                                .DataRouteValues(route =>
+                                {
+                                    route.Add(m => m.BlogPostId).RouteKey("blog_post_id");
+                                });
+                        });
+                        columns.Bound(m => m.BlogPostId).Hidden();
+                        columns.Bound(m => m.BlogPostTitle);
+                        columns.Bound(m => m.ImageUri);
+                        columns.Bound(m => m.YouTubeUri);
+                        columns.Bound(m => m.VineUri);
+                        columns.Bound(m => m.PostMessage);
+                        columns.Bound(m => m.PostDateTime);
+                    })
+                    .Pageable(pager => pager.PageSize(10))
+                    .Sortable()
+                ) 
+            </div>
+
+            <br /><br />
+            @{
+                var showBlogPosts = ViewData["ShowBlogPost"];            
+
+                <input type="hidden" id="hdnShowBlogPosts" value="@showBlogPosts" />
+
+                if (Model.BlogPost != null)
+                {
+                    <div id="showBlogPostDiv" class="hidden">@Html.Partial("~/Views/Admin/_ViewBlogPost.cshtml")</div>
+                }
+            }
+        </div>
+    </div>
+</div>

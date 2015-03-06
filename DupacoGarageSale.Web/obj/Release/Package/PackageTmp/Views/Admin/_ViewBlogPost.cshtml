@@ -1,0 +1,43 @@
+﻿@model DupacoGarageSale.Web.Models.AdminViewModel
+
+<div class="row">
+    <h2>Blog post details:</h2>
+<div>
+    @Html.Hidden("hdnBlogPostId", Model.BlogPost.BlogPostId)
+    <h3>@Model.BlogPost.BlogPostTitle</h3> 
+    <small>Posted by @Model.BlogPost.BlogPostUser @@ @Model.BlogPost.PostDateTime</small><br /><br />
+                                
+    @if (@Model.BlogPost.MediaTypeId == 1)
+    {
+        if (@Model.BlogPost.ImageUri != string.Empty)
+        {
+            <div>                                            
+                <img alt="@Model.BlogPost.ImageUri" data-src="holder.js/200%x200" style="display: block;" 
+                    class="img-thumbnail" src="~/Content/images/garage_sale_pictures/@Model.BlogPost.ImageUri">
+            </div>
+        }
+                                        
+    }
+    else if (@Model.BlogPost.MediaTypeId == 2)
+    {
+        if (@Model.BlogPost.YouTubeUri != string.Empty)
+        {
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" allowfullscreen="" src="@Model.BlogPost.YouTubeUri"></iframe>
+            </div>
+        }
+    }
+    else if (@Model.BlogPost.MediaTypeId == 3)
+    {
+        if (@Model.BlogPost.VineUri != string.Empty)
+        {
+            <div>
+                <iframe class="vine-embed" src="@Model.BlogPost.VineUri" width="600" height="600" frameborder="0"></iframe>
+                <script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>
+            </div>
+        }
+    }
+    <div style="margin-top:15px;">
+        @Model.BlogPost.PostMessage
+    </div>
+</div>

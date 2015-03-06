@@ -1,0 +1,152 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+@{
+    ViewBag.Title = "User home page";
+    Layout = "~/Views/Shared/_UserHomeLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row" style="margin-bottom:20px">
+        <h2><a href="~/Home" style="text-decoration:none;">Home / </a>View profile / Account info for @Model.User.FirstName @Model.User.LastName</h2><br />
+    </div>
+    @if (Model.HeadlineNews != null)
+    {
+        <div class="row">
+            <div role="alert" class="alert alert-info">
+              <strong>Hey, garage salers!</strong> @Model.HeadlineNews
+            </div>
+        </div>       
+    }
+    <hr />
+    <div class="row">
+        <div class="col-md-5">
+            <p class="lead">Sales I'm hosting</p>
+            @{                    
+                    if (Model.GarageSales.Count > 0)
+                    {
+                        <div class="form-group">
+                        @{
+                            if (TempData["SaveSuccessful"] != null)
+                            {
+                                var saveSuccessful = Convert.ToBoolean(TempData["SaveSuccessful"]);
+                                if (saveSuccessful == true)
+                                {
+                                    Html.RenderPartial("~/Views/Shared/_SuccessfulDelete.cshtml");
+                                }
+                                else if (saveSuccessful == false)
+                                {
+                                    Html.RenderPartial("~/Views/Shared/_FailedDelete.cshtml");
+                                }
+                            }
+                        }
+                        </div>
+                        foreach (var sale in Model.GarageSales)
+                        {
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">@sale.GarageSaleName</h3>
+                                </div>
+                                <div class="panel-body">
+                                    @Html.HiddenFor(m => m.Sale.GarageSaleId)
+                                    <strong>Description:</strong> @sale.SaleDescription<br />
+                                    <strong>Last modified:</strong> @sale.ModifyDate<br /><br />
+                                    <strong>House number & street:</strong> @sale.SaleAddress1<br />
+                                    <strong>Apt, unit, or condo #:</strong> @sale.SaleAddress2<br />
+                                    <strong>City:</strong> @sale.SaleCity<br />
+                                    <strong>State:</strong> @sale.SaleState<br />
+                                    <strong>Zip code:</strong> @sale.SaleZip<br /><br />
+                                    <strong>Sale dates/times:</strong><br /><br />
+                                    <div>
+                                        <table style="width:525px;" class="table table-bordered table-condensed table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>@sale.DatesTimes.SaleDateOne.ToLongDateString()</th>
+                                                    <th>@sale.DatesTimes.SaleDateTwo.ToLongDateString()</th>
+                                                    <th>@sale.DatesTimes.SaleDateThree.ToLongDateString()</th>
+                                                    <th>@sale.DatesTimes.SaleDateFour.ToLongDateString()</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="width:auto">
+                                                <tr>
+                                                    <td>Start:<br />@sale.DatesTimes.DayOneStart</td>
+                                                    <td>Start:<br />@sale.DatesTimes.DayTwoStart</td>
+                                                    <td>Start:<br />@sale.DatesTimes.DayThreeStart</td>
+                                                    <td>Start:<br />@sale.DatesTimes.DayFourStart</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End:<br />@sale.DatesTimes.DayOneEnd</td>
+                                                    <td>End:<br />@sale.DatesTimes.DayTwoEnd</td>
+                                                    <td>End:<br />@sale.DatesTimes.DayThreeEnd</td>
+                                                    <td>End:<br />@sale.DatesTimes.DayFourEnd</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div><br />
+                                    <div>
+                                        @Html.ActionLink("Spruce up this garage sale", "Edit", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-info" })
+                                        @Html.ActionLink("Delete this garage sale", "Delete", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-md-9">
+                            <p class="lead">No existing garage sales.  Why don't you <a href="~/GarageSale/Add" >create one?</a></p>
+                        </div>
+                    }
+                }
+        </div>
+
+        <div class="col-md-5">
+            <p class="lead">Sales I'm watching</p>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">Favorite garage sales</h3>
+                </div>
+                <div class="panel-body">
+                    @if (Model.FavoriteGarageSales != null)
+                    {
+                        if (Model.FavoriteGarageSales.Count > 0)
+                        {
+                            <ul class="list-group">
+                                @foreach (var sale in Model.FavoriteGarageSales)
+                                {
+                                    <li class="list-group-item">
+                                        <div>
+                                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @sale.SaleAddress1<br />
+		                                    @if (sale.SaleAddress2 != string.Empty)
+                                      {                        
+			                                    @sale.SaleAddress2<br />
+                                      }
+		                                    @sale.SaleCity, @sale.SaleState @sale.SaleZip<br /><br />
+		                                    <div>
+                                                <button type="button"class="btn btn-default btn-xs" data-toggle="popover" title="@sale.GarageSaleName" data-placement="top"
+                                                    data-content="@sale.SaleDescription">Quick view</button>
+                                                <a href="~/GarageSale/ViewGarageSale/@sale.GarageSaleId" class="btn btn-primary btn-xs">Visit this garage sale</a>
+                                                <a href="~/GarageSale/RemoveSaleFromFavesByUserId?saleId=@sale.GarageSaleId&userId=@Model.User.UserId" class="btn btn-danger btn-xs">Remove</a>
+                                            </div>
+                                        </div> 
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <span>No favorites yet. Let's get shopping!</span>
+                        }
+                    }                    
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-2">
+            <a href="~/Itinerary/GetUserItineraries/@Model.User.UserId">
+                <p class="lead">View itineraries</p>
+                <img src="~/Content/images/iowa.jpg" class="img-circle" alt="View itineraries" style="width:150px;height:150px" />
+            </a>            
+        </div>
+    </div>
+</div>

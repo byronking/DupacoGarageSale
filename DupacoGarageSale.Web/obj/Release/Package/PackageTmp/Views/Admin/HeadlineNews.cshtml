@@ -1,0 +1,52 @@
+﻿@model DupacoGarageSale.Web.Models.AdminViewModel
+
+@{
+    ViewBag.Title = "Publish headline news";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            @Html.Partial("~/Views/Shared/_AdminSideNavigation.cshtml")
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Publish headline news</h1>
+            <p class="lead">This is where you set the messages that appear in the users' home page</p>
+            <input id="hdnSaveMessage" type="hidden" value="@ViewBag.Invisible" />
+            <div class="alert alert-success hidden" role="alert" id="divSaveMessage" style="width:40%;">
+                <strong>Nice work!</strong>
+                    The headline was successfully published!
+            </div>
+
+            <form action="/Admin/PublishHeadlineNews" method="post">            
+                <div class="form-group">
+                    <label for="txtHeadlineNews">What's up?</label>
+                    @Html.TextAreaFor(m => m.HeadlineNews, new { @class="form-control", id="txtHeadlineNews", placeholder="Brevity is the soul of wit (500 characters max)", maxlength="500" })
+                    <div id="charNumHeadlineNews"></div>
+                    <span id="headlineNewsValidationMessage" class="red invisible">Please enter a message.</span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" id="btnPublishMessage" class="btn btn-primary" value="Publish" />
+                </div>
+            </form>
+            <hr />
+
+            <p class="lead">Past headlines</p>
+            <div class="down_20">
+                @(Html.Telerik().Grid(Model.AdminMessages)
+                    .Name("grdAdminMessages")
+                    .DataKeys(dataKeys => dataKeys.Add(m => m.MessageId))
+                    .Columns(columns =>
+                    {
+                        columns.Bound(m => m.MessageId).Hidden();
+                        columns.Bound(m => m.MessageText);
+                        columns.Bound(m => m.MessageCreateDate);
+                    })
+                    .Pageable(pager => pager.PageSize(10))
+                    .Sortable()
+                ) 
+            </div>
+        </div>
+    </div>
+</div>
