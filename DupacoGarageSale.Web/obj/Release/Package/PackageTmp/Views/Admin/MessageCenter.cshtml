@@ -18,6 +18,7 @@
                 @(Html.Telerik().Grid(Model.ContactUsMessages)
                     .Name("grdContactUsMessages")
                     .DataKeys(dataKeys => dataKeys.Add(m => m.MessageId))
+                    //.HtmlAttributes(new { style = "width:90%;" })
                     .Columns(columns =>
                     {
                         columns.Command(commands =>
@@ -32,7 +33,7 @@
                         });
                     })
                     .RowTemplate(grid => @<text>
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col-sm-10">
                                     <strong>@item.ContactName</strong><br />
@@ -70,7 +71,9 @@
                                         </div>
                                     </div>
                                 }
-                            }   
+                                
+                                <span>Click <a href="#" class="replyLink" id="linkReplyToModal2" data-value="@item.MessageId" data-toggle="modal" data-target="#replyModal">here</a> to reply.</span><br /><br />
+                            }
                             else
                             {
                                 <span>No reply yet. Click <a href="#" class="replyLink" id="linkReplyToModal" data-value="@item.MessageId" data-toggle="modal" data-target="#replyModal">here</a> to reply.</span><br /><br /> 
@@ -79,7 +82,7 @@
                     )
                     .Pageable(pager => pager.PageSize(5))
                     .Sortable()
-                ) 
+                )
             </div>
         </div>
     </div>

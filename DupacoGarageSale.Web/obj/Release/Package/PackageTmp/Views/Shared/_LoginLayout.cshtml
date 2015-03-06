@@ -17,14 +17,8 @@
 </head>
 <body>
     @Html.Partial("~/Views/Shared/_LoginTopNavigation.cshtml")
-    
-    <div class="container" style="margin-top:60px;">
-        <div id="bg">
-          <img src="~/Content/images/garage-sale-1.jpg" alt="">
-        </div>
 
-        @RenderBody()
-    </div>
+    @RenderBody()
 
     @RenderSection("scripts", required: false)
 </body>
