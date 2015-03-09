@@ -8,7 +8,7 @@
 <div>
     <div class="container">
         <div class="row" style="margin-bottom:20px">
-            <h2><a href="~/Home" style="text-decoration:none;">Home / </a>Edit profile / Account info for @Model.FirstName @Model.LastName</h2><br />
+            <h2><a href="~/Home"  style="text-decoration:none;"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home / </a>Edit profile / Account info for @Model.FirstName @Model.LastName</h2><br />
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong>View / update your account info</strong></h3>
@@ -104,6 +104,7 @@
                                 </div>
                                 <div id="uploadPreview"></div>
                             </div>
+                            @Html.HiddenFor(m => m.ProfilePicLink)
                         </div>
             
                         <div class="row down_40">

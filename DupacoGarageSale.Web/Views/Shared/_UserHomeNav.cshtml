@@ -38,8 +38,8 @@
             </ul>
             <form class="navbar-form navbar-right" role="form">
                 <div class="form-group">
-                    <button class="btn btn-primary">Signed in as @Model.User.FirstName @Model.User.LastName</button>
-                    @Html.ActionLink("Log out", "LogOut", "Home", null, new { @class="btn btn-success", @id="btnLogOut" })                    
+                    <button class="btn btn-primary btn-sm">Signed in as @Model.User.FirstName @Model.User.LastName</button>
+                    @Html.ActionLink("Log out", "LogOut", "Home", null, new { @class="btn btn-success btn-sm", @id="btnLogOut" })                    
                 </div>
                 <div class="form-group" style="display:none;">
                     @*<div class="fb-login-button" id="loginbutton" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogout="" onlogin='window.location.reload(true);'></div>*@

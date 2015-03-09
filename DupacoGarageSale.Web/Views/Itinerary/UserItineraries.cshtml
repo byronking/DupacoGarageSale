@@ -6,31 +6,31 @@
 }
 
 <div class="container">
-    <div>
-        <img src="~/Content/images/garagesale.gif" alt="dupaco garage sales!" class="down_30" />
-        <h1>Here are your itineraries</h1>
+    <div class="form-inline">
+        <div class="form-group">
+            <img src="~/Content/images/garagesale.gif" alt="dupaco garage sales!" class="down_30" />
+        </div>
+        <div class="form-group">
+            <h1>Here are the itineraries you've created</h1>
+        </div>
     </div><br />
    
     <div class="col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                @if (Model.GarageSaleItineraries.Count == 0)
-                {
-                    <h3>You have no itineraries!  Time to get shopping!</h3>
-                }
-                else
-                {
-                    foreach(var itinerary in Model.GarageSaleItineraries)
-                    {
-                        <h3>@itinerary.ItineraryName</h3>
-                        <span>Created: @itinerary.ItineraryCreatedDate</span><br /><br />
+        @if (Model.GarageSaleItineraries.Count == 0)
+        {
+            <h3>You have no itineraries!  Time to get shopping!</h3>
+        }
+        else
+        {
+            foreach(var itinerary in Model.GarageSaleItineraries)
+            {
+                <h3>@itinerary.ItineraryName</h3>
+                <span>Created: @itinerary.ItineraryCreatedDate</span><br /><br />
                     
-                        @Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, 
-                                new { @class="btn btn-xs btn-info" })<br />
-                        <hr />
-                    }
-                }
-            </div>
-        </div>
+                @Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, 
+                        new { @class="btn btn-xs btn-info" })<br />
+                <hr />
+            }
+        }
     </div>
 </div>

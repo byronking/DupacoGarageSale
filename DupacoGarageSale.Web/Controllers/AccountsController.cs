@@ -275,6 +275,8 @@ namespace DupacoGarageSale.Web.Controllers
                 // Clear the session object.
                 Session["SaveSuccessful"] = null;
 
+                Session["ViewModel"] = viewModel;
+
                 return View(viewModel);
             }
             else
@@ -371,8 +373,11 @@ namespace DupacoGarageSale.Web.Controllers
             }
             else
             {
-                // Use the default pic.
-                user.ProfilePicLink = "keep-calm-and-come-to-the-dupaco-garage-sale.png";
+                if (user.ProfilePicLink == null)
+                {
+                    // Use the default pic.
+                    user.ProfilePicLink = "keep-calm-and-come-to-the-dupaco-garage-sale.png";
+                }
             }
 
             var errors = ModelState.Where(v => v.Value.Errors.Any());

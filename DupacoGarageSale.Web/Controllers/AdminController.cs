@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -91,7 +92,7 @@ namespace DupacoGarageSale.Web.Controllers
                 // Clear the session object.
                 Session["SaveSuccessful"] = null;
 
-                Session["ViewModel"] = viewModel;
+                Session["AdminViewModel"] = viewModel;
 
                 ViewBag.UsersActive = "active";
                 ViewBag.NavAdmin = "active";
@@ -125,7 +126,7 @@ namespace DupacoGarageSale.Web.Controllers
                 var statesList = addressRepository.GetStates();
                 ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
 
-                Session["ViewModel"] = viewModel;
+                Session["AdminViewModel"] = viewModel;
 
                 ViewBag.NavAdmin = "active";
                 return View("Users", viewModel);
@@ -152,9 +153,9 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 var viewModel = new AdminViewModel();
 
-                if (Session["ViewModel"] != null)
+                if (Session["AdminViewModel"] != null)
                 {
-                    viewModel = Session["ViewModel"] as AdminViewModel;
+                    viewModel = Session["AdminViewModel"] as AdminViewModel;
                 }
 
                 if (Session["AllUsers"] != null)
@@ -259,6 +260,11 @@ namespace DupacoGarageSale.Web.Controllers
                 var session = Session["UserSession"] as UserSession;
                 var viewModel = new AdminViewModel();
 
+                if (Session["AdminViewModel"] != null)
+                {
+                    viewModel = Session["AdminViewModel"] as AdminViewModel;
+                }
+
                 viewModel.AdminUser = session.User;
 
                 // Load all the garage sales.
@@ -272,7 +278,7 @@ namespace DupacoGarageSale.Web.Controllers
                 var statesList = addressRepository.GetStates();
                 ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
 
-                Session["ViewModel"] = viewModel;
+                Session["AdminViewModel"] = viewModel;
 
                 ViewBag.GarageSalesActive = "active";
                 ViewBag.NavAdmin = "active";
@@ -305,7 +311,7 @@ namespace DupacoGarageSale.Web.Controllers
                 var statesList = addressRepository.GetStates();
                 ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
 
-                Session["ViewModel"] = viewModel;
+                Session["AdminViewModel"] = viewModel;
 
                 ViewBag.NavAdmin = "active";
                 return View("GarageSales", viewModel);
@@ -325,9 +331,9 @@ namespace DupacoGarageSale.Web.Controllers
 
                 viewModel.AdminUser = session.User;
 
-                if (Session["ViewModel"] != null)
+                if (Session["AdminViewModel"] != null)
                 {
-                    viewModel = Session["ViewModel"] as AdminViewModel;
+                    viewModel = Session["AdminViewModel"] as AdminViewModel;
                 }
 
                 if (Session["AllGarageSales"] != null)
@@ -344,9 +350,9 @@ namespace DupacoGarageSale.Web.Controllers
 
                 // Get the blog posts.
                 var blogRepo = new BlogPostRepository();
-                viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.GarageSale.GarageSaleId);                
+                viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.GarageSale.GarageSaleId);
 
-                Session["ViewModel"] = viewModel;
+                Session["AdminViewModel"] = viewModel;
 
                 // Load the states dropdown.
                 var addressRepository = new AddressRepository();
@@ -359,6 +365,90 @@ namespace DupacoGarageSale.Web.Controllers
             else
             {
                 return View("~/Views/Accounts/Login.cshtml");
+            }
+        }
+
+        /// <summary>
+        /// Edit a garage sale.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult EditGarageSale(int id)
+        {
+            var userSession = new UserSession();
+
+            if (Session["UserSession"] != null)
+            {
+                // Load the states dropdown.
+                var addressRepository = new AddressRepository();
+                var statesList = addressRepository.GetStates();
+                ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+
+                userSession = Session["UserSession"] as UserSession;
+
+                var repository = new GarageSaleRepository();
+
+                var viewModel = new AdminViewModel
+                {
+                    AdminUser = userSession.User,
+                    GarageSale = repository.GetGarageSaleAndItemsById(id),
+                    SelectedCategories = new List<int>()
+                };
+
+                var accountRepository = new AccountsRepository();
+                viewModel.User = accountRepository.GetGarageSaleUserByUserName(viewModel.GarageSale.ModifyUser);
+
+                foreach (var itemId in viewModel.GarageSale.GarageSaleItems)
+                {
+                    viewModel.SelectedCategories.Add(itemId.ItemSubcategoryId);
+                }
+
+                // Get the categories and subcategories.
+                viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+
+                // Get the special items.
+                viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(viewModel.GarageSale.GarageSaleId);
+                foreach (var itemId in viewModel.GarageSaleSpecialItems)
+                {
+                    viewModel.SelectedCategories.Add(itemId.ItemSubcategoryId);
+                }
+
+                var selectedCategories = viewModel.SelectedCategories.ToArray();
+                ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+
+                // Get the blog posts.
+                var blogRepo = new BlogPostRepository();
+                viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.GarageSale.GarageSaleId);
+
+                // Get the messages.
+                viewModel.GarageSaleMessages = repository.GetGarageSaleMessages(id);
+
+                // Show the success message if saving the garage sale worked.
+                if (Session["SaveSuccessful"] != null)
+                {
+                    var saveSuccessful = Convert.ToBoolean(Session["SaveSuccessful"]);
+
+                    if (saveSuccessful)
+                    {
+                        ViewBag.Invisible = "false";
+                    }
+                }
+
+                ViewData["ShowEditGarageSale"] = "true";
+
+                // Save the viewmodel for later use.
+                Session["AdminViewModel"] = viewModel;
+
+                // Clear the session object.
+                Session["SaveSuccessful"] = null;
+
+                ViewBag.NavGarageSales = "active";
+                return View("GarageSales", viewModel); 
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
             }
         }
 
@@ -454,7 +544,7 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.BlogPosts = repository.GetAllBlogPosts();
 
                 Session["AllBlogPosts"] = viewModel.BlogPosts;
-                Session["ViewModel"] = viewModel;
+                Session["AdminViewModel"] = viewModel;
                 ViewData["ShowBlogPost"] = "true";
 
                 ViewBag.BlogPostsActive = "active";
@@ -481,14 +571,14 @@ namespace DupacoGarageSale.Web.Controllers
 
                 viewModel.AdminUser = session.User;
 
-                if (Session["ViewModel"] != null)
+                if (Session["AdminViewModel"] != null)
                 {
-                    viewModel = Session["ViewModel"] as AdminViewModel;
+                    viewModel = Session["AdminViewModel"] as AdminViewModel;
 
                     // Get the blog post.
                     var blogRepo = new AdminRepository();
                     viewModel.BlogPost = blogRepo.GetBlogPost(blog_post_id);
-                    Session["ViewModel"] = viewModel;
+                    Session["AdminViewModel"] = viewModel;
                 }
 
                 if (Session["AllBlogPosts"] != null)
@@ -650,6 +740,23 @@ namespace DupacoGarageSale.Web.Controllers
 
                 if (saveResult.IsSaveSuccessful)
                 {
+                    try
+                    {
+                        // Send contact us email.
+                        var mailMessage = new System.Net.Mail.MailMessage(message.ContactEmail, ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString());
+                        mailMessage.Subject = "Dupaco Garage Sale User Message from " + message.ContactName;
+                        mailMessage.Body = message.MessageText;
+                        mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+
+                        var smtp = new SmtpClient();
+                        smtp.Host = ConfigurationManager.AppSettings["MailServer"].ToString();
+                        smtp.Send(mailMessage);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log.Error(ex.ToString());
+                    }
+
                     ViewBag.Message = "Message sent! Someone will get back to you soon!";
                 }
                 else
@@ -694,6 +801,23 @@ namespace DupacoGarageSale.Web.Controllers
 
                     if (saveResult.IsSaveSuccessful)
                     {
+                        try
+                        {
+                            //// Send contact us email.
+                            //var mailMessage = new System.Net.Mail.MailMessage(reply.ReplyToEmail, ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString());
+                            //mailMessage.Subject = "Reply from the Dupaco Garage Sale Staff";
+                            //mailMessage.Body = reply.ReplyText;
+                            //mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+
+                            //var smtp = new SmtpClient();
+                            //smtp.Host = ConfigurationManager.AppSettings["MailServer"].ToString();
+                            //smtp.Send(mailMessage);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Log.Error(ex.ToString());
+                        }
+
                         Session["ReplySuccessful"] = true;
                     }
                 }
