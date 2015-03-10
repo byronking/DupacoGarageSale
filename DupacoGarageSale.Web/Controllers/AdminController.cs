@@ -246,6 +246,51 @@ namespace DupacoGarageSale.Web.Controllers
             }));
         }
 
+        /// <summary>
+        /// This allows for changing of user passwords.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
+        public ActionResult ChangePassword(FormCollection form)
+        {
+            var password = form["User.Password"].ToString();
+
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                session.User.Password = password;
+
+                // Update the user's password.
+                var repository = new AccountsRepository();
+                var hashedPassword = AccountHelper.GetSHA1Hash(session.User.UserName, password);
+
+                try
+                {
+                    var saveSuccessful = repository.UpdateUserPassword(session.User.UserName, hashedPassword);
+
+                    if (saveSuccessful)
+                    {
+                        Session["ChangePasswordSuccessful"] = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log.Error(ex.ToString());
+                }
+
+                return RedirectToAction("Users", new RouteValueDictionary(new
+                {
+                    controller = "Admin",
+                    action = "Users",
+                    userId = session.User.UserId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
         #endregion
 
         #region Garage sales
@@ -597,53 +642,172 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
-        #endregion
-
         /// <summary>
-        /// This allows for changing of user passwords.
+        /// This edits a special item.
         /// </summary>
-        /// <param name="form"></param>
+        /// <param name="special_item_id"></param>
         /// <returns></returns>
-        public ActionResult ChangePassword(FormCollection form)
+        [HttpGet]
+        public ActionResult EditSpecialItem(int special_item_id)
         {
-            var password = form["User.Password"].ToString();
+            var userSession = new UserSession();
 
             if (Session["UserSession"] != null)
             {
-                var session = Session["UserSession"] as UserSession;
-                session.User.Password = password;
+                userSession = Session["UserSession"] as UserSession;
 
-                // Update the user's password.
-                var repository = new AccountsRepository();
-                var hashedPassword = AccountHelper.GetSHA1Hash(session.User.UserName, password);
+                var viewModel = new AdminViewModel();
 
-                try
+                if (Session["AdminViewModel"] != null)
                 {
-                    var saveSuccessful = repository.UpdateUserPassword(session.User.UserName, hashedPassword);
+                    viewModel = Session["AdminViewModel"] as AdminViewModel;
+                }
+
+                // Show the success message if the save worked.
+                if (Session["SaveSuccessful"] != null)
+                {
+                    var saveSuccessful = Convert.ToBoolean(Session["SaveSuccessful"]);
 
                     if (saveSuccessful)
                     {
-                        Session["ChangePasswordSuccessful"] = true;
+                        ViewBag.Invisible = "false";
                     }
                 }
-                catch (Exception ex)
+
+                var item = viewModel.GarageSaleSpecialItems.Where(m => m.SpecialItemsId == special_item_id).ToList();
+                viewModel.GarageSaleSpecialItem = item[0];
+
+                Session["AdminViewModel"] = viewModel;
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        /// <summary>
+        /// This updates a special item.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="formCollection"></param>
+        /// <param name="picUpload"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult UpdateSpecialItem(AdminViewModel model, FormCollection formCollection, HttpPostedFileBase picUpload)
+        {
+            var userSession = new UserSession();
+
+            if (Session["UserSession"] != null)
+            {
+                userSession = Session["UserSession"] as UserSession;
+
+                var viewModel = new AdminViewModel();
+
+                if (Session["AdminViewModel"] != null)
                 {
-                    Logger.Log.Error(ex.ToString());
+                    viewModel = Session["AdminViewModel"] as AdminViewModel;
+                    model.GarageSaleSpecialItem.SaleId = viewModel.GarageSaleSpecialItem.SaleId;
+
+                    viewModel.GarageSaleSpecialItem = model.GarageSaleSpecialItem;
                 }
 
-                return RedirectToAction("Users", new RouteValueDictionary(new
+                model.GarageSaleSpecialItem.ItemSubcategoryId = Convert.ToInt32(formCollection["ddlCategories"]);
+
+                if (picUpload != null)
+                {
+                    // Save the image file.
+                    model.GarageSaleSpecialItem.PictureLink = picUpload.FileName;
+
+                    var fileName = Path.GetFileName(model.GarageSaleSpecialItem.PictureLink);
+                    var dir = ConfigurationManager.AppSettings["GarageSaleImagesDirectory"].ToString();
+
+                    var storageDir = dir + Path.DirectorySeparatorChar + fileName;
+
+                    if (!System.IO.File.Exists(fileName))
+                    {
+                        picUpload.SaveAs(dir + Path.DirectorySeparatorChar + fileName);
+                    }
+                }
+                else
+                {
+                    // Don't do anything. Use the previously-uploaded pic.
+                    //model.GarageSaleSpecialItem.PictureLink = "keep-calm-and-come-to-the-dupaco-garage-sale.png";
+                }
+
+                var repository = new GarageSaleRepository();
+                var saveSuccessful = repository.UpdateGarageSaleSpecialItem(model.GarageSaleSpecialItem);
+
+                if (saveSuccessful)
+                {
+                    Session["SaveSuccessful"] = true;
+
+                    // Remove the updated item.
+                    foreach (var item in viewModel.GarageSaleSpecialItems.ToList())
+                    {
+                        if (item.SpecialItemsId == model.GarageSaleSpecialItem.SpecialItemsId)
+                        {
+                            viewModel.GarageSaleSpecialItems.Remove(item);
+                            viewModel.GarageSaleSpecialItems.Add(model.GarageSaleSpecialItem);
+                        }
+                    }
+                }
+
+                Session["AdminViewModel"] = viewModel;
+
+                return RedirectToAction("EditSpecialItem", new RouteValueDictionary(new
                 {
                     controller = "Admin",
-                    action = "Users",
-                    userId = session.User.UserId
+                    action = "EditSpecialItem",
+                    special_item_id = viewModel.GarageSaleSpecialItem.SpecialItemsId
                 }));
             }
             else
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Accounts");
             }
-
         }
+
+        /// <summary>
+        /// This deletes a special item.
+        /// </summary>
+        /// <param name="special_item_id"></param>
+        /// <returns></returns>
+        public ActionResult DeleteSpecialItem(int special_item_id)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var saveSuccessful = false;
+
+                var repository = new GarageSaleRepository();
+                saveSuccessful = repository.DeleteGarageSpecialItems(special_item_id);
+
+                TempData["ItemDeleteSuccessful"] = saveSuccessful;
+
+                var viewModel = new AdminViewModel();
+
+                if (Session["AdminViewModel"] != null)
+                {
+                    viewModel = Session["AdminViewModel"] as AdminViewModel;
+                }
+
+                return RedirectToAction("EditGarageSale", new RouteValueDictionary(new
+                {
+                    controller = "Admin",
+                    action = "EditGarageSale",
+                    id = viewModel.GarageSale.GarageSaleId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        #endregion        
+
+        #region Blog posts
 
         /// <summary>
         /// This gets all the blog posts for the admin view.
@@ -714,6 +878,42 @@ namespace DupacoGarageSale.Web.Controllers
                 return View("~/Views/Accounts/Login.cshtml");
             }
         }
+
+        /// <summary>
+        /// This deletes a garage sale blog post.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult DeleteBlogPost(int id)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var viewModel = new AdminViewModel();
+
+                if (Session["AdminViewModel"] != null)
+                {
+                    viewModel = Session["AdminViewModel"] as AdminViewModel;
+                }
+
+                var repository = new BlogPostRepository();
+                var saveSuccessful = repository.DeleteBlogPost(id);
+
+                TempData["ItemDeleteSuccessful"] = saveSuccessful;
+
+                return RedirectToAction("EditGarageSale", new RouteValueDictionary(new
+                {
+                    controller = "Admin",
+                    action = "EditGarageSale",
+                    id = viewModel.GarageSale.GarageSaleId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        #endregion
 
         #region Headline news
         /// <summary>

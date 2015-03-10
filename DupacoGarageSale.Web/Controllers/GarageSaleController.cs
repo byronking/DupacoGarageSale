@@ -857,6 +857,11 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// This deletes a garage sale blog post.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteBlogPost(int id)
         {
             if (Session["UserSession"] != null)

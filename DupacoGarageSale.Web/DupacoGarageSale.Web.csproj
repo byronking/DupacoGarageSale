@@ -839,6 +839,7 @@
     <Content Include="Views\Admin\MessageCenter.cshtml" />
     <Content Include="Views\Admin\MessageSent.cshtml" />
     <Content Include="Views\Admin\_EditGarageSale.cshtml" />
+    <Content Include="Views\Admin\EditSpecialItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

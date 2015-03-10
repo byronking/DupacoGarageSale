@@ -34,7 +34,7 @@
                         }
                     }
                 </div>
-                <p class="lead">Make changes to your garage sale. Change details about the sale, change the dates/times, or add new item categories or special items.</p>
+                <p class="lead">Garage sale detail.</p>
                     
                 @using (Html.BeginForm("UpdateGarageSale", "Admin", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
                 {
@@ -428,8 +428,7 @@
                 <h3 class="panel-title"><strong>Hot picks!</strong></h3>
             </div>
             <div class="panel-body">
-                <p class="lead">Here are the "hot picks" you're selling at your garage sale. Hot pick items are those items that show up first in search.
-                    Don't have any yet? Click @Html.ActionLink("here", "AddSpecialItem") to add one.
+                <p class="lead">Here are the user's "hot picks".
                 </p>
                         
                 @{ if (Model.GarageSaleSpecialItems == null)
@@ -450,8 +449,8 @@
                                         @item.Description<br /><br />
                                         <p><span>$</span> @item.Price</p>
                                         <p>
-                                            @Html.ActionLink("Edit this item", "EditSpecialItem", "GarageSale", new { special_item_id = @item.SpecialItemsId }, new { @class = "btn btn-primary btn-xs" })
-                                            @Html.ActionLink("Delete this item", "DeleteSpecialItem", "GarageSale", new { special_item_id = @item.SpecialItemsId }, new { @class = "btn btn-danger btn-xs" })
+                                            @Html.ActionLink("Edit this item", "EditSpecialItem", "Admin", new { special_item_id = @item.SpecialItemsId }, new { @class = "btn btn-primary btn-xs" })
+                                            @Html.ActionLink("Delete this item", "DeleteSpecialItem", "Admin", new { special_item_id = @item.SpecialItemsId }, new { @class = "btn btn-danger btn-xs" })
                                         </p>                     
                                     </div>                    
                                 </div>
@@ -472,11 +471,8 @@
 
             <div class="panel-body">
                 <p class="lead">
-                    This is where you get to tell the story of your sale. Add messages, pictures, and videos about your sale. Creativity counts!
-                    Click <a href="#" data-toggle="modal" data-target=".blog-post-modal">here</a> to post a new message.
-                </p>                   
-
-                @*<button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target=".blog-post-modal">Add a new garage sale post</button>*@
+                    Here are the user's blog posts.
+                </p>
                 <hr />
                      
                 @{

@@ -1,8 +1,8 @@
-﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+﻿@model DupacoGarageSale.Web.Models.AdminViewModel
 
 @{
     ViewBag.Title = "Edit your hot pick item";
-    Layout = "~/Views/Shared/_GarageSaleLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 
@@ -22,7 +22,7 @@
                         Your hot pick was successfully updated!
                 </div>
 
-                @using (Html.BeginForm("UpdateSpecialItem", "GarageSale", FormMethod.Post, new { enctype="multipart/form-data", role="form" }))
+                @using (Html.BeginForm("UpdateSpecialItem", "Admin", FormMethod.Post, new { enctype="multipart/form-data", role="form" }))
                 {
                     @Html.HiddenFor(m => m.GarageSaleSpecialItem.SpecialItemsId)
                     <div style="width:50%;margin-left:150px;">
@@ -230,7 +230,7 @@
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="Save item" id="btnSaveSpecialItem" />
-                            @Html.ActionLink("Cancel and go back", "Edit", "GarageSale", new { id = @Model.Sale.GarageSaleId }, new { @class = "btn btn-default" })                                  
+                            @Html.ActionLink("Go back", "EditGarageSale", "Admin", new { id = @Model.GarageSale.GarageSaleId }, new { @class = "btn btn-default" })                                  
                         </div>
                         <div class="form-group">
                             @{

@@ -30,12 +30,12 @@
                         columns.Command(commands =>
                         {
                             commands.Custom("EditGarageSale")
-                                .Text("View")
-                                .Action("EditGarageSale", "Admin")
-                                .DataRouteValues(route =>
-                                {
-                                    route.Add(m => m.GarageSaleId).RouteKey("saleId");
-                                });
+                                .Text("Edit")
+                                .Action("EditGarageSale", "Admin");
+                                //.DataRouteValues(route =>
+                                //{
+                                //    route.Add(m => m.GarageSaleId).RouteKey("saleId");
+                                //});
                         });
                         columns.Bound(m => m.GarageSaleId).Hidden();
                         columns.Bound(m => m.GarageSaleName);
@@ -50,11 +50,9 @@
                     .Sortable()
                 ) 
             </div>
-
             <br /><br />
             @{
-                var showEditGarageSale = ViewData["ShowEditGarageSale"];            
-
+                var showEditGarageSale = ViewData["ShowEditGarageSale"];
                 <input type="hidden" id="hdnShowEditGarageSale" value="@showEditGarageSale" />
 
                 if (Model.GarageSale != null)
