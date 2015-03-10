@@ -265,13 +265,8 @@
             $("input:checkbox[value=" + selectedCategories[x] + "]").attr("checked", true);
 
             var panelCollapse = $("input:checkbox[value=" + selectedCategories[x] + "]").closest('div.panel-collapse').attr('id');
-            $(panelCollapse).collapse('show');
-            //alert($(panelCollapse).prop('tagName'));
-
-            //$("#collapseNine").collapse('show');
-            //$("#collapseTen").collapse('show');
-
-            //alert($("#collapseNine").prop('tagName'));
+            var panelName = $(panelCollapse).selector;
+            $(document.getElementById(panelName)).collapse('show');
         }
     }
 

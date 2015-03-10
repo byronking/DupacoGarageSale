@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     
-    // Shoe the user edit fields.
+    // Show the user edit fields.
     if ($("#hdnShowEditUser").val() == "true") {
         //alert('true');
         $("#editUserDiv").removeClass('hidden');
@@ -90,6 +90,29 @@
     //    alert(hdnMessageId);
     //    e.preventDefault();
     //});
+
+    // Set the range of available times.
+    $('#dayOneStart').timepicker({ 'scrollDefault': '800' });
+    $('#dayOneEnd').timepicker({ 'scrollDefault': '2000' });
+    $('#dayTwoStart').timepicker({ 'scrollDefault': '800' });
+    $('#dayTwoEnd').timepicker({ 'scrollDefault': '2000' });
+    $('#dayThreeStart').timepicker({ 'scrollDefault': '800' });
+    $('#dayThreeEnd').timepicker({ 'scrollDefault': '2000' });
+    $('#dayFourStart').timepicker({ 'scrollDefault': '800' });
+    $('#dayFourEnd').timepicker({ 'scrollDefault': '2000' });
+
+    // Set the selected item categories.
+    if ($("#hdnSelectedCategories").val() !== undefined) {
+        var selectedCategories = new Array();
+        selectedCategories = $("#hdnSelectedCategories").val().split(',');
+
+        for (x in selectedCategories) {
+            $("input:checkbox[value=" + selectedCategories[x] + "]").attr("checked", true);
+            var panelCollapse = $("input:checkbox[value=" + selectedCategories[x] + "]").closest('div.panel-collapse').attr('id');
+            var panelName = $(panelCollapse).selector;
+            $(document.getElementById(panelName)).collapse('show');
+        }
+    }
 });
 
 function debugObject(inputobject) {

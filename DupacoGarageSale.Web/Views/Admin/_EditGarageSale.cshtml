@@ -36,7 +36,7 @@
                 </div>
                 <p class="lead">Make changes to your garage sale. Change details about the sale, change the dates/times, or add new item categories or special items.</p>
                     
-                @using (Html.BeginForm("Update", "GarageSale", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("UpdateGarageSale", "Admin", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
                 {
                     <div class="col-md-5">
                         <div class="well">                    
@@ -128,10 +128,10 @@
                                     </a>
                                     </h4>
                                 </div>
-                                <div aria-labelledby="headingOne" role="tabpanel" class="panel-collapse collapse in" id="collapseOne">
+                                <div aria-labelledby="headingOne" role="tabpanel" class="panel-collapse collapse" id="collapseOne">
                                     <div class="list-group">
                                         @{
-                                            if (Model. ItemCategories != null)
+                                            if (Model.ItemCategories != null)
                                             {
                                                 var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
 

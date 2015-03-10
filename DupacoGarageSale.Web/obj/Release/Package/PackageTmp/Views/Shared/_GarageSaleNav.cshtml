@@ -3,7 +3,7 @@
 <nav class="navbar dupaco_colors navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="~/Home/" style="color:white;font-weight:bold;font-size:24px;">Add or edit your garage sales</a>
+            <a class="navbar-brand" href="~/Home/" style="color:white;font-weight:bold;font-size:24px;">Add a new sale</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -33,8 +33,8 @@
             </ul>
             <form class="navbar-form navbar-right" role="form">
                 <div class="form-group">
-                    <button class="btn btn-primary">Signed in as @Model.User.FirstName @Model.User.LastName</button>
-                    @Html.ActionLink("Log out", "LogOut", "Home", null, new { @class="btn btn-success" })
+                    <button class="btn btn-primary btn-sm">Signed in as @Model.User.FirstName @Model.User.LastName</button>
+                    @Html.ActionLink("Log out", "LogOut", "Home", null, new { @class="btn btn-success btn-sm" })
                 </div>
             </form>
         </div>

@@ -396,6 +396,12 @@ namespace DupacoGarageSale.Web.Controllers
                     SelectedCategories = new List<int>()
                 };
 
+                if (Session["AdminViewModel"] != null)
+                {
+                    var savedViewModel = Session["AdminViewModel"] as AdminViewModel;
+                    viewModel.GarageSales = savedViewModel.GarageSales;
+                }
+
                 var accountRepository = new AccountsRepository();
                 viewModel.User = accountRepository.GetGarageSaleUserByUserName(viewModel.GarageSale.ModifyUser);
 
@@ -455,9 +461,7 @@ namespace DupacoGarageSale.Web.Controllers
         public ActionResult ClearSalesSearch()
         {
             return RedirectToAction("GarageSales");
-        }
-
-        #endregion
+        }        
 
         /// <summary>
         /// This loadsthe garage sale items page.
@@ -479,6 +483,121 @@ namespace DupacoGarageSale.Web.Controllers
                 return View("~/Views/Accounts/Login.cshtml");
             }
         }
+
+        /// <summary>
+        /// This updates a user's garage sale.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult UpdateGarageSale(HttpPostedFileBase garageSalePicUpload, AdminViewModel model, FormCollection form)
+        {
+            var categoryIdList = new List<int>();
+            model.GarageSale.GarageSaleItems = new List<GarageSaleItem>();
+
+            foreach (var key in form.AllKeys)
+            {
+                int categoryId;
+
+                if (Int32.TryParse(key, out categoryId))
+                {
+                    var garageSaleItem = new GarageSaleItem
+                    {
+                        SaleId = model.GarageSale.GarageSaleId,
+                        ItemSubcategoryId = categoryId
+                    };
+                    
+                    model.GarageSale.GarageSaleItems.Add(garageSaleItem);
+                    categoryIdList.Add(categoryId);
+                }
+            }
+
+            var viewModel = new AdminViewModel();
+
+            if (Session["AdminViewModel"] != null)
+            {
+                viewModel = Session["AdminViewModel"] as AdminViewModel;
+                //model.GarageSale.GarageSaleItems = viewModel.GarageSale.GarageSaleItems;
+                //model.GarageSaleSpecialItems = viewModel.GarageSaleSpecialItems;
+            }
+
+            if (garageSalePicUpload != null)
+            {
+                // Save the image file.
+                model.GarageSale.GargeSalePicLink = garageSalePicUpload.FileName;
+
+                var fileName = Path.GetFileName(model.GarageSale.GargeSalePicLink);
+                var dir = ConfigurationManager.AppSettings["GarageSaleImagesDirectory"].ToString();
+
+                var storageDir = dir + Path.DirectorySeparatorChar + fileName;
+
+                if (!System.IO.File.Exists(fileName))
+                {
+                    garageSalePicUpload.SaveAs(dir + Path.DirectorySeparatorChar + fileName);
+                }
+            }
+            else
+            {
+                if (model.GarageSale.GargeSalePicLink == string.Empty)
+                {
+                    // Use the default pic.
+                    model.GarageSale.GargeSalePicLink = "Insulators-3080-Karen-St-DBQ.jpg";
+                }
+            }
+
+            // Set the sale dates in the web.config file and then set them as the model properties...
+            model.GarageSale.DatesTimes.SaleDateOne = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateOne"]);
+            model.GarageSale.DatesTimes.SaleDateTwo = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateTwo"]);
+            model.GarageSale.DatesTimes.SaleDateThree = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateThree"]);
+            model.GarageSale.DatesTimes.SaleDateFour = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateFour"]);
+            model.GarageSale.ModifyDate = DateTime.Now;
+
+            if (Session["UserSession"] != null)
+            {
+                // Load the states dropdown.
+                var addressRepository = new AddressRepository();
+                var statesList = addressRepository.GetStates();
+                ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+
+                var userSession = Session["UserSession"] as UserSession;
+                model.User = userSession.User;
+                model.GarageSale.ModifyUser = model.User.UserName;
+            }
+
+            var errors = ModelState.Where(v => v.Value.Errors.Any());
+            var repository = new GarageSaleRepository();
+
+            if (ModelState.IsValid)
+            {
+                var saveResult = new UserSaveResult();
+
+                saveResult = repository.UpdateGarageSale(model.GarageSale);
+
+                model.GarageSale.GarageSaleId = saveResult.SaveResultId;
+
+                ViewBag.NavViewSales = "active";
+
+                if (saveResult.IsSaveSuccessful)
+                {
+                    Session["SaveSuccessful"] = true;
+                }
+
+                return RedirectToAction("EditGarageSale", new RouteValueDictionary(new
+                {
+                    controller = "Admin",
+                    action = "EditGarageSale",
+                    id = model.GarageSale.GarageSaleId
+                }));
+            }
+            else
+            {
+                // Get the subcategories
+                model.ItemCategories = repository.GetCategoriesAndSubcategories();
+                return View("~/Views/Admin/GarageSales.cshtml", model);
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// This allows for changing of user passwords.

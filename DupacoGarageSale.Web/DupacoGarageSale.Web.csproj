@@ -641,7 +641,7 @@
     <Content Include="Content\lightbox\js\lightbox.min.map" />
     <Content Include="Content\lightbox\README.markdown" />
     <None Include="Properties\PublishProfiles\DupacoGarageSale.pubxml" />
-    <Content Include="Scripts\2013.2.611\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\2013.2.611\jquery-1.7.1x.min.js" />
     <Content Include="Scripts\2013.2.611\jquery.validate.min.js" />
     <Content Include="Scripts\2013.2.611\telerik.all.min.js" />
     <Content Include="Scripts\2013.2.611\telerik.autocomplete.min.js" />

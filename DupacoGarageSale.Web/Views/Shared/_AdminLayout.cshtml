@@ -7,13 +7,14 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/bootstrap/css")
     @Styles.Render("~/Content/dashboard/css")
-    @*@Styles.Render("~/Content/timepicker/css")*@
+    @Styles.Render("~/Content/timepicker/css")
+    @Styles.Render("~/Content/lightbox/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
-    @*@Scripts.Render("~/bundles/js")*@
-    @*@Scripts.Render("~/bundles/timepicker")*@
+    @Scripts.Render("~/bundles/timepicker")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/adminjs")
+    @Scripts.Render("~/bundles/lightboxjs")  
 
     @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.windows7.css").Combined(true).Compress(true)))
 </head>
@@ -25,6 +26,6 @@
 
     @RenderSection("scripts", required: false)
 
-    @(Html.Telerik().ScriptRegistrar())
+    @*@(Html.Telerik().ScriptRegistrar())*@
 </body>
 </html>
