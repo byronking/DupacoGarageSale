@@ -35,6 +35,7 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.Parameters.Add("@sale_city", SqlDbType.VarChar).Value = sale.SaleCity;
                     cmd.Parameters.Add("@sale_state_id", SqlDbType.Int).Value = sale.SaleStateId;
                     cmd.Parameters.Add("@sale_zip", SqlDbType.VarChar).Value = sale.SaleZip;
+                    cmd.Parameters.Add("@sale_host", SqlDbType.VarChar).Value = sale.SaleHost;
                     cmd.Parameters.Add("@create_date", SqlDbType.DateTime).Value = sale.CreateDate;
                     cmd.Parameters.Add("@modify_date", SqlDbType.DateTime).Value = sale.CreateDate;
                     cmd.Parameters.Add("@modify_user", SqlDbType.VarChar).Value = sale.ModifyUser;
@@ -42,7 +43,6 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.Parameters.Add("@sale_date_one", SqlDbType.DateTime).Value = sale.DatesTimes.SaleDateOne;
 
                     DateTime? dayOneStart = null;
-
                     if (sale.DatesTimes.DayOneStart == null)
                     {
                         dayOneStart = null;
@@ -50,12 +50,11 @@ namespace DupacoGarageSale.Data.Repository
                     else
                     {
                         dayOneStart = Convert.ToDateTime(sale.DatesTimes.DayOneStart);
-                    } 
+                    }
 
                     cmd.Parameters.Add("@day_one_start", SqlDbType.DateTime).Value = dayOneStart;
 
                     DateTime? dayOneEnd = null;
-
                     if (sale.DatesTimes.DayOneEnd == null)
                     {
                         dayOneEnd = null;
@@ -63,21 +62,87 @@ namespace DupacoGarageSale.Data.Repository
                     else
                     {
                         dayOneEnd = Convert.ToDateTime(sale.DatesTimes.DayOneEnd);
-                    } 
+                    }
 
                     cmd.Parameters.Add("@day_one_end", SqlDbType.DateTime).Value = dayOneEnd;
-
                     cmd.Parameters.Add("@sale_date_two", SqlDbType.DateTime).Value = sale.DatesTimes.SaleDateTwo;
-                    cmd.Parameters.Add("@day_two_start", SqlDbType.DateTime).Value = sale.DatesTimes.DayTwoStart;
-                    cmd.Parameters.Add("@day_two_end", SqlDbType.DateTime).Value = sale.DatesTimes.DayTwoEnd;
+
+                    DateTime? dayTwoStart = null;
+                    if (sale.DatesTimes.DayTwoStart == null)
+                    {
+                        dayTwoStart = null;
+                    }
+                    else
+                    {
+                        dayTwoStart = Convert.ToDateTime(sale.DatesTimes.DayTwoStart);
+                    }
+
+                    cmd.Parameters.Add("@day_two_start", SqlDbType.DateTime).Value = dayTwoStart;
+
+                    DateTime? dayTwoEnd = null;
+                    if (sale.DatesTimes.DayTwoEnd == null)
+                    {
+                        dayTwoEnd = null;
+                    }
+                    else
+                    {
+                        dayTwoEnd = Convert.ToDateTime(sale.DatesTimes.DayTwoEnd);
+                    }
+
+                    cmd.Parameters.Add("@day_two_end", SqlDbType.DateTime).Value = dayTwoEnd;
 
                     cmd.Parameters.Add("@sale_date_three", SqlDbType.DateTime).Value = sale.DatesTimes.SaleDateThree;
-                    cmd.Parameters.Add("@day_three_start", SqlDbType.DateTime).Value = sale.DatesTimes.DayThreeStart;
-                    cmd.Parameters.Add("@day_three_end", SqlDbType.DateTime).Value = sale.DatesTimes.DayThreeEnd;
+
+
+                    DateTime? dayThreeStart = null;
+                    if (sale.DatesTimes.DayThreeStart == null)
+                    {
+                        dayThreeStart = null;
+                    }
+                    else
+                    {
+                        dayThreeStart = Convert.ToDateTime(sale.DatesTimes.DayThreeStart);
+                    }
+
+                    cmd.Parameters.Add("@day_three_start", SqlDbType.DateTime).Value = dayThreeStart;
+
+                    DateTime? dayThreeEnd = null;
+                    if (sale.DatesTimes.DayThreeEnd == null)
+                    {
+                        dayThreeEnd = null;
+                    }
+                    else
+                    {
+                        dayThreeEnd = Convert.ToDateTime(sale.DatesTimes.DayThreeEnd);
+                    }
+
+                    cmd.Parameters.Add("@day_three_end", SqlDbType.DateTime).Value = dayThreeEnd;
 
                     cmd.Parameters.Add("@sale_date_four", SqlDbType.DateTime).Value = sale.DatesTimes.SaleDateFour;
-                    cmd.Parameters.Add("@day_four_start", SqlDbType.DateTime).Value = sale.DatesTimes.DayFourStart;
-                    cmd.Parameters.Add("@day_four_end", SqlDbType.DateTime).Value = sale.DatesTimes.DayFourEnd;
+
+                    DateTime? dayFourStart = null;
+                    if (sale.DatesTimes.DayFourStart == null)
+                    {
+                        dayFourStart = null;
+                    }
+                    else
+                    {
+                        dayFourStart = Convert.ToDateTime(sale.DatesTimes.DayFourStart);
+                    }
+
+                    cmd.Parameters.Add("@day_four_start", SqlDbType.DateTime).Value = dayFourStart;
+
+                    DateTime? dayFourEnd = null;
+                    if (sale.DatesTimes.DayFourEnd == null)
+                    {
+                        dayFourEnd = null;
+                    }
+                    else
+                    {
+                        dayFourEnd = Convert.ToDateTime(sale.DatesTimes.DayFourEnd);
+                    }
+
+                    cmd.Parameters.Add("@day_four_end", SqlDbType.DateTime).Value = dayFourEnd;
 
                     var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
@@ -256,6 +321,7 @@ namespace DupacoGarageSale.Data.Repository
                             SaleAddress2 = reader["sale_address2"].ToString(),
                             SaleCity = reader["sale_city"].ToString(),                            
                             SaleDescription = reader["sale_description"].ToString(),
+                            SaleHost = reader["sale_host"].ToString(),
                             SaleState = reader["state_name"].ToString(),
                             SaleStateId = Convert.ToInt32(reader["state_id"]),
                             SaleZip = reader["sale_zip"].ToString()

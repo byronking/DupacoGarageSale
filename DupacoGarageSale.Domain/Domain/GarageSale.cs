@@ -34,7 +34,7 @@ namespace DupacoGarageSale.Data.Domain
         [Required(ErrorMessage = "Enter a zip code")]
         public string SaleZip { get; set; }
         public SaleDatesTimes DatesTimes { get; set; }
-
+        public string SaleHost { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? ModifyDate { get; set; }
         public string ModifyUser { get; set; }

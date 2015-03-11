@@ -94,10 +94,10 @@ namespace DupacoGarageSale.Web.Controllers
             }
 
             // Set the sale dates in the web.config file and then set them as the model properties...
-            model.Sale.DatesTimes.SaleDateOne = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateOne"]);
-            model.Sale.DatesTimes.SaleDateTwo = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateTwo"]);
-            model.Sale.DatesTimes.SaleDateThree = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateThree"]);
-            model.Sale.DatesTimes.SaleDateFour = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateFour"]);
+            model.Sale.DatesTimes.SaleDateOne = Convert.ToDateTime(model.Sale.DatesTimes.SaleDateOne);
+            model.Sale.DatesTimes.SaleDateTwo = Convert.ToDateTime(model.Sale.DatesTimes.SaleDateTwo);
+            model.Sale.DatesTimes.SaleDateThree = Convert.ToDateTime(model.Sale.DatesTimes.SaleDateThree);
+            model.Sale.DatesTimes.SaleDateFour = Convert.ToDateTime(model.Sale.DatesTimes.SaleDateFour);
             model.Sale.CreateDate = DateTime.Now;            
 
             if (Session["UserSession"] != null)
@@ -109,6 +109,7 @@ namespace DupacoGarageSale.Web.Controllers
 
                 var userSession = Session["UserSession"] as UserSession;
                 model.User = userSession.User;
+                model.Sale.SaleHost = model.User.UserName;
                 model.Sale.ModifyUser = model.User.UserName;
             }
 
