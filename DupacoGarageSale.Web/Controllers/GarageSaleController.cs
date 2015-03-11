@@ -911,6 +911,7 @@ namespace DupacoGarageSale.Web.Controllers
                     viewModel = Session["ViewModel"] as GarageSaleViewModel;
                     viewModel.GarageSaleMessage = new GarageSaleMessage();
                     viewModel.GarageSaleMessage.MessageFrom = userSession.User.UserName;
+                    viewModel.GarageSaleMessage.MessageTo = viewModel.Sale.GarageSaleEmail;
                     viewModel.GarageSaleMessage.SaleId = viewModel.Sale.GarageSaleId;
                     viewModel.GarageSaleMessage.MessageSent = DateTime.Now;
                     viewModel.GarageSaleMessage.MessageText = model.GarageSaleMessage.MessageText;
@@ -923,7 +924,7 @@ namespace DupacoGarageSale.Web.Controllers
                         try
                         {
                             // Send notification email.
-                            var mailMessage = new System.Net.Mail.MailMessage(viewModel.User.Email, ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString());
+                            var mailMessage = new System.Net.Mail.MailMessage(viewModel.User.Email, viewModel.Sale.GarageSaleEmail);
                             mailMessage.Subject = "Dupaco Garage Sale Message from " + viewModel.GarageSaleMessage.MessageFrom;
                             mailMessage.Body = viewModel.GarageSaleMessage.MessageText;
                             mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
@@ -972,6 +973,7 @@ namespace DupacoGarageSale.Web.Controllers
                     viewModel = Session["ViewModel"] as GarageSaleViewModel;
                     viewModel.GarageSaleMessage = new GarageSaleMessage();
                     viewModel.GarageSaleMessage.MessageFrom = userSession.User.UserName;
+                    viewModel.GarageSaleMessage.MessageTo = viewModel.Sale.GarageSaleEmail;
                     viewModel.GarageSaleMessage.SaleId = viewModel.Sale.GarageSaleId;
                     viewModel.GarageSaleMessage.MessageSent = DateTime.Now;
                     viewModel.GarageSaleMessage.MessageText = model.GarageSaleMessage.MessageText;
@@ -981,6 +983,23 @@ namespace DupacoGarageSale.Web.Controllers
 
                     if (saveResult.IsSaveSuccessful)
                     {
+                        try
+                        {
+                            // Send notification email.
+                            var mailMessage = new System.Net.Mail.MailMessage(viewModel.User.Email, viewModel.GarageSaleMessage.MessageTo);
+                            mailMessage.Subject = "Dupaco Garage Sale Message from " + viewModel.GarageSaleMessage.MessageFrom;
+                            mailMessage.Body = viewModel.GarageSaleMessage.MessageText;
+                            mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+
+                            var smtp = new SmtpClient();
+                            smtp.Host = ConfigurationManager.AppSettings["MailServer"].ToString();
+                            smtp.Send(mailMessage);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Log.Error(ex.ToString());
+                        }
+
                         viewModel.GarageSaleMessage.MessageId = saveResult.SaveResultId;
                         Session["SaveSuccessful"] = true;
                     }

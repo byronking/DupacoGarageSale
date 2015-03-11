@@ -1480,6 +1480,7 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@message_from", SqlDbType.VarChar).Value = message.MessageFrom;
+                    cmd.Parameters.Add("@message_to", SqlDbType.VarChar).Value = message.MessageTo;
                     cmd.Parameters.Add("@message_text", SqlDbType.VarChar).Value = message.MessageText;
                     cmd.Parameters.Add("@message_sent", SqlDbType.DateTime).Value = message.MessageSent;
                     cmd.Parameters.Add("@sale_id", SqlDbType.Int).Value = message.SaleId;

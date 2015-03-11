@@ -545,20 +545,26 @@
             <div class="panel-heading">
                 <h3 class="panel-title"><strong>Questions and answers about this garage sale</strong></h3>
             </div>
-            <div class="panel-body"> 
-
+            <div class="panel-body">
                 <div>
-                    @foreach (var message in Model.GarageSaleMessages)
+                    @if (Model.GarageSaleMessages.Count > 0)
                     {
-                        <div>
-                            Date: @message.MessageSent <br />
-                            From: @message.MessageFrom <br />
-                            Message: @message.MessageText <br />
-                        </div>
-                        <div>
-                            <a href="#" data-toggle="modal" data-target=".reply-to-message">Reply</a>
-                        </div>                         
-                        <hr />
+                        foreach (var message in Model.GarageSaleMessages)
+                        {
+                            <div>
+                                Date: @message.MessageSent <br />
+                                From: @message.MessageFrom <br />
+                                Message: @message.MessageText <br />
+                            </div>
+                            <div>
+                                <a href="#" data-toggle="modal" data-target=".reply-to-message">Reply</a>
+                            </div>                         
+                            <hr />
+                        }
+                    }
+                    else
+                    {
+                        <span>No messages at this time.</span>   
                     }
                 </div>
             </div>

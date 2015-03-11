@@ -10,6 +10,7 @@ namespace DupacoGarageSale.Data.Domain
     {
         public int MessageId { get; set; }
         public string MessageFrom { get; set; }
+        public string MessageTo { get; set; }
         public string MessageText { get; set; }
         public DateTime MessageSent { get; set; }
         public int SaleId { get; set; }
