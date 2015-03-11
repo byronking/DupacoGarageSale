@@ -24,3 +24,111 @@ Error Number:213,State:1,Class:16
    at DupacoGarageSale.Data.Repository.ItineraryRepository.SaveItineraryLeg(Int32 itineraryId, Int32 saleId) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\ItineraryRepository.cs:line 261
 ClientConnectionId:a2145add-358b-4ccb-86eb-484b819e30ca
 Error Number:213,State:1,Class:16
+2015-03-10 17:39:05,605 [63] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 80
+2015-03-10 17:39:10,909 [63] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 80
+2015-03-10 17:41:41,929 [9] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 17:56:49,749 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 17:57:05,060 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 17:57:22,892 [9] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 17:58:04,731 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:23:12,881 [14] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:23:49,218 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:24:58,963 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:24:58,964 [9] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:25:01,210 [8] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:25:02,466 [9] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:28:29,582 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:28:29,628 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:30:03,132 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:30:03,173 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:31:50,973 [19] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 18:31:51,016 [19] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 19:17:26,253 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 19:17:26,302 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 19:20:33,038 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 19:20:33,085 [7] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 19:33:41,298 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 19:33:41,337 [10] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 20:32:30,352 [6] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92
+2015-03-10 20:32:30,403 [6] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Web.Helpers.ItemsHelper.GetMinAndMaxItemNumbers(String itemType) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Helpers\ItemsHelper.cs:line 92

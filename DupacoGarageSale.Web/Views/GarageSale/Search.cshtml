@@ -30,7 +30,7 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <div class="form-group">
-                            <input type="text" id="txtSearchWithFilters" name="txtSearchWithFilters" class="form-control" placeholder="Enter search criteria" /> <br />
+                            @*<input type="text" id="txtSearchWithFilters" name="txtSearchWithFilters" class="form-control" placeholder="Enter search criteria" /> <br />*@
                             <select name="ddlRadius" id="ddlRadius" class="form-control">
                                 <option value="5">5 miles</option>
                                 <option value="10">10 miles</option>
@@ -360,6 +360,32 @@
                                                 var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
 
                                                 foreach (var category in categories11)
+                                                {
+                                                    <div class="row" style="margin-left:5px;">
+                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="panel panel-success">
+                                <div id="headingTwelve" role="tab" class="panel-heading">
+                                    <h4 class="panel-title">
+                                    <a aria-controls="collapseTwelve" aria-expanded="false" href="#collapseTwelve" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                        Musical Instruments & Gear
+                                    </a>
+                                    </h4>
+                                </div>
+                                <div aria-labelledby="headingTwelve" role="tabpanel" class="panel-collapse collapse" id="collapseTwelve">
+                                    <div class="list-group">
+                                        @{
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories12 = Model.ItemCategories.Where(m => m.ItemCategoryId == 12);
+
+                                                foreach (var category in categories12)
                                                 {
                                                     <div class="row" style="margin-left:5px;">
                                                         <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>

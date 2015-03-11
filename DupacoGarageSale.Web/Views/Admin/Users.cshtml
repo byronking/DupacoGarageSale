@@ -16,11 +16,10 @@
                 <strong>Nice work!</strong>
                     The user profile was successfully updated!
             </div>
-            <div>
+
             @using (Html.BeginForm("SearchUsers", "Admin", FormMethod.Post, new { @class="form-inline" }))
             {
                 <div class="form-group">
-                    @*<input type="text" id="txtSearchUsers" class="form-control" style="width:300px;" placeholder="Search..." /> *@ 
                     @Html.TextBoxFor(m => m.SearchCriteria, new { @id="txtSearchUsers", @class="form-control", @style="width:300px;", placeholder="Enter a search term" })                
                 </div>
                 <input type="submit" class="btn btn-primary" value="Search" />
@@ -30,6 +29,7 @@
             <div class="down_20">
                 @(Html.Telerik().Grid(Model.Users)
                     .Name("grdAllUsers")
+                    .HtmlAttributes(new { @style="width:115%;" })
                     .DataKeys(dataKeys => dataKeys.Add(u => u.UserId))
                     .Columns(columns =>
                     {
@@ -49,11 +49,16 @@
                         columns.Bound(u => u.UserName);
                         columns.Bound(u => u.Email);
                         columns.Bound(u => u.Phone);
+                        columns.Bound(u => u.Address.Address1);
+                        columns.Bound(u => u.Address.Address2);
+                        columns.Bound(u => u.Address.City);
+                        columns.Bound(u => u.Address.State);
+                        columns.Bound(u => u.Address.Zip);
                         columns.Bound(u => u.CreateDate);
                     })
                     .Pageable(pager => pager.PageSize(10))
                     .Sortable()
-                ) 
+                )
             </div>
 
             <br /><br />

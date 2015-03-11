@@ -38,6 +38,7 @@ namespace DupacoGarageSale.Data.Domain
         public DateTime CreateDate { get; set; }
         public DateTime? ModifyDate { get; set; }
         public string ModifyUser { get; set; }
+        public string GarageSaleEmail { get; set; }
         public List<GarageSaleItem> GarageSaleItems { get; set; }
     }
 }

@@ -212,6 +212,36 @@
         }
     });
 
+    // Handle validation for selecting the dates.
+    
+
+    $("#ddlCommunity").change(function () {
+        if ($("#ddlCommunity option:selected").text() == "Dubuque, IA") {
+            $("#txtSaleDateOne").val("4/23/2015");
+            $("#txtSaleDateTwo").val("4/24/2015");
+            $("#txtSaleDateThree").val("4/25/2015");
+            $("#txtSaleDateFour").val("4/26/2015");
+        }
+        else if ($("#ddlCommunity option:selected").text() == "Manchester, IA") {
+            $("#txtSaleDateOne").val("4/23/2015");
+            $("#txtSaleDateTwo").val("4/24/2015");
+            $("#txtSaleDateThree").val("4/25/2015");
+            $("#txtSaleDateFour").val("4/26/2015");
+        }
+        else if ($("#ddlCommunity option:selected").text() == "Platteville, WI") {
+            $("#txtSaleDateOne").val("5/7/2015");
+            $("#txtSaleDateTwo").val("5/8/2015");
+            $("#txtSaleDateThree").val("5/9/2015");
+            $("#txtSaleDateFour").val("5/10/2015");
+        }
+        else {
+            $("#txtSaleDateOne").val(' ');
+            $("#txtSaleDateTwo").val(' ');
+            $("#txtSaleDateThree").val(' ');
+            $("#txtSaleDateFour").val(' ');
+        }
+    });
+
     // Set the range of available times.
     $('#dayOneStart').timepicker({ 'scrollDefault': '800' });
     $('#dayOneEnd').timepicker({ 'scrollDefault': '2000' });
@@ -247,11 +277,17 @@
     $("#btnSaveGargeSale").click(function (e) {
 
         if (($('#dayOneStart').val() == "" || $('#dayOneEnd').val() == "") && ($('#dayTwoStart').val() == "" || $('#dayTwoEnd').val() == "") && ($('#dayThreeStart').val() == "" || $('#dayThreeEnd').val() == "") && ($('#dayFourStart').val() == "" || $('#dayFourEnd').val() == "")) {
+            $("#alertDatesTimes").html('Please enter at least one starting and ending date for your sale');
             $("#alertDatesTimes").removeClass("hidden");
             e.preventDefault();
         }
         else {
             $("#alertDatesTimes").addClass("hidden");
+        }
+
+        if ($("#ddlCommunity").val() == 0) {
+            $("#alertDatesTimes").html('Please select a community');
+            $("#alertDatesTimes").removeClass("hidden");
         }
     });
 

@@ -124,10 +124,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:52</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>03/03/2015 22:39:06</publishTime>
+      <publishTime>03/10/2015 13:41:53</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>03/10/2015 11:40:24</publishTime>
+      <publishTime>03/10/2015 13:41:55</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -973,7 +973,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/30/2014 10:45:10</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>03/05/2015 11:00:53</publishTime>
+      <publishTime>03/10/2015 13:06:58</publishTime>
     </File>
     <File Include="Content/standard.css">
       <publishTime>02/21/2015 12:37:45</publishTime>
@@ -1648,13 +1648,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/03/2015 23:16:38</publishTime>
     </File>
     <File Include="Views/Admin/Users.cshtml">
-      <publishTime>03/09/2015 13:23:38</publishTime>
+      <publishTime>03/10/2015 13:21:00</publishTime>
     </File>
     <File Include="Views/Admin/_EditGarageSale.cshtml">
       <publishTime>03/10/2015 11:23:03</publishTime>
     </File>
     <File Include="Views/Admin/_EditUser.cshtml">
-      <publishTime>02/20/2015 10:57:49</publishTime>
+      <publishTime>03/10/2015 13:27:59</publishTime>
     </File>
     <File Include="Views/Admin/_ViewBlogPost.cshtml">
       <publishTime>02/17/2015 23:41:11</publishTime>
@@ -1687,7 +1687,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/02/2015 10:19:56</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewGarageSale.cshtml">
-      <publishTime>03/10/2015 11:37:31</publishTime>
+      <publishTime>03/10/2015 12:03:08</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewItinerary.cshtml">
       <publishTime>02/16/2015 16:28:14</publishTime>

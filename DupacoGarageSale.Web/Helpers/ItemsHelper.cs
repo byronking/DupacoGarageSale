@@ -15,19 +15,25 @@ namespace DupacoGarageSale.Web.Helpers
             // Get 4 random special items.
             var randomSpecialItems = new List<int>();
             var minMax = GetMinAndMaxItemNumbers("specialItems");
-            int min = minMax[0];
-            int max = minMax[1];
+            var min = 0;
+            var max = 0;
 
-            Random rnd = new Random();
-            for (int i = 0; i < 4; i++)
+            if (minMax.Count > 0)
             {
-                var currentValue = rnd.Next(min, max);
-                while (randomSpecialItems.Exists(value => value == currentValue))
+                min = minMax[0];
+                max = minMax[1];
+
+                Random rnd = new Random();
+                for (int i = 0; i < 4; i++)
                 {
-                    currentValue = rnd.Next(min, max);
-                }
-                randomSpecialItems.Add(currentValue);
-            } 
+                    var currentValue = rnd.Next(min, max);
+                    while (randomSpecialItems.Exists(value => value == currentValue))
+                    {
+                        currentValue = rnd.Next(min, max);
+                    }
+                    randomSpecialItems.Add(currentValue);
+                } 
+            }            
 
             return randomSpecialItems;
         }
@@ -38,15 +44,21 @@ namespace DupacoGarageSale.Web.Helpers
             // Get 4 random special items.
             var randomGarageSaleItems = new List<int>();
             var minMax = GetMinAndMaxItemNumbers("garageSaleItems");
-            int min = minMax[0];
-            int max = minMax[1];
+            var min = 0;
+            var max = 0;
 
-            Random rnd = new Random();
-            for (int i = 0; i < 4; i++)
+            if (minMax.Count > 0)
             {
-                var currentValue = rnd.Next(min, max);
-                randomGarageSaleItems.Add(currentValue);
-            } 
+                min = minMax[0];
+                max = minMax[1];
+
+                Random rnd = new Random();
+                for (int i = 0; i < 4; i++)
+                {
+                    var currentValue = rnd.Next(min, max);
+                    randomGarageSaleItems.Add(currentValue);
+                } 
+            }            
 
             return randomGarageSaleItems;
         }

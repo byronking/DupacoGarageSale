@@ -63,28 +63,34 @@
                     <div style="padding:10px;">
                         <div class="form-group">
                             <div class="table-scrollable">
-                                <p class="lead">Enter start and end times for the dates of your sale:</p>
-                                <table class="table table-bordered">
+                                <p class="lead">Select the community in which your sale will be hosted:</p>
+                                <select id="ddlCommunity" class="form-control" style="width:50%">
+                                    <option value="0">Select...</option>
+                                    <option value="1">Dubuque, IA</option>
+                                    <option value="2">Manchester, IA</option>
+                                    <option value="3">Platteville, WI</option>
+                                </select>
+                                <table class="table table-bordered down_30">
                                     <tr>
-                                        <th>Thu April 23rd</th>
-                                        <th>Fri April 24th</th>
-                                        <th>Sat April 25th</th>
-                                        <th>Sun April 26th</th>
+                                        <th>Day 1: <br />@Html.TextBoxFor(m => m.Sale.DatesTimes.SaleDateOne, new { id = "txtSaleDateOne", @class="ninety-eight-wide form-control", @readonly="readonly" })</th>
+                                        <th>Day 2: <br />@Html.TextBoxFor(m => m.Sale.DatesTimes.SaleDateTwo, new { id = "txtSaleDateTwo", @class="ninety-eight-wide form-control", @readonly="readonly" })</th>
+                                        <th>Day 3: <br />@Html.TextBoxFor(m => m.Sale.DatesTimes.SaleDateThree, new { id = "txtSaleDateThree", @class="ninety-eight-wide form-control", @readonly="readonly" })</th>
+                                        <th>Day 4: <br />@Html.TextBoxFor(m => m.Sale.DatesTimes.SaleDateFour, new { id = "txtSaleDateFour", @class="ninety-eight-wide form-control", @readonly="readonly" })</th>
                                     </tr>
                                     <tr>
-                                        <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayOneStart, new { id="dayOneStart", @class="ninety-eight-wide" })</td>
-                                        <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayTwoStart, new { id="dayTwoStart", @class="ninety-eight-wide" })</td>
-                                        <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayThreeStart, new { id="dayThreeStart", @class="ninety-eight-wide" })</td>
-                                        <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayFourStart, new { id="dayFourStart", @class="ninety-eight-wide" })</td>
+                                        <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayOneStart, new { id="dayOneStart", @class="ninety-eight-wide form-control" })</td>
+                                        <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayTwoStart, new { id="dayTwoStart", @class="ninety-eight-wide form-control" })</td>
+                                        <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayThreeStart, new { id="dayThreeStart", @class="ninety-eight-wide form-control" })</td>
+                                        <td>Start:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayFourStart, new { id="dayFourStart", @class="ninety-eight-wide form-control" })</td>
                                     </tr>
                                     <tr>
-                                        <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayOneEnd, new { id="dayOneEnd", @class="ninety-eight-wide" })</td>
-                                        <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayTwoEnd, new { id="dayTwoEnd", @class="ninety-eight-wide" })</td>
-                                        <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayThreeEnd, new { id="dayThreeEnd", @class="ninety-eight-wide" })</td>
-                                        <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayFourEnd, new { id="dayFourEnd", @class="ninety-eight-wide" })</td>
+                                        <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayOneEnd, new { id="dayOneEnd", @class="ninety-eight-wide form-control" })</td>
+                                        <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayTwoEnd, new { id="dayTwoEnd", @class="ninety-eight-wide form-control" })</td>
+                                        <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayThreeEnd, new { id="dayThreeEnd", @class="ninety-eight-wide form-control" })</td>
+                                        <td>End:<br />@Html.TextBoxFor(m => m.Sale.DatesTimes.DayFourEnd, new { id="dayFourEnd", @class="ninety-eight-wide form-control" })</td>
                                     </tr>
                                 </table>
-                                <span id="alertDatesTimes" class="red hidden">Please enter at least one starting and ending date for your sale</span>
+                                <span id="alertDatesTimes" class="red hidden"></span>
                             </div>                               
                         </div>
                     </div>               

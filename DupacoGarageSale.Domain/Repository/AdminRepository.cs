@@ -79,6 +79,77 @@ namespace DupacoGarageSale.Data.Repository
         /// This returns all the garage sale users.
         /// </summary>
         /// <returns></returns>
+        public List<GarageSaleUser> GetAllUsersWithAddresses()
+        {
+            var usersList = new List<GarageSaleUser>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetAllUsersWithAddresses", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var address = new UserAddress();
+                        address.Address1 = reader["address1"].ToString();
+                        address.Address2 = reader["address2"].ToString();
+                        address.City = reader["city"].ToString();
+                        address.State = reader["state_name"].ToString();
+                        address.Zip = reader["zip"].ToString();
+
+                        var user = new GarageSaleUser();
+
+                        DateTime? modifyDate = null;
+                        if (reader["modify_date"] != DBNull.Value)
+                        {
+                            modifyDate = Convert.ToDateTime(reader["modify_date"]);
+                        }
+
+                        int userTypeId = 0;
+                        if (reader["user_type_id"] == DBNull.Value)
+                        {
+                            userTypeId = 2;
+                        }
+                        else
+                        {
+                            userTypeId = Convert.ToInt32(reader["user_type_id"]);
+                        }
+
+                        user.Active = Convert.ToBoolean(reader["active"]);
+                        user.Address = address;
+                        user.CreateDate = Convert.ToDateTime(reader["create_date"]);
+                        user.Email = reader["email"].ToString();
+                        user.FirstName = reader["first_name"].ToString();
+                        user.LastName = reader["last_name"].ToString();
+                        user.ModifyDate = modifyDate;
+                        user.ModifyUser = reader["modify_user"].ToString();
+                        user.BytePassword = (byte[])reader["password"];
+                        user.Phone = reader["phone"].ToString();
+                        user.UserId = Convert.ToInt32(reader["user_id"]);
+                        user.UserName = reader["user_name"].ToString();
+                        user.ProfilePicLink = reader["profile_pic_link"].ToString();
+                        user.UserTypeId = userTypeId;
+
+                        usersList.Add(user);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return usersList;
+        }
+
+        /// <summary>
+        /// This returns all the garage sale users.
+        /// </summary>
+        /// <returns></returns>
         public List<GarageSaleUser> GetGarageSaleUsersForSearch(string criteria)
         {
             var usersList = new List<GarageSaleUser>();
@@ -563,6 +634,11 @@ namespace DupacoGarageSale.Data.Repository
             return contactUsMessages;
         }
 
+        /// <summary>
+        /// This gets the replies to the contact us messages.
+        /// </summary>
+        /// <param name="messageId"></param>
+        /// <returns></returns>
         public List<MessageReply> GetMessageReplies(int messageId)
         {
             var replies = new List<MessageReply>();

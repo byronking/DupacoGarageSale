@@ -251,6 +251,7 @@ namespace DupacoGarageSale.Data.Repository
                             GarageSaleName = reader["sale_name"].ToString(),
                             ModifyDate = Convert.ToDateTime(reader["modify_date"]),
                             ModifyUser = reader["modify_user"].ToString(),
+                            GarageSaleEmail = reader["email"].ToString(),
                             SaleAddress1 = reader["sale_address1"].ToString(),
                             SaleAddress2 = reader["sale_address2"].ToString(),
                             SaleCity = reader["sale_city"].ToString(),                            

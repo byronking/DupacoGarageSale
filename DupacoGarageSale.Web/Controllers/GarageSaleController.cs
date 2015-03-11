@@ -1,5 +1,6 @@
 ﻿using DupacoGarageSale.Data.Domain;
 using DupacoGarageSale.Data.Repository;
+using DupacoGarageSale.Data.Services;
 using DupacoGarageSale.Web.Helpers;
 using DupacoGarageSale.Web.Models;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -917,6 +919,23 @@ namespace DupacoGarageSale.Web.Controllers
 
                     if (saveResult.IsSaveSuccessful)
                     {
+                        try
+                        {
+                            // Send notification email.
+                            var mailMessage = new System.Net.Mail.MailMessage(viewModel.User.Email, ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString());
+                            mailMessage.Subject = "Dupaco Garage Sale Message from " + viewModel.GarageSaleMessage.MessageFrom;
+                            mailMessage.Body = viewModel.GarageSaleMessage.MessageText;
+                            mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+
+                            var smtp = new SmtpClient();
+                            smtp.Host = ConfigurationManager.AppSettings["MailServer"].ToString();
+                            smtp.Send(mailMessage);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Log.Error(ex.ToString());
+                        }
+
                         viewModel.GarageSaleMessage.MessageId = saveResult.SaveResultId;
                         Session["SaveSuccessful"] = true;
                     }

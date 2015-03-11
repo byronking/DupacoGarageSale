@@ -69,7 +69,7 @@ namespace DupacoGarageSale.Web.Controllers
 
                 // Load all the users.
                 var repository = new AdminRepository();
-                viewModel.Users = repository.GetAllGarageSaleUsers();
+                viewModel.Users = repository.GetAllUsersWithAddresses();
 
                 Session["AllUsers"] = viewModel.Users;
 
@@ -166,6 +166,10 @@ namespace DupacoGarageSale.Web.Controllers
                 var repository = new AccountsRepository();
                 var user = repository.GetUserProfileInfoById(userId);
                 viewModel.User = user;
+
+                // Get the user's garage sales.
+                var garageSaleRepository = new GarageSaleRepository();
+                viewModel.UserGarageSales = garageSaleRepository.GetGarageSaleByUserName(viewModel.User.UserName);
 
                 // Load the states dropdown.
                 var addressRepository = new AddressRepository();
@@ -445,6 +449,19 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     var savedViewModel = Session["AdminViewModel"] as AdminViewModel;
                     viewModel.GarageSales = savedViewModel.GarageSales;
+
+                    if (viewModel.GarageSales == null)
+                    {
+                        // Load all the garage sales by default.
+                        var adminRepository = new AdminRepository();
+                        viewModel.GarageSales = adminRepository.GetAllGarageSales();
+                    }
+                }
+                else
+                {
+                    // Load all the garage sales by default.
+                    var adminRepository = new AdminRepository();
+                    viewModel.GarageSales = adminRepository.GetAllGarageSales();
                 }
 
                 var accountRepository = new AccountsRepository();

@@ -95,6 +95,69 @@
     }
 </div>
 
+<div>
+    <h2>Garage sales hosted by the user:</h2>
+
+    @if (Model.UserGarageSales != null)
+    {
+        if (Model.UserGarageSales.Count > 0)
+        {
+            foreach (var sale in Model.UserGarageSales)
+            {
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">@sale.GarageSaleName</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Html.HiddenFor(m => m.GarageSale.GarageSaleId)
+                        <strong>Description:</strong> @sale.SaleDescription<br />
+                        <strong>Last modified:</strong> @sale.ModifyDate<br /><br />
+                        <strong>House number & street:</strong> @sale.SaleAddress1<br />
+                        <strong>Apt, unit, or condo #:</strong> @sale.SaleAddress2<br />
+                        <strong>City:</strong> @sale.SaleCity<br />
+                        <strong>State:</strong> @sale.SaleState<br />
+                        <strong>Zip code:</strong> @sale.SaleZip<br /><br />
+                        <strong>Sale dates/times:</strong><br /><br />
+                        <div>
+                            <table style="width:525px;" class="table table-bordered table-condensed table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>@sale.DatesTimes.SaleDateOne.ToLongDateString()</th>
+                                        <th>@sale.DatesTimes.SaleDateTwo.ToLongDateString()</th>
+                                        <th>@sale.DatesTimes.SaleDateThree.ToLongDateString()</th>
+                                        <th>@sale.DatesTimes.SaleDateFour.ToLongDateString()</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="width:auto">
+                                    <tr>
+                                        <td>Start:<br />@sale.DatesTimes.DayOneStart</td>
+                                        <td>Start:<br />@sale.DatesTimes.DayTwoStart</td>
+                                        <td>Start:<br />@sale.DatesTimes.DayThreeStart</td>
+                                        <td>Start:<br />@sale.DatesTimes.DayFourStart</td>
+                                    </tr>
+                                    <tr>
+                                        <td>End:<br />@sale.DatesTimes.DayOneEnd</td>
+                                        <td>End:<br />@sale.DatesTimes.DayTwoEnd</td>
+                                        <td>End:<br />@sale.DatesTimes.DayThreeEnd</td>
+                                        <td>End:<br />@sale.DatesTimes.DayFourEnd</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><br />
+                        <div>
+                            @Html.ActionLink("View this garage sale", "EditGarageSale", "Admin", new { id = @sale.GarageSaleId }, new { @class = "btn btn-info" })
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h3>This user is not currently hosting any sales.</h3>   
+        }
+    }
+</div>
+
 <!-- Change password modal -->
 @using (Html.BeginForm("ChangePassword", "Admin", FormMethod.Post, new { @class="form-horizontal", @role="form" }))
 {
