@@ -25,8 +25,9 @@ namespace DupacoGarageSale.Web
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                         "~/Scripts/default.js",
-                        "~/Scripts/garagesale.itinerary.js",                        
-                        "~/Scripts/respond.js"));            
+                        "~/Scripts/garagesale.itinerary.js",
+                        "~/Scripts/respond.js"));
+                        //"~/Scripts/jquery.maxlength.js"));            
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap.js"));

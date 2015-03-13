@@ -14,7 +14,7 @@
                     <div class="form-group">
                         @Html.TextBox("Password", null, new { @class = "form-control", id="txtPassword", type="Password", placeholder="Password", required="" })
                     </div>
-                    <input type="submit" class="btn btn-success btn-sm" value="Sign in" />
+                    <input type="submit" id="btnSignIn" class="btn btn-success btn-sm" value="Sign in" />
                     <div class="form-group">
                         @Html.ActionLink("Sign up for free!", "SignUp", "Accounts", null, new { @class="btn btn-primary btn-sm" })
                     </div>

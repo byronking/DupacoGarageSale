@@ -89,6 +89,22 @@
                                      
                             </div>
                         </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="oldBlowserAlert" role="alert" class="alert alert-warning alert-dismissible fade in hidden">
+                                    <button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>
+                                    <h4>Hello, garage saler!</h4>
+                                    <p>It looks like you are using an older version of Internet Explorer. Unfortunately, there is no way to preview your uploaded image at this time. 
+                                        However, you can click save profile to upload and view your uploaded pic. Sorry for any inconvenience.
+                                    </p>
+                                    <p>
+                                    The Dupaco Garage Sales site runs best in a modern browser.  Please update your browser for the best experience! Update to the latest version of 
+                                        Internet Explorer or try Mozilla Firefox (https://www.mozilla.org/en-US/firefox/new/) or Google Chrome (http://www.google.com/chrome/).
+                                    </p>
+                                </div>
+                            </div>                            
+                        </div>
             
                         <div class="row">
                             <div class="col-sm-6 col-md-3" style="margin-left:136px;">
@@ -102,7 +118,7 @@
                                         <input type="file" id="fileUpload" name="fileUpload" style="width:185px;" />
                                     </div>                                    
                                 </div>
-                                <div id="uploadPreview"></div>
+                                <div id="uploadPreview"></div>                                
                             </div>
                             @Html.HiddenFor(m => m.ProfilePicLink)
                         </div>

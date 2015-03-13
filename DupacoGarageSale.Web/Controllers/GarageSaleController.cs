@@ -925,6 +925,7 @@ namespace DupacoGarageSale.Web.Controllers
                         {
                             // Send notification email.
                             var mailMessage = new System.Net.Mail.MailMessage(viewModel.User.Email, viewModel.Sale.GarageSaleEmail);
+                            mailMessage.IsBodyHtml = true;
                             mailMessage.Subject = "Dupaco Garage Sale Message from " + viewModel.GarageSaleMessage.MessageFrom;
                             mailMessage.Body = viewModel.GarageSaleMessage.MessageText;
                             mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
@@ -987,6 +988,7 @@ namespace DupacoGarageSale.Web.Controllers
                         {
                             // Send notification email.
                             var mailMessage = new System.Net.Mail.MailMessage(viewModel.User.Email, viewModel.GarageSaleMessage.MessageTo);
+                            mailMessage.IsBodyHtml = true;
                             mailMessage.Subject = "Dupaco Garage Sale Message from " + viewModel.GarageSaleMessage.MessageFrom;
                             mailMessage.Body = viewModel.GarageSaleMessage.MessageText;
                             mailMessage.Priority = System.Net.Mail.MailPriority.Normal;

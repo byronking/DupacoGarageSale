@@ -1080,6 +1080,7 @@ namespace DupacoGarageSale.Web.Controllers
                     {
                         // Send contact us email.
                         var mailMessage = new System.Net.Mail.MailMessage(message.ContactEmail, ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString());
+                        mailMessage.IsBodyHtml = true;
                         mailMessage.Subject = "Dupaco Garage Sale User Message from " + message.ContactName;
                         mailMessage.Body = message.MessageText;
                         mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
@@ -1141,6 +1142,7 @@ namespace DupacoGarageSale.Web.Controllers
                         {
                             //// Send contact us email.
                             //var mailMessage = new System.Net.Mail.MailMessage(reply.ReplyToEmail, ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString());
+                            //mailMessage.IsBodyHtml = true;
                             //mailMessage.Subject = "Reply from the Dupaco Garage Sale Staff";
                             //mailMessage.Body = reply.ReplyText;
                             //mailMessage.Priority = System.Net.Mail.MailPriority.Normal;

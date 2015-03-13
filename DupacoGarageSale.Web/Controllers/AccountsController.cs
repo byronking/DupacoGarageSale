@@ -400,6 +400,18 @@ namespace DupacoGarageSale.Web.Controllers
         }
 
         /// <summary>
+        /// This saves the profile pic to a temporary place for IE < 10 browsers.
+        /// </summary>
+        /// <param name="fileUpload"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SaveProfilePicForPreview(HttpPostedFileBase fileUpload)
+        {
+
+            return View("UserProfile");
+        }
+
+        /// <summary>
         /// This resets the user's password.
         /// </summary>
         /// <param name="accountInfo"></param>
@@ -430,6 +442,7 @@ namespace DupacoGarageSale.Web.Controllers
                     {
                         // Send password reset email.
                         var mailMessage = new System.Net.Mail.MailMessage("Password Reset <password-reset@dupacogaragesales.com>", passwordResetRequest.Email);
+                        mailMessage.IsBodyHtml = true;
                         mailMessage.Subject = "Password reset request";
                         mailMessage.Body = @"Here is your password reset request.  Use this link to reset your password: " + 
                             ConfigurationManager.AppSettings["PasswordResetUrl"].ToString() + token;                        

@@ -1,25 +1,30 @@
 ﻿$(document).ready(function () {
 
-    //var ie = (function () {
-    //    var undef,
-    //        v = 3,
-    //        div = document.createElement('div'),
-    //        all = div.getElementsByTagName('i');
+    // Handle the character count for the garage sale description for IE browsers < 10.
+    //$().maxlength();
 
-    //    while (
-    //        div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
-    //        all[0]
-    //    );
+    var ie = (function () {
+        var undef,
+            v = 3,
+            div = document.createElement('div'),
+            all = div.getElementsByTagName('i');
 
-    //    return v > 4 ? v : undef;
-    //}());
+        while (
+            div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
+            all[0]
+        );
+
+        return v > 4 ? v : undef;
+    }());
 
     //alert('ie version: ' + ie);
 
-    //if (ie < 9) {
-    //    alert('The Dupaco Garage Sales site runs best in a modern browser.  Please update your browser for the best experience! Update to the latest version of Internet Explorer or try Mozilla Firefox (https://www.mozilla.org/en-US/firefox/new/) or Google Chrome (http://www.google.com/chrome/)');
-    //    location.href = 'http://www.dupaco.com';
-    //}
+    if (ie < 8) {
+        alert('The Dupaco Garage Sales site runs best in a modern browser.  Please update your browser for the best experience! Update to the latest version of Internet Explorer or try Mozilla Firefox (https://www.mozilla.org/en-US/firefox/new/) or Google Chrome (http://www.google.com/chrome/)');
+        location.href = 'http://www.dupaco.com';
+
+        //alert('Hello, ' + ie);
+    }
 
     // Show the error message if there is an existing account
     if ($("#hdnExistingAccountError").val() == "true") {
@@ -69,10 +74,50 @@
         };
 
     }
+
     $("#fileUpload").change(function (e) {
         if (this.disabled) return alert('File upload not supported!');
         var F = this.files;
         if (F && F[0]) for (var i = 0; i < F.length; i++) readImage(F[i]);
+
+        if (ie < 10) {
+
+            // Show the old browser alert.
+            $("#oldBlowserAlert").removeClass('hidden');
+
+            //var F = this.form.fileUpload; // To get the file name, use this.form.fileUpload.value.
+            //alert(F);
+
+            //alert('Hello! It looks like you are using Internet Explorer version ' + ie + '. Unfortunately, there is no way to preview your uploaded image at this time. Click save to view your uploaded pic. Sorry for any inconvenience.');
+
+            // Example #1
+            //var Preview = document.getElementById("imgPreview");
+            //Preview.src = F.value;
+            //Preview.style.width = "200px";
+            //Preview.style.height = "150px";
+
+
+            // Example #2
+            //var Preview = document.getElementById("imgPreview");
+            //$('#' + Preview).attr('src', F);
+
+            // Example #3
+            //// Save the profile pic.
+            //$.ajax({
+            //    url: '/Accounts/SaveProfilePicForPreview/',
+            //    type: 'post',
+            //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            //    data: { fileUpload: F },
+            //    contentType: 'application/json; charset=utf-8',
+            //    processData: false, contentType: false,
+            //    success: function (data) {
+            //        alert('it worked');
+            //    },
+            //    error: function (data) {
+            //        alert('ooops!');
+            //    }
+            //});
+        }       
     });
 
     // This provides validation for the user profile fields.
@@ -244,13 +289,13 @@
 
     // Set the range of available times.
     $('#dayOneStart').timepicker({ 'scrollDefault': '800' });
-    $('#dayOneEnd').timepicker({ 'scrollDefault': '2000' });
+    $('#dayOneEnd').timepicker({ 'scrollDefault': '800' });
     $('#dayTwoStart').timepicker({ 'scrollDefault': '800' });
-    $('#dayTwoEnd').timepicker({ 'scrollDefault': '2000' });
+    $('#dayTwoEnd').timepicker({ 'scrollDefault': '800' });
     $('#dayThreeStart').timepicker({ 'scrollDefault': '800' });
-    $('#dayThreeEnd').timepicker({ 'scrollDefault': '2000' });
+    $('#dayThreeEnd').timepicker({ 'scrollDefault': '800' });
     $('#dayFourStart').timepicker({ 'scrollDefault': '800' });
-    $('#dayFourEnd').timepicker({ 'scrollDefault': '2000' });
+    $('#dayFourEnd').timepicker({ 'scrollDefault': '800' });
 
     // Character count for the garage sale description.
     $("#txtDescription").keyup(function () {
@@ -279,6 +324,7 @@
         if (($('#dayOneStart').val() == "" || $('#dayOneEnd').val() == "") && ($('#dayTwoStart').val() == "" || $('#dayTwoEnd').val() == "") && ($('#dayThreeStart').val() == "" || $('#dayThreeEnd').val() == "") && ($('#dayFourStart').val() == "" || $('#dayFourEnd').val() == "")) {
             $("#alertDatesTimes").html('Please enter at least one starting and ending date for your sale');
             $("#alertDatesTimes").removeClass("hidden");
+            $("#ddlCommunity").focus();
             e.preventDefault();
         }
         else {
@@ -288,6 +334,8 @@
         if ($("#ddlCommunity").val() == 0) {
             $("#alertDatesTimes").html('Please select a community');
             $("#alertDatesTimes").removeClass("hidden");
+            $("#ddlCommunity").focus();
+            e.preventDefault();
         }
     });
 
@@ -356,10 +404,14 @@
             var check = function (string) {
                 for (i = 0; i < specialChars.length; i++) {
                     if (string.indexOf(specialChars[i]) > -1) {
-                        return true
+
+                        e.preventDefault();
+                        return true;
                     }
                 }
                 return false;
+
+                
             }
 
             if (check($('#txtPrice').val()) == true) {

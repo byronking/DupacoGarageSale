@@ -30,23 +30,19 @@ namespace DupacoGarageSale.Web.Controllers
 
             if (viewModel.SearchResults == null)
             {
-                // Get some random items for the home page.
-                var randomSpecialItems = ItemsHelper.GetRandomSpecialItems();
-                var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
-                viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(randomSpecialItems);
+                //// Get some random items for the home page.
+                //var randomSpecialItems = ItemsHelper.GetRandomSpecialItems();
+                //var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
+                //viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(randomSpecialItems);
 
-                // Set the selected categories for the special items.
-                if (viewModel.GarageSaleSpecialItems.Count > 0)
-                {
-                    foreach (var item in viewModel.GarageSaleSpecialItems)
-                    {
-                        viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
-                    }
-                }
-
-                // Not sure I need to do this when the page loads...
-                //var selectedCategories = viewModel.SelectedCategories.ToArray();
-                //ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+                //// Set the selected categories for the special items.
+                //if (viewModel.GarageSaleSpecialItems.Count > 0)
+                //{
+                //    foreach (var item in viewModel.GarageSaleSpecialItems)
+                //    {
+                //        viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                //    }
+                //}
             }
             else
             {

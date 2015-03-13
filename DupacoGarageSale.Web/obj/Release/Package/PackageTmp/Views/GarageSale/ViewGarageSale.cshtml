@@ -322,6 +322,7 @@
                             maxlength="140", @style="margin-left:15px;width:95%;" })
                         <div id="charNumMessage" style="margin-left:15px;"></div>
                         <span class="text-error">@Html.ValidationMessageFor(m => m.GarageSaleMessage.MessageText)</span>
+                        @Html.HiddenFor(m => m.Sale.GarageSaleEmail)
                     </div>
                 </div>
                 <div class="modal-footer">

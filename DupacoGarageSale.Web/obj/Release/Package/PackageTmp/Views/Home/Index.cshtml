@@ -377,6 +377,32 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="panel panel-success">
+                                <div id="headingTwelve" role="tab" class="panel-heading">
+                                    <h4 class="panel-title">
+                                    <a aria-controls="collapseTwelve" aria-expanded="false" href="#collapseTwelve" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                         Musical Instruments & Gear
+                                    </a>
+                                    </h4>
+                                </div>
+                                <div aria-labelledby="headingTwelve" role="tabpanel" class="panel-collapse collapse" id="collapseTwelve">
+                                    <div class="list-group">
+                                        @{
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories12 = Model.ItemCategories.Where(m => m.ItemCategoryId == 12);
+
+                                                foreach (var category in categories12)
+                                                {
+                                                    <div class="row" style="margin-left:5px;">
+                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <input type="submit" id="btnFilter" value="Search sales" class="btn btn-primary" />

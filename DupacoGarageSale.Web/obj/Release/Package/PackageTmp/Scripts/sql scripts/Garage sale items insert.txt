@@ -9,6 +9,7 @@ insert into ItemCategory values ('Media');
 insert into ItemCategory values ('Toys & Games');
 insert into ItemCategory values ('Vehicles');
 insert into ItemCategory values ('Sports, Fitness & Outdoors');
+insert into ItemCategory values ('Musical Instruments & Gear');
 
 
 insert into ItemSubcategory values ('Strollers', 1);
@@ -161,3 +162,16 @@ insert into ItemSubcategory values ('Exercise & Fitness', 11)
 insert into ItemSubcategory values ('Outdoor Storage', 11)
 insert into ItemSubcategory values ('Firewood', 11)
 insert into ItemSubcategory values ('Plants', 11)
+
+insert into ItemSubcategory values ('Accordion & Concertina', 12);
+insert into ItemSubcategory values ('Brass', 12);
+insert into ItemSubcategory values ('Equipment', 12);
+insert into ItemSubcategory values ('Guitars', 12);
+insert into ItemSubcategory values ('Harmonicas', 12);
+insert into ItemSubcategory values ('Karaoke Equipment', 12);
+insert into ItemSubcategory values ('Percussion', 12);
+insert into ItemSubcategory values ('Pianos, Keyboards, and Organs', 12);
+insert into ItemSubcategory values ('Pro Audio Equipment', 12);
+insert into ItemSubcategory values ('Stage Lighting & Effects', 12);
+insert into ItemSubcategory values ('Strings', 12);
+insert into ItemSubcategory values ('Woodwinds', 12);
