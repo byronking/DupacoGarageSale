@@ -785,6 +785,62 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
+        /// This gets random special items for the home page.
+        /// </summary>
+        /// <param name="sale_id"></param>
+        /// <returns></returns>
+        public List<SpecialItem> GetRandomSpecialItems()
+        {
+            var specialItems = new List<SpecialItem>();
+
+            try
+            {                
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetRandomSpecialItems", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var garageSaleAddress = new GarageSaleAddress
+                        {
+                            Address1 = reader["sale_address1"].ToString(),
+                            Address2 = reader["sale_address2"].ToString(),
+                            City = reader["sale_city"].ToString(),
+                            State = reader["state_name"].ToString(),
+                            ZipCode = reader["sale_zip"].ToString()
+                        };
+
+                        var specialItem = new SpecialItem
+                        {
+                            SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
+                            Title = reader["title"].ToString(),
+                            Description = reader["description"].ToString(),
+                            PictureLink = reader["picture_link"].ToString(),
+                            Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            SpecialItemAddress = garageSaleAddress
+                        };
+
+                        specialItems.Add(specialItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return specialItems;
+        }
+
+        /// <summary>
         /// This deletes a garage sale by id.
         /// </summary>
         /// <param name="sale_id"></param>

@@ -124,10 +124,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:52</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>03/11/2015 13:57:54</publishTime>
+      <publishTime>03/13/2015 23:32:45</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>03/11/2015 13:57:55</publishTime>
+      <publishTime>03/13/2015 23:32:46</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -973,7 +973,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/30/2014 10:45:10</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>03/10/2015 13:06:58</publishTime>
+      <publishTime>03/12/2015 08:51:10</publishTime>
     </File>
     <File Include="Content/standard.css">
       <publishTime>02/21/2015 12:37:45</publishTime>
@@ -1381,13 +1381,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2014 09:14:12</publishTime>
     </File>
     <File Include="Scripts/default.js">
-      <publishTime>03/10/2015 21:10:27</publishTime>
+      <publishTime>03/13/2015 18:41:08</publishTime>
     </File>
     <File Include="Scripts/facebook.login.js">
       <publishTime>01/20/2015 22:55:21</publishTime>
     </File>
     <File Include="Scripts/garagesale.itinerary.js">
-      <publishTime>03/01/2015 14:03:35</publishTime>
+      <publishTime>03/11/2015 15:33:50</publishTime>
     </File>
     <File Include="Scripts/i18n/jquery-ui-timepicker-addon-i18n.js">
       <publishTime>01/30/2015 14:05:09</publishTime>
@@ -1554,6 +1554,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery-ui-timepicker-addon.min.js">
       <publishTime>01/30/2015 14:05:08</publishTime>
     </File>
+    <File Include="Scripts/jquery.maxlength.js">
+      <publishTime>03/13/2015 09:53:37</publishTime>
+    </File>
     <File Include="Scripts/jquery.timepicker.js">
       <publishTime>10/14/2014 18:49:28</publishTime>
     </File>
@@ -1690,7 +1693,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/09/2015 13:23:38</publishTime>
     </File>
     <File Include="Views/Accounts/UserProfile.cshtml">
-      <publishTime>03/09/2015 13:23:38</publishTime>
+      <publishTime>03/12/2015 10:49:53</publishTime>
     </File>
     <File Include="Views/Accounts/_ResetPassword.cshtml">
       <publishTime>12/20/2014 18:30:42</publishTime>
@@ -1732,7 +1735,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/31/2015 10:45:20</publishTime>
     </File>
     <File Include="Views/GarageSale/Add.cshtml">
-      <publishTime>03/10/2015 21:11:43</publishTime>
+      <publishTime>03/13/2015 11:21:57</publishTime>
     </File>
     <File Include="Views/GarageSale/AddSpecialItem.cshtml">
       <publishTime>03/05/2015 22:53:06</publishTime>
@@ -1741,7 +1744,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/05/2014 15:31:35</publishTime>
     </File>
     <File Include="Views/GarageSale/Edit.cshtml">
-      <publishTime>03/10/2015 23:33:39</publishTime>
+      <publishTime>03/12/2015 12:17:56</publishTime>
     </File>
     <File Include="Views/GarageSale/EditSpecialItem.cshtml">
       <publishTime>03/09/2015 22:26:38</publishTime>
@@ -1840,7 +1843,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/15/2014 23:01:28</publishTime>
     </File>
     <File Include="Views/Shared/_TopNavigation.cshtml">
-      <publishTime>03/09/2015 10:17:51</publishTime>
+      <publishTime>03/13/2015 18:37:16</publishTime>
     </File>
     <File Include="Views/Shared/_TopNavigation2.cshtml">
       <publishTime>01/12/2015 17:32:51</publishTime>
@@ -1864,7 +1867,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/09/2015 13:42:17</publishTime>
+      <publishTime>03/13/2015 23:32:47</publishTime>
     </File>
   </ItemGroup>
 </Project>

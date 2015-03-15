@@ -25,11 +25,20 @@ namespace DupacoGarageSale.Web.Controllers
         {
             if (Session["UserSession"] != null)
             {
+                // Need to check if the user is an admin. If not, send them to the login screen.
+
                 var session = Session["UserSession"] as UserSession;
                 var viewModel = new AdminViewModel();
                 viewModel.AdminUser = session.User;
 
                 var repository = new AdminRepository();
+
+                var userIsAdmin = repository.VerifyUserIsAdmin(viewModel.AdminUser.UserName);
+
+                if (!userIsAdmin)
+                {
+                    return View("~/Views/Accounts/Login.cshtml");
+                }
 
                 // Get the count of user accounts.
                 viewModel.UserCount = repository.GetCountOfRegisteredUsers();
@@ -1125,31 +1134,35 @@ namespace DupacoGarageSale.Web.Controllers
                     var messageId = form["hdnMessageId"];
                     string messageText = form["txtReplyMessage"].ToString();
 
+                    // Get the message by id.
+                    var repository = new AdminRepository();
+                    var contactUsMessage = repository.GetContactUsMessageById(Convert.ToInt32(messageId));
+
                     var reply = new MessageReply
                     {
                         MessageId = Convert.ToInt32(messageId),
                         ReplyText = messageText,
                         ReplyFrom = session.User.FirstName + " " + session.User.LastName,
+                        ReplyTo = contactUsMessage.ContactEmail,
                         ReplyDateTime = DateTime.Now
                     };
-
-                    var repository = new AdminRepository();
+                    
                     var saveResult = repository.SaveContactUsReplies(reply);
 
                     if (saveResult.IsSaveSuccessful)
                     {
                         try
                         {
-                            //// Send contact us email.
-                            //var mailMessage = new System.Net.Mail.MailMessage(reply.ReplyToEmail, ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString());
-                            //mailMessage.IsBodyHtml = true;
-                            //mailMessage.Subject = "Reply from the Dupaco Garage Sale Staff";
-                            //mailMessage.Body = reply.ReplyText;
-                            //mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+                            // Reply to contact us email.
+                            var mailMessage = new System.Net.Mail.MailMessage(ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString(), reply.ReplyTo);
+                            mailMessage.IsBodyHtml = true;
+                            mailMessage.Subject = "Reply from the Dupaco Garage Sale Staff";
+                            mailMessage.Body = reply.ReplyText;
+                            mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
 
-                            //var smtp = new SmtpClient();
-                            //smtp.Host = ConfigurationManager.AppSettings["MailServer"].ToString();
-                            //smtp.Send(mailMessage);
+                            var smtp = new SmtpClient();
+                            smtp.Host = ConfigurationManager.AppSettings["MailServer"].ToString();
+                            smtp.Send(mailMessage);
                         }
                         catch (Exception ex)
                         {

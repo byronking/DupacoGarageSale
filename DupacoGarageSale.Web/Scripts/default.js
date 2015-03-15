@@ -650,6 +650,13 @@
     });
 });
 
+var maxLength = 100;
+function enforceMaxLength(ta) {
+    if (ta.value.length > maxLength) {
+        ta.value = ta.value.substring(0, maxLength);
+    }
+}
+
 function debugObject(inputobject) {
     obj = inputobject;
     for (x in obj) {

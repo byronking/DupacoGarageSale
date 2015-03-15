@@ -101,5 +101,7 @@ namespace DupacoGarageSale.Web.Helpers
 
             return minAndMax;
         }
+
+
     }
 }

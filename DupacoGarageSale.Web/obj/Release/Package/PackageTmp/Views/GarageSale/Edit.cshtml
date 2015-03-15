@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="txtDescription">Describe your sale</label>
-                                    @Html.TextAreaFor(m => m.Sale.SaleDescription, new { @class="form-control", id="txtDescription", placeholder="Brevity is the soul of wit (300 characters max)", maxlength="300", rows="7" })
+                                    @Html.TextAreaFor(m => m.Sale.SaleDescription, new { @class="form-control", id="txtDescription", placeholder="Brevity is the soul of wit (100 characters max)", maxlength="100", rows="5" })
                                     <div id="charNumDescription"></div>
                                     <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.SaleDescription)</span>
                                 </div>                            
@@ -404,6 +404,32 @@
                                                 {
                                                     <div class="row" style="margin-left:20px;">
                                                         <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> @category.ItemSubcategoryName 
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-info">
+                                <div id="headingTwelve" role="tab" class="panel-heading">
+                                    <h4 class="panel-title">
+                                    <a aria-controls="collapseTwelve" aria-expanded="false" href="#collapseTwelve" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                        Musical Instruments & Gear
+                                    </a>
+                                    </h4>
+                                </div>
+                                <div aria-labelledby="headingTwelve" role="tabpanel" class="panel-collapse collapse" id="collapseTwelve">
+                                    <div class="list-group">
+                                        @{
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories12 = Model.ItemCategories.Where(m => m.ItemCategoryId == 12);
+
+                                                foreach (var category in categories12)
+                                                {
+                                                    <div class="row" style="margin-left:20px;">
+                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
                                                     </div>
                                                 }
                                             }

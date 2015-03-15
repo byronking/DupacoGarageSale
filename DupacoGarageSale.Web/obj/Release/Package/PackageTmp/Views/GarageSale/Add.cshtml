@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             <label for="txtDescription">Describe your sale</label>
-                            @Html.TextAreaFor(m => m.Sale.SaleDescription, new { @class="form-control", id="txtDescription", placeholder="Brevity is the soul of wit (100 characters max)", maxlength="300" })
+                            @Html.TextAreaFor(m => m.Sale.SaleDescription, new { @class="form-control", id="txtDescription", placeholder="Brevity is the soul of wit (100 characters max)", maxlength="100" })
                             <div id="charNumDescription"></div>
                             <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.SaleDescription)</span>
                         </div>
@@ -97,87 +97,85 @@
                 </div>
                 <div class="well">
                     <p class="lead">Select the categories of the items in your sale:</p>
-
                     <div id="accordion" class="panel-group" aria-multiselectable="true" role="tablist">
                         <div class="panel panel-info">
-                        <div id="headingOne" role="tab" class="panel-heading">
-                            <h4 class="panel-title">
-                            <a aria-controls="collapseOne" aria-expanded="true" href="#collapseOne" data-parent="#accordion" data-toggle="collapse">
-                                Baby
-                            </a>
-                            </h4>
-                        </div>
-                        <div aria-labelledby="headingOne" role="tabpanel" class="panel-collapse collapse" id="collapseOne">
-                            <div class="list-group">
-                                @{
-                                    if (Model.ItemCategories != null)
-                                    {
-                                        var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
-
-                                        foreach (var category in categories1)
+                            <div id="headingOne" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseOne" aria-expanded="true" href="#collapseOne" data-parent="#accordion" data-toggle="collapse">
+                                    Baby
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingOne" role="tabpanel" class="panel-collapse collapse" id="collapseOne">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
                                         {
-                                            <div class="row" style="margin-left:20px;">
-                                                <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                            </div>
+                                            var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
+
+                                            foreach (var category in categories1)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <div class="panel panel-info">
-                        <div id="headingTwo" role="tab" class="panel-heading">
-                            <h4 class="panel-title">
-                            <a aria-controls="collapseTwo" aria-expanded="false" href="#collapseTwo" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                Clothing & Accessories
-                            </a>
-                            </h4>
-                        </div>
-                        <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo">
-                            <div class="list-group">
-                                @{
-                                    if (Model.ItemCategories != null)
-                                    {
-                                        var categories2 = Model.ItemCategories.Where(m => m.ItemCategoryId == 2);
-
-                                        foreach (var category in categories2)
+                            <div id="headingTwo" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseTwo" aria-expanded="false" href="#collapseTwo" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Clothing & Accessories
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
                                         {
-                                            <div class="row" style="margin-left:20px;">
-                                                <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                            </div>
+                                            var categories2 = Model.ItemCategories.Where(m => m.ItemCategoryId == 2);
+
+                                            foreach (var category in categories2)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <div class="panel panel-info">
-                        <div id="headingThree" role="tab" class="panel-heading">
-                            <h4 class="panel-title">
-                            <a aria-controls="collapseThree" aria-expanded="false" href="#collapseThree" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                Electronics
-                            </a>
-                            </h4>
-                        </div>
-                        <div aria-labelledby="headingThree" role="tabpanel" class="panel-collapse collapse" id="collapseThree">
-                            <div class="list-group">
-                                @{
-                                    if (Model.ItemCategories != null)
-                                    {
-                                        var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
-
-                                        foreach (var category in categories3)
+                            <div id="headingThree" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseThree" aria-expanded="false" href="#collapseThree" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Electronics
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingThree" role="tabpanel" class="panel-collapse collapse" id="collapseThree">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
                                         {
-                                            <div class="row" style="margin-left:20px;">
-                                                <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                            </div>
+                                            var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
+
+                                            foreach (var category in categories3)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </div>
-                        </div>
-
                         <div class="panel panel-info">
                         <div id="headingFour" role="tab" class="panel-heading">
                             <h4 class="panel-title">
@@ -204,188 +202,214 @@
                             </div>
                         </div>
                         </div>
-                    <div class="panel panel-info">
-                        <div id="headingFive" role="tab" class="panel-heading">
-                            <h4 class="panel-title">
-                            <a aria-controls="collapseFive" aria-expanded="false" href="#collapseFive" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                Pets
-                            </a>
-                            </h4>
-                        </div>
-                        <div aria-labelledby="headingFive" role="tabpanel" class="panel-collapse collapse" id="collapseFive">
-                            <div class="list-group">
-                                @{
-                                    if (Model.ItemCategories != null)
-                                    {
-                                        var categories5 = Model.ItemCategories.Where(m => m.ItemCategoryId == 5);
-
-                                        foreach (var category in categories5)
+                        <div class="panel panel-info">
+                            <div id="headingFive" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseFive" aria-expanded="false" href="#collapseFive" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Pets
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingFive" role="tabpanel" class="panel-collapse collapse" id="collapseFive">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
                                         {
-                                            <div class="row" style="margin-left:20px;">
-                                                <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                            </div>
+                                            var categories5 = Model.ItemCategories.Where(m => m.ItemCategoryId == 5);
+
+                                            foreach (var category in categories5)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel panel-info">
-                        <div id="headingSix" role="tab" class="panel-heading">
-                            <h4 class="panel-title">
-                            <a aria-controls="collapseSix" aria-expanded="false" href="#collapseSix" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                Home
-                            </a>
-                            </h4>
-                        </div>
-                        <div aria-labelledby="headingSix" role="tabpanel" class="panel-collapse collapse" id="collapseSix">
-                            <div class="list-group">
-                                @{
-                                    if (Model.ItemCategories != null)
-                                    {
-                                        var categories6 = Model.ItemCategories.Where(m => m.ItemCategoryId == 6);
-
-                                        foreach (var category in categories6)
+                        <div class="panel panel-info">
+                            <div id="headingSix" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseSix" aria-expanded="false" href="#collapseSix" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Home
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingSix" role="tabpanel" class="panel-collapse collapse" id="collapseSix">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
                                         {
-                                            <div class="row" style="margin-left:20px;">
-                                                <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                            </div>
+                                            var categories6 = Model.ItemCategories.Where(m => m.ItemCategoryId == 6);
+
+                                            foreach (var category in categories6)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel panel-info">
-                        <div id="headingSeven" role="tab" class="panel-heading">
-                            <h4 class="panel-title">
-                            <a aria-controls="collapseSeven" aria-expanded="false" href="#collapseSeven" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                Home Maintenance
-                            </a>
-                            </h4>
-                        </div>
-                        <div aria-labelledby="headingSeven" role="tabpanel" class="panel-collapse collapse" id="collapseSeven">
-                            <div class="list-group">
-                                @{
-                                    if (Model.ItemCategories != null)
-                                    {
-                                        var categories7 = Model.ItemCategories.Where(m => m.ItemCategoryId == 7);
-
-                                        foreach (var category in categories7)
+                        <div class="panel panel-info">
+                            <div id="headingSeven" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseSeven" aria-expanded="false" href="#collapseSeven" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Home Maintenance
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingSeven" role="tabpanel" class="panel-collapse collapse" id="collapseSeven">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
                                         {
-                                            <div class="row" style="margin-left:20px;">
-                                                <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                            </div>
+                                            var categories7 = Model.ItemCategories.Where(m => m.ItemCategoryId == 7);
+
+                                            foreach (var category in categories7)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel panel-info">
-                        <div id="headingEight" role="tab" class="panel-heading">
-                            <h4 class="panel-title">
-                            <a aria-controls="collapseEight" aria-expanded="false" href="#collapseEight" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                Media
-                            </a>
-                            </h4>
-                        </div>
-                        <div aria-labelledby="headingEight" role="tabpanel" class="panel-collapse collapse" id="collapseEight">
-                            <div class="list-group">
-                                @{
-                                    if (Model.ItemCategories != null)
-                                    {
-                                        var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
-
-                                        foreach (var category in categories8)
+                        <div class="panel panel-info">
+                            <div id="headingEight" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseEight" aria-expanded="false" href="#collapseEight" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Media
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingEight" role="tabpanel" class="panel-collapse collapse" id="collapseEight">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
                                         {
-                                            <div class="row" style="margin-left:20px;">
-                                                <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                            </div>
+                                            var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
+
+                                            foreach (var category in categories8)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel panel-info">
-                        <div id="headingNine" role="tab" class="panel-heading">
-                            <h4 class="panel-title">
-                            <a aria-controls="collapseNine" aria-expanded="false" href="#collapseNine" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                Toys & Games
-                            </a>
-                            </h4>
-                        </div>
-                        <div aria-labelledby="headingNine" role="tabpanel" class="panel-collapse collapse" id="collapseNine">
-                            <div class="list-group">
-                                @{
-                                    if (Model.ItemCategories != null)
-                                    {
-                                        var categories9 = Model.ItemCategories.Where(m => m.ItemCategoryId == 9);
-
-                                        foreach (var category in categories9)
+                        <div class="panel panel-info">
+                            <div id="headingNine" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseNine" aria-expanded="false" href="#collapseNine" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Toys & Games
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingNine" role="tabpanel" class="panel-collapse collapse" id="collapseNine">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
                                         {
-                                            <div class="row" style="margin-left:20px;">
-                                                <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                            </div>
+                                            var categories9 = Model.ItemCategories.Where(m => m.ItemCategoryId == 9);
+
+                                            foreach (var category in categories9)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel panel-info">
-                        <div id="headingTen" role="tab" class="panel-heading">
-                            <h4 class="panel-title">
-                            <a aria-controls="collapseTen" aria-expanded="false" href="#collapseTen" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                Vehicles
-                            </a>
-                            </h4>
-                        </div>
-                        <div aria-labelledby="headingTen" role="tabpanel" class="panel-collapse collapse" id="collapseTen">
-                            <div class="list-group">
-                                @{
-                                    if (Model.ItemCategories != null)
-                                    {
-                                        var categories10 = Model.ItemCategories.Where(m => m.ItemCategoryId == 10);
-
-                                        foreach (var category in categories10)
+                        <div class="panel panel-info">
+                            <div id="headingTen" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseTen" aria-expanded="false" href="#collapseTen" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Vehicles
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingTen" role="tabpanel" class="panel-collapse collapse" id="collapseTen">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
                                         {
-                                            <div class="row" style="margin-left:20px;">
-                                                <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                            </div>
+                                            var categories10 = Model.ItemCategories.Where(m => m.ItemCategoryId == 10);
+
+                                            foreach (var category in categories10)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel panel-info">
-                        <div id="headingEleven" role="tab" class="panel-heading">
-                            <h4 class="panel-title">
-                            <a aria-controls="collapseEleven" aria-expanded="false" href="#collapseEleven" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                Sports, Fitness & Outdoors
-                            </a>
-                            </h4>
-                        </div>
-                        <div aria-labelledby="headingEleven" role="tabpanel" class="panel-collapse collapse" id="collapseEleven">
-                            <div class="list-group">
-                                @{
-                                    if (Model.ItemCategories != null)
-                                    {
-                                        var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
-
-                                        foreach (var category in categories11)
+                        <div class="panel panel-info">
+                            <div id="headingEleven" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseEleven" aria-expanded="false" href="#collapseEleven" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Sports, Fitness & Outdoors
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingEleven" role="tabpanel" class="panel-collapse collapse" id="collapseEleven">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
                                         {
-                                            <div class="row" style="margin-left:20px;">
-                                                <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
-                                            </div>
+                                            var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
+
+                                            foreach (var category in categories11)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="panel panel-info">
+                            <div id="headingTwelve" role="tab" class="panel-heading">
+                                <h4 class="panel-title">
+                                <a aria-controls="collapseTwelve" aria-expanded="false" href="#collapseTwelve" data-parent="#accordion" data-toggle="collapse" class="collapsed">
+                                    Musical Instruments & Gear
+                                </a>
+                                </h4>
+                            </div>
+                            <div aria-labelledby="headingTwelve" role="tabpanel" class="panel-collapse collapse" id="collapseTwelve">
+                                <div class="list-group">
+                                    @{
+                                        if (Model.ItemCategories != null)
+                                        {
+                                            var categories12 = Model.ItemCategories.Where(m => m.ItemCategoryId == 12);
+
+                                            foreach (var category in categories12)
+                                            {
+                                                <div class="row" style="margin-left:20px;">
+                                                    <input type="checkbox" name="@category.ItemSubcategoryId"> @category.ItemSubcategoryName
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                                        

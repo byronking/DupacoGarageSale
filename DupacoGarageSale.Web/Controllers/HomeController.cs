@@ -30,19 +30,20 @@ namespace DupacoGarageSale.Web.Controllers
 
             if (viewModel.SearchResults == null)
             {
-                //// Get some random items for the home page.
-                //var randomSpecialItems = ItemsHelper.GetRandomSpecialItems();
-                //var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
-                //viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(randomSpecialItems);
+                // Get some random items for the home page.
+                var randomSpecialItems = repository.GetRandomSpecialItems();
+                viewModel.GarageSaleSpecialItems = randomSpecialItems;
 
-                //// Set the selected categories for the special items.
-                //if (viewModel.GarageSaleSpecialItems.Count > 0)
-                //{
-                //    foreach (var item in viewModel.GarageSaleSpecialItems)
-                //    {
-                //        viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
-                //    }
-                //}
+                var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
+
+                // Set the selected categories for the special items.
+                if (viewModel.GarageSaleSpecialItems.Count > 0)
+                {
+                    foreach (var item in viewModel.GarageSaleSpecialItems)
+                    {
+                        viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                    }
+                }
             }
             else
             {

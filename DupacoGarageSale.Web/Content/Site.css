@@ -102,7 +102,15 @@
 }
 
 .white {
-    color: white;
+    color: #ffffff;
+}
+
+.black {
+    color: #000000;
+}
+
+.navbar-nav > li > a {
+    color: #ffffff;
 }
 
 .light-orange {

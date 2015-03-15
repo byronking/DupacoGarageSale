@@ -13,6 +13,42 @@ namespace DupacoGarageSale.Data.Repository
     public class AdminRepository
     {
         /// <summary>
+        /// This verifies whether the user is an admin or not.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public bool VerifyUserIsAdmin(string userName)
+        {
+            var userIsAdmin = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("VerifyUserIsAdmin", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_name", SqlDbType.VarChar).Value = userName;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var adminUser = reader["user_name"].ToString();
+                    }
+
+                    userIsAdmin = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return userIsAdmin;
+        }
+
+        /// <summary>
         /// This returns all the garage sale users.
         /// </summary>
         /// <returns></returns>
@@ -635,6 +671,44 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
+        /// This gets a contact us message by id.
+        /// </summary>
+        /// <param name="messageId"></param>
+        /// <returns></returns>
+        public ContactUsMessage GetContactUsMessageById(int messageId)
+        {
+            var message = new ContactUsMessage();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetContactUsMessageById", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@message_id", SqlDbType.Int).Value = messageId;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        message.ContactName = reader["contact_name"].ToString();
+                        message.ContactEmail = reader["contact_email"].ToString();
+                        message.ContactPhone = reader["contact_phone"].ToString();
+                        message.MessageText = reader["message_text"].ToString();
+                        message.MessageSentDateTime = Convert.ToDateTime(reader["message_sent_date"]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return message;
+        }
+
+        /// <summary>
         /// This gets the replies to the contact us messages.
         /// </summary>
         /// <param name="messageId"></param>
@@ -692,11 +766,18 @@ namespace DupacoGarageSale.Data.Repository
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@reply_from", SqlDbType.VarChar).Value = reply.ReplyFrom;
+                    cmd.Parameters.Add("@reply_to", SqlDbType.VarChar).Value = reply.ReplyTo;
                     cmd.Parameters.Add("@reply_date", SqlDbType.DateTime).Value = reply.ReplyDateTime;
                     cmd.Parameters.Add("@reply_text", SqlDbType.VarChar).Value = reply.ReplyText;
                     cmd.Parameters.Add("@message_id", SqlDbType.Int).Value = reply.MessageId;
+
+                    var returnParameter = cmd.Parameters.Add("@return_value", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
+
+                    saveResult.SaveResultId = (int)returnParameter.Value;
 
                     if (saveResult.SaveResultId != 0)
                     {

@@ -99,6 +99,8 @@ namespace DupacoGarageSale.Web.Controllers
                 //// Cleanup.
                 //Session["ItineraryLegDeleted"] = null;
 
+                ViewBag.NavCreateItinerary = "active";
+
                 Session["ViewModel"] = viewModel;
                 return View("UserItineraries", viewModel);
             }

@@ -1169,11 +1169,14 @@ namespace DupacoGarageSale.Web.Controllers
                 // Show some random items as you land on the page for the first time.
                 if (s != null)
                 {
-                    var randomSpecialItems = ItemsHelper.GetRandomSpecialItems();
-                    var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
+                    // Get some random items for the home page.
+                    var randomSpecialItems = repository.GetRandomSpecialItems();
+                    viewModel.GarageSaleSpecialItems = randomSpecialItems;
+                    //var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
+
                     viewModel.SearchResults = new GarageSaleSearchResults
                     {
-                        SpecialItems = repository.GetGarageSaleSpecialItems(randomSpecialItems),
+                        SpecialItems = randomSpecialItems,
                         GarageSaleItems = new List<GarageSaleSearchItem>()
                     };
                 }
