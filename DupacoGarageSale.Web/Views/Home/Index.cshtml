@@ -57,10 +57,14 @@
                                     }
                                 }
                             </textarea>                       
-                        </div>                            
+                        </div><br />                            
                         <div>
-                            Sale dates:
-                            <div class="checkbox">
+                            <h4>Select start and end dates:</h4>
+                            <label for="from">Start:</label><br />
+                            <input type="text" id="from" name="from" class="form-control"><br />
+                            <label for="to">End</label><br />
+                            <input type="text" id="to" name="to" class="form-control"><br />
+                            @*<div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="saleDateOne" checked /> 
                                     @Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["SaleDateOne"]).DayOfWeek.ToString() 
@@ -87,8 +91,9 @@
                                     @Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["SaleDateFour"]).DayOfWeek.ToString()
                                     @Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["SaleDateFour"]).ToLongDateString()
                                 </label>                                    
-                            </div>
-                        </div><br />                          
+                            </div>*@
+                        </div>
+                        <br /><br />                          
 
                         <div id="accordion" class="panel-group" aria-multiselectable="true" role="tablist">
                             <div class="panel panel-success">

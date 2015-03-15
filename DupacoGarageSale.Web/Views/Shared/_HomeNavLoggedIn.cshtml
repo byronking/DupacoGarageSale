@@ -4,10 +4,16 @@
     <div class="container" style="background-color: #87C440;">
         <div class="navbar-header">
             <a class="navbar-brand" href="~/Home/" style="color:white;font-weight:bold;font-size:24px;">Say hello to a good buy!</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar">
+			<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
         </div>
         @if (Model != null)
         {
-            <div id="navbar" class="navbar-collapse collapse" style="color:white;">
+            <div id="topNavbar" class="navbar-collapse collapse" style="color:white;">
                 <ul class="nav navbar-nav">
                     @{
                         if (Model.User.UserTypeId == 1)

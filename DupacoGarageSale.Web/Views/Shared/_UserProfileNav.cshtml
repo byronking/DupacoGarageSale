@@ -4,13 +4,19 @@
     <div class="container" style="background-color: #87C440;">
         <div class="navbar-header">
             <a class="navbar-brand" href="~/Home/" style="color:white;font-weight:bold;font-size:24px;">Edit user profile</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar">
+			<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="topNavbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 @{
                     if (Model.UserTypeId == 1)
                     {
-                        <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index"><span class="white">Admin </span></a></li>
+                        <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index"><span class="black">Admin </span></a></li>
                     }
                 }
                 <li class="dropdown @ViewBag.NavProfile">
@@ -23,16 +29,16 @@
                 </li>
                 
                 <li class="dropdown @ViewBag.NavGarageSales">
-                    <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false"><span class="white">Garage sales</span> <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false"><span class="black">Garage sales</span> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="~/GarageSale/Add/">Add a new sale</a></li>
                         <li><a href="~/GarageSale/View/">View my sales</a></li>
                     </ul>
                 </li>
-                <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1"><span class="white">Search</span> </a></li>
+                <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1"><span class="black">Search</span> </a></li>
                 @if(Model.Address != null)
                 {
-                    <li class="@ViewBag.NavCreateItinerary"><a href="~/Itinerary/GetUserItineraries/@Model.UserId"><span class="white">View itineraries</span> </a></li>
+                    <li class="@ViewBag.NavCreateItinerary"><a href="~/Itinerary/GetUserItineraries/@Model.UserId"><span class="black">View itineraries</span> </a></li>
                 }
                 
             </ul>

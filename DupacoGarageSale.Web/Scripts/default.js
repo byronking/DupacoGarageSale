@@ -257,9 +257,24 @@
         }
     });
 
-    // Handle validation for selecting the dates.
-    
+    $("#from").datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3,
+        onClose: function (selectedDate) {
+            $("#to").datepicker("option", "minDate", selectedDate);
+        }
+    });
+    $("#to").datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3,
+        onClose: function (selectedDate) {
+            $("#from").datepicker("option", "maxDate", selectedDate);
+        }
+    });
 
+    // Handle validation for selecting the dates.
     $("#ddlCommunity").change(function () {
         if ($("#ddlCommunity option:selected").text() == "Dubuque, IA") {
             $("#txtSaleDateOne").val("4/23/2015");

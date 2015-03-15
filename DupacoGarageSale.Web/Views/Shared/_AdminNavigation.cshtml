@@ -4,8 +4,14 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="~/Home/" style="color:#428BCA;font-weight:bold;font-size:24px;">Garage sale admin console</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar">
+			<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="topNavbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 @{
                     if (Model.AdminUser.UserTypeId == 1)
