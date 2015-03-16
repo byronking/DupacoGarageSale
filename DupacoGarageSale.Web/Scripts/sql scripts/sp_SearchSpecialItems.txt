@@ -1,0 +1,30 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[SearchSpecialItems]    Script Date: 3/15/15 11:17:11 PM ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+ALTER PROCEDURE [dbo].[SearchSpecialItems]
+
+@search_criteria varchar(100),
+@sale_date varchar(10)
+
+as
+
+begin
+
+set nocount on;
+
+	begin
+		
+		select special_items_id, title, description, picture_link, price, si.sale_id, item_category_id, item_subcategory_id, g.sale_address1,
+			g.sale_address2, g.sale_city, state_name, g.sale_zip from SpecialItems si join GarageSales g on si.sale_id = g.sale_id
+			join States s on g.sale_state_id = s.state_id join GarageSaleDatesTimes dt on g.sale_id = dt.sale_id
+			where (title like '%' + @search_criteria + '%' or description like '%' + @search_criteria + '%') and
+			(sale_date_two = @sale_date and day_two_start is not null or sale_date_one = @sale_date and day_one_start is not null 
+			or sale_date_three = @sale_date and day_three_start is not null or sale_date_four = @sale_date and day_four_start is not null);
+
+	end
+end

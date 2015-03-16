@@ -233,6 +233,27 @@
             $("#txtAddress").focus();
             e.preventDefault();
         }
+
+        if ($("#from").val() == "") {
+            $("#from").popover({
+                content: "Enter a start date", placement: "bottom",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#from").popover('show');
+            $("#from").focus();
+            e.preventDefault();
+        }
+
+        if ($("#to").val() == "") {
+            $("#to").popover({
+                content: "Enter an end date", placement: "bottom",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#to").popover('show');
+            $("#to").focus();
+            e.preventDefault();
+        }
+
     });   
 
     // Show the successful save message.
@@ -260,7 +281,7 @@
     $("#from").datepicker({
         defaultDate: "+1w",
         changeMonth: true,
-        numberOfMonths: 3,
+        numberOfMonths: 1,
         onClose: function (selectedDate) {
             $("#to").datepicker("option", "minDate", selectedDate);
         }
@@ -268,7 +289,7 @@
     $("#to").datepicker({
         defaultDate: "+1w",
         changeMonth: true,
-        numberOfMonths: 3,
+        numberOfMonths: 1,
         onClose: function (selectedDate) {
             $("#from").datepicker("option", "maxDate", selectedDate);
         }

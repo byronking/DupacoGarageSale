@@ -1308,36 +1308,8 @@ namespace DupacoGarageSale.Web.Controllers
 
             var radius = form["ddlRadius"].ToString();
             var address = form["txtAddress"].ToString();
-            var saleDates = new Dictionary<string, string>();
-
-            var saleDateOne = "off";
-            if (form["saleDateOne"] != null)
-            {
-                saleDateOne = form["saleDateOne"].ToString();
-                saleDates.Add("saleDateOne", System.Configuration.ConfigurationManager.AppSettings["SaleDateOne"].ToString());
-            }
-
-            var saleDateTwo = "off";
-            if (form["saleDateTwo"] != null)
-            {
-                saleDateTwo = form["saleDateTwo"].ToString();
-                saleDates.Add("saleDateTwo", System.Configuration.ConfigurationManager.AppSettings["SaleDateTwo"].ToString());
-            }
-
-            var saleDateThree = "off";
-            if (form["saleDateThree"] != null)
-            {
-                saleDateThree = form["saleDateThree"].ToString();
-                saleDates.Add("saleDateThree", System.Configuration.ConfigurationManager.AppSettings["SaleDateThree"].ToString());
-            }
-
-            var saleDateFour = "off";
-            if (form["saleDateFour"] != null)
-            {
-                saleDateFour = form["saleDateFour"].ToString();
-                saleDates.Add("saleDateFour", System.Configuration.ConfigurationManager.AppSettings["SaleDateFour"].ToString());
-            }
-
+            var startDate = form["from"].ToString();
+            var endDate = form["to"].ToString();
             var categoryIdList = new List<int>();
 
             foreach (var key in form.AllKeys)
@@ -1363,7 +1335,7 @@ namespace DupacoGarageSale.Web.Controllers
             viewModel.MappingData.Addresses = new List<string>();
 
             var repository = new GarageSaleRepository();
-            viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList, saleDates);
+            viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList, startDate, endDate);
 
             // Instantiate the selected categories.
             viewModel.SelectedCategories = new List<int>();

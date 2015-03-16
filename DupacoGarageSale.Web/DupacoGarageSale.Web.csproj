@@ -566,6 +566,7 @@
     <Content Include="Content\images\left.jpg" />
     <Content Include="Content\images\right.jpg" />
     <Content Include="Content\images\shim.gif" />
+    <Content Include="Content\jquery-ui-1.11.3.css" />
     <Content Include="Content\jquery-ui-timepicker-addon.css" />
     <Content Include="Content\jquery-ui-timepicker-addon.min.css" />
     <Content Include="Content\layout.css" />
@@ -766,6 +767,7 @@
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleSpecialItems.txt" />
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleUser.txt" />
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleUserProfile.txt" />
+    <Content Include="Scripts\sql scripts\sp_SearchSpecialItems.txt" />
     <Content Include="Scripts\sql scripts\sp_SearchSpecialItemsBySubcategory.txt" />
     <Content Include="Scripts\sql scripts\sp_UpdateGarageSale.txt" />
     <Content Include="Scripts\sql scripts\sp_UpdateGarageSaleSpecialItem.txt" />
