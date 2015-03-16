@@ -18,11 +18,6 @@
   min-height: 50%;
 }
 
-#uploadPreview
-{
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
-}
-
 /* Profile pic upload preview */
 #uploadPreview img{
   height:200px;
@@ -102,7 +97,19 @@
 }
 
 .white {
-    color: white;
+    color: #ffffff;
+}
+
+.black {
+    color: #000000;
+}
+
+.bootstrap-blue {
+    color: #3B84C3;
+}
+
+.navbar-nav > li > a {
+    color: #ffffff;
 }
 
 .light-orange {

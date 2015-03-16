@@ -521,7 +521,7 @@
         }
     });
     
-    // This counts the characters for the 
+    // This counts the characters for the blog post message.
     $("#txtBlogPost").keyup(function () {
         var max = 300;
         var len = $(this).val().length;

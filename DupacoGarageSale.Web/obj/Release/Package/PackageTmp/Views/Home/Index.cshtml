@@ -1,7 +1,7 @@
 ﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
 
 @{
-    ViewBag.Title = "Welcome to the Dupaco Garage Sale";
+    ViewBag.Title = "Welcome to the Dupaco Garage Sales!";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -57,10 +57,14 @@
                                     }
                                 }
                             </textarea>                       
-                        </div>                            
+                        </div><br />                            
                         <div>
-                            Sale dates:
-                            <div class="checkbox">
+                            <h4>Select start and end dates:</h4>
+                            <label for="from">Start:</label><br />
+                            <input type="text" id="from" name="from" class="form-control"><br />
+                            <label for="to">End</label><br />
+                            <input type="text" id="to" name="to" class="form-control"><br />
+                            @*<div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="saleDateOne" checked /> 
                                     @Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["SaleDateOne"]).DayOfWeek.ToString() 
@@ -87,8 +91,9 @@
                                     @Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["SaleDateFour"]).DayOfWeek.ToString()
                                     @Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["SaleDateFour"]).ToLongDateString()
                                 </label>                                    
-                            </div>
-                        </div><br />                          
+                            </div>*@
+                        </div>
+                        <br /><br />                          
 
                         <div id="accordion" class="panel-group" aria-multiselectable="true" role="tablist">
                             <div class="panel panel-success">
@@ -431,7 +436,7 @@
             @using (Html.BeginForm("SearchByCriteria", "Home", FormMethod.Post, new { @class = "form-inline" }))
             {
                 <div class="input-group">
-                    <input class="form-control" type="text" id="txtSearchCriteria" name="txtSearchCriteria" style="width:375px" placeholder="What are you looking for?">
+                    <input class="form-control" type="text" id="txtSearchCriteria" name="txtSearchCriteria" style="width:275px" placeholder="What are you looking for?">
                     <span class="input-group-btn">
                         <input type="submit" id="btnSearchBarFind" class="btn btn-primary" value="Find it!" />
                     </span>
@@ -467,7 +472,7 @@
                                         @foreach (var item in Model.SearchResults.SpecialItems)
                                         {
                                             <div class="col-md-5">
-                                                <div class="thumbnail" style="min-height:510px;"> 
+                                                <div class="thumbnail" style="min-height:650px;"> 
                                                     <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
 	                                                    <img alt="@item.Title" class="img-responsive" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
                                                     </a> 

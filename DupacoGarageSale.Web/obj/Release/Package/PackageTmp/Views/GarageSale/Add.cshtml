@@ -49,7 +49,8 @@
                         </div>
                         <div class="form-group">
                             <label for="txtDescription">Describe your sale</label>
-                            @Html.TextAreaFor(m => m.Sale.SaleDescription, new { @class="form-control", id="txtDescription", placeholder="Brevity is the soul of wit (100 characters max)", maxlength="100" })
+                            @Html.TextAreaFor(m => m.Sale.SaleDescription, new { @class="form-control", id="txtDescription", placeholder="Brevity is the soul of wit (100 characters max)", 
+                                maxlength="100", onchange="enforceMaxLength(this)", onkeyup="enforceMaxLength(this)", onpaste="enforceMaxLength(this)" })
                             <div id="charNumDescription"></div>
                             <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.SaleDescription)</span>
                         </div>

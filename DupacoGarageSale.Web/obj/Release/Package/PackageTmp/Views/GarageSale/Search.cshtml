@@ -425,7 +425,7 @@
             @using (Html.BeginForm("SearchByCriteria", "GarageSale", FormMethod.Post, new { @class = "form-inline" }))
             {
                 <div class="input-group">
-                    <input class="form-control" type="text" id="txtSearchCriteria" name="txtSearchCriteria" style="width:375px" placeholder="What are you looking for?">
+                    <input class="form-control" type="text" id="txtSearchCriteria" name="txtSearchCriteria" style="width:318px" placeholder="What are you looking for?">
                     <span class="input-group-btn">
                         <input type="submit" id="btnSearchBarFind" class="btn btn-primary" value="Find it!" />
                     </span>
@@ -462,8 +462,8 @@
                                         <div class="col-md-5">
                                             <div class="thumbnail" style="min-height:510px;margin-right:4px"> 
                                                 <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                                <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
-                                                </a> 
+	                                                <img alt="@item.Title" class="img-responsive" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+                                                </a>
                                                 <div class="caption">
                                                     <h3>@item.Title</h3>
                                                     @item.Description<br /><br />
@@ -553,7 +553,7 @@
                                 <div class="col-md-5">
                                     <div class="thumbnail" style="min-height:510px;">
                                         <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                        <img alt="100%x200" data-src="holder.js/100%x200" style="height: 200px; width: 100%; display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+	                                        <img alt="@item.Title" class="img-responsive" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
                                         </a>                                                
                                         <div class="caption">
                                             <h3>@item.Title</h3>

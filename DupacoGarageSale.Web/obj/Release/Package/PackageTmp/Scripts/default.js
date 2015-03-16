@@ -257,9 +257,24 @@
         }
     });
 
-    // Handle validation for selecting the dates.
-    
+    $("#from").datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3,
+        onClose: function (selectedDate) {
+            $("#to").datepicker("option", "minDate", selectedDate);
+        }
+    });
+    $("#to").datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3,
+        onClose: function (selectedDate) {
+            $("#from").datepicker("option", "maxDate", selectedDate);
+        }
+    });
 
+    // Handle validation for selecting the dates.
     $("#ddlCommunity").change(function () {
         if ($("#ddlCommunity option:selected").text() == "Dubuque, IA") {
             $("#txtSaleDateOne").val("4/23/2015");
@@ -506,7 +521,7 @@
         }
     });
     
-    // This counts the characters for the 
+    // This counts the characters for the blog post message.
     $("#txtBlogPost").keyup(function () {
         var max = 300;
         var len = $(this).val().length;
@@ -649,6 +664,13 @@
         }
     });
 });
+
+var maxLength = 100;
+function enforceMaxLength(ta) {
+    if (ta.value.length > maxLength) {
+        ta.value = ta.value.substring(0, maxLength);
+    }
+}
 
 function debugObject(inputobject) {
     obj = inputobject;

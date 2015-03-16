@@ -359,7 +359,7 @@ namespace DupacoGarageSale.Web.Controllers
             if (fileUpload != null)
             {
                 // Save the image file.
-                user.ProfilePicLink = fileUpload.FileName;
+                user.ProfilePicLink = DateTime.Now.ToString("yyyyMMddHHmmss") + fileUpload.FileName;
 
                 var fileName = Path.GetFileName(user.ProfilePicLink);
                 var dir = ConfigurationManager.AppSettings["ProfileImagesDirectory"].ToString();

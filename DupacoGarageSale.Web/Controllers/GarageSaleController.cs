@@ -1037,10 +1037,19 @@ namespace DupacoGarageSale.Web.Controllers
         {
             var viewModel = new GarageSaleViewModel();
 
+            if (Session["ViewModel"] != null)
+            {
+                viewModel = Session["ViewModel"] as GarageSaleViewModel;
+            }
+
             if (Session["UserSession"] != null)
             {
                 var session = Session["UserSession"] as UserSession;
-                viewModel.User = session.User;
+
+                if (viewModel.User == null)
+                {
+                    viewModel.User = session.User;
+                }
 
                 // Get the user's address.
                 if (viewModel.User.Address != null)
@@ -1091,9 +1100,12 @@ namespace DupacoGarageSale.Web.Controllers
                     if (viewModel.MappingData == null)
                     {
                         // Default to the user's address in the search box.
-                        var userAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City +
-                            " " + viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
-                        TempData["UserAddress"] = userAddress.Trim();
+                        if (viewModel.User.Address != null)
+                        {
+                            var userAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City +
+                                " " + viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
+                            TempData["UserAddress"] = userAddress.Trim();
+                        }
                     }
                     else
                     {

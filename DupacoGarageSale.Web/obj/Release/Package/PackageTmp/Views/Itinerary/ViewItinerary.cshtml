@@ -30,13 +30,12 @@
                             </div>
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <input type="text" id="txtStartingAddress" class="form-control" style="width:400px;" value="@startingAddress" />
+                                    <input type="text" id="txtStartingAddress" class="form-control" value="@startingAddress" />
                                 </div>
                                 <div class="form-group">
                                     <!-- Adding an itinerary here means it is not tied to any particular sale -->
                                     @Html.ActionLink("Add new garage sale", "Search", "GarageSale", new { s=1 }, new { @class = "btn btn-primary" })
                                     @Html.ActionLink("Add new stopover", "AddStopover", null, new { @class="btn btn-primary" })
-                                    @*@Html.ActionLink("Add new stopover", "AddNewItineraryLeg", new { userId = @Model.User.UserId }, new { @class="btn btn-primary" })*@
                                 </div>
                             </div>
                         </div>                            
@@ -54,7 +53,6 @@
                                 </div>
 
                                 <!-- begin itinerary legs code -->
-                                @*<ul class="list-group" id="sortable">*@
                                 <ul id="sortable" class="list-group" >
                                     @foreach (var address in Model.GarageSaleItineraries) 
                                     {
@@ -72,16 +70,21 @@
                                         itineraryLegs.Add(address.ItineraryLegId);
                                         <li class="list-group-item">
                                             <label for="txtItineraryLeg@(address.ItineraryLegId)">Stopover:</label>
-                                            <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" class="input-sm" style="width:350px;" value="@itineraryAddress" />
-                                            
-                                            @if (address.SaleId == 7777777)
-                                            {
-                                                <a href="/Itinerary/DeleteWaypoint?id=@(Model.GarageSaleItinerary.ItineraryId)&address=@address.SaleAddress1" class="btn btn-danger btn-sm">Delete waypoint</a>
-                                            }
-                                            else
-                                            {
-                                                <a href="/Itinerary/DeleteItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-danger btn-sm">Delete</a>
-                                            }
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" class="input-sm form-control" style="min-width:245px; margin-bottom:3px;" value="@itineraryAddress" />
+                                                </div>
+                                                <div class="form-group">
+                                                     @if (address.SaleId == 7777777)
+                                                        {
+                                                            <a href="~/Itinerary/DeleteWaypoint?id=@(Model.GarageSaleItinerary.ItineraryId)&address=@address.SaleAddress1" class="btn btn-danger btn-sm">Delete waypoint</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="~/Itinerary/DeleteItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-danger btn-sm">Delete</a>
+                                                        }
+                                                </div>
+                                            </div>
                                             <input type="hidden" id="hdnItineraryLeg@(address.ItineraryLegId)" value="@address.ItineraryLegId" />
                                         </li>
                                     }
