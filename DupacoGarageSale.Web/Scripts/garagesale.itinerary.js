@@ -134,6 +134,13 @@
         });
     });
 
+    // Show this when a user removes a sale from faves    
+    if (($("#hdnFaveRemovedSuccess").val() !== undefined)) {
+        alert($("#hdnFaveRemovedSuccess").val());
+        if ($("#hdnFaveRemovedSuccess").val() == "true") {
+            $("#divFaveRemovedSuccess").removeClass("hidden");
+        }
+    }
 });
 
 $(function () {

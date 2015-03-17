@@ -199,8 +199,15 @@ namespace DupacoGarageSale.Web.Controllers
                 }
 
                 viewModel.User = session.User;
+
                 // Add the current itinerary as well.
                 viewModel.GarageSaleItinerary = repository.GetItineraryByItineraryId(id);
+
+                if (viewModel.GarageSaleItinerary.ItineraryId == 0)
+                {
+                    viewModel.GarageSaleItinerary.ItineraryId = id;
+                }
+
                 viewModel.GarageSaleItineraries = itineraryList;
 
                 // Get the waypoints, if any and then add them to the itineraries list.
@@ -230,6 +237,14 @@ namespace DupacoGarageSale.Web.Controllers
                 // Get the user's fave garage sales.
                 var saleRepository = new GarageSaleRepository();
                 viewModel.FavoriteGarageSales = saleRepository.GetFavoriteGarageSales(viewModel.User.UserId);
+
+                if (Session["NoResultsReturned"] != null)
+                {
+                    if(Session["NoResultsReturned"].ToString() == "true")
+                    {
+                        ViewBag.NoResultsReturned = "true";
+                    }
+                }
 
                 // Cleanup.
                 Session["ItineraryLegDeleted"] = null;
@@ -359,6 +374,7 @@ namespace DupacoGarageSale.Web.Controllers
         public ActionResult ItineraryPageSearch(FormCollection formCollection)
         {
             var viewModel = new GarageSaleViewModel();
+            var itineraryId = Convert.ToInt32(formCollection["hdnItineraryId"]);
 
             if (Session["ViewModel"] != null)
             {
@@ -371,8 +387,13 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.User = session.User;
 
                 var repository = new ItineraryRepository();
-                var searchCriteria = formCollection["txtSearchCriteria"].ToString();
+                var searchCriteria = formCollection["txtSearchCriteria"].ToString();                
                 viewModel.ItinerarySearchResults = repository.ItineraryPageSearch(searchCriteria);
+
+                if (viewModel.ItinerarySearchResults.ItineraryGarageSaleItems.Count == 0 && viewModel.ItinerarySearchResults.ItinerarySpecialItems.Count == 0)
+                {
+                    Session["NoResultsReturned"] = "true";
+                }
             }
 
             Session["ViewModel"] = viewModel;
@@ -381,7 +402,7 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     controller = "Itinerary",
                     action = "ViewItinerary",
-                    id = viewModel.GarageSaleItineraries[0].ItineraryId
+                    id = itineraryId
                 }));
         }
 

@@ -1579,6 +1579,11 @@ namespace DupacoGarageSale.Web.Controllers
                 var repository = new GarageSaleRepository();
                 var saveResult = repository.RemoveFaveGarageSale(userId, saleId);
 
+                if (saveResult)
+                {
+                    TempData["FaveRemovedSuccess"] = "true";
+                }
+
                 return RedirectToAction("ViewItinerary", new RouteValueDictionary(new
                 {
                     controller = "Itinerary",
