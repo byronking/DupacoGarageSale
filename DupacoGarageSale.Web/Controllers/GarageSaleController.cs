@@ -1598,5 +1598,69 @@ namespace DupacoGarageSale.Web.Controllers
         }
 
         #endregion
+
+        #region Print fave garage sales
+
+        public ActionResult PrintFavorites(int id)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+
+                    var repository = new GarageSaleRepository();
+                    var favedSales = new List<GarageSale>();
+                    viewModel.FavoriteGarageSales = repository.GetFavoriteGarageSales(id);
+
+                    foreach (var sale in viewModel.FavoriteGarageSales)
+                    {
+                        favedSales.Add(repository.GetGarageSaleAndItemsById(sale.GarageSaleId));
+                    }
+
+                    viewModel.FavoriteGarageSales = null;
+                    viewModel.FavoriteGarageSales = favedSales;
+                }
+
+                Session["ViewModel"] = viewModel;
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        public ActionResult PrintAllGarageSales()
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                    Session["ViewModel"] = viewModel;
+                }
+
+                var repository = new GarageSaleRepository();
+
+
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        #endregion
     }
 }
