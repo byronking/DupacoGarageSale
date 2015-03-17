@@ -488,8 +488,8 @@
                                         })
                                         .RowTemplate(grid => @<text>
 				                            <div>
-                                                <a href="~/Content/images/keep-calm-and-come-to-the-dupaco-garage-sale.png" data-lightbox="dupaco_garage_sale">
-                                                    <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/keep-calm-and-come-to-the-dupaco-garage-sale.png" />
+                                                <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="@item.ProfilePic">
+                                                    <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/@item.ProfilePic" />
                                                 </a>
                                                 @item.ItemCategoryName - @item.ItemSubcategoryName<br /><br />
 					                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1,
@@ -517,39 +517,40 @@
                             </div>
                         }
                     }                    
-
-                    <!-- This shows the featured hot picks for the home page. -->
-                    @if (Model.GarageSaleSpecialItems != null && Model.SearchResults == null)
-                    {
-                        if (Model.GarageSaleSpecialItems.Count > 0)
+                    <div class="row">
+                        <!-- This shows the featured hot picks for the search page. -->
+                        @if (Model.GarageSaleSpecialItems != null && Model.SearchResults == null)
                         {
-                            <p class="lead">Featured hot picks</p>
-                            foreach (var item in Model.GarageSaleSpecialItems)
+                            if (Model.GarageSaleSpecialItems.Count > 0)
                             {
-                                <div class="col-md-5">
-                                    <div class="thumbnail" style="min-height:510px;">
-                                        <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                        <img alt="@item.Title" class="img-responsive" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
-                                        </a>                                                
-                                        <div class="caption">
-                                            <h3>@item.Title</h3>
-                                            @item.Description<br /><br />
-                                            <p><span>$</span> @item.Price</p>
-                                            @item.SpecialItemAddress.Address1<br />
+                                <p class="lead">Featured hot picks</p>
+                                foreach (var item in Model.GarageSaleSpecialItems)
+                                {
+                                    <div class="col-md-5">
+                                        <div class="thumbnail" style="min-height:510px;">
+                                            <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
+	                                            <img alt="@item.Title" class="img-responsive" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+                                            </a>                                                
+                                            <div class="caption">
+                                                <h3>@item.Title</h3>
+                                                @item.Description<br /><br />
+                                                <p><span>$</span> @item.Price</p>
+                                                @item.SpecialItemAddress.Address1<br />
                                         
-                                            @if (@item.SpecialItemAddress.Address2 != string.Empty)
-                                            {
-                                                @item.SpecialItemAddress.Address2<br />
-                                            }
+                                                @if (@item.SpecialItemAddress.Address2 != string.Empty)
+                                                {
+                                                    @item.SpecialItemAddress.Address2<br />
+                                                }
 
-                                            @item.SpecialItemAddress.City, @item.SpecialItemAddress.State @item.SpecialItemAddress.ZipCode<br /><br />
-                                            <a href="~/GarageSale/ViewGarageSale/@item.SaleId">Visit this garage sale</a><br />                  
-                                        </div>                     
+                                                @item.SpecialItemAddress.City, @item.SpecialItemAddress.State @item.SpecialItemAddress.ZipCode<br /><br />
+                                                <a href="~/GarageSale/ViewGarageSale/@item.SaleId">Visit this garage sale</a><br />                  
+                                            </div>                     
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             }
                         }
-                    }
+                    </div>
                 </div>
             </div>
         </div>
@@ -603,7 +604,7 @@
             var infowindow = new google.maps.InfoWindow();
 
             for (x = 0; x < addresses.length; x++) {
-                alert('address: ' + addresses[x]);
+                //alert('address: ' + addresses[x]);
                 $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=false', null, function (data) {
 
                     var p = data.results[0].geometry.location

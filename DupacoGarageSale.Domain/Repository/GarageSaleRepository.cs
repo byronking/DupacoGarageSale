@@ -787,7 +787,6 @@ namespace DupacoGarageSale.Data.Repository
         /// <summary>
         /// This gets random special items for the home page.
         /// </summary>
-        /// <param name="sale_id"></param>
         /// <returns></returns>
         public List<SpecialItem> GetRandomSpecialItems()
         {
@@ -798,7 +797,6 @@ namespace DupacoGarageSale.Data.Repository
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
                 using (SqlCommand cmd = new SqlCommand("GetRandomSpecialItems", conn))
                 {
-
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection.Open();
 
@@ -838,6 +836,54 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return specialItems;
+        }
+
+        /// <summary>
+        /// This gets random items for the home page.
+        /// </summary>
+        /// <returns></returns>
+        public List<GarageSaleSearchItem> GetRandomGarageSaleItems()
+        {
+            var garageSaleItems = new List<GarageSaleSearchItem>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetRandomGarageSaleItems", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var garageSaleItem = new GarageSaleSearchItem
+                        {
+                            GarageSaleItemsId = Convert.ToInt32(reader["garage_sale_items_id"]),
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemCategoryName = reader["item_category_name"].ToString(),
+                            ItemSubcategoryName = reader["item_subcategory_name"].ToString(),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            ProfilePic = reader["profile_pic_link"].ToString(),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            Address1 = reader["sale_address1"].ToString(),
+                            Address2 = reader["sale_address2"].ToString(),
+                            City = reader["sale_city"].ToString(),
+                            State = reader["state_name"].ToString(),
+                            ZipCode = reader["sale_zip"].ToString()
+                        };
+
+                        garageSaleItems.Add(garageSaleItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return garageSaleItems;
         }
 
         /// <summary>
@@ -1116,6 +1162,7 @@ namespace DupacoGarageSale.Data.Repository
                                 ItemCategoryName = reader["item_category_name"].ToString(),
                                 ItemSubcategoryName = reader["item_subcategory_name"].ToString(),
                                 ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                                ProfilePic = reader["profile_pic_link"].ToString(),
                                 SaleId = Convert.ToInt32(reader["sale_id"]),
                                 Address1 = reader["sale_address1"].ToString(),
                                 Address2 = reader["sale_address2"].ToString(),

@@ -34,12 +34,23 @@ namespace DupacoGarageSale.Web.Controllers
                 var randomSpecialItems = repository.GetRandomSpecialItems();
                 viewModel.GarageSaleSpecialItems = randomSpecialItems;
 
-                var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
+                // Get random garage sale items for the home page.
+                var randomGarageSaleItems = repository.GetRandomGarageSaleItems();
+                viewModel.GarageSaleItems = randomGarageSaleItems;
 
                 // Set the selected categories for the special items.
                 if (viewModel.GarageSaleSpecialItems.Count > 0)
                 {
                     foreach (var item in viewModel.GarageSaleSpecialItems)
+                    {
+                        viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                    }
+                }
+
+                // Set the selected categories for the regular items.
+                if (viewModel.GarageSaleItems.Count > 0)
+                {
+                    foreach (var item in viewModel.GarageSaleItems)
                     {
                         viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
                     }

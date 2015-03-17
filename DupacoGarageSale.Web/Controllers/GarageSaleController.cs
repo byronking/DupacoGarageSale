@@ -56,6 +56,14 @@ namespace DupacoGarageSale.Web.Controllers
                     viewModel.Sale.GargeSalePicLink = "Insulators-3080-Karen-St-DBQ.jpg";
                 }
 
+                // Load any headlines, if any.
+                var adminRepository = new AdminRepository();
+                var adminMessages = adminRepository.GetCreateSaleInstructions();
+                if (adminMessages.Count > 0)
+                {
+                    viewModel.HeadlineNews = adminMessages[0].MessageText;
+                }
+
                 ViewBag.NavGarageSales = "active";
                 return View(viewModel);
             }
@@ -344,6 +352,14 @@ namespace DupacoGarageSale.Web.Controllers
                     {
                         ViewBag.Invisible = "false";
                     }
+                }
+
+                // Load any headlines, if any.
+                var adminRepository = new AdminRepository();
+                var adminMessages = adminRepository.GetAdvancedSaleInstructions();
+                if (adminMessages.Count > 0)
+                {
+                    viewModel.HeadlineNews = adminMessages[0].MessageText;
                 }
 
                 // Save the viewmodel for later use.
@@ -687,65 +703,74 @@ namespace DupacoGarageSale.Web.Controllers
         [HttpGet]
         public ActionResult ViewGarageSale(int id)
         {
-            // Load the states dropdown.
-            var addressRepository = new AddressRepository();
-            var statesList = addressRepository.GetStates();
-            ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+            var viewModel = new GarageSaleViewModel();
 
-            var repository = new GarageSaleRepository();
-
-            var viewModel = new GarageSaleViewModel
+            if (id == 0)
             {
-                Sale = repository.GetGarageSaleAndItemsById(id),
-                SelectedCategories = new List<int>()
-            };
-
-            // Get the user session
-            UserSession session = null;
-            if (Session["UserSession"] != null)
+                return View("~/Views/GarageSale/GarageSaleNotFound.cshtml");
+            }
+            else
             {
-                session = Session["UserSession"] as UserSession;
-                viewModel.User = session.User;
+                // Load the states dropdown.
+                var addressRepository = new AddressRepository();
+                var statesList = addressRepository.GetStates();
+                ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
 
-                // Check to see if the current user has fave'd this garage sale.
-                var faveGarageSale = repository.CheckForFavedGarageSale(id, viewModel.User.UserId);
-                if (faveGarageSale.FavoriteId != 0)
+                var repository = new GarageSaleRepository();
+
+                viewModel = new GarageSaleViewModel
                 {
-                    viewModel.FaveGarageSales = new List<FavoriteGarageSale>();
-                    viewModel.FaveGarageSales.Add(faveGarageSale);
-                    ViewBag.FavedGarageSale = faveGarageSale.FavoriteId;
+                    Sale = repository.GetGarageSaleAndItemsById(id),
+                    SelectedCategories = new List<int>()
+                };
+
+                // Get the user session
+                UserSession session = null;
+                if (Session["UserSession"] != null)
+                {
+                    session = Session["UserSession"] as UserSession;
+                    viewModel.User = session.User;
+
+                    // Check to see if the current user has fave'd this garage sale.
+                    var faveGarageSale = repository.CheckForFavedGarageSale(id, viewModel.User.UserId);
+                    if (faveGarageSale.FavoriteId != 0)
+                    {
+                        viewModel.FaveGarageSales = new List<FavoriteGarageSale>();
+                        viewModel.FaveGarageSales.Add(faveGarageSale);
+                        ViewBag.FavedGarageSale = faveGarageSale.FavoriteId;
+                    }
+
+                    // Get the user's itinerary by user id.
+                    var itineraryRepository = new ItineraryRepository();
+                    var itineraryList = new List<GarageSaleItinerary>();
+                    itineraryList = itineraryRepository.GetItinerariesByUserId(viewModel.User.UserId);
+                    viewModel.GarageSaleItineraries = itineraryList;
                 }
 
-                // Get the user's itinerary by user id.
-                var itineraryRepository = new ItineraryRepository();
-                var itineraryList = new List<GarageSaleItinerary>();
-                itineraryList = itineraryRepository.GetItinerariesByUserId(viewModel.User.UserId);
-                viewModel.GarageSaleItineraries = itineraryList;
+                foreach (var itemId in viewModel.Sale.GarageSaleItems)
+                {
+                    viewModel.SelectedCategories.Add(itemId.ItemSubcategoryId);
+                }
+
+                // Get the categories and subcategories.
+                viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+
+                var selectedCategories = viewModel.SelectedCategories.ToArray();
+                ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+
+                // Get the special items.
+                viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(viewModel.Sale.GarageSaleId);
+
+                // Get the blog posts.
+                var blogRepo = new BlogPostRepository();
+                viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.Sale.GarageSaleId);
+
+                // Get the messages.
+                viewModel.GarageSaleMessages = repository.GetGarageSaleMessages(id);
+
+                // Save the viewmodel for later use.
+                Session["ViewModel"] = viewModel;
             }
-
-            foreach (var itemId in viewModel.Sale.GarageSaleItems)
-            {
-                viewModel.SelectedCategories.Add(itemId.ItemSubcategoryId);
-            }
-
-            // Get the categories and subcategories.
-            viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
-
-            var selectedCategories = viewModel.SelectedCategories.ToArray();
-            ViewBag.SelectedCategories = string.Join(",", selectedCategories);
-
-            // Get the special items.
-            viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(viewModel.Sale.GarageSaleId);
-
-            // Get the blog posts.
-            var blogRepo = new BlogPostRepository();
-            viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.Sale.GarageSaleId);
-
-            // Get the messages.
-            viewModel.GarageSaleMessages = repository.GetGarageSaleMessages(id);
-
-            // Save the viewmodel for later use.
-            Session["ViewModel"] = viewModel;
 
             ViewBag.NavGarageSales = "active";
 
@@ -1158,11 +1183,12 @@ namespace DupacoGarageSale.Web.Controllers
                     if (s != null)
                     {
                         var randomSpecialItems = ItemsHelper.GetRandomSpecialItems();
-                        var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
+                        var randomGarageSaleItems = repository.GetRandomGarageSaleItems();
+
                         viewModel.SearchResults = new GarageSaleSearchResults
                         {
                             SpecialItems = repository.GetGarageSaleSpecialItems(randomSpecialItems),
-                            GarageSaleItems = new List<GarageSaleSearchItem>()
+                            GarageSaleItems = randomGarageSaleItems
                         };
                     }
                     else
@@ -1184,12 +1210,12 @@ namespace DupacoGarageSale.Web.Controllers
                     // Get some random items for the home page.
                     var randomSpecialItems = repository.GetRandomSpecialItems();
                     viewModel.GarageSaleSpecialItems = randomSpecialItems;
-                    //var randomGarageSaleItems = ItemsHelper.GetRandomGarageSaleItems();
+                    var randomGarageSaleItems = repository.GetRandomGarageSaleItems();
 
                     viewModel.SearchResults = new GarageSaleSearchResults
                     {
                         SpecialItems = randomSpecialItems,
-                        GarageSaleItems = new List<GarageSaleSearchItem>()
+                        GarageSaleItems = randomGarageSaleItems
                     };
                 }
                 else
@@ -1448,35 +1474,8 @@ namespace DupacoGarageSale.Web.Controllers
             // Check to see if the user has an itinerary. If not, create a new one. If so, update the existing one.
             var repository = new ItineraryRepository();
 
-            //var itinerary = repository.CheckForItinerary(userId);
-
-            //if (itinerary.ItineraryId != 0)
-            //{
-                // Add a new leg to the existing itinerary.
-                var saveResult = repository.SaveItineraryLeg(itineraryId, saleId);
-            //}
-            //else
-            //{
-            //    // Create a new itinerary.
-            //    itinerary = new Itinerary
-            //    {
-            //        SaleId = saleId,
-            //        ItineraryCreateDate = DateTime.Now,
-            //        ItineraryModifyDate = DateTime.Now,
-            //        ItineraryOwner = userId
-            //    };
-
-            //    var saveResult = repository.SaveItinerary(itinerary);
-
-            //    if (saveResult.IsSaveSuccessful)
-            //    {
-            //        itinerary.ItineraryId = saveResult.SaveResultId;
-            //        TempData["ItineraryId"] = itinerary.ItineraryId;
-            //        ViewBag.ItineraryId = itinerary.ItineraryId;
-            //        viewModel.UserItinerary = new Itinerary();
-            //        viewModel.UserItinerary = itinerary;
-            //    }
-            //}
+            // Add a new leg to the existing itinerary.
+            var saveResult = repository.SaveItineraryLeg(itineraryId, saleId);
 
             Session["ViewModel"] = viewModel;
 
@@ -1582,7 +1581,7 @@ namespace DupacoGarageSale.Web.Controllers
 
                 return RedirectToAction("ViewItinerary", new RouteValueDictionary(new
                 {
-                    controller = "GarageSale",
+                    controller = "Itinerary",
                     action = "ViewItinerary",
                     id = userId
                 }));

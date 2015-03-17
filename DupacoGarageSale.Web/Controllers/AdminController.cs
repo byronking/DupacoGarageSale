@@ -1022,6 +1022,92 @@ namespace DupacoGarageSale.Web.Controllers
         }
         #endregion
 
+        #region Publish garage sale instructions
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="saleInstructions"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PublishCreateASaleInstructions(string headlineNews)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var saveResult = new UserSaveResult();
+                var repository = new AdminRepository();
+
+                var message = new AdminMessage
+                {
+                    MessageText = headlineNews,
+                    MessageCreateDate = DateTime.Now,
+                    MessagePublishDate = DateTime.Now,
+                    MessageType = "sale instructions"
+                };
+
+                saveResult = repository.SaveAdminMessage(message);
+
+                if (saveResult.IsSaveSuccessful)
+                {
+                    Session["PublishHeadlineNews"] = true;
+                }
+
+                return RedirectToAction("HeadlineNews", new RouteValueDictionary(new
+                {
+                    controller = "Admin",
+                    action = "HeadlineNews",
+                    userId = session.User.UserId
+                }));
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="saleInstructions"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PublishAdvancedSaleInstructions(string headlineNews)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var saveResult = new UserSaveResult();
+                var repository = new AdminRepository();
+
+                var message = new AdminMessage
+                {
+                    MessageText = headlineNews,
+                    MessageCreateDate = DateTime.Now,
+                    MessagePublishDate = DateTime.Now,
+                    MessageType = "advanced sale instructions"
+                };
+
+                saveResult = repository.SaveAdminMessage(message);
+
+                if (saveResult.IsSaveSuccessful)
+                {
+                    Session["PublishHeadlineNews"] = true;
+                }
+
+                return RedirectToAction("HeadlineNews", new RouteValueDictionary(new
+                {
+                    controller = "Admin",
+                    action = "HeadlineNews",
+                    userId = session.User.UserId
+                }));
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
+        }
+        #endregion
+
         #region Message center
         /// <summary>
         /// This loads the message center page.

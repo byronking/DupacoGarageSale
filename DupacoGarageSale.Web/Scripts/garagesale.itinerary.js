@@ -62,6 +62,11 @@
         });
     });
 
+    // Reload the current page after dismissing the modal.
+    $('#addToFavesModal').on('hidden.bs.modal', function () {
+        location.reload();
+    })
+
     // Remove the garage sale from the users' faves.
     $("#linkRemoveFromFaves").click(function (e) {
         var sale_id = $("#hdnGarageSaleId").val();
@@ -88,6 +93,11 @@
             }
         });
     });
+
+    // Reload the current page after dismissing the modal.
+    $('#removeFromFavesModal').on('hidden.bs.modal', function () {
+        location.reload();
+    })
 
     // This handles sorting the itinerary routes.
     $(function () {

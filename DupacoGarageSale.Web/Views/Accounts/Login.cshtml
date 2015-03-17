@@ -49,7 +49,83 @@
                 </div>
                 <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
             }
+            <br />
+            <div class="text-center">
+                <fb:login-button autologoutlink="false"></fb:login-button>
+				<div id="fb-root"></div>
+            </div>
             <div class="text-center"><a href="#" data-toggle="modal" data-target=".reset-password-modal">Forgot password?</a></div>
         </div>
     </div>       
 </div>
+
+ <script>
+     window.fbAsyncInit = function () {
+         FB.init({
+             appId: '1538676693053081',
+             xfbml: true,
+             version: 'v2.1'
+         });
+
+         // After your onload method has been called and initial login state has
+         // already been determined. (See above about not using these during a page's
+         // init function.)
+         FB.Event.subscribe('auth.authResponseChange', auth_response_change_callback);
+         FB.Event.subscribe('auth.statusChange', auth_status_change_callback);
+     };
+
+     (function (d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) { return; }
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+     // In your JavaScript
+     var auth_response_change_callback = function (response) {
+         console.log("auth_response_change_callback");
+         console.log(response);
+     }
+
+     var auth_status_change_callback = function (response) {
+         console.log("auth_status_change_callback: " + response.status);
+
+         if (response.status === 'unknown') {
+             location.href = '@Url.Content("/Home/LogOut")';
+         }
+
+         if (response.status === 'connected') {
+             signInFacebookUser();
+         }
+     }
+
+     function signInFacebookUser() {
+         //alert('signing in');
+         console.log('Welcome!  Fetching your information.... ');
+         FB.api('/me', function (response) { // This gets the user's profile info.
+             console.log('Successful login for: ' + response.name);
+
+             var id = response.id;
+             var first_name = response.first_name;
+             var last_name = response.last_name;
+             var email = response.email;
+
+             $.ajax({
+                 url: '@Url.Content("~/Accounts/SignInFacebookUser/")',
+                 type: 'POST',
+                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                 data: { id: id, first_name: first_name, last_name: last_name, email: email },
+                 dataType: 'json',
+                 success: function (data) {
+                     if (data.ok)
+
+                         window.location = data.newurl;
+                     else {
+                         alert(data.message);
+                     }
+                 }
+             });
+         });
+     }
+</script>

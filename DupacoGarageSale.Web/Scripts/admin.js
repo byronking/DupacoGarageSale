@@ -54,7 +54,7 @@
 
     // Character counter for the admin headline news.
     $("#txtHeadlineNews").keyup(function () {
-        var max = 500;
+        var max = 1000;
         var len = $(this).val().length;
         //alert('length: ' + len);
         if (len >= max) {
@@ -70,6 +70,48 @@
         if ($("#txtHeadlineNews").val() == "")
         {
             $("#headlineNewsValidationMessage").removeClass('invisible');
+            e.preventDefault();
+        }
+    });
+
+    // Character counter for the admin create-a-sale instructions.
+    $("#txtCreateASaleInstructions").keyup(function () {
+        var max = 1000;
+        var len = $(this).val().length;
+        //alert('length: ' + len);
+        if (len >= max) {
+            $("#charCreateASaleInstructions").text(' you have reached the limit');
+        } else {
+            var char = max - len;
+            $("#charCreateASaleInstructions").text(char + ' characters left');
+        }
+    });
+
+    // Validation for the create-a-sale instructions.
+    $("#btnCreateASaleInstructions").click(function (e) {
+        if ($("#txtCreateASaleInstructions").val() == "") {
+            $("#createASaleInstructionsValidationMessage").removeClass('invisible');
+            e.preventDefault();
+        }
+    });
+
+    // Character counter for the admin advanced sale instructions.
+    $("#txtAdvancedSaleInstructions").keyup(function () {
+        var max = 1000;
+        var len = $(this).val().length;
+        //alert('length: ' + len);
+        if (len >= max) {
+            $("#charAdvancedASaleInstructions").text(' you have reached the limit');
+        } else {
+            var char = max - len;
+            $("#charAdvancedASaleInstructions").text(char + ' characters left');
+        }
+    });
+
+    // Validation for the advanced sale instructions.
+    $("#btnAdvancedASaleInstructions").click(function (e) {
+        if ($("#txtAdvancedASaleInstructions").val() == "") {
+            $("#advancedASaleInstructionsValidationMessage").removeClass('invisible');
             e.preventDefault();
         }
     });

@@ -185,6 +185,7 @@ namespace DupacoGarageSale.Web.Controllers
 
             // Create a user session.
             var user = repository.GetGarageSaleUserByUserName(id);
+            user.Address = repository.GetUserAddressByUserId(user.UserId);
 
             var saveResult = new UserSaveResult();
 
@@ -253,7 +254,7 @@ namespace DupacoGarageSale.Web.Controllers
 
                 // Load any headlines, if any.
                 var adminRepository = new AdminRepository();
-                var adminMessages = adminRepository.GetAdminMessages();
+                var adminMessages = adminRepository.GetHeadlineNews();
                 if (adminMessages.Count > 0)
                 {
                     viewModel.HeadlineNews = adminMessages[0].MessageText;

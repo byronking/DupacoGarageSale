@@ -543,6 +543,126 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
+        /// This gets the latest headline news message.
+        /// </summary>
+        /// <returns></returns>
+        public List<AdminMessage> GetHeadlineNews()
+        {
+            var headlineNews = new List<AdminMessage>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetHeadlineNews", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var message = new AdminMessage
+                        {
+                            MessageText = reader["message_text"].ToString(),
+                            MessageCreateDate = Convert.ToDateTime(reader["message_create_date"]),
+                            MessagePublishDate = Convert.ToDateTime(reader["message_publish_date"]),
+                            MessageType = reader["message_type"].ToString()
+                        };
+
+                        headlineNews.Add(message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return headlineNews;
+        }
+
+        /// <summary>
+        /// This gets the latest create sale instructions text.
+        /// </summary>
+        /// <returns></returns>
+        public List<AdminMessage> GetCreateSaleInstructions()
+        {
+            var createSaleInstructions = new List<AdminMessage>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetCreateSaleInstructions", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var message = new AdminMessage
+                        {
+                            MessageText = reader["message_text"].ToString(),
+                            MessageCreateDate = Convert.ToDateTime(reader["message_create_date"]),
+                            MessagePublishDate = Convert.ToDateTime(reader["message_publish_date"]),
+                            MessageType = reader["message_type"].ToString()
+                        };
+
+                        createSaleInstructions.Add(message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return createSaleInstructions;
+        }
+
+        /// <summary>
+        /// This gets the latest advanced sale instructions text.
+        /// </summary>
+        /// <returns></returns>
+        public List<AdminMessage> GetAdvancedSaleInstructions()
+        {
+            var advancedSaleInstructions = new List<AdminMessage>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetAdvancedSaleInstructions", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var message = new AdminMessage
+                        {
+                            MessageText = reader["message_text"].ToString(),
+                            MessageCreateDate = Convert.ToDateTime(reader["message_create_date"]),
+                            MessagePublishDate = Convert.ToDateTime(reader["message_publish_date"]),
+                            MessageType = reader["message_type"].ToString()
+                        };
+
+                        advancedSaleInstructions.Add(message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return advancedSaleInstructions;
+        }
+
+        /// <summary>
         /// This saves admin messages, be they for the user home page or for the main home page.
         /// </summary>
         /// <param name="message"></param>

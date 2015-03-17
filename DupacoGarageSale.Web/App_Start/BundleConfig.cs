@@ -26,8 +26,7 @@ namespace DupacoGarageSale.Web
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                         "~/Scripts/default.js",
                         "~/Scripts/garagesale.itinerary.js",
-                        "~/Scripts/respond.js"));
-                        //"~/Scripts/jquery.maxlength.js"));            
+                        "~/Scripts/respond.js"));      
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap.js"));
@@ -36,7 +35,8 @@ namespace DupacoGarageSale.Web
                         "~/Content/lightbox/js/lightbox.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/adminjs").Include(
-                        "~/Scripts/admin.js"));
+                        "~/Scripts/admin.js",
+                        "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/timepicker").Include(
                         "~/Scripts/jquery.timepicker.js"));

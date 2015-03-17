@@ -120,8 +120,16 @@
                                 </div>
                                 <div id="uploadPreview"></div>                                
                             </div>
-                            @Html.HiddenFor(m => m.ProfilePicLink)
+                            @Html.HiddenFor(m => m.ProfilePicLink)                            
                         </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div id="picSizeWarning" role="alert" class="alert alert-danger alert-dismissible fade in hidden">
+                                    <button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>
+                                    <strong>Ooops!</strong> The file you are attempting to upload exceeds the 5 MB limit. Please try a smaller file.
+                                </div>
+                            </div> 
+                        </div>                       
             
                         <div class="row down_40">
                             <div class="col-md-12 text-center">

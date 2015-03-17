@@ -68,11 +68,22 @@
                     s = ~~(file.size / 1024) + 'KB';
                 $('#uploadPreview').append('<img src="' + this.src + '"> ' + w + 'x' + h + ' ' + s + ' ' + t + ' ' + n + '<br>');
             };
+
+            //alert(file.size / 1024);
+
+            if ((file.size / 1024) > 5000) {
+                //alert('too big!');
+                $("#picSizeWarning").removeClass("hidden");
+                $("#btnSaveProfile").attr("disabled", true);
+            }
+            else {
+                $("#btnSaveProfile").attr("disabled", false);
+            }
+
             image.onerror = function () {
                 alert('Invalid file type: ' + file.type);
             };
         };
-
     }
 
     $("#fileUpload").change(function (e) {
@@ -84,39 +95,6 @@
 
             // Show the old browser alert.
             $("#oldBlowserAlert").removeClass('hidden');
-
-            //var F = this.form.fileUpload; // To get the file name, use this.form.fileUpload.value.
-            //alert(F);
-
-            //alert('Hello! It looks like you are using Internet Explorer version ' + ie + '. Unfortunately, there is no way to preview your uploaded image at this time. Click save to view your uploaded pic. Sorry for any inconvenience.');
-
-            // Example #1
-            //var Preview = document.getElementById("imgPreview");
-            //Preview.src = F.value;
-            //Preview.style.width = "200px";
-            //Preview.style.height = "150px";
-
-
-            // Example #2
-            //var Preview = document.getElementById("imgPreview");
-            //$('#' + Preview).attr('src', F);
-
-            // Example #3
-            //// Save the profile pic.
-            //$.ajax({
-            //    url: '/Accounts/SaveProfilePicForPreview/',
-            //    type: 'post',
-            //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            //    data: { fileUpload: F },
-            //    contentType: 'application/json; charset=utf-8',
-            //    processData: false, contentType: false,
-            //    success: function (data) {
-            //        alert('it worked');
-            //    },
-            //    error: function (data) {
-            //        alert('ooops!');
-            //    }
-            //});
         }       
     });
 
@@ -445,9 +423,7 @@
                         return true;
                     }
                 }
-                return false;
-
-                
+                return false;                
             }
 
             if (check($('#txtPrice').val()) == true) {
