@@ -371,6 +371,50 @@ namespace DupacoGarageSale.Data.Repository
             return garageSale;
         }
 
+        /// <summary>
+        /// This gets the garage sale items by sale id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<GarageSaleItem> GetGarageSaleItemsById(int id)
+        {
+            var garageSaleItemsList = new List<GarageSaleItem>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetGarageSaleItemsBySaleId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@sale_id", SqlDbType.VarChar).Value = id;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var garageSaleItem = new GarageSaleItem
+                        {
+                            GarageSaleItemsId = Convert.ToInt32(reader["garage_sale_items_id"]),
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                            ItemCategoryName = reader["item_category_name"].ToString(),
+                            ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                            ItemSubcategoryName = reader["item_subcategory_name"].ToString()
+                        };
+
+                        garageSaleItemsList.Add(garageSaleItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return garageSaleItemsList;
+        }
+
          /// <summary>
         /// This gets a list of garage sales by user name.
         /// </summary>
@@ -1576,7 +1620,6 @@ namespace DupacoGarageSale.Data.Repository
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
                 using (SqlCommand cmd = new SqlCommand("SaveGarageSaleMessage", conn))
                 {
-
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@message_from", SqlDbType.VarChar).Value = message.MessageFrom;
@@ -1806,6 +1849,72 @@ namespace DupacoGarageSale.Data.Repository
             }
 
             return faveGarageSales;
+        }
+
+        /// <summary>
+        /// This gets all the garage sales and items.
+        /// </summary>
+        /// <returns></returns>
+        public List<GarageSale> GetAllGarageSales()
+        {
+            var allGarageSales = new List<GarageSale>();
+            var garageSaleItemsList = new List<GarageSaleItem>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetAllGarageSalesForPrint", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var saleDatesTimes = new SaleDatesTimes();
+                        saleDatesTimes.SaleDateTimeId = Convert.ToInt32(reader["sale_date_time_id"]);
+                        saleDatesTimes.SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]);
+                        saleDatesTimes.DayOneStart = reader["day_one_start"].ToString();
+                        saleDatesTimes.DayOneEnd = reader["day_one_end"].ToString();
+                        saleDatesTimes.SaleDateTwo = Convert.ToDateTime(reader["sale_date_two"]);
+                        saleDatesTimes.DayTwoStart = reader["day_two_start"].ToString();
+                        saleDatesTimes.DayTwoEnd = reader["day_two_end"].ToString();
+                        saleDatesTimes.SaleDateThree = Convert.ToDateTime(reader["sale_date_three"]);
+                        saleDatesTimes.DayThreeStart = reader["day_three_start"].ToString();
+                        saleDatesTimes.DayThreeEnd = reader["day_three_end"].ToString();
+                        saleDatesTimes.SaleDateFour = Convert.ToDateTime(reader["sale_date_four"]);
+                        saleDatesTimes.DayFourStart = reader["day_four_start"].ToString();
+                        saleDatesTimes.DayFourEnd = reader["day_four_end"].ToString();
+
+                        var garageSale = new GarageSale
+                        {
+                            CreateDate = Convert.ToDateTime(reader["create_date"]),
+                            DatesTimes = saleDatesTimes,
+                            GarageSaleId = Convert.ToInt32(reader["sale_id"]),
+                            GarageSaleName = reader["sale_name"].ToString(),
+                            ModifyDate = Convert.ToDateTime(reader["modify_date"]),
+                            ModifyUser = reader["modify_user"].ToString(),
+                            SaleAddress1 = reader["sale_address1"].ToString(),
+                            SaleAddress2 = reader["sale_address2"].ToString(),
+                            SaleCity = reader["sale_city"].ToString(),
+                            SaleDescription = reader["sale_description"].ToString(),
+                            SaleState = reader["state_name"].ToString(),
+                            SaleStateId = Convert.ToInt32(reader["state_id"]),
+                            SaleZip = reader["sale_zip"].ToString()
+                        };
+
+                        garageSale.GarageSaleItems = GetGarageSaleItemsById(garageSale.GarageSaleId);
+                        allGarageSales.Add(garageSale);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return allGarageSales;
         }
     }
 }

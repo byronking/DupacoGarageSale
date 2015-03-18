@@ -337,6 +337,7 @@
     <Compile Include="Helpers\ItemsHelper.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\AllGarageSalesViewModel.cs" />
     <Compile Include="Models\GarageSaleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -845,6 +846,9 @@
     <Content Include="Views\Admin\EditSpecialItem.cshtml" />
     <Content Include="Views\GarageSale\GarageSaleNotFound.cshtml" />
     <Content Include="Views\GarageSale\PrintFavorites.cshtml" />
+    <Content Include="Views\GarageSale\PrintAllGarageSales.cshtml" />
+    <Content Include="Views\Shared\_AllGarageSalesLayout.cshtml" />
+    <Content Include="Views\Shared\_AllGarageSalesNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

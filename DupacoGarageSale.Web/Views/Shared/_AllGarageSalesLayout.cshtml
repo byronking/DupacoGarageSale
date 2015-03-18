@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/bootstrap/css")
+        @Styles.Render("~/Content/timepicker/css")
+        @Styles.Render("~/Content/lightbox/css")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/js")
+        @Scripts.Render("~/bundles/timepicker")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/lightboxjs")
+    </head>
+    <body>
+        @Html.Partial("~/Views/Shared/_AllGarageSalesNav.cshtml")
+
+        @RenderBody()
+
+        @Html.Partial("~/Views/Shared/_Footer.cshtml")
+    
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

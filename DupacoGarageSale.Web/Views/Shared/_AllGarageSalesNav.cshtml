@@ -1,4 +1,4 @@
-﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+﻿@model DupacoGarageSale.Web.Models.AllGarageSalesViewModel
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container" style="background-color: #87C440;">
@@ -14,7 +14,7 @@
         <div id="topNavbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 @{
-                    if (Model.User.UserTypeId == 1)
+                    if (Model.LoggedInUser.UserTypeId == 1)
                     {
                         <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index"><span class="black">Admin</span></a></li>
                     }
@@ -22,8 +22,8 @@
                 <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My profile <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="~/Accounts/UserHome/@Model.User.UserId">Profile home</a></li>
-                        <li><a href="~/Accounts/UserProfile/@Model.User.UserId">Edit profile</a></li>
+                        <li><a href="~/Accounts/UserHome/@Model.LoggedInUser.UserId">Profile home</a></li>
+                        <li><a href="~/Accounts/UserProfile/@Model.LoggedInUser.UserId">Edit profile</a></li>
                         <li><a href="~/Accounts/SignUp/">Create account</a></li>
                     </ul>
                 </li>
@@ -33,24 +33,23 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="~/GarageSale/Add/">Add a new sale</a></li>
                         <li><a href="~/GarageSale/View/">View my sales</a></li>
-                        <li><a href="~/GarageSale/PrintFavorites/@Model.User.UserId">Print favorite sales</a></li>
+                        <li><a href="~/GarageSale/PrintFavorites/@Model.LoggedInUser.UserId">Print favorite sales</a></li>
                         <li><a href="~/GarageSale/PrintAllGarageSales/">Print all garage sales</a></li>
                     </ul>
                 </li>
                 <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1"><span class="black">Search</span></a></li>
-                @if (Model.User.Address != null)
+                @if (Model.LoggedInUser.Address != null)
                 {
-                    <li class="@ViewBag.NavCreateItinerary"><a href="~/Itinerary/GetUserItineraries/@Model.User.UserId"><span class="black">View itineraries</span></a></li>
+                    <li class="@ViewBag.NavCreateItinerary"><a href="~/Itinerary/GetUserItineraries/@Model.LoggedInUser.UserId"><span class="black">View itineraries</span></a></li>
                 }
                 
             </ul>
             <form class="navbar-form navbar-right" role="form">
                 <div class="form-group">
-                    <button class="btn btn-primary btn-sm">Signed in as @Model.User.FirstName @Model.User.LastName</button>
+                    <button class="btn btn-primary btn-sm">Signed in as @Model.LoggedInUser.FirstName @Model.LoggedInUser.LastName</button>
                     @Html.ActionLink("Log out", "LogOut", "Home", null, new { @class="btn btn-success btn-sm", @id="btnLogOut" })                    
                 </div>
                 <div class="form-group" style="display:none;">
-                    @*<div class="fb-login-button" id="loginbutton" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogout="" onlogin='window.location.reload(true);'></div>*@
                     <fb:login-button autologoutlink="false"></fb:login-button>
                     <div id="fb-root"></div>
                 </div>
@@ -58,46 +57,3 @@
         </div>
     </div>
 </nav>
-
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '1538676693053081',
-            xfbml: true,  // parse social plugins on this page.  default is true.
-            version: 'v2.1' // use version 2.1
-        });
-
-        FB.Event.subscribe('auth.authResponseChange', auth_response_change_callback);
-        FB.Event.subscribe('auth.statusChange', auth_status_change_callback);
-    };
-
-    // Load the SDK asynchronously
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js"; // Use this one for prod.
-        //js.src = "//connect.facebook.net/en_US/sdk/debug.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    var auth_response_change_callback = function (response) {
-        console.log("auth_response_change_callback");
-        console.log(response);
-    }
-
-    var auth_status_change_callback = function (response) {
-        console.log("auth_status_change_callback: " + response.status);
-
-        if (response.status === 'unknown') {
-            location.href = '/Home/LogOut';
-        }
-    }
-
-    function debugObject(inputobject) {
-        obj = inputobject;
-        for (x in obj) {
-            alert(x + ": " + obj[x]);
-        }
-    }
-</script>

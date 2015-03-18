@@ -1642,16 +1642,10 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 var session = Session["UserSession"] as UserSession;
 
-                var viewModel = new GarageSaleViewModel();
-
-                if (Session["ViewModel"] != null)
-                {
-                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
-                    Session["ViewModel"] = viewModel;
-                }
-
+                var viewModel = new AllGarageSalesViewModel();
                 var repository = new GarageSaleRepository();
-
+                viewModel.AllGarageSales = repository.GetAllGarageSales();
+                viewModel.LoggedInUser = session.User;
 
                 return View(viewModel);
             }
