@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_ItineraryLayout.cshtml";
 }
 
-<div class="container">
+<div class="container down_70">
     <div class="form-inline">
         <div class="form-group">
             <img src="~/Content/images/garagesale.gif" alt="dupaco garage sales!" class="down_30" />
@@ -18,7 +18,7 @@
     <div class="col-md-8">
         @if (Model.GarageSaleItineraries.Count == 0)
         {
-            <h3>You have no itineraries!  Time to get shopping!</h3>
+            <h3>You have no itineraries! <a href="~/GarageSale/Search?s=1">Let's get shopping!</a></h3>
         }
         else
         {

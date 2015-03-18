@@ -33,6 +33,8 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="~/GarageSale/Add/">Add a new sale</a></li>
                         <li><a href="~/GarageSale/View/">View my sales</a></li>
+                        <li><a href="~/GarageSale/PrintFavorites/@Model.User.UserId">Print favorite sales</a></li>
+                        <li><a href="~/GarageSale/PrintAllGarageSales/">Print all garage sales</a></li>
                     </ul>
                 </li>
                 <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1"><span class="black">Search</span></a></li>
@@ -60,9 +62,9 @@
 <script>
     window.fbAsyncInit = function () {
         FB.init({
-            appId: '1538676693053081',
+            appId: '1536203933300357',
             xfbml: true,  // parse social plugins on this page.  default is true.
-            version: 'v2.1' // use version 2.1
+            version: 'v2.2'
         });
 
         FB.Event.subscribe('auth.authResponseChange', auth_response_change_callback);

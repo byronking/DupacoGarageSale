@@ -1087,6 +1087,10 @@ namespace DupacoGarageSale.Web.Controllers
                         viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
                 }
             }
+            else
+            {
+                ViewBag.NoAddress = "true";
+            }
 
             var repository = new GarageSaleRepository();
 
@@ -1628,6 +1632,8 @@ namespace DupacoGarageSale.Web.Controllers
 
                 Session["ViewModel"] = viewModel;
 
+                ViewBag.NavGarageSales = "active";
+
                 return View(viewModel);
             }
             else
@@ -1646,6 +1652,8 @@ namespace DupacoGarageSale.Web.Controllers
                 var repository = new GarageSaleRepository();
                 viewModel.AllGarageSales = repository.GetAllGarageSales();
                 viewModel.LoggedInUser = session.User;
+
+                ViewBag.NavGarageSales = "active";
 
                 return View(viewModel);
             }

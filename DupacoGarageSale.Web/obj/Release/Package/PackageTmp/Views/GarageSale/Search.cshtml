@@ -11,11 +11,11 @@
     .nav-tabs li a {font-size:14px;padding: 13px 4px;color:#000000;}
 </style>
 
-<div class="container">
+<div class="container down_70">
     <div class="form-inline">
-        <div class="form-group">
+        @*<div class="form-group">
             <img src="~/Content/images/garagesale.gif" alt="dupaco garage sales!" class="down_30" />
-        </div>
+        </div>*@
         <div class="form-group">
             <h1>Use the search tools below to find that perfect item.</h1>
         </div>
@@ -42,6 +42,7 @@
                                 <option value="500">500 miles</option>
                             </select>
                             <br />
+                            <input type="hidden" id="hdnNoAddress" value="@ViewBag.NoAddress" />
                             <textarea class="form-control" style="width:230px;" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
                                 @{
                                     if (TempData["UserAddress"] != null)
@@ -50,7 +51,7 @@
                                     }
                                 }
                             </textarea>                       
-                        </div>                            
+                        </div><br />                          
                         <div>
                             <strong>Enter start and end dates:</strong><br />
                             <label for="from">Start:</label><br />

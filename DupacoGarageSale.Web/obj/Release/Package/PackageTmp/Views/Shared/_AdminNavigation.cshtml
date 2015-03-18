@@ -3,7 +3,7 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="~/Home/" style="color:#428BCA;font-weight:bold;font-size:24px;">Garage sale admin console</a>
+            <a class="navbar-brand" href="~/Home/" style="color:white;font-weight:bold;font-size:24px;">Garage sale admin console</a>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar">
 			<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
@@ -16,25 +16,27 @@
                 @{
                     if (Model.AdminUser.UserTypeId == 1)
                     {
-                        <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index">Admin </a></li>
+                        <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index"><span class="black">Admin</span> </a></li>
                     }
                 }
                 <li class="dropdown @ViewBag.NavProfile">
-                    <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false">My profile <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false"><span class="black">My profile</span>  <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="~/Accounts/UserHome/@Model.AdminUser.UserId">Profile home</a></li>
-                        <li><a href="~/Accounts/UserProfile/@Model.AdminUser.UserId">Edit profile</a></li>
+                        <li><a href="~/Accounts/UserHome/@Model.AdminUser.UserId"><span class="black">Profile home</span> </a></li>
+                        <li><a href="~/Accounts/UserProfile/@Model.AdminUser.UserId"><span class="black">Edit profile</span></a></li>
                         <li><a href="~/Accounts/SignUp/">Create account</a></li>
                     </ul>
                 </li>
                 <li class="dropdown @ViewBag.NavGarageSales">
-                    <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false">Garage sales <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle white" data-toggle="dropdown" role="button" aria-expanded="false"><span class="black">Garage sales</span> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="~/GarageSale/Add/" class="white">Add a new sale</a></li>
                         <li><a href="~/GarageSale/View/" class="white">View my sales</a></li>
+                        <li><a href="~/GarageSale/PrintFavorites/@Model.AdminUser.UserId">Print favorite sales</a></li>
+                        <li><a href="~/GarageSale/PrintAllGarageSales/">Print all garage sales</a></li>
                     </ul>
                 </li>
-                <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1" class="white">Search</a></li>
+                <li class="@ViewBag.NavSearch"><a href="~/GarageSale/Search?s=1" class="white"><span class="black">Search</span></a></li>
             </ul>
             <form class="navbar-form navbar-right" role="form">
                 <div class="form-group">

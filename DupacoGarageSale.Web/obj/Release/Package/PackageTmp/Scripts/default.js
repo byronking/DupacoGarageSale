@@ -190,7 +190,7 @@
             var char = max - len;
             $("#charNumContactMessage").text(char + ' characters left');
         }
-    });
+    });   
 
     //alert($("#hdnNoAddress").val());
     if ($("#hdnNoAddress").val() == "true") {
@@ -533,21 +533,19 @@
     // Validation for the password reset page.
     $("#btnResetPassword").click(function (e) {
         if ($('#txtPasswordResetUserName').val() == "") {
-            $('#validateUserName').removeClass('invisible');
-
+            $('#passwordResetUserNameAlert').removeClass('hidden');
             e.preventDefault();
         }
         else {
-            $('#validateUserName').addClass('invisible');
+            $('#passwordResetUserNameAlert').addClass('hidden');
         }
 
         if ($('#txtPasswordResetEmail').val() == "") {
-            $('#validateEmail').removeClass('invisible');
-
+            $('#passwordResetEmailAlert').removeClass('hidden');
             e.preventDefault();
         }
         else {
-            $('#validateEmail').addClass('invisible');
+            $('#passwordResetEmailAlert').addClass('hidden');
         }
     });
 

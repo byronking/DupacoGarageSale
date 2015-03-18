@@ -1,4 +1,47 @@
-﻿
+﻿/* Dupaco top nav css */
+
+.navbar-default {
+	background-color: #88c440 !important;
+	background-image: none !important;
+}
+
+.navbar-top {
+    background-color: #fff !important;
+    margin-bottom: 0px !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.navbar-bottom {
+    background-color: #88c440 !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.vcenter {
+    line-height: 50px;
+}
+
+.nv-img {
+    margin-top: -10px;
+    position: relative;
+    z-index: 9999;
+}
+
+.nv-sm {
+    position: relative;
+    z-index: 9999;
+    text-align: center;
+}
+
+.top-bar {
+    background-image: url("images/color-bar-small.png");
+    background-repeat: repeat-x;
+    height: 7px;
+}
+
+
+
 
 #bg {
   position: fixed; 
@@ -149,7 +192,6 @@
 }
 
 body {
-    padding-top: 70px;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
