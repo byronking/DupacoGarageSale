@@ -76,16 +76,7 @@ namespace DupacoGarageSale.Data.Repository
                         {
                             ItineraryId = Convert.ToInt32(reader["itinerary_id"]),
                             ItineraryName = reader["itinerary_name"].ToString(),
-                            ItineraryCreatedDate = Convert.ToDateTime(reader["itinerary_create_date"]),
-                            //ItineraryLegId = Convert.ToInt32(reader["itinerary_leg_id"]),
-                            //ItineraryLegOrder = Convert.ToInt32(reader["leg_order"]),
-                            //ItineraryLegsCount = Convert.ToInt32(reader["legs_count"]),
-                            //SaleId = Convert.ToInt32(reader["sale_id"]),
-                            //SaleAddress1 = reader["sale_address1"].ToString(),
-                            //SaleAddress2 = reader["sale_address2"].ToString(),
-                            //SaleCity = reader["sale_city"].ToString(),
-                            //SaleState = reader["state_name"].ToString(),
-                            //SaleZipCode = reader["sale_zip"].ToString()
+                            ItineraryCreatedDate = Convert.ToDateTime(reader["itinerary_create_date"])
                         };
 
                         itineraryList.Add(itinerary);
@@ -275,6 +266,38 @@ namespace DupacoGarageSale.Data.Repository
 
             return saveResult;
         }
+
+        /// <summary>
+        /// This deletes a user's itinerary by id.
+        /// </summary>
+        /// <param name="itineraryId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public UserSaveResult DeleteItinerary(int itineraryId, int userId)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("DeleteItinerary", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@itinerary_id", SqlDbType.Int).Value = itineraryId;
+                    cmd.Parameters.Add("@itinerary_owner", SqlDbType.Int).Value = userId;
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.IsSaveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveResult;
+        }  
 
         public UserSaveResult DeleteFromItinerary(int itineraryId, int saleId)
         {

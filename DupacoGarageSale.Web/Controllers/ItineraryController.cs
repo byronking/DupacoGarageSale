@@ -82,22 +82,18 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.User = session.User;
                 viewModel.GarageSaleItineraries = itineraryList;
 
-                //if (Session["ItineraryLegDeleted"] != null)
-                //{
-                //    var deleteSuccessful = Convert.ToBoolean(Session["ItineraryLegDeleted"]);
+                if (Session["ItineraryDeleted"] != null)
+                {
+                    var deleteSuccessful = Convert.ToBoolean(Session["ItineraryDeleted"]);
 
-                //    if (deleteSuccessful)
-                //    {
-                //        ViewBag.Invisible = "false";
-                //    }
-                //}
+                    if (deleteSuccessful)
+                    {
+                        ViewBag.ItineraryDeleted = "true";
+                    }
+                }
 
-                //// Get the user's fave garage sales.
-                //var saleRepository = new GarageSaleRepository();
-                //viewModel.FavoriteGarageSales = saleRepository.GetFavoriteGarageSales(viewModel.User.UserId);
-
-                //// Cleanup.
-                //Session["ItineraryLegDeleted"] = null;
+                // Cleanup
+                Session["ItineraryDeleted"] = null;
 
                 ViewBag.NavCreateItinerary = "active";
 
@@ -251,6 +247,42 @@ namespace DupacoGarageSale.Web.Controllers
 
                 Session["ViewModel"] = viewModel;
                 return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        /// <summary>
+        /// This deletes the 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult DeleteItinerary(int id)
+        {
+            if (Session["ViewModel"] != null)
+            {
+                var viewModel = Session["ViewModel"] as GarageSaleViewModel;
+
+                var user = viewModel.User;
+
+                // Delete the itinerary by id.
+                var repository = new ItineraryRepository();
+                var saveResult = repository.DeleteItinerary(id, user.UserId);
+
+                if (saveResult.IsSaveSuccessful)
+                {
+                    Session["ItineraryDeleted"] = true;
+                }
+
+                return RedirectToAction("GetUserItineraries", new RouteValueDictionary(new
+                {
+                    controller = "Itinerary",
+                    action = "GetUserItineraries",
+                    id = user.UserId
+                }));
             }
             else
             {

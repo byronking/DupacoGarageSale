@@ -100,9 +100,12 @@ namespace DupacoGarageSale.Web.Controllers
                 // Default to the user's address in the search box, unless the user entered an address.
                 if (viewModel.MappingData == null)
                 {
-                    var userAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City +
-                        " " + viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
-                    TempData["UserAddress"] = userAddress.Trim();
+                    if (viewModel.User.Address != null)
+                    {
+                        var userAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City +
+                            " " + viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
+                        TempData["UserAddress"] = userAddress.Trim();
+                    }
                 }
                 else
                 {

@@ -1,19 +1,35 @@
 ﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container" style="background-color: #87C440;">
+<nav class="navbar navbar-default navbar-static-top navbar-top">
+    <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="~/Home/" style="color:white;font-weight:bold;font-size:24px;">Say hello to a good buy!</a>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar">
-			<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand nv-img hidden-xs hidden-sm" href="~/Home"><img src="~/Content/images/logo-top.png" /></a>
+            <a class="navbar-brand visible-xs visible-sm" href="#">Garage Sales!</a>
         </div>
-        @if (Model != null)
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.dupaco.com"><img src="~/Content/images/d.png" /></a></li>
+                @*<li><a href="#"><img src="~/Content/images/dbqriver.png" /></a></li>
+                <li><a href="#"><img src="~/Content/images/katfm.png" /></a></li>
+                <li><a href="#"><img src="~/Content/images/dbq.png" /></a></li>
+                <li><a href="#"><img src="~/Content/images/koth.png" /></a></li>*@
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+    <div class="top-bar visible-xs"></div>
+</nav>
+<nav class="navbar navbar-default navbar-static-top navbar-bottom">
+    <div class="container">
+		@if (Model != null)
         {
-            <div id="topNavbar" class="navbar-collapse collapse" style="color:white;">
+            <div id="topNavbar" class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav">
                     @{
                         if (Model.User.UserTypeId == 1)
@@ -53,4 +69,5 @@
             </div>
         }
     </div>
+    <div class="top-bar hidden-xs"></div>
 </nav>

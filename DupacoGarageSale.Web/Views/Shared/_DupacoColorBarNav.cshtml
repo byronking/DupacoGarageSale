@@ -43,7 +43,7 @@
 					    @Html.ActionLink("Sign up for free!", "SignUp", "Accounts", null, new { @class="btn btn-primary btn-sm" })
 				    </div>
 				    <div class="form-group">
-					    <fb:login-button autologoutlink="false"></fb:login-button>
+					    <fb:login-button scope="public_profile,email" autologoutlink="false"></fb:login-button>
 					    <div id="fb-root"></div>
 				    </div>
 			    }             
@@ -56,7 +56,7 @@
  <script>
      window.fbAsyncInit = function () {
          FB.init({
-             appId: '1538676693053081',
+             appId: '1564898977097519',
              xfbml: true,
              version: 'v2.2'
          });
@@ -104,6 +104,8 @@
              var first_name = response.first_name;
              var last_name = response.last_name;
              var email = response.email;
+
+             //alert(email);
 
              $.ajax({
                  url: '@Url.Content("~/Accounts/SignInFacebookUser/")',
