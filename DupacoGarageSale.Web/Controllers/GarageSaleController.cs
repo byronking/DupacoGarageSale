@@ -162,7 +162,7 @@ namespace DupacoGarageSale.Web.Controllers
             if (garageSalePicUpload != null)
             {
                 // Save the image file.
-                model.Sale.GargeSalePicLink = garageSalePicUpload.FileName;
+                model.Sale.GargeSalePicLink = DateTime.Now.ToString("yyyyMMddHHmmss") + garageSalePicUpload.FileName;
 
                 var fileName = Path.GetFileName(model.Sale.GargeSalePicLink);
                 var dir = ConfigurationManager.AppSettings["GarageSaleImagesDirectory"].ToString();

@@ -22,58 +22,62 @@
         <strong>Sorry!</strong>
         There is already a registered user with user name <strong>@ViewBag.UserName</strong> and email <strong>@ViewBag.Email</strong>. Please try a different user name.
     </div>
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            @*<h3 id="panel-title" class="panel-title">
-                Register to be able to publish a sale or to search garage sales and save your favorites. Registration is free!
-            </h3>*@
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    @*<h3 id="panel-title" class="panel-title">
+                        Register to be able to publish a sale or to search garage sales and save your favorites. Registration is free!
+                    </h3>*@
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("RegisterUser", "Accounts", FormMethod.Post, new { @role="form"}))
+                    {
+                        <p class="lead">
+                            Register to be able to publish a sale or to search garage sales and save your favorites. Registration is free!
+                        </p>            
+                        <div class="form-group">
+                            <label for="txtFirstName">First Name *</label>
+                            @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", id="txtFirstName" })
+                            <span class="text-error">@Html.ValidationMessageFor(m => m.User.FirstName)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtLastName">Last Name *</label>
+                            @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", id="txtLastName" })
+                            <span class="text-error">@Html.ValidationMessageFor(m => m.User.LastName)</span>
+                        </div>            
+                        <div class="form-group">
+                            <label for="txtUserName">User Name *</label>
+                            @Html.TextBoxFor(m => m.User.UserName, new { @class = "form-control", id="txtUserName" })
+                            <span class="text-error">@Html.ValidationMessageFor(m => m.User.UserName)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtEmail">Email *</label>
+                            @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control", id="txtEmail" })
+                            <span class="text-error">@Html.ValidationMessageFor(m => m.User.Email)</span>
+                        </div>            
+                        <div class="form-group">
+                            <label for="txtPhone">Phone *</label>
+                            @Html.TextBoxFor(m => m.User.Phone, new { @class = "form-control", id="txtPhone", @placeholder="555-323-1234" })
+                            <span class="text-error">@Html.ValidationMessageFor(m => m.User.Phone)</span>
+                        </div>            
+                        <div class="form-group">
+                            <label for="txtPassword">Password *</label>
+                            @Html.TextBoxFor(m => m.User.Password, new { @class = "form-control", id="txtPassword", @type="password" })
+                            <span class="text-error">@Html.ValidationMessageFor(m => m.User.Password)</span>
+                        </div>            
+                        <div class="form-group">
+                            <label for="txtConfirmPassword">Confirm Password *</label>
+                            @Html.TextBoxFor(m => m.User.ConfirmPassword, new { @class = "form-control", id="txtConfirmPassword", @type="password" })
+                            <span class="text-error">@Html.ValidationMessageFor(m => m.User.ConfirmPassword)</span>
+                        </div>            
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary down_30" value="Register" />
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            @using (Html.BeginForm("RegisterUser", "Accounts", FormMethod.Post, new { @role="form"}))
-            {
-                <p class="lead">
-                    Register to be able to publish a sale or to search garage sales and save your favorites. Registration is free!
-                </p>            
-                <div class="form-group">
-                    <label for="txtFirstName">First Name *</label>
-                    @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", id="txtFirstName" })
-                    <span class="text-error">@Html.ValidationMessageFor(m => m.User.FirstName)</span>
-                </div>
-                <div class="form-group">
-                    <label for="txtLastName">Last Name *</label>
-                    @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", id="txtLastName" })
-                    <span class="text-error">@Html.ValidationMessageFor(m => m.User.LastName)</span>
-                </div>            
-                <div class="form-group">
-                    <label for="txtUserName">User Name *</label>
-                    @Html.TextBoxFor(m => m.User.UserName, new { @class = "form-control", id="txtUserName" })
-                    <span class="text-error">@Html.ValidationMessageFor(m => m.User.UserName)</span>
-                </div>
-                <div class="form-group">
-                    <label for="txtEmail">Email *</label>
-                    @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control", id="txtEmail" })
-                    <span class="text-error">@Html.ValidationMessageFor(m => m.User.Email)</span>
-                </div>            
-                <div class="form-group">
-                    <label for="txtPhone">Phone *</label>
-                    @Html.TextBoxFor(m => m.User.Phone, new { @class = "form-control", id="txtPhone", @placeholder="555-323-1234" })
-                    <span class="text-error">@Html.ValidationMessageFor(m => m.User.Phone)</span>
-                </div>            
-                <div class="form-group">
-                    <label for="txtPassword">Password *</label>
-                    @Html.TextBoxFor(m => m.User.Password, new { @class = "form-control", id="txtPassword", @type="password" })
-                    <span class="text-error">@Html.ValidationMessageFor(m => m.User.Password)</span>
-                </div>            
-                <div class="form-group">
-                    <label for="txtConfirmPassword">Confirm Password *</label>
-                    @Html.TextBoxFor(m => m.User.ConfirmPassword, new { @class = "form-control", id="txtConfirmPassword", @type="password" })
-                    <span class="text-error">@Html.ValidationMessageFor(m => m.User.ConfirmPassword)</span>
-                </div>            
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary down_30" value="Register" />
-                </div>
-            }
-        </div>
-    </div>    
+    </div> 
     <br />
 </div>

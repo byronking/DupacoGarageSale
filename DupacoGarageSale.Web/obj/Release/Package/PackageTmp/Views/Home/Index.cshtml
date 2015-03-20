@@ -21,6 +21,14 @@
         Why garage sales? As a credit union, Dupaco is about people, thrift, and the community. That's also what the Community-Wide Garage Sale is about, and why it's a perfect 
         fit for us.
     </p>
+
+    <!-- intro youtube video here -->
+    <div class="row">
+        <div class="embed-responsive embed-responsive-4by3">
+            <iframe class="embed-responsive-item" allowfullscreen="" src="https://www.youtube.com/embed/GTOv0nxKcG4"></iframe>
+        </div>
+    </div><br /><br />
+
     <p class="lead">
         Use the search tools below to find that perfect item.
     </p>
@@ -494,9 +502,20 @@
                                         })
                                         .RowTemplate(grid => @<text>
 				                            <div>
-                                                <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="dupaco_garage_sale">
-                                                    <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/@item.ProfilePic" />
-                                                </a>
+                                                @if (item.ProfilePic == string.Empty)
+                                                {
+                                                    <a href="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" data-lightbox="dupaco_garage_sale">
+                                                        <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="dupaco_garage_sale">
+                                                        <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/@item.ProfilePic" />
+                                                    </a>
+                                                }
+                                                <br /><br />
+                                                @item.SaleDescription<br /><br />
                                                 @item.ItemCategoryName - @item.ItemSubcategoryName<br /><br />
 					                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1,
 					                            @if (item.Address2 != string.Empty)
@@ -583,9 +602,20 @@
                                         })
                                         .RowTemplate(grid => @<text>
 				                            <div>
-                                                <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="dupaco_garage_sale">
-                                                    <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/@item.ProfilePic" />
-                                                </a>
+                                                @if (item.ProfilePic == string.Empty)
+                                                {
+                                                    <a href="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" data-lightbox="dupaco_garage_sale">
+                                                        <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="dupaco_garage_sale">
+                                                        <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/@item.ProfilePic" />
+                                                    </a>
+                                                }
+                                                <br /><br />
+                                                @item.SaleDescription<br /><br />
                                                 @item.ItemCategoryName - @item.ItemSubcategoryName<br /><br />
 					                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1,
 					                            @if (item.Address2 != string.Empty)

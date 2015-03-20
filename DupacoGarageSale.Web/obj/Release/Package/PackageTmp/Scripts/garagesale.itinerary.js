@@ -28,11 +28,19 @@
         });
     });
 
-    // Show the itinerary leg deleted message.
+    // Show the itinerary deleted message.
     if (($("#hdnLegDeletedMessage").val() !== undefined)) {
 
         if ($("#hdnLegDeletedMessage").val() == "false") {
             $("#divLegDeletedMessage").removeClass("hidden");
+        }
+    }
+
+    // Show the itinerary leg deleted message.
+    if (($("#hdnItineraryDeleted").val() !== undefined)) {
+
+        if ($("#hdnItineraryDeleted").val() == "true") {
+            $("#divItineraryDeleted").removeClass("hidden");
         }
     }
 

@@ -1,17 +1,33 @@
 ﻿@model DupacoGarageSale.Web.Models.AllGarageSalesViewModel
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container" style="background-color: #87C440;">
+<nav class="navbar navbar-default navbar-static-top navbar-top">
+    <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="~/Home/" style="color:white;font-weight:bold;font-size:18px;">Edit user profile</a>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar">
-			<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand nv-img hidden-xs hidden-sm" href="~/Home"><img src="~/Content/images/logo-top.png" /></a>
+            <a class="navbar-brand visible-xs visible-sm" href="#">Garage Sales!</a>
         </div>
-        <div id="topNavbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.dupaco.com"><img src="~/Content/images/d.png" /></a></li>
+                @*<li><a href="#"><img src="~/Content/images/dbqriver.png" /></a></li>
+                <li><a href="#"><img src="~/Content/images/katfm.png" /></a></li>
+                <li><a href="#"><img src="~/Content/images/dbq.png" /></a></li>
+                <li><a href="#"><img src="~/Content/images/koth.png" /></a></li>*@
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+    <div class="top-bar visible-xs"></div>
+</nav>
+<nav class="navbar navbar-default navbar-static-top navbar-bottom">
+    <div class="container">
+        <div id="topNavbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
                 @{
                     if (Model.LoggedInUser.UserTypeId == 1)
@@ -19,7 +35,7 @@
                         <li class="@ViewBag.NavAdmin"><a href="~/Admin/Index"><span class="black">Admin</span></a></li>
                     }
                 }
-                <li class="dropdown">
+                <li class="dropdown @ViewBag.NavProfile">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="black">My profile</span> <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="~/Accounts/UserHome/@Model.LoggedInUser.UserId">Profile home</a></li>
@@ -50,10 +66,12 @@
                     @Html.ActionLink("Log out", "LogOut", "Home", null, new { @class="btn btn-success btn-sm", @id="btnLogOut" })                    
                 </div>
                 <div class="form-group" style="display:none;">
+                    @*<div class="fb-login-button" id="loginbutton" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogout="" onlogin='window.location.reload(true);'></div>*@
                     <fb:login-button autologoutlink="false"></fb:login-button>
                     <div id="fb-root"></div>
                 </div>
             </form>
         </div>
     </div>
+    <div class="top-bar hidden-xs"></div>
 </nav>
