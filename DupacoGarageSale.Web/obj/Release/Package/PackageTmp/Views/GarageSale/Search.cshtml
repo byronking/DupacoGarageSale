@@ -43,7 +43,7 @@
                             </select>
                             <br />
                             <input type="hidden" id="hdnNoAddress" value="@ViewBag.NoAddress" />
-                            <textarea class="form-control" style="width:230px;" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
+                            <textarea class="form-control" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
                                 @{
                                     if (TempData["UserAddress"] != null)
                                     {
@@ -489,16 +489,27 @@
                                         })
                                         .RowTemplate(grid => @<text>
 				                            <div>
-                                                <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="@item.ProfilePic">
-                                                    <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/@item.ProfilePic" />
-                                                </a>
-                                                @item.ItemCategoryName - @item.ItemSubcategoryName<br /><br />
+                                                @if (item.ProfilePic == string.Empty)
+                                                {
+                                                    <a href="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" data-lightbox="dupaco_garage_sale">
+                                                        <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="dupaco_garage_sale">
+                                                        <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/@item.ProfilePic" />
+                                                    </a>
+                                                }
+                                                <br /><br />
+                                                @item.SaleDescription<br /><br />
+                                                @item.ItemCategoryName - @item.ItemSubcategoryName<br /><br />                                                
 					                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1,
 					                            @if (item.Address2 != string.Empty)
                                                 {                        
 						                            @item.Address2
                                                 }
-					                            @item.City, @item.State @item.ZipCode<br />
+					                            @item.City, @item.State @item.ZipCode<br /><br />
 					                            <a href="~/GarageSale/ViewGarageSale/@item.SaleId">Visit this garage sale</a><br />
 				                            </div>
                                     

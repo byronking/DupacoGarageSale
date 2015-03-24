@@ -124,10 +124,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:52</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>03/19/2015 01:29:37</publishTime>
+      <publishTime>03/20/2015 13:59:33</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>03/19/2015 02:31:41</publishTime>
+      <publishTime>03/20/2015 13:59:34</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -1852,13 +1852,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2015 02:07:41</publishTime>
     </File>
     <File Include="Views/GarageSale/Search.cshtml">
-      <publishTime>03/18/2015 18:13:13</publishTime>
+      <publishTime>03/20/2015 13:09:39</publishTime>
     </File>
     <File Include="Views/GarageSale/SearchResults.cshtml">
       <publishTime>03/17/2015 12:05:49</publishTime>
     </File>
     <File Include="Views/GarageSale/View.cshtml">
-      <publishTime>03/18/2015 16:31:33</publishTime>
+      <publishTime>03/19/2015 21:29:49</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewGarageSale.cshtml">
       <publishTime>03/18/2015 23:07:53</publishTime>
@@ -1879,7 +1879,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/17/2015 12:05:49</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>03/19/2015 01:00:47</publishTime>
+      <publishTime>03/20/2015 13:52:47</publishTime>
     </File>
     <File Include="Views/Itinerary/AddStopover.cshtml">
       <publishTime>03/17/2015 12:05:49</publishTime>
