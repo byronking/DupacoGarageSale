@@ -51,3 +51,18 @@ The statement has been terminated.
    at DupacoGarageSale.Data.Repository.ItineraryRepository.DeleteItinerary(Int32 itineraryId, Int32 userId) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\ItineraryRepository.cs:line 289
 ClientConnectionId:eb25ae60-87d6-4372-830c-bd3a352d46fa
 Error Number:547,State:0,Class:16
+2015-03-24 12:24:14,832 [25] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: user_type_id
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 245
+2015-03-24 12:24:26,110 [28] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: user_type_id
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 245
+2015-03-24 12:25:10,988 [27] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: user_type_id
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.AccountsRepository.GetUserProfileInfoById(Int32 user_id) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 245

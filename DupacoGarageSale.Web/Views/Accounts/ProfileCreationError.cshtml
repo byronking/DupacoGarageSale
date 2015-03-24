@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Contact Dupaco";
+    ViewBag.Title = "There was a problem creating your profile!";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
 
 <div class="container down_70" style="min-height:600px;">
 
-    <h1>@message</h1>
+    <h1>@ViewBag.Title  We have been alerted to the problem.  Please close/re-open your web browser and try to sign up again.</h1>
 
     <h2>Click <a href="~/Home/Index">here</a> to go back to the home page.</h2>
 </div>

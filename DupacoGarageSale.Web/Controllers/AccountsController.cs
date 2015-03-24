@@ -71,28 +71,46 @@ namespace DupacoGarageSale.Web.Controllers
                 var saveResult = new UserSaveResult();
 
                 // Save the new user and then send them to the profile page.
-
                 saveResult = repository.SaveGarageSaleUser(model.User);
-
                 model.User.UserId = saveResult.SaveResultId;
 
-                // Create a user session.
-                var session = new UserSession
+                if (model.User.UserId == 0)
                 {
-                    SessionKey = Guid.NewGuid(),
-                    SessionStartDate = DateTime.Now,
-                    User = model.User
-                };
-
-                Session["UserSession"] = session;
-
-                return RedirectToAction("UserProfile", new RouteValueDictionary(new
+                    return RedirectToAction("ProfileCreationError", new RouteValueDictionary(new
+                    {
+                        controller = "Accounts",
+                        action = "ProfileCreationError"
+                    }));
+                }
+                else
                 {
-                    controller = "Accounts",
-                    action = "UserProfile",
-                    id = model.User.UserId
-                }));
+                    // Create a user session.
+                    var session = new UserSession
+                    {
+                        SessionKey = Guid.NewGuid(),
+                        SessionStartDate = DateTime.Now,
+                        User = model.User
+                    };
+
+                    Session["UserSession"] = session;
+
+                    return RedirectToAction("UserProfile", new RouteValueDictionary(new
+                    {
+                        controller = "Accounts",
+                        action = "UserProfile",
+                        id = model.User.UserId
+                    }));
+                }
             }
+        }
+
+        /// <summary>
+        /// This responds to an error with user profile creation.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ProfileCreationError()
+        {
+            return View();
         }
 
         /// <summary>
