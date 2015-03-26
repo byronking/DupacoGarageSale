@@ -912,5 +912,81 @@ namespace DupacoGarageSale.Data.Repository
 
             return saveResult;
         }
+
+        /// <summary>
+        /// This gets all the email addresses for the autocomplete.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public List<EmailAddress> GetEmailAddressesByCriteria(string query)
+        {
+            var emailAddresses = new List<EmailAddress>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetEmailAddressesByQuery", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@query", SqlDbType.VarChar).Value = query;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var email = new EmailAddress
+                        {
+                            Email = reader["email"].ToString()
+                        };
+
+                        emailAddresses.Add(email);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return emailAddresses;
+        }
+
+        /// <summary>
+        /// This gets the communities based on the existing garage sales.
+        /// </summary>
+        /// <returns></returns>
+        public List<Community> GetCommunities()
+        {
+            var communityList = new List<Community>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetCommunities", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var community = new Community
+                        {
+                            Name = reader["sale_city"].ToString()
+                        };
+                            
+                        communityList.Add(community);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return communityList;
+        }
     }
 }

@@ -78,7 +78,10 @@
     <Compile Include="Domain\AdminMessage.cs" />
     <Compile Include="Domain\AuthenticationInfo.cs" />
     <Compile Include="Domain\BlogPost.cs" />
+    <Compile Include="Domain\Community.cs" />
     <Compile Include="Domain\ContactUsMessage.cs" />
+    <Compile Include="Domain\EmailAddress.cs" />
+    <Compile Include="Domain\EmailMessage.cs" />
     <Compile Include="Domain\FavoriteGarageSale.cs" />
     <Compile Include="Domain\GarageSale.cs" />
     <Compile Include="Domain\GarageSaleAddress.cs" />

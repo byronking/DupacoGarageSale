@@ -19,10 +19,10 @@
                     The headline was successfully published!
             </div>
 
-            <form action="/Admin/PublishHeadlineNews" method="post">            
+            <form action="~/Admin/PublishHeadlineNews" method="post">            
                 <div class="form-group">
                     <label for="txtHeadlineNews">What's up?</label>
-                    @Html.TextAreaFor(m => m.HeadlineNews, new { @class="form-control", id="txtHeadlineNews", placeholder="(1000 characters max)", maxlength="500", rows="7" })
+                    @Html.TextAreaFor(m => m.HeadlineNews, new { @class="form-control", id="txtHeadlineNews", placeholder="(1000 characters max)", maxlength="1000", rows="7" })
                     <div id="charNumHeadlineNews"></div>
                     <span id="headlineNewsValidationMessage" class="red invisible">Please enter a message.</span>
                 </div>

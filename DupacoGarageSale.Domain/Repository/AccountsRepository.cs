@@ -235,7 +235,6 @@ namespace DupacoGarageSale.Data.Repository
                     while (reader.Read())
                     {
                         int addressId = 0;
-
                         if (reader["address_id"] != DBNull.Value)
                         {
                             addressId = Convert.ToInt32(reader["address_id"]);
@@ -247,6 +246,12 @@ namespace DupacoGarageSale.Data.Repository
                             userType = Convert.ToInt32(reader["user_type_id"]);
                         }
 
+                        var stateId = 0;
+                        if (reader["state_id"] != DBNull.Value)
+                        {
+                            stateId = Convert.ToInt32(reader["state_id"]);
+                        }
+
                         var address = new UserAddress
                         {
                             AddressId = addressId,
@@ -254,6 +259,7 @@ namespace DupacoGarageSale.Data.Repository
                             Address2 = reader["address2"].ToString(),
                             City = reader["city"].ToString(),
                             State = reader["state"].ToString(),
+                            StateId = stateId,
                             Zip = reader["zip"].ToString()
                         };
 
@@ -301,7 +307,7 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.Parameters.Add("@address1", SqlDbType.VarChar).Value = user.Address.Address1;
                     cmd.Parameters.Add("@address2", SqlDbType.VarChar).Value = user.Address.Address2 ?? string.Empty;
                     cmd.Parameters.Add("@city", SqlDbType.VarChar).Value = user.Address.City;
-                    cmd.Parameters.Add("@state", SqlDbType.VarChar).Value = user.Address.State;
+                    cmd.Parameters.Add("@state", SqlDbType.VarChar).Value = user.Address.StateId;
                     cmd.Parameters.Add("@zip", SqlDbType.VarChar).Value = user.Address.Zip;
                     if (user.ModifyDate != null)
                     {

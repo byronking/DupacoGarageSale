@@ -1133,6 +1133,9 @@ namespace DupacoGarageSale.Web.Controllers
                     }
                 }
 
+                var communityList = repository.GetCommunities();
+                ViewData["CommunityList"] = new SelectList(communityList, "name", "name");
+
                 ViewBag.MessageCenterActive = "active"; 
                 return View(viewModel);
             }
@@ -1266,6 +1269,52 @@ namespace DupacoGarageSale.Web.Controllers
                 return View("~/Views/Accounts/Login.cshtml");
             }
         }
+
+        [HttpGet]
+        public JsonResult GetEmailAddresses(string q)
+        {
+            var repository = new AdminRepository();
+            var emailAddressList = repository.GetEmailAddressesByCriteria(q);
+
+            var jsonResult = emailAddressList.Select(results => new { id = results.Email, name = results.Email });
+
+            return Json(jsonResult, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// This allows for sending messages to individuals and to communities
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SendMessage(FormCollection form)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var addresses = form["txtMessageTo"].ToString();
+                var community = form["ddlCommunity"].ToString();
+                var message = form["txtMessage"].ToString();
+
+                // Send email to either individuals or to a community.
+                if (addresses != string.Empty)
+                {
+                    // Send email to individuals.
+
+                }
+                else if (community != string.Empty)
+                {
+                    // Send email to a community.
+
+                }
+
+                ViewBag.MessageCenterActive = "active";
+                return RedirectToAction("MessageCenter");
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
+        }
+
         #endregion
     }
 }

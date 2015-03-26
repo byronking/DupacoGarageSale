@@ -10,7 +10,7 @@
     .nav-tabs li a {font-size:14px;padding: 13px 4px;color:#000000;}
 </style>
 
-<div class="container down_70">
+<div class="container down_60">
     <div class="form-inline">
         <div class="form-group">
             <h1>Dupaco Community-Wide Garage Sales!</h1>
@@ -25,7 +25,7 @@
     <!-- intro youtube video here -->
     <div class="row">
         <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" allowfullscreen="" src="https://www.youtube.com/embed/GTOv0nxKcG4"></iframe>
+            <iframe class="embed-responsive-item" allowfullscreen="" src="https://www.youtube.com/embed/GTOv0nxKcG4?rel=0"></iframe>
         </div>
     </div><br /><br />
 
@@ -449,9 +449,9 @@
                                         @foreach (var item in Model.SearchResults.SpecialItems)
                                         {
                                             <div class="col-md-5">
-                                                <div class="thumbnail" style="min-height:650px;"> 
+                                                <div class="thumbnail" style="max-height:600px;min-height:550px;">
                                                     <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                                    <img alt="@item.Title" class="img-responsive" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+	                                                    <img alt="@item.Title" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
                                                     </a> 
                                                     <div class="caption">
                                                         <h3>@item.Title</h3>
@@ -479,59 +479,59 @@
                              <hr/>   
                             }
 
-                                if (Model.SearchResults.GarageSaleItems.Count != 0)
-                                {                                
-                                <div style="width:60%;">
-                                    <!-- Diaplay the garage sale items -->
-                                    <p class="lead">Garage sale items for sale</p>
-                                    @(Html.Telerik().Grid(Model.SearchResults.GarageSaleItems)
-                                        .Name("grdGarageSaleItems")
-                                        .DataKeys(dataKeys => dataKeys.Add(k => k.GarageSaleItemsId))
-                                        .Columns(columns =>
+                            if (Model.SearchResults.GarageSaleItems.Count != 0)
+                            {                                
+                            <div style="width:60%;">
+                                <!-- Diaplay the garage sale items -->
+                                <p class="lead">Garage sale items for sale</p>
+                                @(Html.Telerik().Grid(Model.SearchResults.GarageSaleItems)
+                                    .Name("grdGarageSaleItems")
+                                    .DataKeys(dataKeys => dataKeys.Add(k => k.GarageSaleItemsId))
+                                    .Columns(columns =>
+                                    {
+                                        columns.Command(commands =>
                                         {
-                                            columns.Command(commands =>
+                                            commands.Custom("ViewGarageSale")
+                                                .Text("View")
+                                                .Action("ViewGarageSale", "GarageSale")
+                                                .DataRouteValues(route =>
+                                                {
+                                                    route.Add(m => m.SaleId).RouteKey("saleId");
+                                                });
+                                        });
+                                    })
+                                    .RowTemplate(grid => @<text>
+				                        <div>
+                                            @if (item.ProfilePic == string.Empty)
                                             {
-                                                commands.Custom("ViewGarageSale")
-                                                    .Text("View")
-                                                    .Action("ViewGarageSale", "GarageSale")
-                                                    .DataRouteValues(route =>
-                                                    {
-                                                        route.Add(m => m.SaleId).RouteKey("saleId");
-                                                    });
-                                            });
-                                        })
-                                        .RowTemplate(grid => @<text>
-				                            <div>
-                                                @if (item.ProfilePic == string.Empty)
-                                                {
-                                                    <a href="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" data-lightbox="dupaco_garage_sale">
-                                                        <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" />
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="dupaco_garage_sale">
-                                                        <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/@item.ProfilePic" />
-                                                    </a>
-                                                }<br /><br />
-                                                @item.SaleDescription<br /><br />
-                                                @item.ItemCategoryName - @item.ItemSubcategoryName<br /><br />                                                                                                
-					                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1,
-					                            @if (item.Address2 != string.Empty)
-                                                {                        
-						                            @item.Address2
-                                                }
-					                            @item.City, @item.State @item.ZipCode<br /><br />
-					                            <a href="~/GarageSale/ViewGarageSale/@item.SaleId">Visit this garage sale</a><br />
-				                            </div>
+                                                <a href="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" data-lightbox="dupaco_garage_sale">
+                                                    <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="dupaco_garage_sale">
+                                                    <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/@item.ProfilePic" />
+                                                </a>
+                                            }<br /><br />
+                                            @item.SaleDescription<br /><br />
+                                            @item.ItemCategoryName - @item.ItemSubcategoryName<br /><br />                                                                                                
+					                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1,
+					                        @if (item.Address2 != string.Empty)
+                                            {                        
+						                        @item.Address2
+                                            }
+					                        @item.City, @item.State @item.ZipCode<br /><br />
+					                        <a href="~/GarageSale/ViewGarageSale/@item.SaleId">Visit this garage sale</a><br />
+				                        </div>
                                     
-                                        </text>
-                                        )
-                                        .Pageable(pager => pager.PageSize(5))
-                                        .Sortable()
+                                    </text>
                                     )
-                                </div>
-                                }
+                                    .Pageable(pager => pager.PageSize(5))
+                                    .Sortable()
+                                )
+                            </div>
+                            }
                         }
                         else
                         {
@@ -552,9 +552,9 @@
                                 foreach (var item in Model.GarageSaleSpecialItems)
                                 {
                                     <div class="col-md-5">
-                                        <div class="thumbnail" style="min-height:650px;">
+                                        <div class="thumbnail" style="max-height:600px;min-height:550px;">
                                             <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                            <img alt="@item.Title" class="img-responsive" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+	                                            <img alt="@item.Title" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
                                             </a>                                                
                                             <div class="caption">
                                                 <h3>@item.Title</h3>
