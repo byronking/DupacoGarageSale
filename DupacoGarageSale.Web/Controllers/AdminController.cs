@@ -1290,20 +1290,81 @@ namespace DupacoGarageSale.Web.Controllers
         {
             if (Session["UserSession"] != null)
             {
+                var session = Session["UserSession"] as UserSession;
                 var addresses = form["txtMessageTo"].ToString();
                 var community = form["ddlCommunity"].ToString();
+                var subject = form["txtMessageSubject"].ToString();
                 var message = form["txtMessage"].ToString();
 
                 // Send email to either individuals or to a community.
                 if (addresses != string.Empty)
                 {
                     // Send email to individuals.
+                    var emailMessage = new EmailMessage
+                    {
+                        MessageFrom = session.User.Email,
+                        MessageTo = addresses,
+                        MessageText = message,
+                        MessageSentDate = DateTimeOffset.Now
+                    };
+
+                    try
+                    {
+                        var mailMessage = new System.Net.Mail.MailMessage(ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString(), emailMessage.MessageTo);
+                        mailMessage.IsBodyHtml = true;
+                        mailMessage.Subject = subject;
+                        mailMessage.Body = emailMessage.MessageText;
+                        mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+
+                        var smtp = new SmtpClient();
+                        smtp.Host = ConfigurationManager.AppSettings["MailServer"].ToString();
+                        smtp.Send(mailMessage);
+
+                        TempData["EmailSent"] = "true";
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["EmailSent"] = "false";
+                        Logger.Log.Error(ex.ToString());
+                    }
 
                 }
                 else if (community != string.Empty)
                 {
                     // Send email to a community.
+                    var repository = new AdminRepository();
+                    var communityEmails = repository.GetEmailAddressesByCommunity(community);
 
+                    foreach (var email in communityEmails)
+                    {
+                        var emailMessage = new EmailMessage
+                        {
+                            MessageFrom = session.User.Email,
+                            MessageTo = email.Email,
+                            MessageText = message,
+                            MessageSentDate = DateTimeOffset.Now
+                        };
+
+                        try
+                        {
+                            var mailMessage = new System.Net.Mail.MailMessage(ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString(), emailMessage.MessageTo);
+                            mailMessage.IsBodyHtml = true;
+                            mailMessage.Subject = subject;
+                            mailMessage.Body = emailMessage.MessageText;
+                            mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+
+                            var smtp = new SmtpClient();
+                            smtp.Host = ConfigurationManager.AppSettings["MailServer"].ToString();
+                            smtp.Send(mailMessage);
+
+                            TempData["EmailSent"] = "true";
+                        }
+                        catch (Exception ex)
+                        {
+                            TempData["EmailSent"] = "false";
+                            Logger.Log.Error(ex.ToString());
+                        }
+                    }
                 }
 
                 ViewBag.MessageCenterActive = "active";

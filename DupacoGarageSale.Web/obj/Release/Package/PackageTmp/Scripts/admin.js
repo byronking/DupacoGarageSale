@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    
+
     // Show the user edit fields.
     if ($("#hdnShowEditUser").val() == "true") {
         //alert('true');
@@ -67,8 +67,7 @@
 
     // Validation for the headline news
     $("#btnPublishMessage").click(function (e) {
-        if ($("#txtHeadlineNews").val() == "")
-        {
+        if ($("#txtHeadlineNews").val() == "") {
             $("#headlineNewsValidationMessage").removeClass('invisible');
             e.preventDefault();
         }
@@ -155,6 +154,60 @@
             $(document.getElementById(panelName)).collapse('show');
         }
     }
+
+    // Validation for sending email messages.
+    $('#btnSendEmailMessage').click(function () {
+        if ($('#txtMessageTo').val() == "") {
+            $('#emailToValidationMessage').removeClass('hidden');
+        }
+
+        if ($('#txtMessage').val() == "") {
+            $('#emailTextValidationMessage').removeClass('hidden');
+        }
+
+        if ($('#txtMessageSubject').val() == "") {
+            $('#emailSubjectValidationMessage').removeClass('hidden');
+        }
+    });
+
+    // Character counter for the admin email messages.
+    $("#txtMessage").keyup(function () {
+        var max = 1000;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $("#charNumEmailMessage").text(' you have reached the limit');
+        } else {
+            var char = max - len;
+            $("#charNumEmailMessage").text(char + ' characters left');
+        }
+    });
+
+    // Autocomplete for the to field.
+    $('#txtMessageTo').tokenInput('/Admin/GetEmailAddresses', {
+        searchDelay: 1000,
+        minChars: 2,
+        hintText: 'Start typing an email address'
+    });
+
+    if ($('#radioIndividuals').is(':checked')) {
+        $('#divIndividuals').removeClass('hidden');
+        $('#divCommunity').addClass('hidden');
+    }
+
+    if ($('#radioCommunity').is(':checked')) {
+        $('#divCommunity').removeClass('hidden');
+        $('#divIndividuals').addClass('hidden');
+    }
+
+    $('#radioIndividuals').click(function () {
+        $('#divIndividuals').removeClass('hidden');
+        $('#divCommunity').addClass('hidden');
+    });
+
+    $('#radioCommunity').click(function () {
+        $('#divCommunity').removeClass('hidden');
+        $('#divIndividuals').addClass('hidden');        
+    });
 });
 
 function debugObject(inputobject) {

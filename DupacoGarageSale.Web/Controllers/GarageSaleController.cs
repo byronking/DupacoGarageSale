@@ -134,10 +134,11 @@ namespace DupacoGarageSale.Web.Controllers
 
                 ViewBag.NavAddSale = "active";   
 
-                return RedirectToAction("View", new RouteValueDictionary(new
+                return RedirectToAction("Edit", new RouteValueDictionary(new
                 {
                     controller = "GarageSale",
-                    action = "View"
+                    action = "Edit",
+                    id = model.Sale.GarageSaleId
                 }));
             }
             else

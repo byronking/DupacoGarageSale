@@ -44,7 +44,9 @@
                         }
                     }
                 </div>
-                <p class="lead">Make changes to your garage sale. Change details about the sale, change the dates/times, or add new item categories or special items.</p>
+                <p class="lead">
+                    Make changes to your garage sale. Change details about the sale, change the dates/times, or add new item categories.  <span class=" red glyphicon glyphicon-info-sign"></span>
+                    Make sure you highlight your sale by adding a Hot Pick!  Click @Html.ActionLink("here", "AddSpecialItem") to add one.</p>
                     
                 @using (Html.BeginForm("Update", "GarageSale", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
                 {
@@ -464,8 +466,8 @@
                 <h3 class="panel-title"><strong>Hot picks!</strong></h3>
             </div>
             <div class="panel-body">
-                <p class="lead">Here are the "hot picks" you're selling at your garage sale. Hot pick items are those items that show up first in search.
-                    Don't have any yet? Click @Html.ActionLink("here", "AddSpecialItem") to add one.
+                <p class="lead">Now, let's add some special items we're calling Hot Picks!  These are special items you want to highlight with a picture.  They
+                    look great in the search results and will help drive traffic to your sale.  Don't have any yet? Click @Html.ActionLink("here", "AddSpecialItem") to add one.
                 </p>
                         
                 @{ if (Model.GarageSaleSpecialItems == null)

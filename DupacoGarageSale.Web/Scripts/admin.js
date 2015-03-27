@@ -164,6 +164,10 @@
         if ($('#txtMessage').val() == "") {
             $('#emailTextValidationMessage').removeClass('hidden');
         }
+
+        if ($('#txtMessageSubject').val() == "") {
+            $('#emailSubjectValidationMessage').removeClass('hidden');
+        }
     });
 
     // Character counter for the admin email messages.

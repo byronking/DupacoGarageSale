@@ -124,10 +124,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:52</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>03/24/2015 16:45:47</publishTime>
+      <publishTime>03/26/2015 22:21:18</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>03/24/2015 16:45:47</publishTime>
+      <publishTime>03/26/2015 22:21:18</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -1048,7 +1048,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/30/2014 10:45:10</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>03/24/2015 13:18:40</publishTime>
+      <publishTime>03/25/2015 13:31:28</publishTime>
     </File>
     <File Include="Content/standard.css">
       <publishTime>02/21/2015 12:37:45</publishTime>
@@ -1347,6 +1347,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/timepicker/jquery.timepicker.css">
       <publishTime>10/14/2014 18:49:28</publishTime>
     </File>
+    <File Include="Content/token-input/token-input-facebook.css">
+      <publishTime>08/07/2011 15:58:20</publishTime>
+    </File>
+    <File Include="Content/token-input/token-input-mac.css">
+      <publishTime>08/07/2011 15:58:20</publishTime>
+    </File>
+    <File Include="Content/token-input/token-input.css">
+      <publishTime>08/07/2011 15:58:20</publishTime>
+    </File>
     <File Include="Global.asax">
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
@@ -1447,7 +1456,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/29/2015 14:27:05</publishTime>
     </File>
     <File Include="Scripts/admin.js">
-      <publishTime>03/17/2015 00:12:59</publishTime>
+      <publishTime>03/26/2015 10:05:37</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>12/23/2014 10:55:16</publishTime>
@@ -1650,6 +1659,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery.timepicker.min.js">
       <publishTime>10/14/2014 18:49:28</publishTime>
     </File>
+    <File Include="Scripts/jquery.tokeninput.js">
+      <publishTime>08/07/2011 15:58:20</publishTime>
+    </File>
     <File Include="Scripts/jquery.unobtrusive-ajax.js">
       <publishTime>11/18/2014 14:27:48</publishTime>
     </File>
@@ -1780,7 +1792,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/24/2015 12:03:16</publishTime>
     </File>
     <File Include="Views/Accounts/ResetPassword.cshtml">
-      <publishTime>12/21/2014 22:31:54</publishTime>
+      <publishTime>03/25/2015 13:31:28</publishTime>
     </File>
     <File Include="Views/Accounts/SignUp.cshtml">
       <publishTime>03/19/2015 01:03:05</publishTime>
@@ -1810,7 +1822,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/09/2015 13:23:38</publishTime>
     </File>
     <File Include="Views/Admin/MessageCenter.cshtml">
-      <publishTime>03/09/2015 13:23:38</publishTime>
+      <publishTime>03/26/2015 11:13:19</publishTime>
     </File>
     <File Include="Views/Admin/MessageSent.cshtml">
       <publishTime>03/24/2015 12:02:21</publishTime>
@@ -1831,16 +1843,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/31/2015 10:45:20</publishTime>
     </File>
     <File Include="Views/GarageSale/Add.cshtml">
-      <publishTime>03/18/2015 16:30:57</publishTime>
+      <publishTime>03/26/2015 21:59:48</publishTime>
     </File>
     <File Include="Views/GarageSale/AddSpecialItem.cshtml">
-      <publishTime>03/05/2015 22:53:06</publishTime>
+      <publishTime>03/26/2015 21:21:23</publishTime>
     </File>
     <File Include="Views/GarageSale/CreateItinerary.cshtml">
       <publishTime>12/05/2014 15:31:35</publishTime>
     </File>
     <File Include="Views/GarageSale/Edit.cshtml">
-      <publishTime>03/18/2015 23:14:42</publishTime>
+      <publishTime>03/26/2015 22:17:02</publishTime>
     </File>
     <File Include="Views/GarageSale/EditSpecialItem.cshtml">
       <publishTime>03/09/2015 22:26:38</publishTime>
@@ -1897,7 +1909,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLayout.cshtml">
-      <publishTime>03/09/2015 20:44:56</publishTime>
+      <publishTime>03/25/2015 21:40:51</publishTime>
     </File>
     <File Include="Views/Shared/_AdminNavigation.cshtml">
       <publishTime>03/19/2015 00:41:19</publishTime>
@@ -1978,7 +1990,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/24/2015 16:32:35</publishTime>
+      <publishTime>03/26/2015 22:21:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

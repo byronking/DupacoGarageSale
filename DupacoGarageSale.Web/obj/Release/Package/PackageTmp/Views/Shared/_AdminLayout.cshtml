@@ -9,12 +9,18 @@
     @Styles.Render("~/Content/dashboard/css")
     @Styles.Render("~/Content/timepicker/css")
     @Styles.Render("~/Content/lightbox/css")
+    @Styles.Render("~/Content/themes/base/css")
+    <link rel="stylesheet" type="text/css" href="~/Content/token-input/token-input.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/token-input/token-input-facebook.css" />
+
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/timepicker")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/adminjs")
     @Scripts.Render("~/bundles/lightboxjs")  
+    @Scripts.Render("~/bundles/tokeninput") 
 
     @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.windows7.css").Combined(true).Compress(true)))
 </head>

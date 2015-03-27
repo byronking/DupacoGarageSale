@@ -953,6 +953,45 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
+        /// This gets the email addresses by community.
+        /// </summary>
+        /// <param name="community"></param>
+        /// <returns></returns>
+        public List<EmailAddress> GetEmailAddressesByCommunity(string community)
+        {
+            var emailAddresses = new List<EmailAddress>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetEmailAddressesByCommunity", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@community", SqlDbType.VarChar).Value = community;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var email = new EmailAddress
+                        {
+                            Email = reader["email"].ToString()
+                        };
+
+                        emailAddresses.Add(email);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return emailAddresses;
+        }
+
+        /// <summary>
         /// This gets the communities based on the existing garage sales.
         /// </summary>
         /// <returns></returns>

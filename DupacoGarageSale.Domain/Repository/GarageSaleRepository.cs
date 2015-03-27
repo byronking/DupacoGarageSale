@@ -1321,7 +1321,8 @@ namespace DupacoGarageSale.Data.Repository
                             Address2 = reader["sale_address2"].ToString(),
                             City = reader["sale_city"].ToString(),
                             State = reader["state_name"].ToString(),
-                            ZipCode = reader["sale_zip"].ToString()
+                            ZipCode = reader["sale_zip"].ToString(),
+                            ProfilePic = reader["profile_pic_link"].ToString()
                         };
 
                         results.GarageSaleItems.Add(item);

@@ -12,6 +12,6 @@ namespace DupacoGarageSale.Data.Domain
         public string MessageFrom { get; set; }
         public string MessageTo { get; set; }
         public string MessageText { get; set; }
-        public DateTime MessageSentDate { get; set; }
+        public DateTimeOffset MessageSentDate { get; set; }
     }
 }
