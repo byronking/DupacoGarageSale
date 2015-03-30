@@ -43,7 +43,6 @@
                         <div class="form-group">
                             @*<input type="text" id="txtSearchWithFilters" name="txtSearchWithFilters" class="form-control" placeholder="Enter search criteria" /> <br />*@
                             <select name="ddlRadius" id="ddlRadius" class="form-control">
-                                <option value="5">5 miles</option>
                                 <option value="10">10 miles</option>
                                 <option value="15">15 miles</option>
                                 <option value="25">25 miles</option>
@@ -54,6 +53,7 @@
                             </select>
                             <br />
                             <input type="hidden" id="hdnNoAddress" value="@ViewBag.NoAddress" />
+                            <input type="hidden" id="hdnSavedAddress" value="@ViewBag.Address" />
                             <textarea class="form-control" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
                                 @{
                                     if (TempData["UserAddress"] != null)
@@ -66,9 +66,9 @@
                         <div>
                             <strong>Enter start and end dates:</strong><br />
                             <label for="from">Start:</label><br />
-                            <input type="text" id="from" name="from" class="form-control"><br />
+                            <input type="text" id="from" name="from" class="form-control" value="@ViewBag.From"><br />
                             <label for="to">End:</label><br />
-                            <input type="text" id="to" name="to" class="form-control"><br />
+                            <input type="text" id="to" name="to" class="form-control" value="@ViewBag.To"><br />
                         </div>
                         <br /><br />                          
 
@@ -527,7 +527,7 @@
                                     
                                     </text>
                                     )
-                                    .Pageable(pager => pager.PageSize(5))
+                                    .Pageable(pager => pager.PageSize(20))
                                     .Sortable()
                                 )
                             </div>
@@ -576,7 +576,7 @@
                             }
                         }
                     </div>
-                    <div class="row">
+                    <div class="row" style="width:60%;">
                         <!-- This shows random garage sale items for the home page. -->
                         @if (Model.GarageSaleItems != null && Model.SearchResults == null)
                         {
@@ -627,7 +627,7 @@
                                     
                                         </text>
                                         )
-                                        .Pageable(pager => pager.PageSize(5))
+                                        .Pageable(pager => pager.PageSize(20))
                                         .Sortable()
                                     )
                             }

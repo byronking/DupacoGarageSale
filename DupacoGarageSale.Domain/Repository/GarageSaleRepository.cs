@@ -1317,6 +1317,8 @@ namespace DupacoGarageSale.Data.Repository
                             ItemSubcategoryName = reader["item_subcategory_name"].ToString(),
                             ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
                             SaleId = Convert.ToInt32(reader["sale_id"]),
+                            SaleName = reader["sale_name"].ToString(),
+                            SaleDescription = reader["sale_description"].ToString(),
                             Address1 = reader["sale_address1"].ToString(),
                             Address2 = reader["sale_address2"].ToString(),
                             City = reader["sale_city"].ToString(),

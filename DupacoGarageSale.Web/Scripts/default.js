@@ -26,6 +26,11 @@
         //alert('Hello, ' + ie);
     }
 
+    // Preserve the address when searching.
+    if ($('#hdnSavedAddress').val() !== "") {
+        $('#txtAddress').text($('#hdnSavedAddress').val());
+    }
+
     // Show the error message if there is an existing account
     if ($("#hdnExistingAccountError").val() == "true") {
         $("#existingAccountError").removeClass('hidden');

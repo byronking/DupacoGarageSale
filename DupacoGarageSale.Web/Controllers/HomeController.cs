@@ -25,6 +25,14 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel = Session["ViewModel"] as GarageSaleViewModel;
             }
 
+            if (Session["SearchData"] != null)
+            {
+                var searchData = Session["SearchData"] as string[];
+                ViewBag.Address = searchData[0].ToString();
+                ViewBag.From = searchData[1].ToString();
+                ViewBag.To = searchData[2].ToString();
+            }
+
             viewModel.SelectedCategories = new List<int>();
             viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
 
@@ -116,7 +124,14 @@ namespace DupacoGarageSale.Web.Controllers
             }
             else
             {
-                ViewBag.NoAddress = "true";
+                if (Session["SearchData"] != null)
+                {
+                    ViewBag.NoAddress = "false";
+                }
+                else
+                {
+                    ViewBag.NoAddress = "true";
+                }
                 return View(viewModel);
             }
         }
@@ -207,6 +222,9 @@ namespace DupacoGarageSale.Web.Controllers
             var address = form["txtAddress"].ToString();
             var startDate = form["from"].ToString();
             var endDate = form["to"].ToString();
+
+            string[] searchData = { address, startDate, endDate };
+            Session["SearchData"] = searchData;
 
             #region Old code using the checkboxes
             //var saleDates = new Dictionary<string, string>();

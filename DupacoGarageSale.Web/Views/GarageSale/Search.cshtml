@@ -32,7 +32,6 @@
                         <div class="form-group">
                             @*<input type="text" id="txtSearchWithFilters" name="txtSearchWithFilters" class="form-control" placeholder="Enter search criteria" /> <br />*@
                             <select name="ddlRadius" id="ddlRadius" class="form-control">
-                                <option value="5">5 miles</option>
                                 <option value="10">10 miles</option>
                                 <option value="15">15 miles</option>
                                 <option value="25">25 miles</option>
@@ -515,7 +514,7 @@
                                     
                                         </text>
                                         )
-                                        .Pageable(pager => pager.PageSize(5))
+                                        .Pageable(pager => pager.PageSize(20))
                                         .Sortable()
                                     )
                                 </div>

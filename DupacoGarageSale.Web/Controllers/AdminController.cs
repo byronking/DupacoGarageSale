@@ -266,6 +266,7 @@ namespace DupacoGarageSale.Web.Controllers
         /// <returns></returns>
         public ActionResult ChangePassword(FormCollection form)
         {
+            var userName = form["User.UserName"].ToString();
             var password = form["User.Password"].ToString();
 
             if (Session["UserSession"] != null)
@@ -275,11 +276,11 @@ namespace DupacoGarageSale.Web.Controllers
 
                 // Update the user's password.
                 var repository = new AccountsRepository();
-                var hashedPassword = AccountHelper.GetSHA1Hash(session.User.UserName, password);
+                var hashedPassword = AccountHelper.GetSHA1Hash(userName, password);
 
                 try
                 {
-                    var saveSuccessful = repository.UpdateUserPassword(session.User.UserName, hashedPassword);
+                    var saveSuccessful = repository.UpdateUserPassword(userName, hashedPassword);
 
                     if (saveSuccessful)
                     {

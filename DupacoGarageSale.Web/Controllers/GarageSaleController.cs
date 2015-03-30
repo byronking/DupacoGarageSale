@@ -1343,6 +1343,8 @@ namespace DupacoGarageSale.Web.Controllers
             var endDate = form["to"].ToString();
             var categoryIdList = new List<int>();
 
+            
+
             foreach (var key in form.AllKeys)
             {
                 int categoryId;
