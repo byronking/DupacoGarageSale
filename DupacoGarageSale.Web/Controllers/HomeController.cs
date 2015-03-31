@@ -31,6 +31,7 @@ namespace DupacoGarageSale.Web.Controllers
                 ViewBag.Address = searchData[0].ToString();
                 ViewBag.From = searchData[1].ToString();
                 ViewBag.To = searchData[2].ToString();
+                ViewBag.SearchCriteria = searchData[3].ToString();
             }
 
             viewModel.SelectedCategories = new List<int>();
@@ -132,6 +133,7 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     ViewBag.NoAddress = "true";
                 }
+
                 return View(viewModel);
             }
         }
@@ -207,15 +209,19 @@ namespace DupacoGarageSale.Web.Controllers
             return RedirectToAction("Index", viewModel);
         }
 
-        // This allows the user to filter search results.
+        /// <summary>
+        /// This allows the user to search by text criteria, date/time, and category filters.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult FilterResults(FormCollection form)
+        public ActionResult AdvancedSearch(FormCollection form)
         {
             var searchCriteria = string.Empty;
 
-            if (form["txtSearchWithFilters"] != null)
+            if (form["txtSearchCriteria"] != null)
             {
-                searchCriteria = form["txtSearchWithFilters"].ToString();
+                searchCriteria = form["txtSearchCriteria"].ToString();
             }
 
             var radius = form["ddlRadius"].ToString();
@@ -223,7 +229,7 @@ namespace DupacoGarageSale.Web.Controllers
             var startDate = form["from"].ToString();
             var endDate = form["to"].ToString();
 
-            string[] searchData = { address, startDate, endDate };
+            string[] searchData = { address, startDate, endDate, searchCriteria };
             Session["SearchData"] = searchData;
 
             #region Old code using the checkboxes

@@ -46,32 +46,34 @@
                                         <strong>State:</strong> @sale.SaleState<br />
                                         <strong>Zip code:</strong> @sale.SaleZip<br /><br />
                                         <strong>Sale dates/times:</strong><br /><br />
-                                        <div>
-                                            <table style="width:525px;" class="table table-bordered table-condensed table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>@sale.DatesTimes.SaleDateOne.ToLongDateString()</th>
-                                                        <th>@sale.DatesTimes.SaleDateTwo.ToLongDateString()</th>
-                                                        <th>@sale.DatesTimes.SaleDateThree.ToLongDateString()</th>
-                                                        <th>@sale.DatesTimes.SaleDateFour.ToLongDateString()</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody style="width:auto">
-                                                    <tr>
-                                                        <td>Start:<br />@sale.DatesTimes.DayOneStart</td>
-                                                        <td>Start:<br />@sale.DatesTimes.DayTwoStart</td>
-                                                        <td>Start:<br />@sale.DatesTimes.DayThreeStart</td>
-                                                        <td>Start:<br />@sale.DatesTimes.DayFourStart</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>End:<br />@sale.DatesTimes.DayOneEnd</td>
-                                                        <td>End:<br />@sale.DatesTimes.DayTwoEnd</td>
-                                                        <td>End:<br />@sale.DatesTimes.DayThreeEnd</td>
-                                                        <td>End:<br />@sale.DatesTimes.DayFourEnd</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div><br />
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <table class="table table-bordered table-condensed table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>@sale.DatesTimes.SaleDateOne.ToLongDateString()</th>
+                                                            <th>@sale.DatesTimes.SaleDateTwo.ToLongDateString()</th>
+                                                            <th>@sale.DatesTimes.SaleDateThree.ToLongDateString()</th>
+                                                            <th>@sale.DatesTimes.SaleDateFour.ToLongDateString()</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="width:auto">
+                                                        <tr>
+                                                            <td>Start:<br />@sale.DatesTimes.DayOneStart</td>
+                                                            <td>Start:<br />@sale.DatesTimes.DayTwoStart</td>
+                                                            <td>Start:<br />@sale.DatesTimes.DayThreeStart</td>
+                                                            <td>Start:<br />@sale.DatesTimes.DayFourStart</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>End:<br />@sale.DatesTimes.DayOneEnd</td>
+                                                            <td>End:<br />@sale.DatesTimes.DayTwoEnd</td>
+                                                            <td>End:<br />@sale.DatesTimes.DayThreeEnd</td>
+                                                            <td>End:<br />@sale.DatesTimes.DayFourEnd</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div><br />
+                                        </div>
                                         <div>
                                             @Html.ActionLink("Spruce up garage sale", "Edit", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-info", style="margin: 4px;" })
                                             @Html.ActionLink("Delete garage sale", "Delete", "GarageSale", new { id = @sale.GarageSaleId }, new { @class = "btn btn-danger", style="margin: 4px;" })

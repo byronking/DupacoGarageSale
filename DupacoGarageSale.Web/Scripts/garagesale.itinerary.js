@@ -28,7 +28,8 @@
         });
     });
 
-    // Show the itinerary deleted message.
+    
+    // Show the itinerary leg deleted message.
     if (($("#hdnLegDeletedMessage").val() !== undefined)) {
 
         if ($("#hdnLegDeletedMessage").val() == "false") {
@@ -36,7 +37,7 @@
         }
     }
 
-    // Show the itinerary leg deleted message.
+    // Show the itinerary deleted message.
     if (($("#hdnItineraryDeleted").val() !== undefined)) {
 
         if ($("#hdnItineraryDeleted").val() == "true") {

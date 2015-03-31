@@ -1144,8 +1144,8 @@ namespace DupacoGarageSale.Data.Repository
 
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
-                        cmd.Parameters.Add("@start_date", SqlDbType.VarChar).Value = Convert.ToDateTime(startDate);
-                        cmd.Parameters.Add("@end_date", SqlDbType.VarChar).Value = Convert.ToDateTime(endDate);
+                        cmd.Parameters.Add("@start_date", SqlDbType.VarChar).Value = startDate;
+                        cmd.Parameters.Add("@end_date", SqlDbType.VarChar).Value = endDate;
                         cmd.Connection.Open();
 
                         var reader = cmd.ExecuteReader();
@@ -1189,10 +1189,11 @@ namespace DupacoGarageSale.Data.Repository
                 foreach (var subcategoryId in itemSubcategories)
                 {                    
                     using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
-                    using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItemsByDate", conn))
+                    using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItemsByCriteria", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = subcategoryId;
+                        cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
+                        cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = subcategoryId;                        
                         cmd.Parameters.Add("@start_date", SqlDbType.VarChar).Value = startDate;
                         cmd.Parameters.Add("@end_date", SqlDbType.VarChar).Value = endDate;
                         cmd.Connection.Open();
@@ -1209,6 +1210,7 @@ namespace DupacoGarageSale.Data.Repository
                                 ItemSubcategoryName = reader["item_subcategory_name"].ToString(),
                                 ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
                                 ProfilePic = reader["profile_pic_link"].ToString(),
+                                SaleName = reader["sale_name"].ToString(),
                                 SaleDescription = reader["sale_description"].ToString(),
                                 SaleId = Convert.ToInt32(reader["sale_id"]),
                                 Address1 = reader["sale_address1"].ToString(),

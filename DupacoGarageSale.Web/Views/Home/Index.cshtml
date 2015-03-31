@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <style type="text/css">
     .nav-tabs li a {font-size:14px;padding: 13px 4px;color:#000000;}
 </style>
@@ -30,18 +29,19 @@
     </div><br /><br />
 
     <p class="lead">
-        Use the search tools below to find that perfect item.
+        Use the search tools below to find that perfect item. Hone in on it by entering search criteria, setting a date range, distance from your address, and item category.
     </p>
     <div class="row">
-        <div id="results-filter" class="col-md-3">
-            <p class="lead">Search all the garage sales</p>
-            @using (Html.BeginForm("FilterResults", "Home", FormMethod.Post, new { @role = "form" }))
-            {
+        <div id="results-filter" class="col-md-4">
+            @using (Html.BeginForm("AdvancedSearch", "Home", FormMethod.Post, new { @role = "form" }))
+            {                
                 <input type="hidden" id="hdnSelectedCategories" value="@ViewBag.SelectedCategories" />
                 <ul class="list-group">
                     <li class="list-group-item">
                         <div class="form-group">
-                            @*<input type="text" id="txtSearchWithFilters" name="txtSearchWithFilters" class="form-control" placeholder="Enter search criteria" /> <br />*@
+                            <input class="form-control" type="text" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="What are you looking for?">
+                        </div>
+                        <div class="form-group">
                             <select name="ddlRadius" id="ddlRadius" class="form-control">
                                 <option value="10">10 miles</option>
                                 <option value="15">15 miles</option>
@@ -70,7 +70,7 @@
                             <label for="to">End:</label><br />
                             <input type="text" id="to" name="to" class="form-control" value="@ViewBag.To"><br />
                         </div>
-                        <br /><br />                          
+                        <br />                       
 
                         <div id="accordion" class="panel-group" aria-multiselectable="true" role="tablist">
                             <div class="panel panel-success">
@@ -409,22 +409,7 @@
             }        
         </div>
         
-        <div class="col-md-9">
-            @using (Html.BeginForm("SearchByCriteria", "Home", FormMethod.Post, new { @class = "form-inline" }))
-            {
-                <div class="input-group">
-                    <input class="form-control" type="text" id="txtSearchCriteria" name="txtSearchCriteria" style="width:275px" placeholder="What are you looking for?">
-                    <span class="input-group-btn">
-                        <input type="submit" id="btnSearchBarFind" class="btn btn-primary" value="Find it!" />
-                    </span>
-                </div><br /><br />
-            }
-
-            <div id="searchValidation" class="hidden alert alert-danger fade in" role="alert" style="width:444px;">
-                <strong>Oops!</strong>
-                Please enter search criteria.
-            </div>
-
+        <div class="col-md-8 text-centered">
             <input type="hidden" id="hdnSearchBarCriteria" value="@ViewBag.SearchCriteria" />
             <input type="hidden" id="hdnShowMap" value="@ViewBag.ShowMap" />                
             <input type="hidden" id="hdnSearchResultsCount" value="@ViewBag.SearchResultsCount" />
@@ -474,13 +459,13 @@
                                 }
                             </div>
 
-                            if (Model.SearchResults.SpecialItems.Count != 0 && Model.SearchResults.GarageSaleItems.Count != 0)
-                            {
+                                if (Model.SearchResults.SpecialItems.Count != 0 && Model.SearchResults.GarageSaleItems.Count != 0)
+                                {
                              <hr/>   
-                            }
+                                }
 
-                            if (Model.SearchResults.GarageSaleItems.Count != 0)
-                            {                                
+                                if (Model.SearchResults.GarageSaleItems.Count != 0)
+                                {                                
                             <div style="width:60%;">
                                 <!-- Diaplay the garage sale items -->
                                 <p class="lead">Garage sale items for sale</p>
@@ -531,13 +516,13 @@
                                     .Sortable()
                                 )
                             </div>
-                            }
+                                }
                         }
                         else
                         {
-                            <div class="alert alert-danger" role="alert" style="width:50%;">
+                            <div class="alert alert-danger" role="alert" style="width:75%;">
                                 <strong>Oh no!</strong>
-                                No results found!
+                                No results found! Check your search criteria and categories.
                             </div>
                         }
                     }                    
@@ -576,13 +561,13 @@
                             }
                         }
                     </div>
-                    <div class="row" style="width:60%;">
+                    <div class="row" style="width:60%;margin-left:5px;">
                         <!-- This shows random garage sale items for the home page. -->
                         @if (Model.GarageSaleItems != null && Model.SearchResults == null)
                         {
                             if (Model.GarageSaleItems.Count > 0)
                             {
-                                <p class="lead" style="margin-left:17px;">Garage sale items for sale</p>
+                                <p class="lead">Garage sale items for sale</p>
                                     @(Html.Telerik().Grid(Model.GarageSaleItems)
                                         .Name("grdRandomGarageSaleItems")
                                         .DataKeys(dataKeys => dataKeys.Add(k => k.GarageSaleItemsId))

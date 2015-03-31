@@ -1087,10 +1087,31 @@ namespace DupacoGarageSale.Web.Controllers
                     ViewBag.CenterAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City + " " +
                         viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
                 }
+
+                if (Session["SearchData"] != null)
+                {
+                    var searchData = Session["SearchData"] as string[];
+                    ViewBag.Address = searchData[0].ToString();
+                    ViewBag.From = searchData[1].ToString();
+                    ViewBag.To = searchData[2].ToString();
+                    ViewBag.SearchCriteria = searchData[3].ToString();
+                }
             }
             else
             {
-                ViewBag.NoAddress = "true";
+                if (Session["SearchData"] != null)
+                {
+                    var searchData = Session["SearchData"] as string[];
+                    ViewBag.Address = searchData[0].ToString();
+                    ViewBag.From = searchData[1].ToString();
+                    ViewBag.To = searchData[2].ToString();
+                    ViewBag.SearchCriteria = searchData[3].ToString();
+                    ViewBag.NoAddress = "false";
+                }
+                else
+                {
+                    ViewBag.NoAddress = "true";
+                }
             }
 
             var repository = new GarageSaleRepository();
@@ -1180,7 +1201,6 @@ namespace DupacoGarageSale.Web.Controllers
                             }
                         }
                     }
-
                 }
                 else
                 {
@@ -1328,22 +1348,23 @@ namespace DupacoGarageSale.Web.Controllers
         /// <param name="form"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult FilterResults(FormCollection form)
+        public ActionResult AdvancedSearch(FormCollection form)
         {
             var searchCriteria = string.Empty;
 
-            if (form["txtSearchWithFilters"] != null)
+            if (form["txtSearchCriteria"] != null)
             {
-                searchCriteria = form["txtSearchWithFilters"].ToString();
+                searchCriteria = form["txtSearchCriteria"].ToString();
             }
 
             var radius = form["ddlRadius"].ToString();
-            var address = form["txtAddress"].ToString();
+            var address = form["txtAddress"].ToString().Trim();
             var startDate = form["from"].ToString();
             var endDate = form["to"].ToString();
             var categoryIdList = new List<int>();
 
-            
+            string[] searchData = { address, startDate, endDate, searchCriteria };
+            Session["SearchData"] = searchData;
 
             foreach (var key in form.AllKeys)
             {

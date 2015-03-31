@@ -172,6 +172,7 @@
                 <div class="form-group">
                     Enter a new password, then confirm it.<br />
                 </div>
+                @Html.HiddenFor(m => m.User.UserName, new { @name = "hdnUserName" })
                 <div class="form-group" style="width:60%;">
                     <label for="txtPassword">Password *</label>
                     @Html.TextBoxFor(m => m.User.Password, new { @class = "form-control", id="txtPassword", @type="password" })
