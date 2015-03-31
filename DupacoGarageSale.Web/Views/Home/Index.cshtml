@@ -33,6 +33,15 @@
     </p>
     <div class="row">
         <div id="results-filter" class="col-md-4">
+            @{
+                var searchButtonClicked = string.Empty;
+                if (TempData["SearchButtonClicked"] != null)
+                {
+                    searchButtonClicked = TempData["SearchButtonClicked"].ToString();
+                }
+            }
+
+            <input type="hidden" id="hdnSearchButtonClicked" value="@searchButtonClicked" />
             @using (Html.BeginForm("AdvancedSearch", "Home", FormMethod.Post, new { @role = "form" }))
             {                
                 <input type="hidden" id="hdnSelectedCategories" value="@ViewBag.SelectedCategories" />

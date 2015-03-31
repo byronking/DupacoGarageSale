@@ -315,6 +315,7 @@ namespace DupacoGarageSale.Web.Controllers
             ViewBag.SelectedCategories = string.Join(",", selectedCategories);
 
             Session["ViewModel"] = viewModel;
+            TempData["SearchButtonClicked"] = "true";
 
             return RedirectToAction("Index", viewModel);
         }
