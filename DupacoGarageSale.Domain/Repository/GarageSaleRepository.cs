@@ -1186,14 +1186,14 @@ namespace DupacoGarageSale.Data.Repository
 
             try
             {
-                foreach (var subcategoryId in itemSubcategories)
-                {                    
+                if (itemSubcategories.Count == 0)
+                {
                     using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
                     using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItemsByCriteria", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
-                        cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = subcategoryId;                        
+                        cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = 0;
                         cmd.Parameters.Add("@start_date", SqlDbType.VarChar).Value = startDate;
                         cmd.Parameters.Add("@end_date", SqlDbType.VarChar).Value = endDate;
                         cmd.Connection.Open();
@@ -1221,6 +1221,47 @@ namespace DupacoGarageSale.Data.Repository
                             };
 
                             results.GarageSaleItems.Add(item);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var subcategoryId in itemSubcategories)
+                    {
+                        using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                        using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItemsByCriteria", conn))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
+                            cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = subcategoryId;
+                            cmd.Parameters.Add("@start_date", SqlDbType.VarChar).Value = startDate;
+                            cmd.Parameters.Add("@end_date", SqlDbType.VarChar).Value = endDate;
+                            cmd.Connection.Open();
+
+                            var reader = cmd.ExecuteReader();
+
+                            while (reader.Read())
+                            {
+                                var item = new GarageSaleSearchItem
+                                {
+                                    GarageSaleItemsId = Convert.ToInt32(reader["garage_sale_items_id"]),
+                                    ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                                    ItemCategoryName = reader["item_category_name"].ToString(),
+                                    ItemSubcategoryName = reader["item_subcategory_name"].ToString(),
+                                    ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                                    ProfilePic = reader["profile_pic_link"].ToString(),
+                                    SaleName = reader["sale_name"].ToString(),
+                                    SaleDescription = reader["sale_description"].ToString(),
+                                    SaleId = Convert.ToInt32(reader["sale_id"]),
+                                    Address1 = reader["sale_address1"].ToString(),
+                                    Address2 = reader["sale_address2"].ToString(),
+                                    City = reader["sale_city"].ToString(),
+                                    State = reader["state_name"].ToString(),
+                                    ZipCode = reader["sale_zip"].ToString()
+                                };
+
+                                results.GarageSaleItems.Add(item);
+                            }
                         }
                     }
                 }

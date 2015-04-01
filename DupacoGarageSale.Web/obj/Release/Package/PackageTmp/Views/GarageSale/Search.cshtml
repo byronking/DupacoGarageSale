@@ -17,20 +17,24 @@
             <img src="~/Content/images/garagesale.gif" alt="dupaco garage sales!" class="down_30" />
         </div>*@
         <div class="form-group">
-            <h1>Use the search tools below to find that perfect item.</h1>
+            <h2>
+                Use the search tools below to find that perfect item.  Hone in on it by entering search criteria, setting a date range, distance from your address, and item category.
+            </h2>
         </div>
     </div><br />
    
     <div class="row">
         <div id="results-filter" class="col-md-3">
-            <p class="lead">Search all the garage sales</p>
-            @using (Html.BeginForm("FilterResults", "GarageSale", FormMethod.Post, new { @role = "form" }))
+            @using (Html.BeginForm("AdvancedSearch", "GarageSale", FormMethod.Post, new { @role = "form" }))
             {
                 <input type="hidden" id="hdnSelectedCategories" value="@ViewBag.SelectedCategories" />
+                <input type="hidden" id="hdnSavedAddress" value="@ViewBag.Address" />
                 <ul class="list-group">
                     <li class="list-group-item">
                         <div class="form-group">
-                            @*<input type="text" id="txtSearchWithFilters" name="txtSearchWithFilters" class="form-control" placeholder="Enter search criteria" /> <br />*@
+                            <input class="form-control" type="text" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="What are you looking for?">
+                        </div>
+                        <div class="form-group">
                             <select name="ddlRadius" id="ddlRadius" class="form-control">
                                 <option value="10">10 miles</option>
                                 <option value="15">15 miles</option>
@@ -54,9 +58,9 @@
                         <div>
                             <strong>Enter start and end dates:</strong><br />
                             <label for="from">Start:</label><br />
-                            <input type="text" id="from" name="from" class="form-control"><br />
+                            <input type="text" id="from" name="from" class="form-control" value="@ViewBag.From"><br />
                             <label for="to">End:</label><br />
-                            <input type="text" id="to" name="to" class="form-control"><br />
+                            <input type="text" id="to" name="to" class="form-control" value="@ViewBag.To"><br />
                         </div>                          
 
                         <div id="accordion" class="panel-group" aria-multiselectable="true" role="tablist">
@@ -398,21 +402,6 @@
         </div>
         
         <div class="col-md-9">
-            @using (Html.BeginForm("SearchByCriteria", "GarageSale", FormMethod.Post, new { @class = "form-inline" }))
-            {
-                <div class="input-group">
-                    <input class="form-control" type="text" id="txtSearchCriteria" name="txtSearchCriteria" style="width:318px" placeholder="What are you looking for?">
-                    <span class="input-group-btn">
-                        <input type="submit" id="btnSearchBarFind" class="btn btn-primary" value="Find it!" />
-                    </span>
-                </div><br /><br />
-            }
-
-            <div id="searchValidation" class="hidden alert alert-danger fade in" role="alert" style="width:444px;">
-                <strong>Oops!</strong>
-                Please enter search criteria.
-            </div>
-
             <input type="hidden" id="hdnSearchBarCriteria" value="@ViewBag.SearchCriteria" />
             <input type="hidden" id="hdnShowMap" value="@ViewBag.ShowMap" />                
             <input type="hidden" id="hdnSearchResultsCount" value="@ViewBag.SearchResultsCount" />
@@ -522,9 +511,9 @@
                         }
                         else
                         {
-                            <div class="alert alert-danger" role="alert" style="width:50%;">
+                            <div class="alert alert-danger" role="alert" style="width:75%;">
                                 <strong>Oh no!</strong>
-                                No results found!
+                                No results found! Check your search criteria and categories.
                             </div>
                         }
                     }                    

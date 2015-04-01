@@ -197,6 +197,7 @@
         }
     });   
 
+    // This clears the address search field when there's no saved address.
     //alert($("#hdnNoAddress").val());
     if ($("#hdnNoAddress").val() == "true") {
         $("#txtAddress").val('');
@@ -204,9 +205,16 @@
 
     // This shows a popover message if the user does not enter an address when searching.
     $("#btnFilter").click(function (e) {
-        //alert($("#txtSearchCriteria").val());
-        //$("#hdnSearchCriteria").val($("#txtSearchCriteria").val());
-        //alert($("#txtAddress").val());
+        if ($("#txtSearchCriteria").val() == "") {
+            $("#txtSearchCriteria").popover({
+                content: "Enter search criteria", placement: "bottom",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#txtSearchCriteria").popover('show');
+            $("#txtSearchCriteria").focus();
+            e.preventDefault();
+        }
+
         if ($("#txtAddress").val() == "") {
             $("#txtAddress").popover({
                 content: "Enter a starting point", placement: "bottom",
@@ -235,9 +243,14 @@
             $("#to").popover('show');
             $("#to").focus();
             e.preventDefault();
-        }
+        }        
+    });
 
-    });   
+    // Focus on the search area of the page.
+    alert('value: ' + $('#hdnSearchButtonClicked').val());
+    if ($('#hdnSearchButtonClicked').val() == "true") {
+        window.scrollTo(0, 1250);
+    }
 
     // Show the successful save message.
     if (($("#hdnSaveMessage").val() !== undefined)) {
