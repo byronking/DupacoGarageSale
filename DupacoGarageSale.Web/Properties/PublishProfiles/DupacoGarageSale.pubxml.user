@@ -124,10 +124,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:52</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>03/31/2015 17:32:56</publishTime>
+      <publishTime>03/31/2015 21:46:21</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>03/31/2015 17:32:57</publishTime>
+      <publishTime>03/31/2015 21:46:22</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -1465,7 +1465,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/23/2014 10:55:16</publishTime>
     </File>
     <File Include="Scripts/default.js">
-      <publishTime>03/31/2015 16:14:26</publishTime>
+      <publishTime>03/31/2015 21:03:37</publishTime>
     </File>
     <File Include="Scripts/facebook.login.js">
       <publishTime>03/18/2015 16:00:57</publishTime>
@@ -1990,7 +1990,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/31/2015 17:32:57</publishTime>
+      <publishTime>03/31/2015 21:46:23</publishTime>
     </File>
   </ItemGroup>
 </Project>

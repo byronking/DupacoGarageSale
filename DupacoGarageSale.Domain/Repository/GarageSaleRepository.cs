@@ -928,7 +928,12 @@ namespace DupacoGarageSale.Data.Repository
                 Logger.Log.Error(ex.ToString());
             }
 
-            return garageSaleItems;
+            var filteredResults = new GarageSaleSearchResults()
+            {
+                GarageSaleItems = garageSaleItems.GroupBy(s => s.SaleId).Select(g => g.First()).ToList()
+            };
+
+            return filteredResults.GarageSaleItems;
         }
 
         /// <summary>
@@ -1116,7 +1121,13 @@ namespace DupacoGarageSale.Data.Repository
                 Logger.Log.Error(ex.ToString());
             }
 
-            return results;
+            var filteredResults = new GarageSaleSearchResults()
+            {
+                GarageSaleItems = results.GarageSaleItems.GroupBy(s => s.SaleId).Select(g => g.First()).ToList(),
+                SpecialItems = results.SpecialItems
+            };
+
+            return filteredResults;
         }
 
         /// <summary>
@@ -1273,8 +1284,8 @@ namespace DupacoGarageSale.Data.Repository
 
             var filteredResults = new GarageSaleSearchResults()
             {
-                GarageSaleItems = results.GarageSaleItems.GroupBy(s => s.GarageSaleItemsId).Select(g => g.First()).ToList(),
-                SpecialItems = results.SpecialItems.GroupBy(s => s.SpecialItemsId).Select(g => g.First()).ToList()
+                GarageSaleItems = results.GarageSaleItems.GroupBy(s => s.SaleId).Select(g => g.First()).ToList(),
+                SpecialItems = results.SpecialItems
             };
 
             return filteredResults;

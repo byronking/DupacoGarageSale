@@ -247,7 +247,7 @@
     });
 
     // Focus on the search area of the page.
-    alert('value: ' + $('#hdnSearchButtonClicked').val());
+    //alert('value: ' + $('#hdnSearchButtonClicked').val());
     if ($('#hdnSearchButtonClicked').val() == "true") {
         window.scrollTo(0, 1250);
     }
