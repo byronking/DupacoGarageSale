@@ -98,6 +98,14 @@ namespace DupacoGarageSale.Web.Controllers
                     }
                 }
 
+                if (Session["SaveSuccessful"] != null)
+                {
+                    if (Convert.ToBoolean(Session["SaveSuccessful"]) == true)
+                    {
+                        ViewBag.Invisible = "false";
+                    }
+                }
+
                 // Clear the session object.
                 Session["SaveSuccessful"] = null;
 
@@ -251,11 +259,10 @@ namespace DupacoGarageSale.Web.Controllers
                 Session["SaveSuccessful"] = true;
             }
 
-            return RedirectToAction("EditUser", new RouteValueDictionary(new
+            return RedirectToAction("Users", new RouteValueDictionary(new
             {
                 controller = "Admin",
-                action = "EditUser",
-                userId = user.UserId
+                action = "Users"
             }));
         }
 
@@ -336,6 +343,14 @@ namespace DupacoGarageSale.Web.Controllers
                 var addressRepository = new AddressRepository();
                 var statesList = addressRepository.GetStates();
                 ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+
+                if (Session["SaveSuccessful"] != null)
+                {
+                    if (Convert.ToBoolean(Session["SaveSuccessful"]) == true)
+                    {
+                        ViewBag.Invisible = "false";
+                    }
+                }
 
                 Session["AdminViewModel"] = viewModel;
 
@@ -654,11 +669,10 @@ namespace DupacoGarageSale.Web.Controllers
                     Session["SaveSuccessful"] = true;
                 }
 
-                return RedirectToAction("EditGarageSale", new RouteValueDictionary(new
+                return RedirectToAction("GarageSales", new RouteValueDictionary(new
                 {
                     controller = "Admin",
-                    action = "EditGarageSale",
-                    id = model.GarageSale.GarageSaleId
+                    action = "GarageSales"
                 }));
             }
             else
@@ -1125,6 +1139,12 @@ namespace DupacoGarageSale.Web.Controllers
 
                 var repository = new AdminRepository();
                 viewModel.ContactUsMessages = repository.GetContactUsMessages();
+                viewModel.NewContactUsMessages = (from msg in viewModel.ContactUsMessages
+                                                  where msg.MessageReplies.Count == 0
+                                                  select msg).ToList();
+                viewModel.ArchivedContactUsMessages = (from msg in viewModel.ContactUsMessages
+                                                      where msg.MessageReplies.Count > 0
+                                                      select msg).ToList();
 
                 if (Session["ReplySuccessful"] != null)
                 {

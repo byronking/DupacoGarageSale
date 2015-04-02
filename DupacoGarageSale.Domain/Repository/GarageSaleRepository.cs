@@ -291,22 +291,24 @@ namespace DupacoGarageSale.Data.Repository
 
                     while (reader.Read())
                     {
-                        garageSale.DatesTimes = new SaleDatesTimes
+                        garageSale.DatesTimes = new SaleDatesTimes();
+
+                        if (reader["sale_date_time_id"] != DBNull.Value)
                         {
-                            SaleDateTimeId = Convert.ToInt32(reader["sale_date_time_id"]),
-                            SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]),
-                            DayOneStart = reader["day_one_start"].ToString(),
-                            DayOneEnd = reader["day_one_end"].ToString(),
-                            SaleDateTwo = Convert.ToDateTime(reader["sale_date_two"]),
-                            DayTwoStart = reader["day_two_start"].ToString(),
-                            DayTwoEnd = reader["day_two_end"].ToString(),
-                            SaleDateThree = Convert.ToDateTime(reader["sale_date_three"]),
-                            DayThreeStart = reader["day_three_start"].ToString(),
-                            DayThreeEnd = reader["day_three_end"].ToString(),
-                            SaleDateFour = Convert.ToDateTime(reader["sale_date_four"]),
-                            DayFourStart = reader["day_four_start"].ToString(),
-                            DayFourEnd = reader["day_four_end"].ToString(),                        
-                        };
+                            garageSale.DatesTimes.SaleDateTimeId = Convert.ToInt32(reader["sale_date_time_id"]);
+                            garageSale.DatesTimes.SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]);
+                            garageSale.DatesTimes.DayOneStart = reader["day_one_start"].ToString();
+                            garageSale.DatesTimes.DayOneEnd = reader["day_one_end"].ToString();
+                            garageSale.DatesTimes.SaleDateTwo = Convert.ToDateTime(reader["sale_date_two"]);
+                            garageSale.DatesTimes.DayTwoStart = reader["day_two_start"].ToString();
+                            garageSale.DatesTimes.DayTwoEnd = reader["day_two_end"].ToString();
+                            garageSale.DatesTimes.SaleDateThree = Convert.ToDateTime(reader["sale_date_three"]);
+                            garageSale.DatesTimes.DayThreeStart = reader["day_three_start"].ToString();
+                            garageSale.DatesTimes.DayThreeEnd = reader["day_three_end"].ToString();
+                            garageSale.DatesTimes.SaleDateFour = Convert.ToDateTime(reader["sale_date_four"]);
+                            garageSale.DatesTimes.DayFourStart = reader["day_four_start"].ToString();
+                            garageSale.DatesTimes.DayFourEnd = reader["day_four_end"].ToString();
+                        }
 
                         garageSale = new GarageSale
                         {

@@ -12,6 +12,164 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"><a href="~/Home"  style="text-decoration:none;"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home / </a>Message center</h1>
+            <hr/>
+            <p class="lead">Messages sent from garage sale users through the site:</p>
+            <div data-example-id="togglable-tabs" role="tabpanel" class="bs-example bs-example-tabs">
+                <ul role="tablist" class="nav nav-tabs" id="myTab">
+                    <li class="active" role="presentation"><a aria-expanded="true" aria-controls="needing_reply" data-toggle="tab" role="tab" id="needing_reply-tab" href="#needing_reply">Messages needing a reply <span class="badge">@Model.NewContactUsMessages.Count</span></a></li>
+                    <li role="presentation"><a aria-controls="archived" data-toggle="tab" id="archived-tab" role="tab" href="#archived">Archived mesages <span class="badge">@Model.ArchivedContactUsMessages.Count</span></a></li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div aria-labelledby="needing_reply-tab" id="needing_reply" class="tab-pane fade in active" role="tabpanel">
+                        <div class="down_20">
+                            @(Html.Telerik().Grid(Model.NewContactUsMessages)
+                                .Name("grdContactUsMessages")
+                                .DataKeys(dataKeys => dataKeys.Add(m => m.MessageId))
+                                //.HtmlAttributes(new { style = "width:90%;" })
+                                .Columns(columns =>
+                                {
+                                    columns.Command(commands =>
+                                    {
+                                        commands.Custom("ReplyToContactUsMessage")
+                                            .Text("Reply")
+                                            .Action("ReplyToContactUsMessage", "Admin")
+                                            .DataRouteValues(route =>
+                                            {
+                                                route.Add(m => m.MessageId).RouteKey("messageId");
+                                            });
+                                    });
+                                })
+                                .RowTemplate(grid => @<text>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <strong>@item.ContactName</strong><br />
+                                                @item.ContactEmail<br />
+                                                @if (item.ContactPhone != string.Empty)
+                                                {
+                                                    @item.ContactPhone<br />
+                                                }
+                                                <br />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @item.MessageSentDateTime
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                @item.MessageText
+                                            </div>
+                                        </div>
+                                        <hr style="border-color:lightgray;" />
+                                        <div class="row">
+                                            <div class="col-sm-10">                                
+                                                <strong>Reply from Dupaco:</strong><br />
+                                            </div>
+                                        </div>
+                                        @if (item.MessageReplies.Count > 0)
+                                        {
+                                            foreach (var reply in item.MessageReplies)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-10">                    
+                                                        @reply.ReplyDateTime<br />
+                                                        @reply.ReplyFrom<br />
+                                                        @reply.ReplyText<br /><br />
+                                                    </div>
+                                                </div>
+                                            }
+                                
+                                            <span>Click <a href="#" class="replyLink" id="linkReplyToModal2" data-value="@item.MessageId" data-toggle="modal" data-target="#replyModal">here</a> to reply.</span><br /><br />
+                                        }
+                                        else
+                                        {
+                                            <span>No reply yet. Click <a href="#" class="replyLink" id="linkReplyToModal" data-value="@item.MessageId" data-toggle="modal" data-target="#replyModal">here</a> to reply.</span><br /><br /> 
+                                        }
+                                    </div>
+                                </text>
+                                )
+                                .Pageable(pager => pager.PageSize(5))
+                                .Sortable()
+                            )
+                        </div>
+                    </div>
+                    <div aria-labelledby="archived-tab" id="archived" class="tab-pane fade" role="tabpanel">
+                        <div class="down_20">
+                            @(Html.Telerik().Grid(Model.ArchivedContactUsMessages)
+                                .Name("grdArchivedContactUsMessages")
+                                .DataKeys(dataKeys => dataKeys.Add(m => m.MessageId))
+                                //.HtmlAttributes(new { style = "width:90%;" })
+                                .Columns(columns =>
+                                {
+                                    columns.Command(commands =>
+                                    {
+                                        commands.Custom("ReplyToContactUsMessage")
+                                            .Text("Reply")
+                                            .Action("ReplyToContactUsMessage", "Admin")
+                                            .DataRouteValues(route =>
+                                            {
+                                                route.Add(m => m.MessageId).RouteKey("messageId");
+                                            });
+                                    });
+                                })
+                                .RowTemplate(grid => @<text>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <strong>@item.ContactName</strong><br />
+                                                @item.ContactEmail<br />
+                                                @if (item.ContactPhone != string.Empty)
+                                                {
+                                                    @item.ContactPhone<br />
+                                                }
+                                                <br />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @item.MessageSentDateTime
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                @item.MessageText
+                                            </div>
+                                        </div>
+                                        <hr style="border-color:lightgray;" />
+                                        <div class="row">
+                                            <div class="col-sm-10">                                
+                                                <strong>Reply from Dupaco:</strong><br />
+                                            </div>
+                                        </div>
+                                        @if (item.MessageReplies.Count > 0)
+                                        {
+                                            foreach (var reply in item.MessageReplies)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-sm-10">                    
+                                                        @reply.ReplyDateTime<br />
+                                                        @reply.ReplyFrom<br />
+                                                        @reply.ReplyText<br /><br />
+                                                    </div>
+                                                </div>
+                                            }
+                                
+                                            <span>Click <a href="#" class="replyLink" id="linkReplyToModal2" data-value="@item.MessageId" data-toggle="modal" data-target="#replyModal">here</a> to reply.</span><br /><br />
+                                        }
+                                        else
+                                        {
+                                            <span>No reply yet. Click <a href="#" class="replyLink" id="linkReplyToModal" data-value="@item.MessageId" data-toggle="modal" data-target="#replyModal">here</a> to reply.</span><br /><br /> 
+                                        }
+                                    </div>
+                                </text>
+                                )
+                                .Pageable(pager => pager.PageSize(5))
+                                .Sortable()
+                            )
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
             <p class="lead">Send messages to individuals or to entire communities:</p>
             <div class="row" style="margin-left:1px;margin-bottom:5px;">
                 <div class="col-md-6">
@@ -26,7 +184,7 @@
                     {
                         <div class="alert alert-danger fade in" role="alert" style="width:444px;">
                             <strong>Oops!</strong>
-                            An error occurref while sending the message!
+                            An error occurred while sending the message!
                         </div>
                     }                             
                 </div>
@@ -64,82 +222,8 @@
                         </div>
                     }
                 </div>
-            </div>            
-
-            <hr/>
-            <p class="lead">Messages sent from garage sale users through the site:</p>
-            <div class="down_20">
-                @(Html.Telerik().Grid(Model.ContactUsMessages)
-                    .Name("grdContactUsMessages")
-                    .DataKeys(dataKeys => dataKeys.Add(m => m.MessageId))
-                    //.HtmlAttributes(new { style = "width:90%;" })
-                    .Columns(columns =>
-                    {
-                        columns.Command(commands =>
-                        {
-                            commands.Custom("ReplyToContactUsMessage")
-                                .Text("Reply")
-                                .Action("ReplyToContactUsMessage", "Admin")
-                                .DataRouteValues(route =>
-                                {
-                                    route.Add(m => m.MessageId).RouteKey("messageId");
-                                });
-                        });
-                    })
-                    .RowTemplate(grid => @<text>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-sm-10">
-                                    <strong>@item.ContactName</strong><br />
-                                    @item.ContactEmail<br />
-                                    @if (item.ContactPhone != string.Empty)
-                                    {
-                                        @item.ContactPhone<br />
-                                    }
-                                    <br />
-                                </div>
-                                <div class="col-sm-2">
-                                    @item.MessageSentDateTime
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-10">
-                                    @item.MessageText
-                                </div>
-                            </div>
-                            <hr style="border-color:lightgray;" />
-                            <div class="row">
-                                <div class="col-sm-10">                                
-                                    <strong>Reply from Dupaco:</strong><br />
-                                </div>
-                            </div>
-                            @if (item.MessageReplies.Count > 0)
-                            {
-                                foreach (var reply in item.MessageReplies)
-                                {
-                                    <div class="row">
-                                        <div class="col-sm-10">                    
-                                            @reply.ReplyDateTime<br />
-                                            @reply.ReplyFrom<br />
-                                            @reply.ReplyText<br /><br />
-                                        </div>
-                                    </div>
-                                }
-                                
-                                <span>Click <a href="#" class="replyLink" id="linkReplyToModal2" data-value="@item.MessageId" data-toggle="modal" data-target="#replyModal">here</a> to reply.</span><br /><br />
-                            }
-                            else
-                            {
-                                <span>No reply yet. Click <a href="#" class="replyLink" id="linkReplyToModal" data-value="@item.MessageId" data-toggle="modal" data-target="#replyModal">here</a> to reply.</span><br /><br /> 
-                            }
-                    </text>
-                    )
-                    .Pageable(pager => pager.PageSize(5))
-                    .Sortable()
-                )
-            </div>
+            </div>   
         </div>
-    </div>
     </div>
 </div>
 
@@ -156,9 +240,9 @@
                     <div class="form-group">
                         <input type="hidden" id="hdnMessageId" name="hdnMessageId" />
                         <label>Message <span class="red">*</span></label>
-                        <textarea class="form-control" id="txtReplyMessage" name="txtReplyMessage" placeholder="Brevity is the soul of wit (500 characters max)" rows="6" maxlength="140" style="width:80%;"></textarea>
+                        <textarea class="form-control" id="txtReplyMessage" name="txtReplyMessage" placeholder="Brevity is the soul of wit (500 characters max)" rows="6" maxlength="500" style="width:80%;"></textarea>
                         <span id="contactValidationMessage" class="red invisible">Please enter your message.</span>
-                        <div id="charNumContactMessage"></div>
+                        <div id="charNumReplyMessage"></div>
                     </div>
                     <div class="form-group"></div>
                 </div>

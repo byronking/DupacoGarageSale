@@ -202,6 +202,13 @@ namespace DupacoGarageSale.Data.Repository
 
                     while (reader.Read())
                     {
+                        var address = new UserAddress();
+                        address.Address1 = reader["address1"].ToString();
+                        address.Address2 = reader["address2"].ToString();
+                        address.City = reader["city"].ToString();
+                        address.State = reader["state_name"].ToString();
+                        address.Zip = reader["zip"].ToString();
+
                         var user = new GarageSaleUser();
 
                         DateTime? modifyDate = null;
@@ -221,6 +228,7 @@ namespace DupacoGarageSale.Data.Repository
                         }
 
                         user.Active = Convert.ToBoolean(reader["active"]);
+                        user.Address = address;
                         user.CreateDate = Convert.ToDateTime(reader["create_date"]);
                         user.Email = reader["email"].ToString();
                         user.FirstName = reader["first_name"].ToString();

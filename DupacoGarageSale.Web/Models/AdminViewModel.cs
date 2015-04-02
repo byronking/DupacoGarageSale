@@ -31,5 +31,7 @@ namespace DupacoGarageSale.Web.Models
         public string HeadlineNews { get; set; }
         public List<AdminMessage> AdminMessages { get; set; }
         public List<ContactUsMessage> ContactUsMessages { get; set; }
+        public List<ContactUsMessage> NewContactUsMessages { get; set; }
+        public List<ContactUsMessage> ArchivedContactUsMessages { get; set; }
     }
 }
