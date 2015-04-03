@@ -195,7 +195,7 @@
             var char = max - len;
             $("#charNumContactMessage").text(char + ' characters left');
         }
-    });   
+    });
 
     // This clears the address search field when there's no saved address.
     //alert($("#hdnNoAddress").val());

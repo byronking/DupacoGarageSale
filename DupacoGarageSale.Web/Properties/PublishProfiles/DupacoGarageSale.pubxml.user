@@ -124,10 +124,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:52</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>04/01/2015 14:08:29</publishTime>
+      <publishTime>04/02/2015 16:20:29</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>04/01/2015 14:08:29</publishTime>
+      <publishTime>04/02/2015 16:20:29</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -1456,7 +1456,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/29/2015 14:27:05</publishTime>
     </File>
     <File Include="Scripts/admin.js">
-      <publishTime>03/26/2015 10:05:37</publishTime>
+      <publishTime>04/02/2015 15:38:32</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>12/23/2014 10:55:16</publishTime>
@@ -1465,7 +1465,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/23/2014 10:55:16</publishTime>
     </File>
     <File Include="Scripts/default.js">
-      <publishTime>03/31/2015 21:03:37</publishTime>
+      <publishTime>04/01/2015 16:04:51</publishTime>
     </File>
     <File Include="Scripts/facebook.login.js">
       <publishTime>03/18/2015 16:00:57</publishTime>
@@ -1813,7 +1813,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2015 10:31:15</publishTime>
     </File>
     <File Include="Views/Admin/GarageSales.cshtml">
-      <publishTime>03/09/2015 15:54:22</publishTime>
+      <publishTime>04/02/2015 10:17:36</publishTime>
     </File>
     <File Include="Views/Admin/HeadlineNews.cshtml">
       <publishTime>03/24/2015 13:20:19</publishTime>
@@ -1822,7 +1822,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/09/2015 13:23:38</publishTime>
     </File>
     <File Include="Views/Admin/MessageCenter.cshtml">
-      <publishTime>03/26/2015 11:13:19</publishTime>
+      <publishTime>04/02/2015 15:53:36</publishTime>
     </File>
     <File Include="Views/Admin/MessageSent.cshtml">
       <publishTime>03/24/2015 12:02:21</publishTime>
@@ -1831,10 +1831,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2015 13:21:00</publishTime>
     </File>
     <File Include="Views/Admin/_EditGarageSale.cshtml">
-      <publishTime>03/10/2015 11:23:03</publishTime>
+      <publishTime>04/02/2015 10:17:36</publishTime>
     </File>
     <File Include="Views/Admin/_EditUser.cshtml">
-      <publishTime>03/30/2015 14:00:57</publishTime>
+      <publishTime>04/02/2015 15:55:42</publishTime>
     </File>
     <File Include="Views/Admin/_ViewBlogPost.cshtml">
       <publishTime>02/17/2015 23:41:11</publishTime>
@@ -1990,7 +1990,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/31/2015 21:46:23</publishTime>
+      <publishTime>04/02/2015 16:20:30</publishTime>
     </File>
   </ItemGroup>
 </Project>

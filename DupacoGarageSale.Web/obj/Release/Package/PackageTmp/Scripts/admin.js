@@ -123,6 +123,14 @@
         $("#hdnMessageId").val(value);
     });
 
+    // This responds to clicking the reply link on the message center page.
+    $('#grdArchivedContactUsMessages').on('click', 'a.replyLink', function () {
+        var value = $(this).attr('data-value');
+        //alert('value: ' + value);
+
+        $("#hdnMessageId").val(value);
+    });
+
     //$("#linkReplyToModal").click(function (e) {
     //    //alert('hi');
     //    //$('div[id^="list_"]')
@@ -179,6 +187,19 @@
         } else {
             var char = max - len;
             $("#charNumEmailMessage").text(char + ' characters left');
+        }
+    });
+
+    // Character count for the message reply messages.
+    $("#txtReplyMessage").keyup(function () {
+        var max = 500;
+        var len = $(this).val().length;
+        //alert('length: ' + len);
+        if (len >= max) {
+            $("#charNumReplyMessage").text(' you have reached the limit');
+        } else {
+            var char = max - len;
+            $("#charNumReplyMessage").text(char + ' characters left');
         }
     });
 
