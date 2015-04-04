@@ -30,7 +30,9 @@
                     }
                 </div>
                 <p class="lead">Garage sale hosted by @Html.ActionLink(Model.GarageSale.SaleHost, "EditUser", new { @userId = Model.User.UserId })</p>
-                    
+                <div>
+                    @Html.ActionLink("Delete garage sale", "DeleteGarageSale", new { @saleId = Model.GarageSale.GarageSaleId }, new { @class = "btn btn-danger" })<br /><br />
+                </div>
                 @using (Html.BeginForm("UpdateGarageSale", "Admin", FormMethod.Post, new { @class = "form-horizontal", @role = "form", enctype = "multipart/form-data" }))
                 {
                     <div class="col-md-5">

@@ -26,6 +26,22 @@
         }
     }
 
+    // Show the user delete success message.
+    if (($("#hdnUserDeleteMessage").val() !== undefined)) {
+
+        if ($("#hdnUserDeleteMessage").val() == "true") {
+            $("#divUserDeleteMessage").removeClass("hidden");
+        }
+    }
+
+    // Show the sale delete success message.
+    if (($("#hdnSaleDeleteMessage").val() !== undefined)) {
+
+        if ($("#hdnSaleDeleteMessage").val() == "true") {
+            $("#divSaleDeleteMessage").removeClass("hidden");
+        }
+    }
+
     // Validation for the change password modal.
     $("#btnChangePassword").click(function (e) {
         if ($("#txtPassword").val() == "") {

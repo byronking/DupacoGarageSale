@@ -160,6 +160,37 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
+        /// This deletes a garage sale user.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public bool DeleteGarageSaleUser(int userId)
+        {
+            var saveSuccessful = false;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("DeleteGarageSaleUser", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_id", SqlDbType.VarChar).Value = userId;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+
+                saveSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveSuccessful;
+        }
+
+        /// <summary>
         /// This gets an active user by username.
         /// </summary>
         /// <param name="user_name"></param>

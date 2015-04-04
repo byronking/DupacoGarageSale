@@ -84,6 +84,7 @@
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target=".changePasswordModal">
                         Change password
                     </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".deleteGarageSaleUserModal">Delete garage sale user</button>
                 </div>
             </div>
         </div>            
@@ -190,5 +191,34 @@
             </div>
         </div>
       </div>
+    </div>
+}
+
+<!-- Delete garage sale modal -->
+@using (Html.BeginForm("DeleteGarageSaleUser", "Admin", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+{
+    <div class="modal fade deleteGarageSaleUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteGarageSaleUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="deleteGarageSaleUserModalLabel">Delete garage sale user</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fliud">
+                        <h4>
+                            Are you sure you want to delete this user?  This will also delete the user's itineraries and garage sales. This cannot be undone.
+                            Click <strong>Confirm</strong> to continue.
+                        </h4>
+                    </div>               
+                </div>
+                <div class="modal-footer">
+                    @Html.HiddenFor(m => m.User.UserId, new { @name = "hdnUserId" })
+                    @Html.HiddenFor(m => m.GarageSale.GarageSaleId, new { @name = "hdnGarageSaleId" })
+
+                    <input type="submit" class="btn btn-primary" value="Confirm" />
+                </div>
+            </div>
+        </div>
     </div>
 }

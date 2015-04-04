@@ -19,6 +19,12 @@
                 Your garage sale was successfully updated!
             </div>
 
+            <input id="hdnSaleDeleteMessage" type="hidden" value="@ViewBag.SaleDeleteSuccessful" />
+            <div class="alert alert-success hidden" role="alert" id="divSaleDeleteMessage" style="width:40%;">
+                <strong>Nice work!</strong>
+                Your garage sale was successfully deleted!
+            </div>
+
             @using (Html.BeginForm("SearchGarageSales", "Admin", FormMethod.Post, new { @class="form-inline" }))
             {
                 <div class="form-group">

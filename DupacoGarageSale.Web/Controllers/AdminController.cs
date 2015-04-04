@@ -106,6 +106,14 @@ namespace DupacoGarageSale.Web.Controllers
                     }
                 }
 
+                if (Session["UserDeleteSuccessful"] != null)
+                {
+                    if (Convert.ToBoolean(Session["UserDeleteSuccessful"]) == true)
+                    {
+                        ViewBag.UserDeleteSuccessful = "true";
+                    }
+                }
+
                 // Clear the session object.
                 Session["SaveSuccessful"] = null;
 
@@ -312,6 +320,89 @@ namespace DupacoGarageSale.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// This deletes garage sale users and all their objects.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public ActionResult DeleteGarageSaleUser(FormCollection form)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var viewModel = new AdminViewModel();
+
+                if (Session["AdminViewModel"] != null)
+                {
+                    viewModel = Session["AdminViewModel"] as AdminViewModel;
+                }
+
+                viewModel.AdminUser = session.User;
+
+                var userId = Convert.ToInt32(form["User.UserId"]);
+                // var garageSaleId = Convert.ToInt32(form["GarageSale.GarageSaleId"]);
+
+                var accountsRepository = new AccountsRepository();
+                var accountsSaveSuccessful = accountsRepository.DeleteGarageSaleUser(userId);
+
+                var repository = new GarageSaleRepository();
+                var saveSuccessful = false;
+
+                foreach (var sale in viewModel.UserGarageSales)
+                {
+                    saveSuccessful = repository.DeleteGarageSale(sale.GarageSaleId);
+                }
+
+                if (accountsSaveSuccessful && saveSuccessful)
+                {
+                    Session["UserDeleteSuccessful"] = true;
+                }
+
+                return RedirectToAction("Users", viewModel);
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
+        }
+
+        /// <summary>
+        /// This deletes the garage sale.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public ActionResult DeleteGarageSale(int saleId)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var viewModel = new AdminViewModel();
+
+                if (Session["AdminViewModel"] != null)
+                {
+                    viewModel = Session["AdminViewModel"] as AdminViewModel;
+                }
+
+                viewModel.AdminUser = session.User;
+
+                var repository = new GarageSaleRepository();
+                var saveSuccessful = false;
+
+                saveSuccessful = repository.DeleteGarageSale(saleId);
+
+                if (saveSuccessful)
+                {
+                    Session["SaleDeleteSuccessful"] = true;
+                }
+
+                return RedirectToAction("GarageSales", viewModel);
+            }
+            else
+            {
+                return View("~/Views/Accounts/Login.cshtml");
+            }
+        }
+
         #endregion
 
         #region Garage sales
@@ -352,10 +443,19 @@ namespace DupacoGarageSale.Web.Controllers
                     }
                 }
 
+                if (Session["SaleDeleteSuccessful"] != null)
+                {
+                    if (Convert.ToBoolean(Session["SaleDeleteSuccessful"]) == true)
+                    {
+                        ViewBag.SaleDeleteSuccessful = "true";
+                    }
+                }                
+
                 Session["AdminViewModel"] = viewModel;
 
                 ViewBag.GarageSalesActive = "active";
                 ViewBag.NavAdmin = "active";
+
                 return View(viewModel);
             }
             else

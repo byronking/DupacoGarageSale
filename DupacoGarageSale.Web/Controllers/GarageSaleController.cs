@@ -319,6 +319,13 @@ namespace DupacoGarageSale.Web.Controllers
                     SelectedCategories = new List<int>()
                 };
 
+                // Get the user's address, if missing.
+                if (viewModel.User.Address == null)
+                {
+                    var accountsRepository = new AccountsRepository();
+                    viewModel.User.Address = accountsRepository.GetUserAddressByUserId(viewModel.User.UserId);
+                }
+
                 foreach (var itemId in viewModel.Sale.GarageSaleItems)
                 {
                     viewModel.SelectedCategories.Add(itemId.ItemSubcategoryId);
