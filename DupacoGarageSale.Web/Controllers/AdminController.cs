@@ -1,4 +1,8 @@
-﻿using DupacoGarageSale.Data.Domain;
+﻿using DotNet.Highcharts;
+using DotNet.Highcharts.Enums;
+using DotNet.Highcharts.Helpers;
+using DotNet.Highcharts.Options;
+using DupacoGarageSale.Data.Domain;
 using DupacoGarageSale.Data.Repository;
 using DupacoGarageSale.Data.Services;
 using DupacoGarageSale.Domain.Helpers;
@@ -49,9 +53,13 @@ namespace DupacoGarageSale.Web.Controllers
                 // Get the counts of items and categories.
                 viewModel.SpecialItemsCount = repository.GetItemsAndCategoriesCount();
 
-                // Get the time/date of the first created account.
+                // Get the user sign-up statistics.
+                viewModel.UserSignUpStatistics = repository.GetUserSignUpStatistics();
+                viewModel.SignUpStatsChart = GetSignUpStatsChart(viewModel.UserSignUpStatistics);
 
-                // Get the time/date of the last created account.
+                // Get the community sign-up statistics.
+                viewModel.CommunitySignUpStatistics = repository.GetCommunitySignUpStatistics();
+                viewModel.CommunitySignUpStatsChart = GetCommunitySignUpStatsChart(viewModel.CommunitySignUpStatistics);
 
                 ViewBag.OverviewActive = "active";
                 ViewBag.NavAdmin = "active";
@@ -61,6 +69,131 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 return View("~/Views/Accounts/Login.cshtml");
             }
+        }
+
+        public Highcharts GetSignUpStatsChart(List<UserSignUpStatistic> data)
+        {
+            var datesList = new List<string>();
+            var countsList = new List<int>();
+
+            foreach (var item in data)
+            {
+                datesList.Add(item.SignUpDate);
+                countsList.Add(item.SignUpCount);
+            }
+
+            string[] datesArray = datesList.ToArray();
+            var countsArray = string.Join(",", countsList);
+
+            Highcharts chart = new Highcharts("chart")
+                .InitChart(new Chart { DefaultSeriesType = ChartTypes.Column })
+                .SetTitle(new Title { Text = "Sign-ups by date" })
+                //.SetSubtitle(new Subtitle { Text = "Source: Dupaco Garage Sales" })
+                .SetXAxis(new XAxis 
+                { 
+                    Categories = datesArray,
+                    Labels = new XAxisLabels
+                    {
+                        Rotation = 270,
+                        Align = HorizontalAligns.Right,
+                        Style = "fontSize: '13px',fontFamily: 'Verdana, sans-serif'"
+                    }
+                })
+                .SetYAxis(new YAxis
+                {
+                    Min = 0,
+                    Title = new YAxisTitle { Text = "# of users" }
+                })
+                .SetLegend(new Legend
+                {
+                    Layout = Layouts.Vertical,
+                    Align = HorizontalAligns.Left,
+                    VerticalAlign = VerticalAligns.Top,
+                    X = 100,
+                    Y = 70,
+                    Floating = true,
+                    BackgroundColor = new BackColorOrGradient(System.Drawing.ColorTranslator.FromHtml("#FFFFFF")),
+                    Shadow = true
+                })
+                .SetTooltip(new Tooltip { Formatter = @"function() { return ''+ this.x +': '+ this.y +' sign-up(s)'; }" })
+                .SetPlotOptions(new PlotOptions
+                {
+                    Column = new PlotOptionsColumn
+                    {
+                        PointPadding = 0.2,
+                        BorderWidth = 0
+                    }
+                })
+                .SetSeries(new[]
+                {
+                    new Series { Name = "Count of users", Data = new DotNet.Highcharts.Helpers.Data(new object[] { countsArray })}
+                    //new Series { Name = "Berlin", Data = new DotNet.Highcharts.Helpers.Data(new object[] { 42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1 }) }
+                });
+
+            return chart;
+        }
+
+        public Highcharts GetCommunitySignUpStatsChart(List<CommunitySignUpStatistic> data)
+        {
+            var communitiesList = new List<string>();
+            var countsList = new List<int>();
+
+            foreach (var item in data)
+            {
+                communitiesList.Add(item.SignUpCommunity);
+                countsList.Add(item.SignUpCount);
+            }
+
+            string[] datesArray = communitiesList.ToArray();
+            var countsArray = string.Join(",", countsList);
+
+            Highcharts chart = new Highcharts("community_chart")
+                .InitChart(new Chart { DefaultSeriesType = ChartTypes.Column, Height = 500 })
+                .SetTitle(new Title { Text = "Sign-ups by community" })
+                //.SetSubtitle(new Subtitle { Text = "Source: Dupaco Garage Sales" })
+                .SetXAxis(new XAxis
+                {
+                    Categories = datesArray,
+                    Labels = new XAxisLabels
+                    {
+                        Rotation = 270,
+                        Align = HorizontalAligns.Right,
+                        Style = "fontSize: '13px',fontFamily: 'Verdana, sans-serif'"
+                    }
+                })
+                .SetYAxis(new YAxis
+                {
+                    Min = 0,
+                    //TickInterval = 1,
+                    //TickLength = 10,
+                    Title = new YAxisTitle { Text = "# of users" }
+                })
+                .SetLegend(new Legend
+                {
+                    Layout = Layouts.Vertical,
+                    Align = HorizontalAligns.Left,
+                    VerticalAlign = VerticalAligns.Top,
+                    X = 100,
+                    Y = 70,
+                    Floating = true,
+                    BackgroundColor = new BackColorOrGradient(System.Drawing.ColorTranslator.FromHtml("#FFFFFF")),
+                    Shadow = true
+                })
+                .SetTooltip(new Tooltip { Formatter = @"function() { return ''+ this.x +': '+ this.y +' sign-up(s)'; }" })
+                .SetPlotOptions(new PlotOptions
+                {
+                    Column = new PlotOptionsColumn
+                    {
+                        PointPadding = 0.2,
+                        BorderWidth = 0
+                    }
+                })
+                .SetSeries(new[]
+                {
+                    new Series { Name = "Count of users", Data = new DotNet.Highcharts.Helpers.Data(new object[] { countsArray })}
+                });
+
+            return chart;
         }
 
         #region Garage sale users

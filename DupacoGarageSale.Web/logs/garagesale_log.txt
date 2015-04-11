@@ -342,3 +342,15 @@ Parameter name: index
    at DupacoGarageSale.Data.Repository.AccountsRepository.GetGarageSaleUserByUserName(String user_name) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AccountsRepository.cs:line 212
 ClientConnectionId:e3698b16-a930-4a8f-bce4-05ab5f69fe9f
 Error Number:201,State:4,Class:16
+2015-04-11 12:31:04,984 [11] ERROR DupacoGarageSale.Data.Services.Logger System.FormatException: The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value, IFormatProvider provider)
+   at System.String.System.IConvertible.ToDateTime(IFormatProvider provider)
+   at System.Convert.ToDateTime(Object value)
+   at DupacoGarageSale.Data.Repository.AdminRepository.GetCommunitySignUpStatistics() in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AdminRepository.cs:line 1097
+2015-04-11 12:31:56,163 [11] ERROR DupacoGarageSale.Data.Services.Logger System.FormatException: The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value, IFormatProvider provider)
+   at System.String.System.IConvertible.ToDateTime(IFormatProvider provider)
+   at System.Convert.ToDateTime(Object value)
+   at DupacoGarageSale.Data.Repository.AdminRepository.GetCommunitySignUpStatistics() in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AdminRepository.cs:line 1097

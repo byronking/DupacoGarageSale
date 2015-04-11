@@ -79,6 +79,7 @@
     <Compile Include="Domain\AuthenticationInfo.cs" />
     <Compile Include="Domain\BlogPost.cs" />
     <Compile Include="Domain\Community.cs" />
+    <Compile Include="Domain\CommunitySignUpStatistic.cs" />
     <Compile Include="Domain\ContactUsMessage.cs" />
     <Compile Include="Domain\EmailAddress.cs" />
     <Compile Include="Domain\EmailMessage.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Domain\UserAddress.cs" />
     <Compile Include="Domain\UserSaveResult.cs" />
     <Compile Include="Domain\UserSession.cs" />
+    <Compile Include="Domain\UserSignUpStatistic.cs" />
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AccountsRepository.cs" />

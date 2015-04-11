@@ -30,3 +30,4 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.WebPages.Razor.
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.csprojResolveAssemblyReference.cache
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\obj\Debug\DupacoGarageSale.Web.pdb
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\DotNet.Highcharts.dll

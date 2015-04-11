@@ -33,5 +33,9 @@ namespace DupacoGarageSale.Web.Models
         public List<ContactUsMessage> ContactUsMessages { get; set; }
         public List<ContactUsMessage> NewContactUsMessages { get; set; }
         public List<ContactUsMessage> ArchivedContactUsMessages { get; set; }
+        public List<UserSignUpStatistic> UserSignUpStatistics { get; set; }
+        public DotNet.Highcharts.Highcharts SignUpStatsChart { get; set; }
+        public List<CommunitySignUpStatistic> CommunitySignUpStatistics { get; set; }
+        public DotNet.Highcharts.Highcharts CommunitySignUpStatsChart { get; set; }
     }
 }

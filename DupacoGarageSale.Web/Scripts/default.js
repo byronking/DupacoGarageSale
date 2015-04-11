@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    jQuery.support.cors = true;
+
     // Handle the character count for the garage sale description for IE browsers < 10.
     //$().maxlength();
 
@@ -677,6 +679,38 @@
         }
     });
 });
+
+// This adds the Dupaco locations to the map.
+function AddDupacoLocations() {
+
+    //var addresses = ['3421 W 9th St Waterloo IA 50702', '1334 Flammang Dr Waterloo IA 50702', '218 W Mullan Ave Waterloo IA 50701', '3301 Cedar Heights Dr Cedar Falls IA 50613',
+    //    '110 35th St Dr SE Cedar Rapids IA 52403', '3131 Williams Blvd SW Cedar Rapids IA 52404', '501 4th Ave SE Cedar Rapids IA 52401', '3999 Pennsylvania Ave Dubuque IA 52002',
+    //    '3299 Hillcrest Rd Dubuque IA 52004', '1465 Sycamore St Dubuque IA 52001', '2245 Flint Hill Dr Dubuque IA 52003', '5865 Saratoga Rd Asbury IA 52002',
+    //    '400 S Locust St Dubuque IA 52003', '807 9th St SE Dyersville IA 52040', '1200 W Main St Manchester IA 52057', '11375 Oldenburg Ln Galena IL 61036',
+    //    '1100 E. Business Hwy. 151 Platteville WI 53818', '503 U.S. 30 Carroll IA 51401'];
+
+    var addresses = { };
+    addresses[0] = { address: '3421 West 9th Street Waterloo IA 50702', page: 'https://www.dupaco.com/access/dupaco-locations/3421-w-9th-st-waterloo-ia.html' };
+    addresses[1] = { address: '3999 Pennsylvania Ave Dubuque IA 52002', page: 'https://www.dupaco.com/access/dupaco-locations/3999-pennsylvania-ave-dubuque-ia.html' };
+    addresses[2] = { address: '11375 Oldenburg Ln Galena IL 61036', page: 'https://www.dupaco.com/access/dupaco-locations/11375-oldenburg-ln-galena-il.html' };
+    addresses[3] = { address: '5865 Saratoga Rd Asbury IA 52002', page: 'https://www.dupaco.com/access/dupaco-locations/5865-saratoga-rd-ia.html' };
+    addresses[4] = { address: '400 S Locust St Dubuque IA 52003', page: 'https://www.dupaco.com/access/dupaco-locations/400-s-locust-st-dubuque-ia.html' };
+    addresses[5] = { address: '1334 Flammang Dr Waterloo IA 50702', page: 'https://www.dupaco.com/access/dupaco-locations/1334-flammang-dr-waterloo-ia.html' };
+    addresses[6] = { address: '218 W Mullan Ave Waterloo IA 50701', page: 'https://www.dupaco.com/access/dupaco-locations/218-w-mullan-ave-waterloo-ia.html' };
+    addresses[7] = { address: '3301 Cedar Heights Dr Cedar Falls IA 50613', page: 'https://www.dupaco.com/access/dupaco-locations/3301-cedar-heights-dr-cedar-falls-ia.html' };
+    addresses[8] = { address: '110 35th St Dr SE Cedar Rapids IA 52403', page: 'https://www.dupaco.com/access/dupaco-locations/110-35th-st-dr-se-cedar-rapids-ia.html' };
+    addresses[9] = { address: '3131 Williams Blvd SW Cedar Rapids IA 52404', page: 'https://www.dupaco.com/access/dupaco-locations/3131-williams-blvd-sw-cedar-rapids-ia.html' };
+    addresses[10] = { address: '501 4th Ave SE Cedar Rapids IA 52401', page: 'https://www.dupaco.com/access/dupaco-locations/501-4th-ave-se-cedar-rapids-ia.html"' };
+    addresses[11] = { address: '3299 Hillcrest Rd Dubuque IA 52004', page: 'https://www.dupaco.com/access/dupaco-locations/3299-hillcrest-rd-dubuque-ia.html' };
+    addresses[12] = { address: '1465 Sycamore St Dubuque IA 52001', page: 'https://www.dupaco.com/access/dupaco-locations/1465-sycamore-st-dubuque-ia.html' };
+    addresses[13] = { address: '2245 Flint Hill Dr Dubuque IA 52003', page: 'https://www.dupaco.com/access/dupaco-locations/2245-flint-hill-dr-dubuque-ia.html' };
+    addresses[14] = { address: '807 9th St SE Dyersville IA 52040', page: 'https://www.dupaco.com/access/dupaco-locations/807-9th-st-se-dyersville-ia.html' };
+    addresses[15] = { address: '1200 W Main St Manchester IA 52057', page: 'https://www.dupaco.com/access/dupaco-locations/1200-w-main-st-manchester-ia.html' };
+    addresses[16] = { address: '1100 E. Business Hwy. 151 Platteville WI 53818', page: 'https://www.dupaco.com/access/dupaco-locations/1100-e-business-hwy-151-platteville-wi.html' };
+    addresses[17] = { address: '503 U.S. 30 Carroll IA 51401', page: 'https://www.dupaco.com/access/dupaco-locations/503-us-30-carroll-ia.html' };
+
+    return addresses;
+}
 
 var maxLength = 100;
 function enforceMaxLength(ta) {

@@ -24,7 +24,7 @@
     <!-- intro youtube video here -->
     <div class="row">
         <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" allowfullscreen="" src="https://www.youtube.com/embed/GTOv0nxKcG4?rel=0"></iframe>
+            <iframe class="embed-responsive-item" allowfullscreen="" src="https://www.youtube.com/embed/GTOv0nxKcG4?rel=0&html5=1"></iframe>
         </div>
     </div><br /><br />
 
@@ -636,7 +636,7 @@
 <input type="hidden" value="@ViewBag.SearchAddress" id="hdnSearchAddress" />
 <input type="hidden" value="@ViewBag.Radius" id="hdnRadius" />
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0PudWjsqLxR5ZBsdLIBHUjMikiAZJgu8"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0PudWjsqLxR5ZBsdLIBHUjMikiAZJgu8&libraries=geometry"></script>
 <script type="text/javascript">     
    
     var mapAddresses = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.Addresses))
@@ -658,7 +658,6 @@
         // End simple test map
 
         geocoder = new google.maps.Geocoder();
-        //alert(geocoder);
 
         var map;         
 
@@ -673,17 +672,17 @@
         //var addresses = ['7 Saint Paul St. Baltimore MD 21202', '2201 Lake Ave Baltimore MD 21213', '4846 Western Ave Bethesda MD 20816', '201 State Rd Rehoboth DE 19971', '2804 Hyson Lane Falls Church VA 22043'];
 
         var addresses = mapAddresses;
-
+        //alert(addresses);
         if (addresses != null)
         {
             var marker, x;
             var infowindow = new google.maps.InfoWindow();
 
             for (x = 0; x < addresses.length; x++) {
-                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=false', null, function (data) {
+                //alert(addresses.length);
+                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x], null, function (data) {
 
                     var p = data.results[0].geometry.location
-
                     //alert(data.results[0].formatted_address);  // This will alert the individual addresses.
 
                     //debugObject(data.results[0].formatted_address);
@@ -705,9 +704,44 @@
             }
 
             geoCodeAddress(map);
+        }
 
-            // Jump to the map.
-            //window.location = $('#mappy').attr('href');
+        // Add the Dupaco locations
+        var dupacoLocations = AddDupacoLocations();
+        //alert(dupacoLocations);
+        //alert(getObjectSize(dupacoLocations));
+
+        if (dupacoLocations != null)
+        {
+            var marker, x;
+            var infowindow = new google.maps.InfoWindow();
+
+            for (x = 0; x < getObjectSize(dupacoLocations); x++) {
+                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + dupacoLocations[x].address, null, function (data) {
+
+                    var p = data.results[0].geometry.location
+
+                    //alert(data.results[0].formatted_address);  // This will alert the individual addresses.
+                    var image = '/Content/images/dupaco_icon.gif';
+                    var latlng = new google.maps.LatLng(p.lat, p.lng);
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+                        icon: image,
+                        title: data.results[0].formatted_address
+                    });
+
+                    // Add the markers to the gmarkers array.
+                    gmarkers.push(marker);
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.setContent('Dupaco Bank <br/>' + data.results[0].formatted_address + ' <br/><a target="_blank" href="'+ dupacoLocations[0].page + '">Visit this location</a>');
+                        infowindow.open(map, marker);
+                    });
+                });            
+            }
+
+            geoCodeAddress(map);
         }
     }    
 
@@ -717,6 +751,7 @@
         var address = document.getElementById('hdnSearchAddress').value;
         var radius = parseInt(document.getElementById('hdnRadius').value, 10)*1000;
         //var address = document.getElementById("hdnCenterAddress").value;
+        //alert('radius: ' + radius);
 
         geocoder.geocode({ 'address': address }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) 
@@ -767,6 +802,7 @@
                 }
                 // put the assembled side_bar_html contents into the side_bar div
                 //document.getElementById("side_bar").innerHTML = side_bar_html;
+                //alert(foundMarkers);
                 if (foundMarkers > 0) 
                 {
                     map.fitBounds(bounds);
@@ -779,14 +815,23 @@
                     map.fitBounds(circle.getBounds());
                 }
                 // makeSidebar();
-                google.maps.event.addListenerOnce(map, 'bounds_changed', makeSidebar);
+                //google.maps.event.addListenerOnce(map, 'bounds_changed', makeSidebar);
             }
             else
             {
-                // alert("Geocode was not successful for the following reason: " + status);
+                //alert("Geocode was not successful for the following reason: " + status);
             }            
         });
     }
+
+    // This gets the size of the object array.
+    function getObjectSize(obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
 
     function debugObject(inputobject) {
         obj = inputobject;

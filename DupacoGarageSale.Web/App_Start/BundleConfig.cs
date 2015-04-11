@@ -44,6 +44,9 @@ namespace DupacoGarageSale.Web
 
             bundles.Add(new ScriptBundle("~/bundles/tokeninput").Include(
                         "~/Scripts/jquery.tokeninput.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
+                        "~/Scripts/Highcharts-4.0.1/js/highcharts.js"));
             
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

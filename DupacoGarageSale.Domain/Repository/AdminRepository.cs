@@ -1035,5 +1035,81 @@ namespace DupacoGarageSale.Data.Repository
 
             return communityList;
         }
+
+        /// <summary>
+        /// This gets the count of users, grouped by sign-up date.
+        /// </summary>
+        /// <returns></returns>
+        public List<UserSignUpStatistic> GetUserSignUpStatistics()
+        {
+            var signUpStats = new List<UserSignUpStatistic>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetUserSignUpStatistics", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var signUpStat = new UserSignUpStatistic
+                        {
+                            SignUpDate = Convert.ToDateTime(reader["create_date"]).ToShortDateString(),
+                            SignUpCount = Convert.ToInt32(reader["records_count"])
+                        };
+
+                        signUpStats.Add(signUpStat);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return signUpStats;
+        }
+
+        /// <summary>
+        /// This gets the count of users, grouped by sign-up community.
+        /// </summary>
+        /// <returns></returns>
+        public List<CommunitySignUpStatistic> GetCommunitySignUpStatistics()
+        {
+            var signUpStats = new List<CommunitySignUpStatistic>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetCommunitySignUpStatistics", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var signUpStat = new CommunitySignUpStatistic
+                        {
+                            SignUpCommunity = reader["community"].ToString(),
+                            SignUpCount = Convert.ToInt32(reader["records_count"])
+                        };
+
+                        signUpStats.Add(signUpStat);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return signUpStats;
+        }
     }
 }
