@@ -7,6 +7,7 @@ using DupacoGarageSale.Data.Repository;
 using DupacoGarageSale.Data.Services;
 using DupacoGarageSale.Domain.Helpers;
 using DupacoGarageSale.Web.Models;
+using NPOI.HSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -1077,6 +1078,118 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 return RedirectToAction("Login", "Accounts");
             }
+        }
+
+        /// <summary>
+        /// This exports the garage sale detil data for print.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ExportGarageSaleDetail()
+        {
+            var detailList = new List<GarageSaleDetail>();
+            var repository = new AdminRepository();
+            detailList = repository.GetAllGarageSaleDetailForPrint();
+
+            MemoryStream output = new MemoryStream();
+            string saveAsFileNameDate = string.Format("GarageSaleDetail" + "-{0:d}.xls", DateTime.Now).Replace("/", "-");
+
+            var workbook = new HSSFWorkbook();
+            HSSFCellStyle cellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
+            cellStyle.DataFormat = HSSFDataFormat.GetBuiltinFormat("mm/dd/yyyy");
+
+            var sheet = workbook.CreateSheet("GarageSaleDetail");
+
+            //Create header row
+            var headerRow = sheet.CreateRow(0);
+            headerRow.CreateCell(0).SetCellValue("Date Field 1");
+            headerRow.CreateCell(1).SetCellValue("Date Field 1 Start Time");	
+            headerRow.CreateCell(2).SetCellValue("Date Field 1 End Time");
+            headerRow.CreateCell(3).SetCellValue("Date Field 2");	
+            headerRow.CreateCell(4).SetCellValue("Date Field 2 Start Time");	
+            headerRow.CreateCell(5).SetCellValue("Date Field 2 End Time");	
+            headerRow.CreateCell(6).SetCellValue("Date Field 3");	
+            headerRow.CreateCell(7).SetCellValue("Date Field 3 Start Time");	
+            headerRow.CreateCell(8).SetCellValue("Date Field 3 End Time");	
+            headerRow.CreateCell(9).SetCellValue("Date Field 4");	
+            headerRow.CreateCell(10).SetCellValue("Date Field 4 Start Time");	
+            headerRow.CreateCell(11).SetCellValue("Date Field 4 End Time");	
+            headerRow.CreateCell(12).SetCellValue("Sale Name");	
+            headerRow.CreateCell(13).SetCellValue("House number and street");	
+            headerRow.CreateCell(14).SetCellValue("Apt, unit, or condo number");	
+            headerRow.CreateCell(15).SetCellValue("City");	
+            headerRow.CreateCell(16).SetCellValue("State");	
+            headerRow.CreateCell(17).SetCellValue("Zip");	
+            headerRow.CreateCell(18).SetCellValue("Description");	
+            headerRow.CreateCell(19).SetCellValue("Category: Baby");	
+            headerRow.CreateCell(20).SetCellValue("Category: Clothing, Accessories");	
+            headerRow.CreateCell(21).SetCellValue("Category: Electronics");	
+            headerRow.CreateCell(22).SetCellValue("Category: Health, Beauty");	
+            headerRow.CreateCell(23).SetCellValue("Category: Pets");	
+            headerRow.CreateCell(24).SetCellValue("Category: Home");	
+            headerRow.CreateCell(25).SetCellValue("Category: Home Maintenance");	
+            headerRow.CreateCell(26).SetCellValue("Category: Media");
+            headerRow.CreateCell(27).SetCellValue("Category: Toys, games");	
+            headerRow.CreateCell(28).SetCellValue("Category: Vehicles");	
+            headerRow.CreateCell(29).SetCellValue("Category: Sports, Fitness, Outdoors");	
+            headerRow.CreateCell(30).SetCellValue("Category: Musical Instruments, Gear");	
+            headerRow.CreateCell(31).SetCellValue("Username");	
+            headerRow.CreateCell(32).SetCellValue("First Name");	
+            headerRow.CreateCell(33).SetCellValue("Last Name");	
+            headerRow.CreateCell(34).SetCellValue("Contact Phone");	
+            headerRow.CreateCell(35).SetCellValue("Contact Email");
+
+            HSSFCellStyle dateStyle;
+            dateStyle = (HSSFCellStyle)workbook.CreateCellStyle();
+            dateStyle.DataFormat = HSSFDataFormat.GetBuiltinFormat("mm/dd/yyyy");
+
+            int rowNum = 1;
+            foreach (var item in detailList)
+            {
+                var row = sheet.CreateRow(rowNum++);
+                row.CreateCell(0).SetCellValue(item.DateField1);
+                row.CreateCell(1).SetCellValue(item.DateField1Start);
+                row.CreateCell(2).SetCellValue(item.DateField1End);
+                row.CreateCell(3).SetCellValue(item.DateField2);
+                row.CreateCell(4).SetCellValue(item.DateField2Start);
+                row.CreateCell(5).SetCellValue(item.DateField2End);
+                row.CreateCell(6).SetCellValue(item.DateField3);
+                row.CreateCell(7).SetCellValue(item.DateField3Start);
+                row.CreateCell(8).SetCellValue(item.DateField3End);
+                row.CreateCell(9).SetCellValue(item.DateField4);
+                row.CreateCell(10).SetCellValue(item.DateField4Start);
+                row.CreateCell(11).SetCellValue(item.DateField4End);
+                row.CreateCell(12).SetCellValue(item.SaleName);
+                row.CreateCell(13).SetCellValue(item.HouseNumberStreet);
+                row.CreateCell(14).SetCellValue(item.AptUnitCondoNumber);
+                row.CreateCell(15).SetCellValue(item.City);
+                row.CreateCell(16).SetCellValue(item.State);
+                row.CreateCell(17).SetCellValue(item.Zip);
+                row.CreateCell(18).SetCellValue(item.Description);
+                row.CreateCell(19).SetCellValue(item.CategoryBaby);
+                row.CreateCell(20).SetCellValue(item.CategoryClothingAccessories);
+                row.CreateCell(21).SetCellValue(item.CategoryElectronics);
+                row.CreateCell(22).SetCellValue(item.CategoryHealthBeauty);
+                row.CreateCell(23).SetCellValue(item.CategoryPets);
+                row.CreateCell(24).SetCellValue(item.CategoryHome);
+                row.CreateCell(25).SetCellValue(item.CategoryHomeMaintenance);
+                row.CreateCell(26).SetCellValue(item.CategoryMedia);
+                row.CreateCell(27).SetCellValue(item.CategoryToysGames);
+                row.CreateCell(28).SetCellValue(item.CategoryVehicles);
+                row.CreateCell(29).SetCellValue(item.CategorySportsFitnessOutdoors);
+                row.CreateCell(30).SetCellValue(item.CategoryMusicalInstruments);
+                row.CreateCell(31).SetCellValue(item.UserName);
+                row.CreateCell(32).SetCellValue(item.FirstName);
+                row.CreateCell(33).SetCellValue(item.LastName);
+                row.CreateCell(34).SetCellValue(item.ContactPhone);
+                row.CreateCell(35).SetCellValue(item.ContactEmail);
+            }
+
+            workbook.Write(output);
+            output.Flush();
+            output.Position = 0;
+
+            return File(output, "application/vnd.ms-excel", saveAsFileNameDate);
         }
 
         #endregion        

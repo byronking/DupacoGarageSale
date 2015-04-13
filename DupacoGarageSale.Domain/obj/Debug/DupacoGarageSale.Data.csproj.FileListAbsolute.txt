@@ -18,4 +18,12 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\System.Web.WebPag
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.dll
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.pdb
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.csprojResolveAssemblyReference.cache
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\NPOI.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\NPOI.OOXML.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\log4net.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\NPOI.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\NPOI.OOXML.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\NPOI.OpenXml4Net.xml

@@ -106,6 +106,15 @@ namespace DupacoGarageSale.Web.Controllers
                 session = Session["UserSession"] as UserSession;
                 viewModel.User = session.User;
 
+                // Set the sign-in flag.
+                ViewBag.SignedIn = "true";
+
+                // Get the user's itinerary or itineraries by user id.
+                var itineraryRepository = new ItineraryRepository();
+                var itineraryList = new List<GarageSaleItinerary>();
+                itineraryList = itineraryRepository.GetItinerariesByUserId(viewModel.User.UserId);
+                viewModel.GarageSaleItineraries = itineraryList;
+
                 // Default to the user's address in the search box, unless the user entered an address.
                 if (viewModel.MappingData == null)
                 {

@@ -1111,5 +1111,74 @@ namespace DupacoGarageSale.Data.Repository
 
             return signUpStats;
         }
+
+        public List<GarageSaleDetail> GetAllGarageSaleDetailForPrint()
+        {
+            var detailList = new List<GarageSaleDetail>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("GetAllGarageSaleDetailForPrint", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        var detail = new GarageSaleDetail
+                        {
+                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            DateField1 = reader["sale_date_one"].ToString(),
+                            DateField1Start = reader["day_one_start"].ToString(),
+                            DateField1End = reader["day_one_end"].ToString(),
+                            DateField2 = reader["sale_date_two"].ToString(),	
+                            DateField2Start = reader["day_two_start"].ToString(),
+                            DateField2End = reader["day_two_end"].ToString(),
+                            DateField3 = reader["sale_date_three"].ToString(),	
+                            DateField3Start = reader["day_three_start"].ToString(),
+                            DateField3End = reader["day_three_end"].ToString(),
+                            DateField4 = reader["sale_date_four"].ToString(),	
+                            DateField4Start = reader["day_four_start"].ToString(),
+                            DateField4End = reader["day_four_end"].ToString(),
+                            SaleName = reader["sale_name"].ToString(),	
+                            HouseNumberStreet = reader["sale_address1"].ToString(),
+                            AptUnitCondoNumber = reader["sale_address2"].ToString(),
+                            City = reader["sale_city"].ToString(),
+                            State = reader["state_name"].ToString(),
+                            Zip = reader["sale_zip"].ToString(),
+                            Description = reader["sale_description"].ToString(),
+                            CategoryBaby = reader["category_baby"].ToString(),
+                            CategoryClothingAccessories = reader["category_clothing_acc"].ToString(),
+                            CategoryElectronics = reader["category_electronics"].ToString(),
+                            CategoryHealthBeauty = reader["category_health_beauty"].ToString(),
+                            CategoryPets = reader["category_pets"].ToString(),
+                            CategoryHome = reader["category_home"].ToString(),
+                            CategoryHomeMaintenance = reader["category_home_maint"].ToString(),
+                            CategoryMedia = reader["category_media"].ToString(),
+                            CategoryToysGames = reader["category_toys_games"].ToString(),
+                            CategoryVehicles = reader["category_vehicles"].ToString(),
+                            CategorySportsFitnessOutdoors = reader["category_sports_fitness"].ToString(),
+                            CategoryMusicalInstruments = reader["category_musical_instr"].ToString(),
+                            UserName = reader["user_name"].ToString(),
+                            FirstName = reader["first_name"].ToString(),
+                            LastName = reader["last_name"].ToString(),
+                            ContactPhone = reader["phone"].ToString(),
+                            ContactEmail = reader["email"].ToString(),
+                        };
+
+                        detailList.Add(detail);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return detailList;
+        }
     }
 }

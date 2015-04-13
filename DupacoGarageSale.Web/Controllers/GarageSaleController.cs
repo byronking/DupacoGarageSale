@@ -106,7 +106,7 @@ namespace DupacoGarageSale.Web.Controllers
             model.Sale.DatesTimes.SaleDateTwo = Convert.ToDateTime(model.Sale.DatesTimes.SaleDateTwo);
             model.Sale.DatesTimes.SaleDateThree = Convert.ToDateTime(model.Sale.DatesTimes.SaleDateThree);
             model.Sale.DatesTimes.SaleDateFour = Convert.ToDateTime(model.Sale.DatesTimes.SaleDateFour);
-            model.Sale.CreateDate = DateTime.Now;            
+            model.Sale.CreateDate = DateTime.Now;
 
             if (Session["UserSession"] != null)
             {
@@ -119,34 +119,38 @@ namespace DupacoGarageSale.Web.Controllers
                 model.User = userSession.User;
                 model.Sale.SaleHost = model.User.UserName;
                 model.Sale.ModifyUser = model.User.UserName;
-            }
 
-            var errors = ModelState.Where(v => v.Value.Errors.Any());
-            var repository = new GarageSaleRepository();
+                var errors = ModelState.Where(v => v.Value.Errors.Any());
+                var repository = new GarageSaleRepository();
 
-            if (ModelState.IsValid)
-            {
-                var saveResult = new UserSaveResult();
-
-                saveResult = repository.SaveGarageSale(model.Sale);
-
-                model.Sale.GarageSaleId = saveResult.SaveResultId;
-
-                ViewBag.NavAddSale = "active";   
-
-                return RedirectToAction("Edit", new RouteValueDictionary(new
+                if (ModelState.IsValid)
                 {
-                    controller = "GarageSale",
-                    action = "Edit",
-                    id = model.Sale.GarageSaleId
-                }));
+                    var saveResult = new UserSaveResult();
+
+                    saveResult = repository.SaveGarageSale(model.Sale);
+
+                    model.Sale.GarageSaleId = saveResult.SaveResultId;
+
+                    ViewBag.NavAddSale = "active";
+
+                    return RedirectToAction("Edit", new RouteValueDictionary(new
+                    {
+                        controller = "GarageSale",
+                        action = "Edit",
+                        id = model.Sale.GarageSaleId
+                    }));
+                }
+                else
+                {
+                    // Get the subcategories
+                    model.ItemCategories = repository.GetCategoriesAndSubcategories();
+                    return View("~/Views/GarageSale/Add.cshtml", model);
+                }
             }
             else
             {
-                // Get the subcategories
-                model.ItemCategories = repository.GetCategoriesAndSubcategories();
-                return View("~/Views/GarageSale/Add.cshtml", model);
-            }                     
+                return RedirectToAction("Login", "Accounts");
+            }
         }
 
         /// <summary>
@@ -197,9 +201,6 @@ namespace DupacoGarageSale.Web.Controllers
                     categoryIdList.Add(categoryId);
                 }
             }
-
-            var testy = categoryIdList;
-            var testy2 = model.Sale.GarageSaleItems;
 
             // Set the sale dates in the web.config file and then set them as the model properties...
             model.Sale.DatesTimes.SaleDateOne = Convert.ToDateTime(ConfigurationManager.AppSettings["SaleDateOne"]);
@@ -748,7 +749,7 @@ namespace DupacoGarageSale.Web.Controllers
                         ViewBag.FavedGarageSale = faveGarageSale.FavoriteId;
                     }
 
-                    // Get the user's itinerary by user id.
+                    // Get the user's itinerary or itineraries by user id.
                     var itineraryRepository = new ItineraryRepository();
                     var itineraryList = new List<GarageSaleItinerary>();
                     itineraryList = itineraryRepository.GetItinerariesByUserId(viewModel.User.UserId);

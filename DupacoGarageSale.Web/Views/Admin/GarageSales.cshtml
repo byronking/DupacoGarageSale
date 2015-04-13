@@ -25,6 +25,14 @@
                 Your garage sale was successfully deleted!
             </div>
 
+            <p class="lead">Click the button below to export all sales for print</p>
+            <div>
+                @Html.ActionLink("Export garage sale detail", "ExportGarageSaleDetail", null, new { @class = "btn btn-primary" })<br /><br />
+            </div>
+            <hr />
+
+            <p class="lead down_30">View or edit sales</p>
+
             @using (Html.BeginForm("SearchGarageSales", "Admin", FormMethod.Post, new { @class="form-inline" }))
             {
                 <div class="form-group">

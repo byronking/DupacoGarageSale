@@ -678,6 +678,11 @@
             e.preventDefault();
         }
     });
+
+    // This responds to clicking the add stopover link.
+    $('#linkAddStopover').click(function () {
+        alert('hi, linkieee');
+    });
 });
 
 // This adds the Dupaco locations to the map.

@@ -633,6 +633,63 @@
     </div>
 </div>
 
+<!-- Add stopover modal -->
+<div class="modal fade add-stopover" id="addStopoverModal" tabindex="-1" role="dialog" aria-labelledby="addStopoverModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add stopover</h3>
+            </div>
+            <div class="modal-body">
+                <form action="~/Itinerary/CreateOrAddToItinerary" method="post">            
+                    <h4>Existing itineraries</h4>
+                    <div>
+                        @if (Model.GarageSaleItineraries != null)
+                        {   
+                            if (Model.GarageSaleItineraries.Count == 0)
+                            {
+                                <span class="margin_bottom_40">No itineraries.  Let's create one!</span>
+                            }
+                            else
+                            {
+                                <input type="hidden" id="waypointAddress" />
+                                <table class="table-hover table-bordered table-condensed margin_bottom_30">
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Itinerary name</th>
+                                        <th>Itinerary create date</th>
+                                    </tr>
+                                    @foreach(var itinerary in Model.GarageSaleItineraries)
+                                    {
+                                        var waypointAddress = string.Empty;
+                                        <tr>
+                                            <td>@Html.ActionLink("Save to this itinerary", "AddItineraryWaypoint", "Itinerary", new { address = @waypointAddress, itineraryId = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>
+                                            <td>@Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>
+                                            <td>@itinerary.ItineraryName</td>
+                                            <td>@itinerary.ItineraryCreatedDate</td>
+                                        </tr>
+                                    }                            
+                                </table>
+                            }
+                        }
+                    </div><br />
+                    @Html.HiddenFor(m => m.Sale.GarageSaleId)
+                    @Html.HiddenFor(m => m.User.UserId)
+                    <h4>Create a new itinerary</h4>
+                
+                    <div class="form-group">
+                        <label for="txtItineraryName">Itinerary name</label>
+                        @Html.TextBoxFor(m => m.UserItinerary.ItineraryName, new { @class="form-control", @style="width:70%;" })
+                    </div>
+                    <br />
+                    <input type="submit" value="Add to itinerary" class="btn btn-sm btn-info" />
+                </form>                                
+            </div>
+        </div>
+    </div>
+</div>
+
 <input type="hidden" value="@ViewBag.SearchAddress" id="hdnSearchAddress" />
 <input type="hidden" value="@ViewBag.Radius" id="hdnRadius" />
 
@@ -746,7 +803,14 @@
         // Add the markers to the gmarkers array.
         gmarkers.push(marker);
         google.maps.event.addListener(marker, 'click', function () {
-            infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><a target="_blank" href="'+ page + '">Visit this location</a>');
+            var signed_in = @ViewBag.SignedIn
+            //alert(signed_in);
+            if (signed_in) {                
+                infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><br/><a target="_blank" href="'+ page + '">Visit this location</a> <br/> <a href="#" id="linkAddStopover" >Add to itinerary</a> ');
+            } //data-target="#addStopoverModal" data-toggle="modal"
+            else {
+                infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><a target="_blank" href="'+ page + '">Visit this location</a>');
+            }
             infowindow.open(map, marker);
         });
     }
