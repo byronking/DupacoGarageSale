@@ -1,5 +1,7 @@
 ﻿@model DupacoGarageSale.Web.Models.AdminViewModel
 
+@using System.Web.Helpers;
+
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -12,12 +14,20 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"><a href="~/Home"  style="text-decoration:none;"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home / </a>Garage Sales Admin Dashboard</h1>
             <p class="lead">General statistics:</p>
-            There are currently <strong>@Model.UserCount</strong> registered users<br />
-            There are currently <strong>@Model.GarageSaleCount</strong> active garage sales.<br /><br /><br />
-            
-            <p class="lead">Hot picks statistics:</p>
-            There are currently <strong>@Model.SpecialItemsCount.Count</strong> hot pick items spanning <strong>@Model.SpecialItemsCount.Categories</strong> categories.<br /><br />
 
+            There are currently <strong>@Model.UserCount</strong> registered users<br />
+            There are currently <strong>@Model.GarageSaleCount</strong> active garage sales<br />
+
+            <p class="lead down_20">Hot picks statistics:</p>
+            There are currently <strong>@Model.SpecialItemsCount.Count</strong> hot pick items spanning <strong>@Model.SpecialItemsCount.Categories</strong> categories<br /><br />
+
+            <div class="down_30">
+                @(Model.SignUpStatsChart)
+            </div>
+
+            <div class="down_30" style="height:500px;">
+                @(Model.CommunitySignUpStatsChart)
+            </div>
         </div>
     </div>
 </div>

@@ -149,12 +149,17 @@
         if ($("#hdnFaveRemovedSuccess").val() == "true") {
             $("#divFaveRemovedSuccess").removeClass("hidden");
         }
-    }
+    }    
 });
 
 $(function () {
     $('[data-toggle="popover"]').popover()
 })
+
+// Show the add stopover modal.
+function ShowStopoverModal() {
+    $('#addStopoverModal').modal('show');
+}
 
 function debugObject(inputobject) {
     obj = inputobject;

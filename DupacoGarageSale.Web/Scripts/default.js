@@ -690,24 +690,24 @@ function AddDupacoLocations() {
     //    '1100 E. Business Hwy. 151 Platteville WI 53818', '503 U.S. 30 Carroll IA 51401'];
 
     var addresses = { };
-    addresses[0] = { address: '3421 West 9th Street Waterloo IA 50702', page: 'https://www.dupaco.com/access/dupaco-locations/3421-w-9th-st-waterloo-ia.html' };
-    addresses[1] = { address: '3999 Pennsylvania Ave Dubuque IA 52002', page: 'https://www.dupaco.com/access/dupaco-locations/3999-pennsylvania-ave-dubuque-ia.html' };
-    addresses[2] = { address: '11375 Oldenburg Ln Galena IL 61036', page: 'https://www.dupaco.com/access/dupaco-locations/11375-oldenburg-ln-galena-il.html' };
-    addresses[3] = { address: '5865 Saratoga Rd Asbury IA 52002', page: 'https://www.dupaco.com/access/dupaco-locations/5865-saratoga-rd-ia.html' };
-    addresses[4] = { address: '400 S Locust St Dubuque IA 52003', page: 'https://www.dupaco.com/access/dupaco-locations/400-s-locust-st-dubuque-ia.html' };
-    addresses[5] = { address: '1334 Flammang Dr Waterloo IA 50702', page: 'https://www.dupaco.com/access/dupaco-locations/1334-flammang-dr-waterloo-ia.html' };
-    addresses[6] = { address: '218 W Mullan Ave Waterloo IA 50701', page: 'https://www.dupaco.com/access/dupaco-locations/218-w-mullan-ave-waterloo-ia.html' };
-    addresses[7] = { address: '3301 Cedar Heights Dr Cedar Falls IA 50613', page: 'https://www.dupaco.com/access/dupaco-locations/3301-cedar-heights-dr-cedar-falls-ia.html' };
-    addresses[8] = { address: '110 35th St Dr SE Cedar Rapids IA 52403', page: 'https://www.dupaco.com/access/dupaco-locations/110-35th-st-dr-se-cedar-rapids-ia.html' };
-    addresses[9] = { address: '3131 Williams Blvd SW Cedar Rapids IA 52404', page: 'https://www.dupaco.com/access/dupaco-locations/3131-williams-blvd-sw-cedar-rapids-ia.html' };
-    addresses[10] = { address: '501 4th Ave SE Cedar Rapids IA 52401', page: 'https://www.dupaco.com/access/dupaco-locations/501-4th-ave-se-cedar-rapids-ia.html"' };
-    addresses[11] = { address: '3299 Hillcrest Rd Dubuque IA 52004', page: 'https://www.dupaco.com/access/dupaco-locations/3299-hillcrest-rd-dubuque-ia.html' };
-    addresses[12] = { address: '1465 Sycamore St Dubuque IA 52001', page: 'https://www.dupaco.com/access/dupaco-locations/1465-sycamore-st-dubuque-ia.html' };
-    addresses[13] = { address: '2245 Flint Hill Dr Dubuque IA 52003', page: 'https://www.dupaco.com/access/dupaco-locations/2245-flint-hill-dr-dubuque-ia.html' };
-    addresses[14] = { address: '807 9th St SE Dyersville IA 52040', page: 'https://www.dupaco.com/access/dupaco-locations/807-9th-st-se-dyersville-ia.html' };
-    addresses[15] = { address: '1200 W Main St Manchester IA 52057', page: 'https://www.dupaco.com/access/dupaco-locations/1200-w-main-st-manchester-ia.html' };
-    addresses[16] = { address: '1100 E. Business Hwy. 151 Platteville WI 53818', page: 'https://www.dupaco.com/access/dupaco-locations/1100-e-business-hwy-151-platteville-wi.html' };
-    addresses[17] = { address: '503 U.S. 30 Carroll IA 51401', page: 'https://www.dupaco.com/access/dupaco-locations/503-us-30-carroll-ia.html' };
+    addresses[0] = { address: '3421 West 9th Street Waterloo IA 50702', lat: 42.461057, long: -92.346031, page: 'https://www.dupaco.com/access/dupaco-locations/3421-w-9th-st-waterloo-ia.html' };
+    addresses[1] = { address: '3999 Pennsylvania Ave Dubuque IA 52002', lat: 42.501910, long: -90.739733, page: 'https://www.dupaco.com/access/dupaco-locations/3999-pennsylvania-ave-dubuque-ia.html' };
+    addresses[2] = { address: '11375 Oldenburg Ln Galena IL 61036', lat: 42.436796, long: -90.450703, page: 'https://www.dupaco.com/access/dupaco-locations/11375-oldenburg-ln-galena-il.html' };
+    addresses[3] = { address: '5865 Saratoga Rd Asbury IA 52002', lat: 42.509365, long: -90.757738, page: 'https://www.dupaco.com/access/dupaco-locations/5865-saratoga-rd-ia.html' };
+    addresses[4] = { address: '400 S Locust St Dubuque IA 52003', lat: 42.486759, long: -90.663007, page: 'https://www.dupaco.com/access/dupaco-locations/400-s-locust-st-dubuque-ia.html' };
+    //addresses[5] = { address: '1334 Flammang Dr Waterloo IA 50702', lat: 42.458591, long: -92.330485, page: 'https://www.dupaco.com/access/dupaco-locations/1334-flammang-dr-waterloo-ia.html' };
+    //addresses[6] = { address: '218 W Mullan Ave Waterloo IA 50701', lat: 42.498419, long: -92.346106, page: 'https://www.dupaco.com/access/dupaco-locations/218-w-mullan-ave-waterloo-ia.html' };
+    //addresses[7] = { address: '3301 Cedar Heights Dr Cedar Falls IA 50613', lat: 42.508496, long: -92.411652, page: 'https://www.dupaco.com/access/dupaco-locations/3301-cedar-heights-dr-cedar-falls-ia.html' };
+    //addresses[8] = { address: '110 35th St Dr SE Cedar Rapids IA 52403', lat: 42.013743, long: -91.634661, page: 'https://www.dupaco.com/access/dupaco-locations/110-35th-st-dr-se-cedar-rapids-ia.html' };
+    //addresses[9] = { address: '3131 Williams Blvd SW Cedar Rapids IA 52404', lat: 41.959942, long: -91.712232, page: 'https://www.dupaco.com/access/dupaco-locations/3131-williams-blvd-sw-cedar-rapids-ia.html' };
+    //addresses[10] = { address: '501 4th Ave SE Cedar Rapids IA 52401', lat: 41.978031, long: -91.662357, page: 'https://www.dupaco.com/access/dupaco-locations/501-4th-ave-se-cedar-rapids-ia.html"' };
+    //addresses[11] = { address: '3299 Hillcrest Rd Dubuque IA 52004', lat: 42.506469, long: -90.719520, page: 'https://www.dupaco.com/access/dupaco-locations/3299-hillcrest-rd-dubuque-ia.html' };
+    //addresses[12] = { address: '1465 Sycamore St Dubuque IA 52001', lat: 42.508943, long: -90.660819, page: 'https://www.dupaco.com/access/dupaco-locations/1465-sycamore-st-dubuque-ia.html' };
+    //addresses[13] = { address: '2245 Flint Hill Dr Dubuque IA 52003', lat: 42.459508, long: -90.675154, page: 'https://www.dupaco.com/access/dupaco-locations/2245-flint-hill-dr-dubuque-ia.html' };
+    //addresses[14] = { address: '807 9th St SE Dyersville IA 52040', lat: 42.478004, long: -91.113549, page: 'https://www.dupaco.com/access/dupaco-locations/807-9th-st-se-dyersville-ia.html' };
+    //addresses[15] = { address: '1200 W Main St Manchester IA 52057', lat: 42.483192, long: -91.474226, page: 'https://www.dupaco.com/access/dupaco-locations/1200-w-main-st-manchester-ia.html' };
+    //addresses[16] = { address: '1100 E. Business Hwy. 151 Platteville WI 53818', lat: 42.732090, long: -90.460371, page: 'https://www.dupaco.com/access/dupaco-locations/1100-e-business-hwy-151-platteville-wi.html' };
+    //addresses[17] = { address: '503 U.S. 30 Carroll IA 51401', lat: 42.064114, long: -94.861233, page: 'https://www.dupaco.com/access/dupaco-locations/503-us-30-carroll-ia.html' };
 
     return addresses;
 }

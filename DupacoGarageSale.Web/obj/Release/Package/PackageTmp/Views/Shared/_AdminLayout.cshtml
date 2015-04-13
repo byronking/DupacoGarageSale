@@ -21,6 +21,7 @@
     @Scripts.Render("~/bundles/adminjs")
     @Scripts.Render("~/bundles/lightboxjs")  
     @Scripts.Render("~/bundles/tokeninput") 
+    @Scripts.Render("~/bundles/highcharts") 
 
     @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.windows7.css").Combined(true).Compress(true)))
 </head>
@@ -32,6 +33,6 @@
 
     @RenderSection("scripts", required: false)
 
-    @*@(Html.Telerik().ScriptRegistrar())*@
+    @*@@(Html.Telerik().ScriptRegistrar())*@
 </body>
 </html>
