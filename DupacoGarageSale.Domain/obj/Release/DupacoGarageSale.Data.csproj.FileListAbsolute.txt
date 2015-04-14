@@ -19,3 +19,12 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\System.Web.WebP
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\System.Web.WebPages.Deployment.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\System.Web.WebPages.Razor.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\log4net.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\ICSharpCode.SharpZipLib.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\NPOI.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\NPOI.OOXML.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\NPOI.OpenXml4Net.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\NPOI.OpenXmlFormats.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\log4net.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\NPOI.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\NPOI.OOXML.xml
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Release\NPOI.OpenXml4Net.xml

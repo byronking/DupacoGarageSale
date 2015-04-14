@@ -127,10 +127,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/08/2015 22:20:28</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>04/11/2015 15:56:32</publishTime>
+      <publishTime>04/13/2015 21:16:23</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>04/11/2015 15:56:32</publishTime>
+      <publishTime>04/14/2015 10:37:53</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
@@ -138,8 +138,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/GoogleMapsApi.dll">
       <publishTime>01/06/2015 11:22:35</publishTime>
     </File>
+    <File Include="bin/ICSharpCode.SharpZipLib.dll">
+      <publishTime>04/13/2015 16:54:54</publishTime>
+    </File>
     <File Include="bin/log4net.dll">
-      <publishTime>11/18/2013 05:51:44</publishTime>
+      <publishTime>04/13/2015 16:37:33</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Helpers.dll">
       <publishTime>01/06/2015 11:27:16</publishTime>
@@ -152,6 +155,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>11/18/2014 14:27:49</publishTime>
+    </File>
+    <File Include="bin/NPOI.dll">
+      <publishTime>04/13/2015 16:54:54</publishTime>
+    </File>
+    <File Include="bin/NPOI.OOXML.dll">
+      <publishTime>04/13/2015 16:54:54</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXml4Net.dll">
+      <publishTime>04/13/2015 16:54:54</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXmlFormats.dll">
+      <publishTime>04/13/2015 16:54:54</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>11/18/2014 14:27:50</publishTime>
@@ -1363,7 +1378,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>04/08/2015 22:20:29</publishTime>
+      <publishTime>04/13/2015 16:54:57</publishTime>
     </File>
     <File Include="Scripts/2013.2.611/jquery-1.7.1.min.js">
       <publishTime>01/29/2015 14:27:06</publishTime>
@@ -1468,7 +1483,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/23/2014 10:55:16</publishTime>
     </File>
     <File Include="Scripts/default.js">
-      <publishTime>04/09/2015 19:01:49</publishTime>
+      <publishTime>04/13/2015 11:59:16</publishTime>
     </File>
     <File Include="Scripts/facebook.login.js">
       <publishTime>03/18/2015 16:00:57</publishTime>
@@ -1915,7 +1930,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2015 10:31:15</publishTime>
     </File>
     <File Include="Views/Admin/GarageSales.cshtml">
-      <publishTime>04/03/2015 16:35:12</publishTime>
+      <publishTime>04/13/2015 17:41:21</publishTime>
     </File>
     <File Include="Views/Admin/HeadlineNews.cshtml">
       <publishTime>03/24/2015 13:20:19</publishTime>
@@ -1969,7 +1984,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2015 02:07:41</publishTime>
     </File>
     <File Include="Views/GarageSale/Search.cshtml">
-      <publishTime>04/09/2015 19:31:00</publishTime>
+      <publishTime>04/13/2015 10:22:18</publishTime>
     </File>
     <File Include="Views/GarageSale/SearchResults.cshtml">
       <publishTime>03/17/2015 12:05:49</publishTime>
@@ -1996,7 +2011,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/17/2015 12:05:49</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>04/09/2015 19:05:43</publishTime>
+      <publishTime>04/13/2015 12:06:34</publishTime>
     </File>
     <File Include="Views/Itinerary/AddStopover.cshtml">
       <publishTime>03/27/2015 14:32:29</publishTime>
@@ -2092,7 +2107,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/11/2015 15:56:33</publishTime>
+      <publishTime>04/14/2015 10:37:55</publishTime>
     </File>
   </ItemGroup>
 </Project>

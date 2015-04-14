@@ -1150,24 +1150,108 @@ namespace DupacoGarageSale.Data.Repository
                             State = reader["state_name"].ToString(),
                             Zip = reader["sale_zip"].ToString(),
                             Description = reader["sale_description"].ToString(),
-                            CategoryBaby = reader["category_baby"].ToString(),
-                            CategoryClothingAccessories = reader["category_clothing_acc"].ToString(),
-                            CategoryElectronics = reader["category_electronics"].ToString(),
-                            CategoryHealthBeauty = reader["category_health_beauty"].ToString(),
-                            CategoryPets = reader["category_pets"].ToString(),
-                            CategoryHome = reader["category_home"].ToString(),
-                            CategoryHomeMaintenance = reader["category_home_maint"].ToString(),
-                            CategoryMedia = reader["category_media"].ToString(),
-                            CategoryToysGames = reader["category_toys_games"].ToString(),
-                            CategoryVehicles = reader["category_vehicles"].ToString(),
-                            CategorySportsFitnessOutdoors = reader["category_sports_fitness"].ToString(),
-                            CategoryMusicalInstruments = reader["category_musical_instr"].ToString(),
+                            //CategoryBaby = reader["category_baby"].ToString(),
+                            //CategoryClothingAccessories = reader["category_clothing_acc"].ToString(),
+                            //CategoryElectronics = reader["category_electronics"].ToString(),
+                            //CategoryHealthBeauty = reader["category_health_beauty"].ToString(),
+                            //CategoryPets = reader["category_pets"].ToString(),
+                            //CategoryHome = reader["category_home"].ToString(),
+                            //CategoryHomeMaintenance = reader["category_home_maint"].ToString(),
+                            //CategoryMedia = reader["category_media"].ToString(),
+                            //CategoryToysGames = reader["category_toys_games"].ToString(),
+                            //CategoryVehicles = reader["category_vehicles"].ToString(),
+                            //CategorySportsFitnessOutdoors = reader["category_sports_fitness"].ToString(),
+                            //CategoryMusicalInstruments = reader["category_musical_instr"].ToString(),
                             UserName = reader["user_name"].ToString(),
                             FirstName = reader["first_name"].ToString(),
                             LastName = reader["last_name"].ToString(),
                             ContactPhone = reader["phone"].ToString(),
                             ContactEmail = reader["email"].ToString(),
                         };
+
+                        // Get the sale items.
+                        var saleRepository = new GarageSaleRepository();
+                        var garageSaleItems = saleRepository.GetGarageSaleItemsById(detail.SaleId);
+
+                        foreach (var item in garageSaleItems)
+                        {
+                            switch (item.ItemCategoryId)
+                            {
+                                case 1:
+                                    {
+                                        detail.CategoryBaby = "yes";
+                                        break;
+                                    }
+
+                                case 2:
+                                    {
+                                        detail.CategoryClothingAccessories = "yes";
+                                        break;
+                                    }
+
+                                case 3:
+                                    {
+                                        detail.CategoryElectronics = "yes";
+                                        break;
+                                    }
+
+                                case 4:
+                                    {
+                                        detail.CategoryHealthBeauty = "yes";
+                                        break;
+                                    }
+
+                                case 5:
+                                    {
+                                        detail.CategoryPets = "yes";
+                                        break;
+                                    }
+
+                                case 6:
+                                    {
+                                        detail.CategoryHome = "yes";
+                                        break;
+                                    }
+
+                                case 7:
+                                    {
+                                        detail.CategoryHomeMaintenance = "yes";
+                                        break;
+                                    }
+
+                                case 8:
+                                    {
+                                        detail.CategoryMedia = "yes";
+                                        break;
+                                    }
+
+                                case 9:
+                                    {
+                                        detail.CategoryToysGames = "yes";
+                                        break;
+                                    }
+
+                                case 10:
+                                    {
+                                        detail.CategoryVehicles = "yes";
+                                        break;
+                                    }
+
+                                case 11:
+                                    {
+                                        detail.CategorySportsFitnessOutdoors = "yes";
+                                        break;
+                                    }
+
+                                case 12:
+                                    {
+                                        detail.CategoryMusicalInstruments = "yes";
+                                        break;
+                                    }
+                            }
+
+                        }
+
 
                         detailList.Add(detail);
                     }

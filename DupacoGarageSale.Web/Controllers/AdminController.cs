@@ -1138,6 +1138,7 @@ namespace DupacoGarageSale.Web.Controllers
             headerRow.CreateCell(33).SetCellValue("Last Name");	
             headerRow.CreateCell(34).SetCellValue("Contact Phone");	
             headerRow.CreateCell(35).SetCellValue("Contact Email");
+            headerRow.CreateCell(36).SetCellValue("Community");
 
             HSSFCellStyle dateStyle;
             dateStyle = (HSSFCellStyle)workbook.CreateCellStyle();
@@ -1147,16 +1148,16 @@ namespace DupacoGarageSale.Web.Controllers
             foreach (var item in detailList)
             {
                 var row = sheet.CreateRow(rowNum++);
-                row.CreateCell(0).SetCellValue(item.DateField1);
+                row.CreateCell(0).SetCellValue(Convert.ToDateTime(item.DateField1).ToShortDateString());
                 row.CreateCell(1).SetCellValue(item.DateField1Start);
                 row.CreateCell(2).SetCellValue(item.DateField1End);
-                row.CreateCell(3).SetCellValue(item.DateField2);
+                row.CreateCell(3).SetCellValue(Convert.ToDateTime(item.DateField2).ToShortDateString());
                 row.CreateCell(4).SetCellValue(item.DateField2Start);
                 row.CreateCell(5).SetCellValue(item.DateField2End);
-                row.CreateCell(6).SetCellValue(item.DateField3);
+                row.CreateCell(6).SetCellValue(Convert.ToDateTime(item.DateField3).ToShortDateString());
                 row.CreateCell(7).SetCellValue(item.DateField3Start);
                 row.CreateCell(8).SetCellValue(item.DateField3End);
-                row.CreateCell(9).SetCellValue(item.DateField4);
+                row.CreateCell(9).SetCellValue(Convert.ToDateTime(item.DateField4).ToShortDateString());
                 row.CreateCell(10).SetCellValue(item.DateField4Start);
                 row.CreateCell(11).SetCellValue(item.DateField4End);
                 row.CreateCell(12).SetCellValue(item.SaleName);
@@ -1166,23 +1167,102 @@ namespace DupacoGarageSale.Web.Controllers
                 row.CreateCell(16).SetCellValue(item.State);
                 row.CreateCell(17).SetCellValue(item.Zip);
                 row.CreateCell(18).SetCellValue(item.Description);
-                row.CreateCell(19).SetCellValue(item.CategoryBaby);
-                row.CreateCell(20).SetCellValue(item.CategoryClothingAccessories);
-                row.CreateCell(21).SetCellValue(item.CategoryElectronics);
-                row.CreateCell(22).SetCellValue(item.CategoryHealthBeauty);
-                row.CreateCell(23).SetCellValue(item.CategoryPets);
-                row.CreateCell(24).SetCellValue(item.CategoryHome);
-                row.CreateCell(25).SetCellValue(item.CategoryHomeMaintenance);
-                row.CreateCell(26).SetCellValue(item.CategoryMedia);
-                row.CreateCell(27).SetCellValue(item.CategoryToysGames);
-                row.CreateCell(28).SetCellValue(item.CategoryVehicles);
-                row.CreateCell(29).SetCellValue(item.CategorySportsFitnessOutdoors);
-                row.CreateCell(30).SetCellValue(item.CategoryMusicalInstruments);
+                row.CreateCell(19).SetCellValue(item.CategoryBaby ?? "n/a");
+                row.CreateCell(20).SetCellValue(item.CategoryClothingAccessories ?? "n/a");
+                row.CreateCell(21).SetCellValue(item.CategoryElectronics ?? "n/a");
+                row.CreateCell(22).SetCellValue(item.CategoryHealthBeauty ?? "n/a");
+                row.CreateCell(23).SetCellValue(item.CategoryPets ?? "n/a");
+                row.CreateCell(24).SetCellValue(item.CategoryHome ?? "n/a");
+                row.CreateCell(25).SetCellValue(item.CategoryHomeMaintenance ?? "n/a");
+                row.CreateCell(26).SetCellValue(item.CategoryMedia ?? "n/a");
+                row.CreateCell(27).SetCellValue(item.CategoryToysGames ?? "n/a");
+                row.CreateCell(28).SetCellValue(item.CategoryVehicles ?? "n/a");
+                row.CreateCell(29).SetCellValue(item.CategorySportsFitnessOutdoors ?? "n/a");
+                row.CreateCell(30).SetCellValue(item.CategoryMusicalInstruments ?? "n/a");
                 row.CreateCell(31).SetCellValue(item.UserName);
                 row.CreateCell(32).SetCellValue(item.FirstName);
                 row.CreateCell(33).SetCellValue(item.LastName);
                 row.CreateCell(34).SetCellValue(item.ContactPhone);
                 row.CreateCell(35).SetCellValue(item.ContactEmail);
+
+                switch(item.City.Trim())
+                {
+                    case "Asbury":
+                        {
+                            row.CreateCell(36).SetCellValue("Dubuque, IA");
+                            break;
+                        }
+                    case "Bellevue":
+                        {
+                            row.CreateCell(36).SetCellValue("Dubuque, IA");
+                            break;
+                        }
+                    case "Darlington":
+                        {
+                            row.CreateCell(36).SetCellValue("Platteville, WI");
+                            break;
+                        }
+                    case "Delaware":
+                        {
+                            row.CreateCell(36).SetCellValue("Manchester, IA");
+                            break;
+                        }
+                    case "Dubuque":
+                        {
+                            row.CreateCell(36).SetCellValue("Dubuque, IA");
+                            break;
+                        }
+                    case "East Dubuque":
+                        {
+                            row.CreateCell(36).SetCellValue("Dubuque, IA");
+                            break;
+                        }
+                    case "Edgewood":
+                        {
+                            row.CreateCell(36).SetCellValue("Manchester, IA");
+                            break;
+                        }
+                    case "Elkader":
+                        {
+                            row.CreateCell(36).SetCellValue("Manchester, IA");
+                            break;
+                        }
+                    case "Epworth":
+                        {
+                            row.CreateCell(36).SetCellValue("Dubuque, IA");
+                            break;
+                        }
+                    case "Hanover":
+                        {
+                            row.CreateCell(36).SetCellValue("Dubuque, IA");
+                            break;
+                        }
+                    case "Manchester":
+                        {
+                            row.CreateCell(36).SetCellValue("Manchester, IA");
+                            break;
+                        }
+                    case "Masonville":
+                        {
+                            row.CreateCell(36).SetCellValue("Manchester, IA");
+                            break;
+                        }
+                    case "Platteville":
+                        {
+                            row.CreateCell(36).SetCellValue("Platteville, WI");
+                            break;
+                        }
+                    case "Shullsburg":
+                        {
+                            row.CreateCell(36).SetCellValue("Platteville, WI");
+                            break;
+                        }
+                    default:
+                        {
+                            row.CreateCell(36).SetCellValue("Unknown");
+                            break;
+                        }
+                }
             }
 
             workbook.Write(output);
