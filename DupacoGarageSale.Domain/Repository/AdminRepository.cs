@@ -1167,6 +1167,7 @@ namespace DupacoGarageSale.Data.Repository
                             LastName = reader["last_name"].ToString(),
                             ContactPhone = reader["phone"].ToString(),
                             ContactEmail = reader["email"].ToString(),
+                            CreateDate = Convert.ToDateTime(reader["create_date"])
                         };
 
                         // Get the sale items.

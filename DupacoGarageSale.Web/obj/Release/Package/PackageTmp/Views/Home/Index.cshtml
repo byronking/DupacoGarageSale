@@ -48,9 +48,30 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <div class="form-group">
-                            <input class="form-control" type="text" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="What are you looking for?">
+                            <label for="txtSearchCriteria">What are you looking for?</label>
+                            <input class="form-control" type="text" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
                         </div>
                         <div class="form-group">
+                            <label for="ddlCommunity">Do you want to search in one community or all communities?</label>
+                            <select name="ddlCommunity" id="ddlCommunity" class="form-control">
+                                <option value="all">All communities</option>
+                                <option value="dubuque">Dubuque, IA</option>
+                                <option value="manchester">Manchester, IA</option>
+                                <option value="platteville">Platteville, WI</option>
+                            </select>
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtAddress">Enter your starting address (Ex. 5865 Saratoga Rd., Dubuque, IA) or the zip code of your starting place.</label>
+                            <textarea class="form-control" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
+                                @{
+                                    if (TempData["UserAddress"] != null)
+                                    {
+                                        @TempData["UserAddress"].ToString() 
+                                    }
+                                }
+                            </textarea><br /><br />
+                            <label for="ddlRadius">How far from your starting place do you want to search?</label><br />
                             <select name="ddlRadius" id="ddlRadius" class="form-control">
                                 <option value="10">10 miles</option>
                                 <option value="15">15 miles</option>
@@ -63,15 +84,8 @@
                             <br />
                             <input type="hidden" id="hdnNoAddress" value="@ViewBag.NoAddress" />
                             <input type="hidden" id="hdnSavedAddress" value="@ViewBag.Address" />
-                            <textarea class="form-control" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
-                                @{
-                                    if (TempData["UserAddress"] != null)
-                                    {
-                                        @TempData["UserAddress"].ToString() 
-                                    }
-                                }
-                            </textarea>                       
-                        </div><br />                            
+                                                   
+                        </div>                            
                         <div>
                             <strong>Enter start and end dates:</strong><br />
                             <label for="from">Start:</label><br />
@@ -634,6 +648,7 @@
 </div>
 
 <!-- Add stopover modal -->
+<input type="hidden" id="hdnShowModal" value="@ViewBag.ShowModal" />
 <div class="modal fade add-stopover" id="addStopoverModal" tabindex="-1" role="dialog" aria-labelledby="addStopoverModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -641,7 +656,7 @@
                 <h3>Add stopover</h3>
             </div>
             <div class="modal-body">
-                <form action="~/Itinerary/CreateOrAddToItinerary" method="post">            
+                <form action="/Itinerary/CreateOrAddToItinerary" method="post">            
                     <h4>Existing itineraries</h4>
                     <div>
                         @if (Model.GarageSaleItineraries != null)
@@ -662,9 +677,9 @@
                                     </tr>
                                     @foreach(var itinerary in Model.GarageSaleItineraries)
                                     {
-                                        var waypointAddress = string.Empty;
+                                        var waypointAddress = ViewBag.WaypointAddress;
                                         <tr>
-                                            <td>@Html.ActionLink("Save to this itinerary", "AddItineraryWaypoint", "Itinerary", new { address = @waypointAddress, itineraryId = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>
+                                            <td>@Html.ActionLink("Save to this itinerary", "AddItineraryWaypoint", "Itinerary", new { id = @itinerary.ItineraryId, address = @waypointAddress }, new { @class="btn btn-xs btn-info", @id = "linkAddWaypoint" })</td>
                                             <td>@Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>
                                             <td>@itinerary.ItineraryName</td>
                                             <td>@itinerary.ItineraryCreatedDate</td>
@@ -695,10 +710,14 @@
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0PudWjsqLxR5ZBsdLIBHUjMikiAZJgu8&libraries=geometry"></script>
 <script type="text/javascript">     
+
+    // This responds to clicking the add stopover link.
+    //$("#linkAddStopover").click(function (e) {
+    //    alert('hi, linkieee');
+    //    e.preventDefault();
+    //});
    
     var mapAddresses = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.Addresses))
-    //alert('addys: ' + mapAddresses);
-
     var geocoder;
     var circle = null;
     var gmarkers = [];
@@ -803,11 +822,11 @@
         // Add the markers to the gmarkers array.
         gmarkers.push(marker);
         google.maps.event.addListener(marker, 'click', function () {
-            var signed_in = @ViewBag.SignedIn
-            //alert(signed_in);
-            if (signed_in) {                
-                infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><br/><a target="_blank" href="'+ page + '">Visit this location</a> <br/> <a href="#" id="linkAddStopover" >Add to itinerary</a> ');
-            } //data-target="#addStopoverModal" data-toggle="modal"
+            var signed_in = '@(ViewBag.SignedIn)'
+            // alert('signed in?: ' + signed_in);
+            if (signed_in == "true") {                
+                infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><br/><a target="_blank" href="'+ page + '">Visit this location</a> <br/> <a href="/Home/SetStopoverAddress?address=' + address + '" id=linkAddStopover>Add to itinerary</a> ');
+            }
             else {
                 infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><a target="_blank" href="'+ page + '">Visit this location</a>');
             }
@@ -833,8 +852,15 @@
 
                 var infowindow = new google.maps.InfoWindow();
                 google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.setContent('Your starting point: ' + results[0].formatted_address);
+                    infowindow.setContent('Your starting point: ' + results[0].formatted_address);                    
                     infowindow.open(map, marker);
+                });
+
+                google.maps.event.addDomListener(infowindow, 'domready', function() {
+                    $('#linkAddStopover').click(function(e) {
+                        alert("Hello World");
+                        e.preventDefault();
+                    });
                 });
 
                 if (circle) 
@@ -848,8 +874,6 @@
                     fillColor: "#FF0000",
                     map: map
                 });
-
-                //alert('zoom: ' + map.getZoom());
 
                 var bounds = new google.maps.LatLngBounds();
 

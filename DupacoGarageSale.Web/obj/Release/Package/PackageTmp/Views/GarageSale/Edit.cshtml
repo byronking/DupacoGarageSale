@@ -104,10 +104,20 @@
                                     <table style="width:200px;" class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Thu April 23rd</th>
-                                                <th>Fri April 24th</th>
-                                                <th>Sat April 25th</th>
-                                                <th>Sun April 26th</th>
+                                                @if (Model.Sale.DatesTimes.SaleDateOne == Convert.ToDateTime("2015-05-07"))
+                                                {
+                                                    <th>Thu May 7th</th>
+                                                    <th>Fri May 8th</th>
+                                                    <th>Sat May 9th</th>
+                                                    <th>Sun May 10th</th>
+                                                }
+                                                else
+                                                {
+                                                    <th>Thu April 23rd</th>
+                                                    <th>Fri April 24th</th>
+                                                    <th>Sat April 25th</th>
+                                                    <th>Sun April 26th</th>
+                                                }
                                             </tr>
                                         </thead>
                                         <tbody style="width:auto">

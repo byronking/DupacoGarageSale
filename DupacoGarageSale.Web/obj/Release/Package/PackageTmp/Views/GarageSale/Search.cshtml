@@ -32,9 +32,30 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <div class="form-group">
-                            <input class="form-control" type="text" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="What are you looking for?">
+                            <label for="txtSearchCriteria">What are you looking for?</label>
+                            <input class="form-control" type="text" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
                         </div>
                         <div class="form-group">
+                            <label for="ddlCommunity">What are you looking for?</label>
+                            <select name="ddlCommunity" id="ddlCommunity" class="form-control">
+                                <option value="all">All communities</option>
+                                <option value="dubuque">Dubuque, IA</option>
+                                <option value="manchester">Manchester, IA</option>
+                                <option value="platteville">Platteville, WI</option>
+                            </select>
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtAddress">Enter your starting address (Ex. 5865 Saratoga Rd., Dubuque, IA) or the zip code of your starting place.</label>
+                            <textarea class="form-control" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
+                                @{
+                                    if (TempData["UserAddress"] != null)
+                                    {
+                                        @TempData["UserAddress"].ToString() 
+                                    }
+                                }
+                            </textarea><br /><br />
+                            <label for="ddlRadius">How far from your starting place do you want to search?</label><br />
                             <select name="ddlRadius" id="ddlRadius" class="form-control">
                                 <option value="10">10 miles</option>
                                 <option value="15">15 miles</option>
@@ -46,15 +67,8 @@
                             </select>
                             <br />
                             <input type="hidden" id="hdnNoAddress" value="@ViewBag.NoAddress" />
-                            <textarea class="form-control" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
-                                @{
-                                    if (TempData["UserAddress"] != null)
-                                    {
-                                        @TempData["UserAddress"].ToString() 
-                                    }
-                                }
-                            </textarea>                       
-                        </div><br />                          
+                                                   
+                        </div>                         
                         <div>
                             <strong>Enter start and end dates:</strong><br />
                             <label for="from">Start:</label><br />

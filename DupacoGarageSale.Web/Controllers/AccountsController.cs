@@ -142,8 +142,8 @@ namespace DupacoGarageSale.Web.Controllers
         {
             var model = new AuthenticationInfo
             {
-                UserName = formCollection["UserName"].ToString(),
-                Password = formCollection["Password"].ToString()
+                UserName = formCollection["UserName"].ToString().Trim(),
+                Password = formCollection["Password"].ToString().Trim()
             };
 
             // Hash the password, then attempt a match.

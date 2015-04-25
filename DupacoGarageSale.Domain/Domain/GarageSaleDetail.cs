@@ -45,5 +45,6 @@ namespace DupacoGarageSale.Data.Domain
         public string LastName { get; set; }	
         public string ContactPhone { get; set; }	
         public string ContactEmail { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

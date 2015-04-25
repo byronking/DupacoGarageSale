@@ -32,6 +32,17 @@ namespace DupacoGarageSale.Web.Controllers
                 ViewBag.From = searchData[1].ToString();
                 ViewBag.To = searchData[2].ToString();
                 ViewBag.SearchCriteria = searchData[3].ToString();
+                ViewBag.SearchRadius = searchData[4].ToString();
+                ViewBag.Community = searchData[5].ToString();
+            }
+
+            if (Session["ShowModal"] != null)
+            {
+                ViewBag.ShowModal = "true";
+                ViewBag.WaypointAddress = Session["WaypointAddress"].ToString();
+
+                // Clean up.
+                Session["ShowModal"] = null;
             }
 
             viewModel.SelectedCategories = new List<int>();
@@ -134,13 +145,22 @@ namespace DupacoGarageSale.Web.Controllers
             }
             else
             {
+                // Set the sign-in flag.
+                ViewBag.SignedIn = "false";
+
                 if (Session["SearchData"] != null)
                 {
                     ViewBag.NoAddress = "false";
+
+                    var searchData = Session["SearchData"] as string[];
+                    ViewBag.SearchRadius = searchData[4].ToString();
+                    ViewBag.Community = searchData[5].ToString();
                 }
                 else
                 {
                     ViewBag.NoAddress = "true";
+                    ViewBag.SearchRadius = "false";
+                    ViewBag.Community = "false";
                 }
 
                 return View(viewModel);
@@ -233,12 +253,13 @@ namespace DupacoGarageSale.Web.Controllers
                 searchCriteria = form["txtSearchCriteria"].ToString();
             }
 
+            var community = form["ddlCommunity"].ToString();
             var radius = form["ddlRadius"].ToString();
             var address = form["txtAddress"].ToString();
             var startDate = form["from"].ToString();
             var endDate = form["to"].ToString();
 
-            string[] searchData = { address, startDate, endDate, searchCriteria };
+            string[] searchData = { address, startDate, endDate, searchCriteria, radius, community };
             Session["SearchData"] = searchData;
 
             #region Old code using the checkboxes
@@ -297,7 +318,14 @@ namespace DupacoGarageSale.Web.Controllers
             viewModel.MappingData.Addresses = new List<string>();
 
             var repository = new GarageSaleRepository();
-            viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList, startDate, endDate);            
+            if (community == "all")
+            {
+                viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList, startDate, endDate);
+            }
+            else
+            {
+                viewModel.SearchResults = repository.SearchGarageSalesByCommunity(community, searchCriteria, categoryIdList, startDate, endDate);
+            }
 
             // Instantiate the selected categories.
             viewModel.SelectedCategories = new List<int>();
@@ -345,6 +373,38 @@ namespace DupacoGarageSale.Web.Controllers
             Session["ViewModel"] = viewModel;
 
             return View("~/Views/Shared/_CategoriesMenu.cshtml", viewModel);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SetStopoverAddress(string address)
+        {
+            var viewModel = new GarageSaleViewModel();
+
+            if (Session["ViewModel"] != null)
+            {
+                viewModel = Session["ViewModel"] as GarageSaleViewModel;
+            }
+
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                viewModel.User = session.User;
+
+                // Get the user's address.
+                if (viewModel.User.Address != null)
+                {
+                    ViewBag.CenterAddress = viewModel.User.Address.Address1 + " " + viewModel.User.Address.Address2 + " " + viewModel.User.Address.City + " " +
+                        viewModel.User.Address.State + " " + viewModel.User.Address.Zip;
+                }
+            }
+
+            Session["ShowModal"] = "true";
+            Session["WaypointAddress"] = address;
+            
+            return RedirectToAction("Index", viewModel);
         }
     }
 }

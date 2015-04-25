@@ -46,6 +46,18 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.UserItinerary = itinerary;
             }
 
+            // If there is a waypoint address, add it here.
+            if (Session["WaypointAddress"] != null)
+            {
+                var address = Session["WaypointAddress"].ToString();
+                var waypointSaveResult = repository.SaveItineraryWaypoints(address, itinerary.ItineraryId);
+
+                if (saveResult.IsSaveSuccessful)
+                {
+                    Session["WaypointSaved"] = true;
+                }
+            }
+
             Session["ViewModel"] = viewModel;
 
             return RedirectToAction("ViewItinerary", new RouteValueDictionary(new

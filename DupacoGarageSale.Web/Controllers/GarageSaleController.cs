@@ -133,6 +133,27 @@ namespace DupacoGarageSale.Web.Controllers
 
                     ViewBag.NavAddSale = "active";
 
+                    // Send an email with a link to the newly created sale.
+                    try
+                    {
+                        var mailMessage = new System.Net.Mail.MailMessage(ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString(), model.User.Email);
+                        mailMessage.IsBodyHtml = true;
+                        mailMessage.Subject = "New Garage Sale Created!";
+                        mailMessage.Body = @"Congratulations!  You've created a garage sale!  Click <a href=""http://www.dupaogaragesales.com/GarageSales/ViewGarageSale/""" + model.Sale.GarageSaleId + ">here</a> to view it.";
+                        mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+
+                        var smtp = new SmtpClient();
+                        smtp.Host = ConfigurationManager.AppSettings["MailServer"].ToString();
+                        smtp.Send(mailMessage);
+
+                        TempData["EmailSent"] = "true";
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["EmailSent"] = "false";
+                        Logger.Log.Error(ex.ToString());
+                    }
+
                     return RedirectToAction("Edit", new RouteValueDictionary(new
                     {
                         controller = "GarageSale",
@@ -1103,6 +1124,8 @@ namespace DupacoGarageSale.Web.Controllers
                     ViewBag.From = searchData[1].ToString();
                     ViewBag.To = searchData[2].ToString();
                     ViewBag.SearchCriteria = searchData[3].ToString();
+                    ViewBag.SearchRadius = searchData[4].ToString();
+                    ViewBag.Community = searchData[5].ToString();
                 }
             }
             else
@@ -1114,6 +1137,8 @@ namespace DupacoGarageSale.Web.Controllers
                     ViewBag.From = searchData[1].ToString();
                     ViewBag.To = searchData[2].ToString();
                     ViewBag.SearchCriteria = searchData[3].ToString();
+                    ViewBag.SearchRadius = searchData[4].ToString();
+                    ViewBag.Community = searchData[5].ToString();
                     ViewBag.NoAddress = "false";
                 }
                 else
@@ -1365,13 +1390,14 @@ namespace DupacoGarageSale.Web.Controllers
                 searchCriteria = form["txtSearchCriteria"].ToString();
             }
 
+            var community = form["ddlCommunity"].ToString();
             var radius = form["ddlRadius"].ToString();
             var address = form["txtAddress"].ToString().Trim();
             var startDate = form["from"].ToString();
             var endDate = form["to"].ToString();
             var categoryIdList = new List<int>();
 
-            string[] searchData = { address, startDate, endDate, searchCriteria };
+            string[] searchData = { address, startDate, endDate, searchCriteria, radius, community };
             Session["SearchData"] = searchData;
 
             foreach (var key in form.AllKeys)
@@ -1397,7 +1423,14 @@ namespace DupacoGarageSale.Web.Controllers
             viewModel.MappingData.Addresses = new List<string>();
 
             var repository = new GarageSaleRepository();
-            viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList, startDate, endDate);
+            if (community == "all")
+            {
+                viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList, startDate, endDate);
+            }
+            else
+            {
+                viewModel.SearchResults = repository.SearchGarageSalesByCommunity(community, searchCriteria, categoryIdList, startDate, endDate);
+            }
 
             // Instantiate the selected categories.
             viewModel.SelectedCategories = new List<int>();

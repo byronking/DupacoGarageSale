@@ -1133,12 +1133,13 @@ namespace DupacoGarageSale.Web.Controllers
             headerRow.CreateCell(28).SetCellValue("Category: Vehicles");	
             headerRow.CreateCell(29).SetCellValue("Category: Sports, Fitness, Outdoors");	
             headerRow.CreateCell(30).SetCellValue("Category: Musical Instruments, Gear");	
-            headerRow.CreateCell(31).SetCellValue("Username");	
+            headerRow.CreateCell(31).SetCellValue("User Name");	
             headerRow.CreateCell(32).SetCellValue("First Name");	
             headerRow.CreateCell(33).SetCellValue("Last Name");	
             headerRow.CreateCell(34).SetCellValue("Contact Phone");	
             headerRow.CreateCell(35).SetCellValue("Contact Email");
             headerRow.CreateCell(36).SetCellValue("Community");
+            headerRow.CreateCell(37).SetCellValue("Create Date");            
 
             HSSFCellStyle dateStyle;
             dateStyle = (HSSFCellStyle)workbook.CreateCellStyle();
@@ -1195,6 +1196,11 @@ namespace DupacoGarageSale.Web.Controllers
                     case "Bellevue":
                         {
                             row.CreateCell(36).SetCellValue("Dubuque, IA");
+                            break;
+                        }
+                    case "Cuba City":
+                        {
+                            row.CreateCell(36).SetCellValue("Platteville, WI");
                             break;
                         }
                     case "Darlington":
@@ -1263,6 +1269,8 @@ namespace DupacoGarageSale.Web.Controllers
                             break;
                         }
                 }
+
+                row.CreateCell(37).SetCellValue(item.CreateDate.ToString());
             }
 
             workbook.Write(output);

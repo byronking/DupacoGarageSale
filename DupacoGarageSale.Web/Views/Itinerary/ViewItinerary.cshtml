@@ -95,8 +95,8 @@
                         </div>
 
                         @{
-                                    var arrayItineraryLegs = itineraryLegs.ToArray();
-                                    arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
+                            var arrayItineraryLegs = itineraryLegs.ToArray();
+                            arrayItineraryLegsJoined = string.Join(",", arrayItineraryLegs);
                         }
                         
                         <input type="button" id="btnMapItinerary" class="btn btn-primary" value="Get directions" onclick="calculateRoute();" /><br /><br />
@@ -394,8 +394,8 @@
         selectedLegs = itineraryLegs.split(',');
         //alert('legs: ' + selectedLegs);
 
-        var start = document.getElementById('hdnStartingAddress').value;
-        // alert('starting address: ' + start);
+        var start = document.getElementById('txtStartingAddress').value;
+        alert('starting address: ' + start);
         var lastItem = 0;
         var legsCount = selectedLegs.length;
 
