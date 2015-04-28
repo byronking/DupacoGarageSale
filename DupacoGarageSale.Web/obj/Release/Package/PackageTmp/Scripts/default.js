@@ -628,6 +628,15 @@
         }
     });
 
+    // This sets the selected radius and community.
+    if ($('#hdnSearchCommunity').val() !== "false") {
+        $('#ddlCommunity').val($('#hdnSearchCommunity').val())
+    }
+
+    if ($('#hdnSearchRadius').val() !== "false") {
+        $('#ddlRadius').val($('#hdnSearchRadius').val())
+    }
+
     $("#btnMapItinerary").click(function () {    
         $("#driving-directions").removeClass('hidden');
     });

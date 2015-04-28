@@ -139,7 +139,7 @@ namespace DupacoGarageSale.Web.Controllers
                         var mailMessage = new System.Net.Mail.MailMessage(ConfigurationManager.AppSettings["MarketingEmailAddress"].ToString(), model.User.Email);
                         mailMessage.IsBodyHtml = true;
                         mailMessage.Subject = "New Garage Sale Created!";
-                        mailMessage.Body = @"Congratulations!  You've created a garage sale!  Click <a href=""http://www.dupaogaragesales.com/GarageSales/ViewGarageSale/""" + model.Sale.GarageSaleId + ">here</a> to view it.";
+                        mailMessage.Body = @"Congratulations!  You've created a garage sale!  Click <a href=http://www.dupacogaragesales.com/GarageSale/ViewGarageSale/" + model.Sale.GarageSaleId + ">here</a> to view it.";
                         mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
 
                         var smtp = new SmtpClient();

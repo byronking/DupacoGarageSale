@@ -835,6 +835,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\sql scripts\CommunityMap insert.txt" />
     <Content Include="Scripts\sql scripts\Garage sale items insert.txt" />
     <Content Include="Scripts\sql scripts\sp_DeleteBlogPost.txt" />
     <Content Include="Scripts\sql scripts\sp_DeleteGarageSale.txt" />

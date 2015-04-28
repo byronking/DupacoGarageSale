@@ -57,6 +57,9 @@
                             </textarea><br /><br />
                             <label for="ddlRadius">How far from your starting place do you want to search?</label><br />
                             <select name="ddlRadius" id="ddlRadius" class="form-control">
+                                <option value="1">1 mile</option>
+                                <option value="2">2 miles</option>
+                                <option value="5">5 miles</option>
                                 <option value="10">10 miles</option>
                                 <option value="15">15 miles</option>
                                 <option value="25">25 miles</option>
@@ -66,6 +69,8 @@
                                 <option value="500">500 miles</option>
                             </select>
                             <br />
+                            <input type="hidden" id="hdnSearchRadius" value="@ViewBag.SearchRadius" />
+                            <input type="hidden" id="hdnSearchCommunity" value="@ViewBag.Community" />
                             <input type="hidden" id="hdnNoAddress" value="@ViewBag.NoAddress" />
                                                    
                         </div>                         

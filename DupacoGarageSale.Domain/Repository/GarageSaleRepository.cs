@@ -1282,11 +1282,11 @@ namespace DupacoGarageSale.Data.Repository
                     foreach (var subcategoryId in itemSubcategories)
                     {
                         using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
-                        using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItemsByCriteria", conn))
+                        using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItemsByCriteriaAndSubcategory", conn))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
-                            //cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = subcategoryId;
+                            cmd.Parameters.Add("@item_subcategory_id", SqlDbType.Int).Value = subcategoryId;
                             cmd.Parameters.Add("@start_date", SqlDbType.VarChar).Value = startDate;
                             cmd.Parameters.Add("@end_date", SqlDbType.VarChar).Value = endDate;
                             cmd.Connection.Open();

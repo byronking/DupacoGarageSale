@@ -1,0 +1,18 @@
+﻿select * from CommunityMap
+
+insert into CommunityMap values ('dubuque', 'asbury');
+insert into CommunityMap values ('dubuque', 'bellevue');
+insert into CommunityMap values ('dubuque', 'cuba city');
+insert into CommunityMap values ('platteville', 'darlington');
+insert into CommunityMap values ('manchester', 'delaware');
+insert into CommunityMap values ('manchester', 'delhi');
+insert into CommunityMap values ('dubuque', 'dubuque');
+insert into CommunityMap values ('dubuque', 'east dubuque');
+insert into CommunityMap values ('manchester', 'edgewood');
+insert into CommunityMap values ('manchester', 'elkader');
+insert into CommunityMap values ('dubuque', 'epworth');
+insert into CommunityMap values ('dubuque', 'hanover');
+insert into CommunityMap values ('manchester', 'manchester');
+insert into CommunityMap values ('manchester', 'masonville');
+insert into CommunityMap values ('platteville', 'platteville');
+insert into CommunityMap values ('platteville', 'shullsburg');
