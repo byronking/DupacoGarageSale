@@ -294,7 +294,7 @@
     });
 
     // Handle validation for selecting the dates.
-    $("#ddlCommunity").change(function () {
+    //$("#ddlCommunity").change(function () {
         if ($("#ddlCommunity option:selected").text() == "Dubuque, IA") {
             $("#txtSaleDateOne").val("4/23/2015");
             $("#txtSaleDateTwo").val("4/24/2015");
@@ -319,7 +319,7 @@
             $("#txtSaleDateThree").val(' ');
             $("#txtSaleDateFour").val(' ');
         }
-    });
+    //});
 
     // Set the range of available times.
     $('#dayOneStart').timepicker({ 'scrollDefault': '800' });

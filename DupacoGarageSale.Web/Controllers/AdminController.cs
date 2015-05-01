@@ -97,7 +97,7 @@ namespace DupacoGarageSale.Web.Controllers
                     {
                         Rotation = 270,
                         Align = HorizontalAligns.Right,
-                        Style = "fontSize: '13px',fontFamily: 'Verdana, sans-serif'"
+                        Style = "fontSize: '11px',fontFamily: 'Verdana, sans-serif'"
                     }
                 })
                 .SetYAxis(new YAxis
@@ -159,7 +159,7 @@ namespace DupacoGarageSale.Web.Controllers
                     {
                         Rotation = 270,
                         Align = HorizontalAligns.Right,
-                        Style = "fontSize: '13px',fontFamily: 'Verdana, sans-serif'"
+                        Style = "fontSize: '11px',fontFamily: 'Verdana, sans-serif'"
                     }
                 })
                 .SetYAxis(new YAxis
