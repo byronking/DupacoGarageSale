@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label for="txtSaleName">Sale title</label>
                             @Html.TextBoxFor(m => m.Sale.GarageSaleName, new { @class="form-control", id="txtSaleName", placeholder="Name your sale" })
-                            <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.GarageSaleName)</span>
+                            @*<span class="text-error">@Html.ValidationMessageFor(m => m.Sale.GarageSaleName)</span>*@
                         </div>
                         <div class="form-group">
                             <label for="txtAddress1">House number & street</label>
@@ -420,9 +420,17 @@
                     </div>
                 </div>
                                        
-                <input id="btnSaveGargeSale" type="submit" value="Save garage sale" class="btn btn-primary" />
+                <input id="btnSaveGarageSale" type="submit" value="Save garage sale" class="btn btn-primary" />
             </div>
         }
+    </div>
+
+    <div>
+        <div class="alert alert-danger down_30 hidden" role="alert" id="divMissingItemsMessage" style="width:92%;">
+            <strong>Some items missing!</strong>
+            Please add the following missing items:
+            <ul></ul>
+        </div>
     </div>
 </div>
 

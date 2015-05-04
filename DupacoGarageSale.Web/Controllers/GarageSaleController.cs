@@ -123,8 +123,8 @@ namespace DupacoGarageSale.Web.Controllers
                 var errors = ModelState.Where(v => v.Value.Errors.Any());
                 var repository = new GarageSaleRepository();
 
-                if (ModelState.IsValid)
-                {
+                //if (ModelState.IsValid)
+                //{
                     var saveResult = new UserSaveResult();
 
                     saveResult = repository.SaveGarageSale(model.Sale);
@@ -160,13 +160,13 @@ namespace DupacoGarageSale.Web.Controllers
                         action = "Edit",
                         id = model.Sale.GarageSaleId
                     }));
-                }
-                else
-                {
-                    // Get the subcategories
-                    model.ItemCategories = repository.GetCategoriesAndSubcategories();
-                    return View("~/Views/GarageSale/Add.cshtml", model);
-                }
+                //}
+                //else
+                //{
+                //    // Get the subcategories
+                //    model.ItemCategories = repository.GetCategoriesAndSubcategories();
+                //    return View("~/Views/GarageSale/Add.cshtml", model);
+                //}
             }
             else
             {
