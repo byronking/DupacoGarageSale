@@ -558,5 +558,87 @@ namespace DupacoGarageSale.Web.Controllers
                 return RedirectToAction("Login", "Accounts");
             }
         }
+
+        /// <summary>
+        /// This displays a garage sale.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult QuickViewGarageSale(int id)
+        {
+            var viewModel = new GarageSaleViewModel();
+
+            if (id == 0)
+            {
+                return View("~/Views/GarageSale/GarageSaleNotFound.cshtml");
+            }
+            else
+            {
+                // Load the states dropdown.
+                var addressRepository = new AddressRepository();
+                var statesList = addressRepository.GetStates();
+                ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
+
+                var repository = new GarageSaleRepository();
+
+                viewModel = new GarageSaleViewModel
+                {
+                    Sale = repository.GetGarageSaleAndItemsById(id),
+                    SelectedCategories = new List<int>()
+                };
+
+                // Get the user session
+                UserSession session = null;
+                if (Session["UserSession"] != null)
+                {
+                    session = Session["UserSession"] as UserSession;
+                    viewModel.User = session.User;
+
+                    // Check to see if the current user has fave'd this garage sale.
+                    var faveGarageSale = repository.CheckForFavedGarageSale(id, viewModel.User.UserId);
+                    if (faveGarageSale.FavoriteId != 0)
+                    {
+                        viewModel.FaveGarageSales = new List<FavoriteGarageSale>();
+                        viewModel.FaveGarageSales.Add(faveGarageSale);
+                        ViewBag.FavedGarageSale = faveGarageSale.FavoriteId;
+                    }
+
+                    // Get the user's itinerary or itineraries by user id.
+                    var itineraryRepository = new ItineraryRepository();
+                    var itineraryList = new List<GarageSaleItinerary>();
+                    itineraryList = itineraryRepository.GetItinerariesByUserId(viewModel.User.UserId);
+                    viewModel.GarageSaleItineraries = itineraryList;
+                }
+
+                foreach (var itemId in viewModel.Sale.GarageSaleItems)
+                {
+                    viewModel.SelectedCategories.Add(itemId.ItemSubcategoryId);
+                }
+
+                // Get the categories and subcategories.
+                viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+
+                var selectedCategories = viewModel.SelectedCategories.ToArray();
+                ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+
+                //// Get the special items.
+                //viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(viewModel.Sale.GarageSaleId);
+
+                //// Get the blog posts.
+                //var blogRepo = new BlogPostRepository();
+                //viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.Sale.GarageSaleId);
+
+                //// Get the messages.
+                //viewModel.GarageSaleMessages = repository.GetGarageSaleMessages(id);
+
+                // Save the viewmodel for later use.
+                Session["ViewModel"] = viewModel;
+            }
+
+            ViewBag.NavGarageSales = "active";
+
+            return View(viewModel);
+        }
     }
 }

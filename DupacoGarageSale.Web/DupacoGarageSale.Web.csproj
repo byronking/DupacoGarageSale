@@ -943,6 +943,7 @@
     <Content Include="Views\Shared\_AllGarageSalesLayout.cshtml" />
     <Content Include="Views\Shared\_AllGarageSalesNav.cshtml" />
     <Content Include="Views\Accounts\ProfileCreationError.cshtml" />
+    <Content Include="Views\Itinerary\QuickViewGarageSale.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

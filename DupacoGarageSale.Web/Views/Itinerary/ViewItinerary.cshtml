@@ -45,7 +45,7 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title">Your stopovers - drag to rearrange your route</h3>
                             </div>
-                            <div class="panel-body container-overflow" style="min-height:260px;">
+                            <div class="panel-body container-overflow"  id="itineraryLegControls" style="min-height:260px;">
                                 <input id="hdnLegDeletedMessage" type="hidden" value="@ViewBag.Invisible" />
                                 <div class="alert alert-success hidden" role="alert" id="divLegDeletedMessage" style="width:60%;">
                                     <strong>Nice work!</strong>
@@ -72,7 +72,7 @@
                                             <label for="txtItineraryLeg@(address.ItineraryLegId)">Stopover:</label>
                                             <div class="form-inline">
                                                 <div class="form-group">
-                                                    <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" class="input-sm form-control" style="min-width:245px; margin-bottom:3px;" value="@itineraryAddress" />
+                                                    <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" class="input-sm form-control" style="margin-bottom:3px;min-width:295px;" value="@itineraryAddress" /> @*<!-- style="min-width:245px; -->*@
                                                 </div>
                                                 <div class="form-group">
                                                      @if (address.SaleId == 7777777)
@@ -82,6 +82,7 @@
                                                         else
                                                         {
                                                             <a href="~/Itinerary/DeleteItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-danger btn-sm">Delete</a>
+                                                            <a href="#" id="linkQuickView@(address.SaleId)" data-saleid="@(address.SaleId)" class="quickView btn btn-default btn-sm">Quick view</a>
                                                         }
                                                 </div>
                                             </div>
@@ -335,6 +336,21 @@
                 </div>
             </div>
         </div>        
+    </div>
+</div>
+
+<!-- Quick sale view modal -->
+<div class="modal fade quick-sale-modal" id="quickSaleModal" tabindex="-1" role="dialog" aria-labelledby="quickSaleModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Quick garage sale view</h3>
+            </div>
+            <div class="modal-body">
+                <div id="saleData"></div>
+
+            </div>
+        </div>
     </div>
 </div>
 
