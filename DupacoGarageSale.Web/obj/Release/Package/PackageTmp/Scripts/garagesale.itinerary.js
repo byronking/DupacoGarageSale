@@ -149,7 +149,34 @@
         if ($("#hdnFaveRemovedSuccess").val() == "true") {
             $("#divFaveRemovedSuccess").removeClass("hidden");
         }
-    }    
+    }
+
+    // Show the quick view modal
+    $('#itineraryLegControls').on('click', 'a.quickView', function () {
+        var saleId = $(this).attr('data-saleid');
+        $('#txtSaleId').val(saleId);
+
+        var url = "/Itinerary/QuickViewGarageSale/" + saleId;
+        $.ajax({
+            type: "get",
+            data: JSON.stringify({
+                id: saleId
+            }),
+            url: url,
+            //dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $('#quickSaleModal').modal('show');
+                $('#saleData').html(data);
+            },
+            error: function (data) {
+                // Do something
+                //debugObject(data);
+                alert('There was a problem adding the garage sale to faves.');
+            }
+        });        
+    });
 });
 
 $(function () {

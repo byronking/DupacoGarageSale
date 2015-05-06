@@ -1106,6 +1106,9 @@ namespace DupacoGarageSale.Web.Controllers
                     viewModel.User = session.User;
                 }
 
+                // Set the sign-in flag.
+                ViewBag.SignedIn = "true";
+
                 // Get the user's address.
                 if (viewModel.User.Address != null)
                 {

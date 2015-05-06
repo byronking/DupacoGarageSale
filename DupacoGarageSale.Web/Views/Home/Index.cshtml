@@ -843,7 +843,6 @@
         var address = document.getElementById('hdnSearchAddress').value;
         var radius = parseInt(document.getElementById('hdnRadius').value, 10)*1000;
         //var address = document.getElementById("hdnCenterAddress").value;
-        //alert('radius: ' + radius);
 
         geocoder.geocode({ 'address': address }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) 
@@ -861,12 +860,12 @@
                     infowindow.open(map, marker);
                 });
 
-                google.maps.event.addDomListener(infowindow, 'domready', function() {
-                    $('#linkAddStopover').click(function(e) {
-                        alert("Hello World");
-                        e.preventDefault();
-                    });
-                });
+                //google.maps.event.addDomListener(infowindow, 'domready', function() {
+                //    $('#linkAddStopover').click(function(e) {
+                //        alert("Hello World");
+                //        e.preventDefault();
+                //    });
+                //});
 
                 if (circle) 
                 {

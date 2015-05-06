@@ -344,11 +344,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
                 <h3>Quick garage sale view</h3>
             </div>
             <div class="modal-body">
                 <div id="saleData"></div>
-
             </div>
         </div>
     </div>
@@ -363,11 +363,12 @@
 
     function initialize() {
         directionsDisplay = new google.maps.DirectionsRenderer();
-        var dubuque = new google.maps.LatLng(41.850033, -87.6500523);
+        var dubuque = new google.maps.LatLng(42.734160,-90.478462); // The map is centered on the user's address.
         var mapOptions = {
-            zoom: 5,
-            center: dubuque
+            center: dubuque,
+            zoom: 5            
         }
+
         map = new google.maps.Map(document.getElementById('map-itinerary'), mapOptions);
         directionsDisplay.setMap(map);
         
@@ -411,7 +412,7 @@
         //alert('legs: ' + selectedLegs);
 
         var start = document.getElementById('txtStartingAddress').value;
-        alert('starting address: ' + start);
+        //alert('starting address: ' + start);
         var lastItem = 0;
         var legsCount = selectedLegs.length;
 

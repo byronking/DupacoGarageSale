@@ -294,7 +294,7 @@
     });
 
     // Handle validation for selecting the dates.
-    $("#ddlCommunity").change(function () {
+    //$("#ddlCommunity").change(function () {
         if ($("#ddlCommunity option:selected").text() == "Dubuque, IA") {
             $("#txtSaleDateOne").val("4/23/2015");
             $("#txtSaleDateTwo").val("4/24/2015");
@@ -319,7 +319,7 @@
             $("#txtSaleDateThree").val(' ');
             $("#txtSaleDateFour").val(' ');
         }
-    });
+    //});
 
     // Set the range of available times.
     $('#dayOneStart').timepicker({ 'scrollDefault': '800' });
@@ -353,23 +353,151 @@
     });
 
     // Validation for the garage sale dates and times.
-    $("#btnSaveGargeSale").click(function (e) {
+    $("#btnSaveGarageSale").click(function (e) {
+
+        $("#divMissingItemsMessage ul").empty();
+        var numberOfErrors = 0;
+
+        if ($('#txtSaleName').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter a name for your garage sale</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++
+            e.preventDefault();
+        }
+
+        if ($('#txtAddress1').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter an address</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++
+            e.preventDefault();
+        }
+
+        if ($('#txtCity').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter a city</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++
+            e.preventDefault();
+        }
+
+        if ($('#ddlStatesList').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter a state</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++
+            e.preventDefault();
+        }
+
+        if ($('#txtZip').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter a zip code</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++
+            e.preventDefault();
+        }
+
+        if ($('#txtDescription').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter a description of your garage sale</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++
+            e.preventDefault();
+        }
 
         if (($('#dayOneStart').val() == "" || $('#dayOneEnd').val() == "") && ($('#dayTwoStart').val() == "" || $('#dayTwoEnd').val() == "") && ($('#dayThreeStart').val() == "" || $('#dayThreeEnd').val() == "") && ($('#dayFourStart').val() == "" || $('#dayFourEnd').val() == "")) {
-            $("#alertDatesTimes").html('Please enter at least one starting and ending date for your sale');
-            $("#alertDatesTimes").removeClass("hidden");
-            $("#ddlCommunity").focus();
+            $("#divMissingItemsMessage ul").append('<li>Please enter at least one starting and ending date for your sale</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++
             e.preventDefault();
-        }
-        else {
-            $("#alertDatesTimes").addClass("hidden");
         }
 
-        if ($("#ddlCommunity").val() == 0) {
-            $("#alertDatesTimes").html('Please select a community');
-            $("#alertDatesTimes").removeClass("hidden");
-            $("#ddlCommunity").focus();
+        //if ($("#ddlCommunity").val() == 0) {
+            //$("#alertDatesTimes").html('Please select a community');
+            //$("#alertDatesTimes").removeClass("hidden");
+            //$("#ddlCommunity").focus();
+            //e.preventDefault();
+        //}
+
+        if ($('#accordion input:checked').length == 0) {
+            $("#divMissingItemsMessage ul").append('<li>Please select at least one category for the items you are selling</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++
             e.preventDefault();
+        }
+        //alert('checked: ' + $('#accordion input:checked').length);
+        //alert('height: ' + $(document).height());
+
+        if (numberOfErrors > 0) {
+            $('html, body').animate({
+                scrollTop: $(document).height()
+            }, 'slow');
+            //return false;
+        }
+    });
+
+    // Validation for the garage sale info on the Edit page.
+    $("#btnEditGarageSale").click(function (e) {
+
+        $("#divMissingItemsMessage ul").empty();
+        var numberOfErrors = 0;
+
+        if ($('#txtSaleName').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter a name for your garage sale</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++;
+            e.preventDefault();
+        }
+
+        if ($('#txtAddress1').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter an address</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++;
+            e.preventDefault();
+        }
+
+        if ($('#txtCity').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter a city</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++;
+            e.preventDefault();
+        }
+
+        if ($('#ddlStatesList').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter a state</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++;
+            e.preventDefault();
+        }
+
+        if ($('#txtZip').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter a zip code</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++;
+            e.preventDefault();
+        }
+
+        if ($('#txtDescription').val() == "") {
+            $("#divMissingItemsMessage ul").append('<li>Enter a description of your garage sale</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++;
+            e.preventDefault();
+        }
+
+        if (($('#dayOneStart').val() == "" || $('#dayOneEnd').val() == "") && ($('#dayTwoStart').val() == "" || $('#dayTwoEnd').val() == "") && ($('#dayThreeStart').val() == "" || $('#dayThreeEnd').val() == "") && ($('#dayFourStart').val() == "" || $('#dayFourEnd').val() == "")) {
+            $("#divMissingItemsMessage ul").append('<li>Please enter at least one starting and ending date for your sale</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++;
+            e.preventDefault();
+        }
+
+        if ($('#accordion input:checked').length == 0) {
+            $("#divMissingItemsMessage ul").append('<li>Please select at least one category for the items you are selling</li>');
+            $("#divMissingItemsMessage").removeClass('hidden');
+            numberOfErrors++;
+            e.preventDefault();
+        }
+
+        if (numberOfErrors > 0) {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 'slow');
+            //return false;
         }
     });
 

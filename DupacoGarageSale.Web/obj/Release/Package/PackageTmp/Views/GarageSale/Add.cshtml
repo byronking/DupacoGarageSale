@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label for="txtSaleName">Sale title</label>
                             @Html.TextBoxFor(m => m.Sale.GarageSaleName, new { @class="form-control", id="txtSaleName", placeholder="Name your sale" })
-                            <span class="text-error">@Html.ValidationMessageFor(m => m.Sale.GarageSaleName)</span>
+                            @*<span class="text-error">@Html.ValidationMessageFor(m => m.Sale.GarageSaleName)</span>*@
                         </div>
                         <div class="form-group">
                             <label for="txtAddress1">House number & street</label>
@@ -72,10 +72,10 @@
                             <div class="table-scrollable">
                                 <p class="lead">Select the community in which your sale will be hosted:</p>
                                 <select id="ddlCommunity" class="form-control" style="width:50%">
-                                    <option value="0">Select...</option>
+                                    @*<option value="0">Select...</option>
                                     <option value="1">Dubuque, IA</option>
-                                    <option value="2">Manchester, IA</option>
-                                    <option value="3">Platteville, WI</option>
+                                    <option value="2">Manchester, IA</option>*@
+                                    <option value="3" selected>Platteville, WI</option>
                                 </select>
                                 <table class="table table-bordered down_30">
                                     <tr>
@@ -420,9 +420,17 @@
                     </div>
                 </div>
                                        
-                <input id="btnSaveGargeSale" type="submit" value="Save garage sale" class="btn btn-primary" />
+                <input id="btnSaveGarageSale" type="submit" value="Save garage sale" class="btn btn-primary" />
             </div>
         }
+    </div>
+
+    <div>
+        <div class="alert alert-danger down_30 hidden" role="alert" id="divMissingItemsMessage" style="width:92%;">
+            <strong>Some items missing!</strong>
+            Please add the following missing items:
+            <ul></ul>
+        </div>
     </div>
 </div>
 

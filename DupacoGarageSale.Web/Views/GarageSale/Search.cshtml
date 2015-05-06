@@ -629,7 +629,6 @@
                 $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=false', null, function (data) {
 
                     var p = data.results[0].geometry.location
-
                     //alert(data.results[0].formatted_address);  // This will alert the individual addresses.
 
                     //debugObject(data.results[0].formatted_address);
@@ -654,39 +653,20 @@
 
             // Add the Dupaco locations
             var dupacoLocations = AddDupacoLocations();
-            //alert(dupacoLocations);
-            //alert(getObjectSize(dupacoLocations));
 
             if (dupacoLocations != null)
             {
                 var marker, x;
+                var markerCount = 0;
                 var infowindow = new google.maps.InfoWindow();
 
-                for (x = 0; x < getObjectSize(dupacoLocations); x++) {
-                    $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + dupacoLocations[x].address, null, function (data) {
+                for (x = 0; x < getObjectSize(dupacoLocations); x++) {  
+                    var bank_address = dupacoLocations[x].address;
+                    var bank_page = dupacoLocations[x].page;
+                    var bank_lat = dupacoLocations[x].lat;
+                    var bank_long = dupacoLocations[x].long;
 
-                        var p = data.results[0].geometry.location
-
-                        //alert(data.results[0].formatted_address);  // This will alert the individual addresses.
-                        var image = '/Content/images/dupaco_icon.gif';
-                        var latlng = new google.maps.LatLng(p.lat, p.lng);
-                        var marker = new google.maps.Marker({
-                            position: latlng,
-                            map: map,
-                            icon: image,
-                            title: data.results[0].formatted_address
-                        });
-
-                        // Add the markers to the gmarkers array.
-                        gmarkers.push(marker);
-
-                        alert('page: ' + dupacoLocations[x].page);
-
-                        google.maps.event.addListener(marker, 'click', function () {
-                            infowindow.setContent('Dupaco Bank <br/>' + data.results[0].formatted_address + ' <br/><a target="_blank" href="'+ dupacoLocations[x].page + '">Visit this location</a>');
-                            infowindow.open(map, marker);
-                        });
-                    });            
+                    addDupcoBankMarker(map, infowindow, bank_address, bank_page, bank_lat, bank_long);
                 }
 
                 geoCodeAddress(map);
@@ -695,6 +675,31 @@
     }    
 
     initialize();
+
+    function addDupcoBankMarker(map, infowindow, address, page, lat, long) {
+        var image = '/Content/images/dupaco_icon.gif';
+        var latlng = new google.maps.LatLng(lat, long);
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            icon: image,
+            title: address
+        });
+
+        // Add the markers to the gmarkers array.
+        gmarkers.push(marker);
+        google.maps.event.addListener(marker, 'click', function () {
+            var signed_in = '@(ViewBag.SignedIn)'
+            // alert('signed in?: ' + signed_in);
+            if (signed_in == "true") {                
+                infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><br/><a target="_blank" href="'+ page + '">Visit this location</a> <br/> <a href="/Home/SetStopoverAddress?address=' + address + '" id=linkAddStopover>Add to itinerary</a> ');
+            }
+            else {
+                infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><a target="_blank" href="'+ page + '">Visit this location</a>');
+            }
+            infowindow.open(map, marker);
+        });
+    }
 
     function geoCodeAddress(map) {
         var address = document.getElementById('hdnSearchAddress').value;
@@ -729,8 +734,6 @@
                     map: map
                 });
 
-                //alert('zoom: ' + map.getZoom());
-
                 var bounds = new google.maps.LatLngBounds();
 
                 var foundMarkers = 0;
@@ -762,7 +765,7 @@
                     map.fitBounds(circle.getBounds());
                 }
                 // makeSidebar();
-                google.maps.event.addListenerOnce(map, 'bounds_changed', makeSidebar);
+                //google.maps.event.addListenerOnce(map, 'bounds_changed', makeSidebar);
             }
             else
             {

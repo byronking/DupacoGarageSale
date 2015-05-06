@@ -510,7 +510,7 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     controller = "Itinerary",
                     action = "ViewItinerary",
-                    id = viewModel.GarageSaleItinerary.ItineraryId
+                    id = id
                 }));
             }
             else

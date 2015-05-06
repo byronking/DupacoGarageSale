@@ -113,6 +113,16 @@ namespace DupacoGarageSale.Data.Repository
 
                     while (reader.Read())
                     {
+                        var saleId = reader["sale_id"];
+                        if (saleId == DBNull.Value)
+                        {
+                            saleId = 0;
+                        }
+                        else
+                        {
+                            saleId = Convert.ToInt32(reader["sale_id"]);
+                        }
+
                         var itinerary = new GarageSaleItinerary
                         {
                             ItineraryId = Convert.ToInt32(reader["itinerary_id"]),
@@ -121,7 +131,7 @@ namespace DupacoGarageSale.Data.Repository
                             ItineraryLegId = Convert.ToInt32(reader["itinerary_leg_id"]),
                             ItineraryLegOrder = Convert.ToInt32(reader["leg_order"]),
                             ItineraryLegsCount = Convert.ToInt32(reader["legs_count"]),
-                            SaleId = Convert.ToInt32(reader["sale_id"]),
+                            SaleId = Convert.ToInt32(saleId),
                             SaleAddress1 = reader["sale_address1"].ToString(),
                             SaleAddress2 = reader["sale_address2"].ToString(),
                             SaleCity = reader["sale_city"].ToString(),

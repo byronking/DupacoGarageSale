@@ -167,7 +167,6 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
 
-                console.log(data);
                 $('#quickSaleModal').modal('show');
                 $('#saleData').html(data);
             },
