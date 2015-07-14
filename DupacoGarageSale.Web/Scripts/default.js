@@ -205,11 +205,38 @@
         $("#txtAddress").val('');
     }
 
+    //// This responds to the click of the visit garage sale control button
+    //$(".quickView").click(function () {
+    //    var sale_id = $(this).attr('data-sale-id');
+    //    //alert('hi: ' + sale_id);
+
+    //    var url = "/Home/QuickViewGarageSale/" + sale_id;
+    //    $.ajax({
+    //        type: "get",
+    //        //data: JSON.stringify({
+    //        //    id: sale_id
+    //        //}),
+    //        url: url,
+    //        //dataType: 'json',
+    //        contentType: 'application/json; charset=utf-8',
+    //        success: function (data) {
+    //            //debugObject(data);
+    //            $('#quickViewGarageSaleModal').modal('show');
+    //            $('#garageSaleData').html(data);
+    //        },
+    //        error: function (data) {
+    //            // Do something
+    //            alert('There was a problem.');
+    //            //debugObject(data);
+    //        }
+    //    });        
+    //});
+
     // This shows a popover message if the user does not enter an address when searching.
     $("#btnFilter").click(function (e) {
         //if ($("#txtSearchCriteria").val() == "") {
         //    $("#txtSearchCriteria").popover({
-        //        content: "Enter search criteria", placement: "bottom",
+        //        content: "Enter search criteria", placement: "top",
         //        template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
         //    });
         //    $("#txtSearchCriteria").popover('show');
@@ -217,9 +244,19 @@
         //    e.preventDefault();
         //}
 
+        if ($("#ddlRadius").val() == "0") {
+            $("#ddlRadius").popover({
+                content: "Enter a radius for your search", placement: "bottom",
+                template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
+            });
+            $("#ddlRadius").popover('show');
+            $("#ddlRadius").focus();
+            e.preventDefault();
+        }
+
         if ($("#txtAddress").val() == "") {
             $("#txtAddress").popover({
-                content: "Enter a starting point", placement: "bottom",
+                content: "Enter a starting address or zip code", placement: "top",
                 template: '<div class="popover alert alert-danger alert-dismissible fade in" role="alert" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>'
             });
             $("#txtAddress").popover('show');
@@ -745,6 +782,9 @@
         });
     });
 
+    $("#spQuickView").tooltip();
+    $('[data-toggle="tooltip"]').tooltip()
+
     // Show an error if the user doesn't enter text when using the search bar.
     $("#btnSearchBarFind").click(function (e) {
         if ($("#txtSearchCriteria").val() == "") {
@@ -761,8 +801,15 @@
         $('#ddlCommunity').val($('#hdnSearchCommunity').val())
     }
 
+    //alert('radius: ' + $('#hdnSearchRadius').val());
     if ($('#hdnSearchRadius').val() !== "false") {
         $('#ddlRadius').val($('#hdnSearchRadius').val())
+    }
+
+    // This sets the selected search category.
+    //alert('radius: ' + $('#hdnSearchCategory').val());
+    if ($('#hdnSearchCategory').val() !== "false") {
+        $('#ddlCategories').val($('#hdnSearchCategory').val())
     }
 
     $("#btnMapItinerary").click(function () {    

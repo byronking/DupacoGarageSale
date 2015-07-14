@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>QuickViewGarageSale</title>
+</head>
+<body>
+<!-- Quick view garage sale modal -->
+<div class="modal" id="quickViewGarageSaleModal" data-remote="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Quick view garage sale</h4>
+            </div>
+            <div id="garageSaleData" class="modal-body">
+                @if (Model.Sale != null)
+                {
+                    <h4>@Model.Sale.GarageSaleName</h4>
+                    @Model.Sale.SaleDescription <br /><br />
+                
+                    <div>
+                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @Model.Sale.SaleAddress1<br />
+
+                        @if (Model.Sale.SaleAddress2 != string.Empty)
+                        {
+                            @Model.Sale.SaleAddress2;
+                            Response.Write("<br/>");
+                        }
+
+                        @Model.Sale.SaleCity, @Model.Sale.SaleState @Model.Sale.SaleZip <br /> 
+                    </div>
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</body>
+</html>

@@ -504,3 +504,71 @@ The statement has been terminated.
    at DupacoGarageSale.Data.Repository.ItineraryRepository.DeleteItinerary(Int32 itineraryId, Int32 userId) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\ItineraryRepository.cs:line 289
 ClientConnectionId:bcda0658-af62-4965-afe9-9520cba8d6a4
 Error Number:512,State:1,Class:16
+2015-07-06 11:27:11,657 [5] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: sale_date_time_id
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.GetRandomSpecialItems() in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 876
+2015-07-07 13:29:22,878 [14] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: day_one_end
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1270
+2015-07-07 23:38:49,201 [11] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1249
+2015-07-09 14:32:08,505 [13] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: sale_description
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1207
+2015-07-09 15:15:48,968 [14] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: sale_description
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1207
+2015-07-09 15:31:53,162 [22] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: sale_description
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1207
+2015-07-09 15:34:18,839 [23] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: sale_description
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1207
+2015-07-12 15:14:55,773 [12] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: sale_description
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1207
+2015-07-12 15:30:36,950 [15] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: sale_description
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1207
+2015-07-12 15:30:37,277 [15] ERROR DupacoGarageSale.Data.Services.Logger System.Data.SqlClient.SqlException (0x80131904): A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: TCP Provider, error: 0 - An existing connection was forcibly closed by the remote host.) ---> System.ComponentModel.Win32Exception (0x80004005): An existing connection was forcibly closed by the remote host
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1258
+ClientConnectionId:9e4028b3-a595-45b5-bc60-cfbbbe9d2dbd
+Error Number:10054,State:0,Class:20
+2015-07-14 14:57:43,828 [45] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1264
+2015-07-14 17:29:41,509 [25] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1264
+2015-07-14 17:34:37,400 [4] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1264

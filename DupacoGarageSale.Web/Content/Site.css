@@ -61,6 +61,22 @@
   min-height: 50%;
 }
 
+/* garage sale item description */
+.item-desc-scroll {
+    height: 60px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.item-container-div {
+    position: relative;
+}
+
+.item-controls {
+    position: absolute;
+    bottom: 0;
+}
+
 /* Profile pic upload preview */
 #uploadPreview img{
   height:200px;
