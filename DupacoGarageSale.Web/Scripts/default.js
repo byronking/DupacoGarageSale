@@ -810,6 +810,9 @@
     //alert('radius: ' + $('#hdnSearchCategory').val());
     if ($('#hdnSearchCategory').val() !== "false") {
         $('#ddlCategories').val($('#hdnSearchCategory').val())
+        // alert('category: ' + $('#ddlCategories option:selected').text());
+        $('#lblSearchCategory').html($('#ddlCategories option:selected').text());
+        $('#lblSearchCategoryHotPicks').html($('#ddlCategories option:selected').text());
     }
 
     $("#btnMapItinerary").click(function () {    

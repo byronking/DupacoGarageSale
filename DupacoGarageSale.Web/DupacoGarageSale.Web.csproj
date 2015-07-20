@@ -864,6 +864,7 @@
     <Content Include="Scripts\sql scripts\sp_UpdateGarageSale.txt" />
     <Content Include="Scripts\sql scripts\sp_UpdateGarageSaleSpecialItem.txt" />
     <Content Include="Scripts\sql scripts\States insert script.txt" />
+    <Content Include="Scripts\sql scripts\sp_SearchSpecialItemsBySubcategoryAndDate.txt" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Shared\_SuccessfulDelete.cshtml">
       <SubType>Code</SubType>

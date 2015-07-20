@@ -1,0 +1,33 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[SearchSpecialItemsBySubcategoryAndDate]    Script Date: 7/17/15 3:18:58 PM ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+alter PROCEDURE [dbo].[SearchSpecialItemsBySubcategoryAndDate]
+
+@subcategory_id int,
+@start_date varchar(10),
+@end_date varchar(10)
+
+as
+
+begin
+
+set nocount on;
+
+	begin
+		
+		select sale_date_one, day_one_start, day_one_end, sale_date_two, day_two_start, day_two_end, sale_date_three, day_three_start, day_three_end, sale_date_four, day_four_start, 
+			day_four_end, g.sale_description,special_items_id, title, description, picture_link, price, si.sale_id, item_category_id, item_subcategory_id, g.sale_address1, g.sale_address2, 
+			g.sale_city, state_name, g.sale_zip from SpecialItems si join GarageSales g on si.sale_id = g.sale_id join GarageSaleDatesTimes dt on g.sale_id = dt.sale_id
+			left join States s on g.sale_state_id = s.state_id
+			where item_subcategory_id = @subcategory_id and ((sale_date_one between @start_date and @end_date) and (day_one_start is not null) 
+			or (sale_date_two between @start_date and @end_date) and (day_two_start is not null)
+			or (sale_date_three between @start_date and @end_date) and (day_three_start is not null) 
+			or (sale_date_four between @start_date and @end_date) and (day_four_start is not null));
+
+	end
+end

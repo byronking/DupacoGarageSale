@@ -1180,11 +1180,10 @@ namespace DupacoGarageSale.Data.Repository
             try
             {
                 if (searchCriteria != string.Empty)
-                {                   
+                {
                     using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
                     using (SqlCommand cmd = new SqlCommand("SearchSpecialItems", conn))
                     {
-
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
                         cmd.Parameters.Add("@start_date", SqlDbType.VarChar).Value = startDate;
@@ -1234,6 +1233,66 @@ namespace DupacoGarageSale.Data.Repository
 
                             specialItem.DatesTimes = saleDatesTimes;
                             results.SpecialItems.Add(specialItem);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var subcategory in itemSubcategories)
+                    {
+                        using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                        using (SqlCommand cmd = new SqlCommand("SearchSpecialItemsBySubcategoryAndDate", conn))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("@subcategory_id", SqlDbType.VarChar).Value = subcategory;
+                            cmd.Parameters.Add("@start_date", SqlDbType.VarChar).Value = startDate;
+                            cmd.Parameters.Add("@end_date", SqlDbType.VarChar).Value = endDate;
+                            cmd.Connection.Open();
+
+                            var reader = cmd.ExecuteReader();
+
+                            while (reader.Read())
+                            {
+                                var garageSaleAddress = new GarageSaleAddress
+                                {
+                                    Address1 = reader["sale_address1"].ToString(),
+                                    Address2 = reader["sale_address2"].ToString(),
+                                    City = reader["sale_city"].ToString(),
+                                    State = reader["state_name"].ToString(),
+                                    ZipCode = reader["sale_zip"].ToString()
+                                };
+
+                                var specialItem = new SpecialItem
+                                {
+                                    SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
+                                    Title = reader["title"].ToString(),
+                                    Description = reader["description"].ToString(),
+                                    PictureLink = reader["picture_link"].ToString(),
+                                    Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
+                                    SaleId = Convert.ToInt32(reader["sale_id"]),
+                                    SaleDescription = reader["sale_description"].ToString(),
+                                    ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                                    ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                                    SpecialItemAddress = garageSaleAddress
+                                };
+
+                                var saleDatesTimes = new SaleDatesTimes();
+                                saleDatesTimes.SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]);
+                                saleDatesTimes.DayOneStart = reader["day_one_start"].ToString();
+                                saleDatesTimes.DayOneEnd = reader["day_one_end"].ToString();
+                                saleDatesTimes.SaleDateTwo = Convert.ToDateTime(reader["sale_date_two"]);
+                                saleDatesTimes.DayTwoStart = reader["day_two_start"].ToString();
+                                saleDatesTimes.DayTwoEnd = reader["day_two_end"].ToString();
+                                saleDatesTimes.SaleDateThree = Convert.ToDateTime(reader["sale_date_three"]);
+                                saleDatesTimes.DayThreeStart = reader["day_three_start"].ToString();
+                                saleDatesTimes.DayThreeEnd = reader["day_three_end"].ToString();
+                                saleDatesTimes.SaleDateFour = Convert.ToDateTime(reader["sale_date_four"]);
+                                saleDatesTimes.DayFourStart = reader["day_four_start"].ToString();
+                                saleDatesTimes.DayFourEnd = reader["day_four_end"].ToString();
+
+                                specialItem.DatesTimes = saleDatesTimes;
+                                results.SpecialItems.Add(specialItem);
+                            }
                         }
                     }
                 }
@@ -1389,6 +1448,8 @@ namespace DupacoGarageSale.Data.Repository
                                     ZipCode = reader["sale_zip"].ToString()
                                 };
 
+                                var saleDateOne = Convert.ToDateTime(reader["sale_date_one"]);
+
                                 var saleDatesTimes = new SaleDatesTimes();
                                 saleDatesTimes.SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]);
                                 saleDatesTimes.DayOneStart = reader["day_one_start"].ToString();
@@ -1442,7 +1503,6 @@ namespace DupacoGarageSale.Data.Repository
             {
                 if (searchCriteria != string.Empty)
                 {
-
                     using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
                     using (SqlCommand cmd = new SqlCommand("SearchSpecialItemsByCommunity", conn))
                     {
@@ -1499,7 +1559,68 @@ namespace DupacoGarageSale.Data.Repository
                         }
                     }
                 }
-            }
+                else
+                {
+                    foreach (var subcategory in itemSubcategories)
+                    {
+                        using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                        using (SqlCommand cmd = new SqlCommand("SearchSpecialItemsBySubcategoryCommunityAndDate", conn))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("@subcategory_id", SqlDbType.VarChar).Value = subcategory;
+                            cmd.Parameters.Add("@community", SqlDbType.VarChar).Value = community;
+                            cmd.Parameters.Add("@start_date", SqlDbType.VarChar).Value = startDate;
+                            cmd.Parameters.Add("@end_date", SqlDbType.VarChar).Value = endDate;
+                            cmd.Connection.Open();
+
+                            var reader = cmd.ExecuteReader();
+
+                            while (reader.Read())
+                            {
+                                var garageSaleAddress = new GarageSaleAddress
+                                {
+                                    Address1 = reader["sale_address1"].ToString(),
+                                    Address2 = reader["sale_address2"].ToString(),
+                                    City = reader["sale_city"].ToString(),
+                                    State = reader["state_name"].ToString(),
+                                    ZipCode = reader["sale_zip"].ToString()
+                                };
+
+                                var specialItem = new SpecialItem
+                                {
+                                    SpecialItemsId = Convert.ToInt32(reader["special_items_id"]),
+                                    Title = reader["title"].ToString(),
+                                    Description = reader["description"].ToString(),
+                                    PictureLink = reader["picture_link"].ToString(),
+                                    Price = Math.Round(Convert.ToDecimal(reader["price"]), 2),
+                                    SaleId = Convert.ToInt32(reader["sale_id"]),
+                                    SaleDescription = reader["sale_description"].ToString(),
+                                    ItemCategoryId = Convert.ToInt32(reader["item_category_id"]),
+                                    ItemSubcategoryId = Convert.ToInt32(reader["item_subcategory_id"]),
+                                    SpecialItemAddress = garageSaleAddress
+                                };
+
+                                var saleDatesTimes = new SaleDatesTimes();
+                                saleDatesTimes.SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]);
+                                saleDatesTimes.DayOneStart = reader["day_one_start"].ToString();
+                                saleDatesTimes.DayOneEnd = reader["day_one_end"].ToString();
+                                saleDatesTimes.SaleDateTwo = Convert.ToDateTime(reader["sale_date_two"]);
+                                saleDatesTimes.DayTwoStart = reader["day_two_start"].ToString();
+                                saleDatesTimes.DayTwoEnd = reader["day_two_end"].ToString();
+                                saleDatesTimes.SaleDateThree = Convert.ToDateTime(reader["sale_date_three"]);
+                                saleDatesTimes.DayThreeStart = reader["day_three_start"].ToString();
+                                saleDatesTimes.DayThreeEnd = reader["day_three_end"].ToString();
+                                saleDatesTimes.SaleDateFour = Convert.ToDateTime(reader["sale_date_four"]);
+                                saleDatesTimes.DayFourStart = reader["day_four_start"].ToString();
+                                saleDatesTimes.DayFourEnd = reader["day_four_end"].ToString();
+
+                                specialItem.DatesTimes = saleDatesTimes;
+                                results.SpecialItems.Add(specialItem);
+                            }
+                        }
+                    }
+                }
+            }            
             catch (Exception ex)
             {
                 Logger.Log.Error(ex.ToString());
@@ -1596,6 +1717,21 @@ namespace DupacoGarageSale.Data.Repository
                                     ZipCode = reader["sale_zip"].ToString()
                                 };
 
+                                var saleDatesTimes = new SaleDatesTimes();
+                                saleDatesTimes.SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]);
+                                saleDatesTimes.DayOneStart = reader["day_one_start"].ToString();
+                                saleDatesTimes.DayOneEnd = reader["day_one_end"].ToString();
+                                saleDatesTimes.SaleDateTwo = Convert.ToDateTime(reader["sale_date_two"]);
+                                saleDatesTimes.DayTwoStart = reader["day_two_start"].ToString();
+                                saleDatesTimes.DayTwoEnd = reader["day_two_end"].ToString();
+                                saleDatesTimes.SaleDateThree = Convert.ToDateTime(reader["sale_date_three"]);
+                                saleDatesTimes.DayThreeStart = reader["day_three_start"].ToString();
+                                saleDatesTimes.DayThreeEnd = reader["day_three_end"].ToString();
+                                saleDatesTimes.SaleDateFour = Convert.ToDateTime(reader["sale_date_four"]);
+                                saleDatesTimes.DayFourStart = reader["day_four_start"].ToString();
+                                saleDatesTimes.DayFourEnd = reader["day_four_end"].ToString();
+
+                                item.DatesTimes = saleDatesTimes;
                                 results.GarageSaleItems.Add(item);
                             }
                         }
@@ -1638,6 +1774,21 @@ namespace DupacoGarageSale.Data.Repository
                                     ZipCode = reader["sale_zip"].ToString()
                                 };
 
+                                var saleDatesTimes = new SaleDatesTimes();
+                                saleDatesTimes.SaleDateOne = Convert.ToDateTime(reader["sale_date_one"]);
+                                saleDatesTimes.DayOneStart = reader["day_one_start"].ToString();
+                                saleDatesTimes.DayOneEnd = reader["day_one_end"].ToString();
+                                saleDatesTimes.SaleDateTwo = Convert.ToDateTime(reader["sale_date_two"]);
+                                saleDatesTimes.DayTwoStart = reader["day_two_start"].ToString();
+                                saleDatesTimes.DayTwoEnd = reader["day_two_end"].ToString();
+                                saleDatesTimes.SaleDateThree = Convert.ToDateTime(reader["sale_date_three"]);
+                                saleDatesTimes.DayThreeStart = reader["day_three_start"].ToString();
+                                saleDatesTimes.DayThreeEnd = reader["day_three_end"].ToString();
+                                saleDatesTimes.SaleDateFour = Convert.ToDateTime(reader["sale_date_four"]);
+                                saleDatesTimes.DayFourStart = reader["day_four_start"].ToString();
+                                saleDatesTimes.DayFourEnd = reader["day_four_end"].ToString();
+
+                                item.DatesTimes = saleDatesTimes;
                                 results.GarageSaleItems.Add(item);
                             }
                         }
@@ -1721,7 +1872,6 @@ namespace DupacoGarageSale.Data.Repository
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
                 using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItemsByCriteria", conn))
                 {
-
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@search_criteria", SqlDbType.VarChar).Value = searchCriteria;
                     cmd.Connection.Open();

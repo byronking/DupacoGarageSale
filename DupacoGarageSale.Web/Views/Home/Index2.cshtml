@@ -245,10 +245,10 @@
                                     <br />
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text" style="width:330px;" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
+                                <input class="form-control" type="text" style="width:300px;" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
                             </div>                   
                             <div class="form-group">
-                                <input class="form-control" type="text" id="txtAddress" name="txtAddress" value="@ViewBag.Address" style="width:350px;" placeholder="Enter your starting address or zip code"><br />
+                                <input class="form-control" type="text" id="txtAddress" name="txtAddress" value="@ViewBag.Address" style="width:300px;" placeholder="Enter your starting address or zip code"><br />
                             </div> 
                             <p />                           
                             <div class="form-group">
@@ -313,7 +313,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <!-- Here's the map -->
-                        <div id="map-canvas" style="width: 100%; height: 565px; margin-bottom:20px;"></div>
+                        <div id="map-canvas" style="width:99%; height: 565px; margin-left:6px; margin-bottom:20px;"></div>
                     </div>
 
                     <!-- This shows the search results -->
@@ -321,17 +321,17 @@
                     {
                         if (Model.SearchResults.SpecialItems.Count != 0 || Model.SearchResults.GarageSaleItems.Count != 0)
                         {
-                            <div class="row">
+                            <div class="row" style="margin-left:5px;">
                                 @if (Model.SearchResults.SpecialItems.Count != 0)
                                 {
                                     <div>
-                                        @if (ViewBag.SearchCriteria == null)
+                                         @if (ViewBag.SearchCriteria == null || ViewBag.SearchCriteria == string.Empty)
                                         {
-                                            <p class="lead" style="margin-left:18px;">Hot picks results for "@ViewBag.SearchCategory"</p>
+                                            <p class="lead">Hot picks results for "<span id="lblSearchCategoryHotPicks"></span>"</p>
                                         }
                                         else 
                                         {
-                                            <p class="lead" style="margin-left:18px;">Hot picks results for "@ViewBag.SearchCriteria"</p>
+                                            <p class="lead">Hot picks results for "@ViewBag.SearchCriteria"</p>
                                         }
 
                                         @foreach (var item in Model.SearchResults.SpecialItems)
@@ -382,43 +382,51 @@
                                 if (Model.SearchResults.GarageSaleItems.Count != 0)
                                 {                                
                                     <div class="row" style="margin-left:5px;">
-                                        <p class="lead">Garage sale results for "@ViewBag.SearchCriteria"</p>                            
-                                            @foreach (var item in Model.SearchResults.GarageSaleItems)
-                                            {
-                                                <div class="col-md-3">
-                                                    @*<div class="thumbnail"><br />*@
-                                                    <div class="thumbnail item-container-div" style="max-height:475px;min-height:475px;min-width:250px;">
-                                                        <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="@item.ProfilePic">
-	                                                        <img alt="@item.SaleName" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/profile_pictures/@item.ProfilePic">
-                                                        </a>                                                
-                                                        <div class="caption item-controls">
-                                                            <h4>@item.SaleName</h4>
+                                        @if (ViewBag.SearchCriteria == null || ViewBag.SearchCriteria == string.Empty)
+                                        {
+                                            <p class="lead">Garage sale results for "<span id="lblSearchCategory"></span>"</p>
+                                        }
+                                        else 
+                                        {
+                                            <p class="lead">Garage sale results for "@ViewBag.SearchCriteria"</p>
+                                        }
+                                                               
+                                        @foreach (var item in Model.SearchResults.GarageSaleItems)
+                                        {
+                                            <div class="col-md-3">
+                                                @*<div class="thumbnail"><br />*@
+                                                <div class="thumbnail item-container-div" style="max-height:475px;min-height:475px;min-width:250px;">
+                                                    <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="@item.ProfilePic">
+	                                                    <img alt="@item.SaleName" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/profile_pictures/@item.ProfilePic">
+                                                    </a>                                                
+                                                    <div class="caption item-controls">
+                                                        <h4>@item.SaleName</h4>
 
-                                                            <div class="item-desc-scroll"><small2>@item.SaleDescription</small2></div><br />
+                                                        <div class="item-desc-scroll"><small2>@item.SaleDescription</small2></div><br />
 
-                                                            <small>@item.Address1</small><br />
+                                                        <small>@item.Address1</small><br />
                                         
-                                                            @if (@item.Address2 != string.Empty)
-                                                            {
-                                                                <small>@item.Address2</small><br />
-                                                            }
+                                                        @if (@item.Address2 != string.Empty)
+                                                        {
+                                                            <small>@item.Address2</small><br />
+                                                        }
 
-                                                            <small>@item.City, @item.State @item.ZipCode</small>
-                                                            <br /><br />
-                                                            <div class="row">
-                                                                <div class="col-md-12 col-md-offset-3">                                                    
-                                                                    <div class="btn-group btn-group-xs">
-                                                                        <button id="btnSearchResultsQuickViewSaleItem" aria-label="info" class="btn btn-success" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@item.SaleName" data-placement="top" data-content='@item.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@item.DatesTimes.DayOneStart</td><td>Start:<br />@item.DatesTimes.DayTwoStart</td><td>Start:<br />@item.DatesTimes.DayThreeStart</td><td>Start:<br />@item.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@item.DatesTimes.DayOneEnd</td><td>End:<br />@item.DatesTimes.DayTwoEnd</td><td>End:<br />@item.DatesTimes.DayThreeEnd</td><td>End:<br />@item.DatesTimes.DayFourEnd</td></tr></tbody></table>'><span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span></button>
-                                                                        <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Visit this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-home"></span></a>
-                                                                        <button aria-label="fave" class="btn btn-success" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
-                                                                        <button aria-label="email" class="btn btn-success" type="button" data-toggle="tooltip" data-placement="top" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
-                                                                    </div>
+                                                        <small>@item.City, @item.State @item.ZipCode</small>
+                                                        <br /><br />
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-md-offset-3">                                                    
+                                                                <div class="btn-group btn-group-xs">
+                                                                    <button id="btnSearchResultsQuickViewSaleItem" aria-label="info" class="btn btn-success" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@item.SaleName" data-placement="top" data-content='@item.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@item.DatesTimes.DayOneStart</td><td>Start:<br />@item.DatesTimes.DayTwoStart</td><td>Start:<br />@item.DatesTimes.DayThreeStart</td><td>Start:<br />@item.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@item.DatesTimes.DayOneEnd</td><td>End:<br />@item.DatesTimes.DayTwoEnd</td><td>End:<br />@item.DatesTimes.DayThreeEnd</td><td>End:<br />@item.DatesTimes.DayFourEnd</td></tr></tbody></table>'><span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span></button>
+                                                                    <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Visit this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-home"></span></a>
+                                                                    <button aria-label="fave" class="btn btn-success" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
+                                                                    <button aria-label="email" class="btn btn-success" type="button" data-toggle="tooltip" data-placement="top" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
                                                                 </div>
-                                                            </div>              
-                                                        </div>                     
-                                                    </div>
+                                                            </div>
+                                                        </div>              
+                                                    </div>                     
                                                 </div>
-                                            }
+                                            </div>
+                                        }
                                 </div>
                                 }
                         }
