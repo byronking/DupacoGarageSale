@@ -2040,7 +2040,6 @@ namespace DupacoGarageSale.Data.Repository
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
                 using (SqlCommand cmd = new SqlCommand("SearchGarageSaleItemsByCategory", conn))
                 {
-
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@item_category_id", SqlDbType.Int).Value = itemCategory;
                     cmd.Connection.Open();

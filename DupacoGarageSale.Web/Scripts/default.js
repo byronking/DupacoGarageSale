@@ -874,6 +874,77 @@
     if ($('#hdnShowModal').val() === "true") {
         $('#addStopoverModal').modal('show');
     }
+
+    // Add the garage sale to the users' faves.
+    $('#special-items').on('click', 'a.add-to-faves', function (e) {
+        //var value = $(this).attr('data-sale-id');
+        //alert('value: ' + value);
+        e.preventDefault();
+
+        var sale_id = $(this).attr('data-sale-id');
+        var user_id = $("#hdnUserId").val();
+        var url = "/GarageSale/AddSaleToFaves/" + sale_id;
+        $.ajax({
+            type: "post",
+            data: JSON.stringify({
+                saleId: sale_id,
+                userId: user_id
+            }),
+            url: url,
+            //dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $('#addToFavesModal').modal('show');
+                //location.href = "/GarageSale/ViewGarageSale/" + sale_id;
+            },
+            error: function (data) {
+                // Do something
+                //debugObject(data);
+                alert('There was a problem adding the garage sale to faves.');
+            }
+        });
+    });
+
+    // Reload the current page after dismissing the modal.
+    $('#addToFavesModal').on('hidden.bs.modal', function () {
+        location.reload();
+    })
+
+    // Remove the garage sale from the users' faves.
+    $('#special-items').on('click', 'a.remove-from-faves', function (e) {
+        //alert('hi');
+        e.preventDefault();
+
+        var sale_id = $(this).attr('data-sale-id');
+        var user_id = $("#hdnUserId").val();
+        //var fave_id = $(this).attr('data-sale-id');
+        var url = "/GarageSale/RemoveSaleFromFavesByUserId/" + sale_id;
+        $.ajax({
+            type: "post",
+            data: JSON.stringify({
+                saleId: sale_id,
+                userId: user_id
+            }),
+            url: url,
+            //dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $('#removeFromFavesModal').modal('show');
+                //location.href = "/GarageSale/ViewGarageSale/" + sale_id;
+            },
+            error: function (data) {
+                // Do something
+                //debugObject(data);
+                alert('There was a problem removing the garage sale from your faves.');
+            }
+        });
+    });
+
+    // Reload the current page after dismissing the modal.
+    $('#removeFromFavesModal').on('hidden.bs.modal', function () {
+        location.reload();
+    })
+
 });
 
 // This adds the Dupaco locations to the map.

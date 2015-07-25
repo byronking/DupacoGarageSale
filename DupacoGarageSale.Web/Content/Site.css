@@ -63,7 +63,7 @@
 
 /* garage sale item description */
 .item-desc-scroll {
-    height: 60px;
+    min-height: 20px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -74,7 +74,7 @@
 
 .item-controls {
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
 }
 
 /* Profile pic upload preview */

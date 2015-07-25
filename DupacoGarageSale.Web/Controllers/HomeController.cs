@@ -279,6 +279,7 @@ namespace DupacoGarageSale.Web.Controllers
                 var itineraryList = new List<GarageSaleItinerary>();
                 itineraryList = itineraryRepository.GetItinerariesByUserId(viewModel.User.UserId);
                 viewModel.GarageSaleItineraries = itineraryList;
+                viewModel.FavoriteGarageSales = repository.GetFavoriteGarageSales(viewModel.User.UserId);
 
                 // Default to the user's address in the search box, unless the user entered an address.
                 if (viewModel.MappingData == null)
@@ -595,6 +596,28 @@ namespace DupacoGarageSale.Web.Controllers
 
             Session["ViewModel"] = viewModel;
             TempData["SearchButtonClicked"] = "true";
+
+            return RedirectToAction("Index2", viewModel);
+        }
+
+        /// <summary>
+        /// This clears the search results.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ClearSearchResults()
+        {
+            var viewModel = new GarageSaleViewModel();
+
+            if (Session["ViewModel"] != null)
+            {
+                Session["ViewModel"] = null;
+            }
+
+            if (Session["SearchData"] != null)
+            {
+                Session["SearchData"] = null;
+            }
 
             return RedirectToAction("Index2", viewModel);
         }

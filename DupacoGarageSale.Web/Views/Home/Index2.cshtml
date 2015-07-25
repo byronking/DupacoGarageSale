@@ -6,7 +6,9 @@
 }
 
 <style type="text/css">
-    .nav-tabs li a {font-size:14px;padding: 13px 4px;color:#000000;}
+    .nav-tabs li a { font-size:14px; padding: 13px 4px; color:#000000; }
+    th { font-size: 9pt; }
+    td { font-family: sans-serif; font-size: 9pt; }
 </style>
 
 <div class="container down_60">
@@ -33,18 +35,17 @@
             <iframe class="embed-responsive-item" allowfullscreen="" src="https://www.youtube.com/embed/GTOv0nxKcG4?rel=0&html5=1"></iframe>
         </div>
     </div>@*<br /><br />*@
-
-    <p class="lead">
-        
-    </p>
+    
     <div class="row">
         <div class="col-md-12">
             <h4>Use the search tools below to find that perfect item. Hone in on it by entering search criteria, setting a date range, distance from your address, and item category.</h4><br />
         </div>
+
+        <h4><a href="~/GarageSale/Search?s=1">search page!</a></h4>
     </div>
+
     <div class="row">
-        <div class="col-md-12">
-        @*<div class="col-md-10 col-md-offset-1">*@            
+        <div class="col-md-12">       
             <div id="results-filter">
                 @{
                     var searchButtonClicked = string.Empty;
@@ -68,169 +69,169 @@
                                     <optgroup label="Baby">
                                         <option value="all_baby">All baby</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
 
-                                                foreach (var category in categories1)
-                                                {
+                        foreach (var category in categories1)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                      </optgroup> 
                                     <optgroup label="Clothing & Accessories">
                                         <option value="all_clothing_accessories">All clothing & accessories</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories2 = Model.ItemCategories.Where(m => m.ItemCategoryId == 2);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories2 = Model.ItemCategories.Where(m => m.ItemCategoryId == 2);
 
-                                                foreach (var category in categories2)
-                                                {
+                        foreach (var category in categories2)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                      </optgroup>
                                     <optgroup label="Electronics">
                                         <option value="all_electronics">All electronics</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
 
-                                                foreach (var category in categories3)
-                                                {
+                        foreach (var category in categories3)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                     </optgroup>
                                     <optgroup label="Health & Beauty">
                                         <option value="all_health_beauty">All health & beauty</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories4 = Model.ItemCategories.Where(m => m.ItemCategoryId == 4);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories4 = Model.ItemCategories.Where(m => m.ItemCategoryId == 4);
 
-                                                foreach (var category in categories4)
-                                                {
+                        foreach (var category in categories4)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                     </optgroup>                                    
                                     <optgroup label="Pets">
                                         <option value="all_pets">All pets</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories5 = Model.ItemCategories.Where(m => m.ItemCategoryId == 5);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories5 = Model.ItemCategories.Where(m => m.ItemCategoryId == 5);
 
-                                                foreach (var category in categories5)
-                                                {
+                        foreach (var category in categories5)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                     </optgroup>
                                     <optgroup label="Home">
                                         <option value="all_home">All home</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories6 = Model.ItemCategories.Where(m => m.ItemCategoryId == 6);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories6 = Model.ItemCategories.Where(m => m.ItemCategoryId == 6);
 
-                                                foreach (var category in categories6)
-                                                {
+                        foreach (var category in categories6)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                     </optgroup>
                                     <optgroup label="Home maintenance">
                                         <option value="all_home_maintenance">All home maintenance</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories7 = Model.ItemCategories.Where(m => m.ItemCategoryId == 7);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories7 = Model.ItemCategories.Where(m => m.ItemCategoryId == 7);
 
-                                                foreach (var category in categories7)
-                                                {
+                        foreach (var category in categories7)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                     </optgroup>
                                     <optgroup label="Media">
                                         <option value="all_media">All media</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
 
-                                                foreach (var category in categories8)
-                                                {
+                        foreach (var category in categories8)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                     </optgroup>
                                     <optgroup label="Toys & games">
                                         <option value="all_toys_games">All toys & games</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories9 = Model.ItemCategories.Where(m => m.ItemCategoryId == 9);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories9 = Model.ItemCategories.Where(m => m.ItemCategoryId == 9);
 
-                                                foreach (var category in categories9)
-                                                {
+                        foreach (var category in categories9)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                     </optgroup>
                                     <optgroup label="Vehicles">
                                         <option value="all_vehicles">All vehicles</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories10 = Model.ItemCategories.Where(m => m.ItemCategoryId == 10);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories10 = Model.ItemCategories.Where(m => m.ItemCategoryId == 10);
 
-                                                foreach (var category in categories10)
-                                                {
+                        foreach (var category in categories10)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                     </optgroup>
                                     <optgroup label="Sports, Fitness & Outdoors">
                                         <option value="all_sports_fitness">All sports, fitness & outdoors</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
 
-                                                foreach (var category in categories11)
-                                                {
+                        foreach (var category in categories11)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                     </optgroup>     
                                     <optgroup label="Musical Instruments & Gear">
                                         <option value="all_musical_instruments">All musical instruments</option>
                                         @{
-                                            if (Model.ItemCategories != null)
-                                            {
-                                                var categories12 = Model.ItemCategories.Where(m => m.ItemCategoryId == 12);
+                    if (Model.ItemCategories != null)
+                    {
+                        var categories12 = Model.ItemCategories.Where(m => m.ItemCategoryId == 12);
 
-                                                foreach (var category in categories12)
-                                                {
+                        foreach (var category in categories12)
+                        {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                                                }
-                                            }
+                        }
+                    }
                                         }
                                     </optgroup>                          
                                 </select>
@@ -282,6 +283,7 @@
                             <p /><br />
                             <div class="form-group">
                                 <input type="submit" id="btnFilter" value="Search the sales" class="btn btn-primary" />
+                                <a href="~/Home/ClearSearchResults" class="btn btn-danger">Clear search results</a>
                             </div>
                         </li>
                     </ul>
@@ -299,8 +301,7 @@
                     }
                 }
             </div>
-        </div>
-        <div class="col-md-1"></div>       
+        </div>    
     </div>
 
     <div class="row">        
@@ -308,6 +309,14 @@
             <input type="hidden" id="hdnSearchBarCriteria" value="@ViewBag.SearchCriteria" />
             <input type="hidden" id="hdnShowMap" value="@ViewBag.ShowMap" />                
             <input type="hidden" id="hdnSearchResultsCount" value="@ViewBag.SearchResultsCount" />
+
+            @{
+                var signed_in = ViewBag.SignedIn;
+                if (signed_in == "true")
+                {
+                    <input type="hidden" id="hdnUserId" value="@Model.User.UserId" />
+                }
+            }
             
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -326,25 +335,25 @@
                                 {
                                     <div>
                                          @if (ViewBag.SearchCriteria == null || ViewBag.SearchCriteria == string.Empty)
-                                        {
+                                         {
                                             <p class="lead">Hot picks results for "<span id="lblSearchCategoryHotPicks"></span>"</p>
-                                        }
-                                        else 
-                                        {
+                                         }
+                                         else
+                                         {
                                             <p class="lead">Hot picks results for "@ViewBag.SearchCriteria"</p>
-                                        }
+                                         }
 
                                         @foreach (var item in Model.SearchResults.SpecialItems)
                                         {
                                             <div class="col-md-3">
                                                 <div class="thumbnail item-container-div" style="max-height:475px;min-height:475px;min-width:250px;">
                                                     <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                                    <img alt="@item.Title" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+	                                                    <img alt="@item.Title" class="img-responsive" style="display:block;min-height:100px;max-height:200px;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
                                                     </a>                                                
                                                     <div class="caption item-controls">
                                                         <h4>@item.Title</h4>
 
-                                                        <div class="item-desc-scroll"><small2>@item.Description</small2></div><br />
+                                                        <div class="item-desc-scroll"><small>@item.Description</small></div><br />
 
                                                         <p><small><span>$</span> @item.Price</small></p>
                                                         <small>@item.SpecialItemAddress.Address1</small><br />
@@ -357,12 +366,40 @@
                                                         <small>@item.SpecialItemAddress.City, @item.SpecialItemAddress.State @item.SpecialItemAddress.ZipCode</small>
                                                         <br /><br />
                                                         <div class="row">
+                                                            <div class="col-md-12">
+                                                                <table class="table table-bordered table-condensed table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th>
+                                                                            <th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th>
+                                                                            <th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th>
+                                                                            <th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody style="width:auto">
+                                                                        <tr>
+                                                                            <td>Start:<br />@item.DatesTimes.DayOneStart</td>
+                                                                            <td>Start:<br />@item.DatesTimes.DayTwoStart</td>
+                                                                            <td>Start:<br />@item.DatesTimes.DayThreeStart</td>
+                                                                            <td>Start:<br />@item.DatesTimes.DayFourStart</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>End:<br />@item.DatesTimes.DayOneEnd</td>
+                                                                            <td>End:<br />@item.DatesTimes.DayTwoEnd</td>
+                                                                            <td>End:<br />@item.DatesTimes.DayThreeEnd</td>
+                                                                            <td>End:<br />@item.DatesTimes.DayFourEnd</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>                                                             
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-md-12 col-md-offset-3">                                                    
                                                                 <div class="btn-group btn-group-xs">
                                                                     <button aria-label="info" class="btn btn-success" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@item.Description" data-placement="top" data-content='@item.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@item.DatesTimes.DayOneStart</td><td>Start:<br />@item.DatesTimes.DayTwoStart</td><td>Start:<br />@item.DatesTimes.DayThreeStart</td><td>Start:<br />@item.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@item.DatesTimes.DayOneEnd</td><td>End:<br />@item.DatesTimes.DayTwoEnd</td><td>End:<br />@item.DatesTimes.DayThreeEnd</td><td>End:<br />@item.DatesTimes.DayFourEnd</td></tr></tbody></table>'><span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span></button>
                                                                     <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Visit this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-home"></span></a>
-                                                                    <button aria-label="fave" class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
-                                                                    <button aria-label="email" class="btn btn-success" type="button" data-toggle="tooltip" data-placement="top" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                                    <button aria-label="fave" class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="top" title="Sign in to fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
+                                                                    <button aria-label="email" class="btn btn-success" type="button" data-toggle="tooltip" data-placement="top" title="Sign in to email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
                                                                 </div>
                                                             </div>
                                                         </div>              
@@ -386,7 +423,7 @@
                                         {
                                             <p class="lead">Garage sale results for "<span id="lblSearchCategory"></span>"</p>
                                         }
-                                        else 
+                                        else
                                         {
                                             <p class="lead">Garage sale results for "@ViewBag.SearchCriteria"</p>
                                         }
@@ -402,7 +439,7 @@
                                                     <div class="caption item-controls">
                                                         <h4>@item.SaleName</h4>
 
-                                                        <div class="item-desc-scroll"><small2>@item.SaleDescription</small2></div><br />
+                                                        <div class="item-desc-scroll"><small>@item.SaleDescription</small></div><br />
 
                                                         <small>@item.Address1</small><br />
                                         
@@ -413,6 +450,34 @@
 
                                                         <small>@item.City, @item.State @item.ZipCode</small>
                                                         <br /><br />
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <table class="table table-bordered table-condensed table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th>
+                                                                            <th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th>
+                                                                            <th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th>
+                                                                            <th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody style="width:auto">
+                                                                        <tr>
+                                                                            <td>Start:<br />@item.DatesTimes.DayOneStart</td>
+                                                                            <td>Start:<br />@item.DatesTimes.DayTwoStart</td>
+                                                                            <td>Start:<br />@item.DatesTimes.DayThreeStart</td>
+                                                                            <td>Start:<br />@item.DatesTimes.DayFourStart</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>End:<br />@item.DatesTimes.DayOneEnd</td>
+                                                                            <td>End:<br />@item.DatesTimes.DayTwoEnd</td>
+                                                                            <td>End:<br />@item.DatesTimes.DayThreeEnd</td>
+                                                                            <td>End:<br />@item.DatesTimes.DayFourEnd</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>                                                             
+                                                            </div>
+                                                        </div>
                                                         <div class="row">
                                                             <div class="col-md-12 col-md-offset-3">                                                    
                                                                 <div class="btn-group btn-group-xs">
@@ -439,7 +504,7 @@
                         }
                     }                    
 
-                    <div class="row">
+                    <div class="row" id="special-items">
                         <!-- This shows the featured hot picks for the home page. -->
                         @if (Model.GarageSaleSpecialItems != null && Model.SearchResults == null)
                         {
@@ -448,16 +513,18 @@
                                 <p class="lead" style="margin-left:17px;">Featured hot picks</p>
                                 foreach (var item in Model.GarageSaleSpecialItems)
                                 {
-                                    <div class="col-md-3">
-                                        @*<div class="thumbnail"><br />*@
-                                        <div class="thumbnail item-container-div" style="max-height:475px;min-height:475px;min-width:250px;">
-                                            <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                            <img alt="@item.Title" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
-                                            </a>                                                
+                                    <div class="col-md-4">
+                                        <div class="thumbnail item-container-div" style="max-height:647px;min-height:647px;min-width:350px;">
+                                            <div>
+                                                <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
+	                                                <img alt="@item.Title" class="img-responsive" style="display:block;min-width:300px;min-height:240px;max-height:240px;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+                                                </a>
+                                            </div>
+                                                                                            
                                             <div class="caption item-controls">
                                                 <h4>@item.Title</h4>
 
-                                                <div class="item-desc-scroll"><small2>@item.Description</small2></div><br />
+                                                <div class="item-desc-scroll"><small>@item.Description</small></div><br />
 
                                                 <p><small><span>$</span> @item.Price</small></p>
                                                 <small>@item.SpecialItemAddress.Address1</small><br />
@@ -470,27 +537,60 @@
                                                 <small>@item.SpecialItemAddress.City, @item.SpecialItemAddress.State @item.SpecialItemAddress.ZipCode</small>
                                                 <br /><br />
                                                 <div class="row">
+                                                    <div class="col-md-12">
+                                                        <table class="table table-bordered table-condensed table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th>
+                                                                    <th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th>
+                                                                    <th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th>
+                                                                    <th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody style="width:auto">
+                                                                <tr>
+                                                                    <td>Start:<br />@item.DatesTimes.DayOneStart</td>
+                                                                    <td>Start:<br />@item.DatesTimes.DayTwoStart</td>
+                                                                    <td>Start:<br />@item.DatesTimes.DayThreeStart</td>
+                                                                    <td>Start:<br />@item.DatesTimes.DayFourStart</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>End:<br />@item.DatesTimes.DayOneEnd</td>
+                                                                    <td>End:<br />@item.DatesTimes.DayTwoEnd</td>
+                                                                    <td>End:<br />@item.DatesTimes.DayThreeEnd</td>
+                                                                    <td>End:<br />@item.DatesTimes.DayFourEnd</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>                                                             
+                                                    </div>
+                                                </div>
+                                                <div class="row">
                                                     <div class="col-md-12 col-md-offset-3">                                                    
                                                         <div class="btn-group btn-group-xs">
                                                             <button aria-label="info" class="btn btn-primary" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@item.Description" data-placement="top" data-content='@item.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@item.DatesTimes.DayOneStart</td><td>Start:<br />@item.DatesTimes.DayTwoStart</td><td>Start:<br />@item.DatesTimes.DayThreeStart</td><td>Start:<br />@item.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@item.DatesTimes.DayOneEnd</td><td>End:<br />@item.DatesTimes.DayTwoEnd</td><td>End:<br />@item.DatesTimes.DayThreeEnd</td><td>End:<br />@item.DatesTimes.DayFourEnd</td></tr></tbody></table>'><span id="spQuickView" aria-hidden="true" class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="left" data-title="Quick view garage sale"></span></button>
                                                             <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Visit this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-home"></span></a>
-                                                            @if (item.SaleId == 53)
-                                                            {
-                                                                <button aria-label="fave" class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
-                                                            }
-                                                            else
-                                                            {
-                                                                <button aria-label="fave" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
-                                                            }
                                                             @{
-                                                                var signed_in = ViewBag.SignedIn;
-                                                                if (signed_in == "true") {  
+                                                                //var signed_in = ViewBag.SignedIn;
+                                                                if (signed_in == "true")
+                                                                {
+                                                                    if (Model.FavoriteGarageSales != null)
+                                                                    {
+                                                                        if (Model.FavoriteGarageSales.Any(m => m.GarageSaleId == item.SaleId))
+                                                                        {
+                                                                            <a href="#" aria-label="fave" class="btn btn-danger remove-from-faves" type="button" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Un-fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <a href="#" aria-label="fave" class="btn btn-primary add-to-faves" type="button" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
+                                                                        }
+                                                                    }                                                          
+                                                                    
                                                                     <button aria-label="email" class="btn btn-primary" type="button" data-toggle="modal" data-target=".ask-question" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
-                                                            
                                                                 }
                                                                 else
                                                                 {
-                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Log in to email this garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                                    <button aria-label="fave" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Sign in to fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
+                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Sign in to email this garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
                                                                 }
                                                             }  
                                                         </div>
@@ -521,7 +621,7 @@
                                             <div class="caption item-controls">
                                                 <h4>@item.SaleName</h4>
 
-                                                <div class="item-desc-scroll"><small2>@item.SaleDescription</small2></div><br />
+                                                <div class="item-desc-scroll"><small>@item.SaleDescription</small></div><br />
 
                                                 <small>@item.Address1</small><br />
                                         
@@ -533,22 +633,62 @@
                                                 <small>@item.City, @item.State @item.ZipCode</small>
                                                 <br /><br />
                                                 <div class="row">
+                                                    <div class="col-md-12">
+                                                        <table class="table table-bordered table-condensed table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th>
+                                                                    <th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th>
+                                                                    <th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th>
+                                                                    <th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody style="width:auto">
+                                                                <tr>
+                                                                    <td>Start:<br />@item.DatesTimes.DayOneStart</td>
+                                                                    <td>Start:<br />@item.DatesTimes.DayTwoStart</td>
+                                                                    <td>Start:<br />@item.DatesTimes.DayThreeStart</td>
+                                                                    <td>Start:<br />@item.DatesTimes.DayFourStart</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>End:<br />@item.DatesTimes.DayOneEnd</td>
+                                                                    <td>End:<br />@item.DatesTimes.DayTwoEnd</td>
+                                                                    <td>End:<br />@item.DatesTimes.DayThreeEnd</td>
+                                                                    <td>End:<br />@item.DatesTimes.DayFourEnd</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="row">
                                                     <div class="col-md-12 col-md-offset-3">                                                    
                                                         <div class="btn-group btn-group-xs">
                                                             <button id="btnRandomResultsQuickViewSaleItem" aria-label="info" class="btn btn-primary" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@item.SaleName" data-placement="top" data-content='@item.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@item.DatesTimes.DayOneStart</td><td>Start:<br />@item.DatesTimes.DayTwoStart</td><td>Start:<br />@item.DatesTimes.DayThreeStart</td><td>Start:<br />@item.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@item.DatesTimes.DayOneEnd</td><td>End:<br />@item.DatesTimes.DayTwoEnd</td><td>End:<br />@item.DatesTimes.DayThreeEnd</td><td>End:<br />@item.DatesTimes.DayFourEnd</td></tr></tbody></table>'><span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span></button>
                                                             <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Visit this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-home"></span></a>
-                                                            <button aria-label="fave" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
                                                             @{
-                                                                var signed_in = ViewBag.SignedIn;
-                                                                if (signed_in == "true") {  
+                                                                //var signed_in = ViewBag.SignedIn;
+                                                                if (signed_in == "true")
+                                                                {
+                                                                    if (Model.FavoriteGarageSales != null)
+                                                                    {
+                                                                        if (Model.FavoriteGarageSales.Any(m => m.GarageSaleId == item.SaleId))
+                                                                        {
+                                                                            <a href="#" aria-label="fave" class="btn btn-danger remove-from-faves" type="button" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Un-fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <a href="#" aria-label="fave" class="btn btn-primary add-to-faves" type="button" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
+                                                                        }
+                                                                    }                                                          
+                                                                    
                                                                     <button aria-label="email" class="btn btn-primary" type="button" data-toggle="modal" data-target=".ask-question" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
-                                                            
                                                                 }
                                                                 else
                                                                 {
-                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Log in to email this garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                                    <button aria-label="fave" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Sign in to fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
+                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Sign in to email this garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
                                                                 }
-                                                            }                                                            
+                                                            }                                                           
                                                         </div>
                                                     </div>
                                                 </div>              
@@ -652,6 +792,28 @@
                     <br />
                     <input type="submit" value="Add to itinerary" class="btn btn-sm btn-info" />
                 </form>                                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add to faves modal -->
+<div class="modal fade add-to-faves" id="addToFavesModal" tabindex="-1" role="dialog" aria-labelledby="addToFavesModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                Garage sale added to your faves!
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Remove from faves modal -->
+<div class="modal fade remove-from-faves" id="removeFromFavesModal" tabindex="-1" role="dialog" aria-labelledby="removeFromFavesModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                Garage sale removed from your faves!
             </div>
         </div>
     </div>

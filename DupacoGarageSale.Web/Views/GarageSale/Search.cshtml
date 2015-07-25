@@ -13,112 +13,55 @@
 
 <div class="container down_70">
     <div class="form-inline">
-        @*<div class="form-group">
-            <img src="~/Content/images/garagesale.gif" alt="dupaco garage sales!" class="down_30" />
-        </div>*@
         <div class="form-group">
-            <h2>
-                Use the search tools below to find that perfect item.  Hone in on it by entering search criteria, setting a date range, distance from your address, and item category.
-            </h2>
-        </div>
+            <h1>Search the Garage Sales!</h1>
+        </div>        
     </div><br />
-   
+
     <div class="row">
-        <div id="results-filter" class="col-md-3">
-            @using (Html.BeginForm("AdvancedSearch", "GarageSale", FormMethod.Post, new { @role = "form" }))
-            {
-                <input type="hidden" id="hdnSelectedCategories" value="@ViewBag.SelectedCategories" />
-                <input type="hidden" id="hdnSavedAddress" value="@ViewBag.Address" />
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="form-group">
-                            <label for="txtSearchCriteria">What are you looking for?</label>
-                            <input class="form-control" type="text" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
-                        </div>
-                        <div class="form-group">
-                            <label for="ddlCommunity">What are you looking for?</label>
-                            <select name="ddlCommunity" id="ddlCommunity" class="form-control">
-                                <option value="all">All communities</option>
-                                <option value="dubuque">Dubuque, IA</option>
-                                <option value="manchester">Manchester, IA</option>
-                                <option value="platteville">Platteville, WI</option>
-                            </select>
-                            <br />
-                        </div>
-                        <div class="form-group">
-                            <label for="txtAddress">Enter your starting address (Ex. 5865 Saratoga Rd., Dubuque, IA) or the zip code of your starting place.</label>
-                            <textarea class="form-control" id="txtAddress" name="txtAddress" placeholder="Enter an address or zip code">
-                                @{
-                                    if (TempData["UserAddress"] != null)
-                                    {
-                                        @TempData["UserAddress"].ToString() 
-                                    }
-                                }
-                            </textarea><br /><br />
-                            <label for="ddlRadius">How far from your starting place do you want to search?</label><br />
-                            <select name="ddlRadius" id="ddlRadius" class="form-control">
-                                <option value="1">1 mile</option>
-                                <option value="2">2 miles</option>
-                                <option value="5">5 miles</option>
-                                <option value="10">10 miles</option>
-                                <option value="15">15 miles</option>
-                                <option value="25">25 miles</option>
-                                <option value="50">50 miles</option>
-                                <option value="100">100 miles</option>
-                                <option value="250">250 miles</option>
-                                <option value="500">500 miles</option>
-                            </select>
-                            <br />
-                            <input type="hidden" id="hdnSearchRadius" value="@ViewBag.SearchRadius" />
-                            <input type="hidden" id="hdnSearchCommunity" value="@ViewBag.Community" />
-                            <input type="hidden" id="hdnNoAddress" value="@ViewBag.NoAddress" />
-                                                   
-                        </div>                         
-                        <div>
-                            <strong>Enter start and end dates:</strong><br />
-                            <label for="from">Start:</label><br />
-                            <input type="text" id="from" name="from" class="form-control" value="@ViewBag.From"><br />
-                            <label for="to">End:</label><br />
-                            <input type="text" id="to" name="to" class="form-control" value="@ViewBag.To"><br />
-                        </div>                          
+        <div class="col-md-12">
+            <h4>Use the search tools below to find that perfect item. Hone in on it by entering search criteria, setting a date range, distance from your address, and item category.</h4><br />
+        </div>
+    </div>
 
-                        <div id="accordion" class="panel-group" aria-multiselectable="true" role="tablist">
-                            <div class="panel panel-success">
-                            <div id="headingOne" role="tab" class="panel-heading">
-                                <h4 class="panel-title">
-                                <a aria-controls="collapseOne" aria-expanded="true" href="#collapseOne" data-parent="#accordion" data-toggle="collapse">
-                                    Baby
-                                </a>
-                                </h4>
+    <div class="row">
+        <div class="col-md-12">       
+            <div id="results-filter">
+                @{
+                    var searchButtonClicked = string.Empty;
+                    if (TempData["SearchButtonClicked"] != null)
+                    {
+                        searchButtonClicked = TempData["SearchButtonClicked"].ToString();
+                    }
+                }
+
+                <input type="hidden" id="hdnSearchButtonClicked" value="@searchButtonClicked" />
+                @using (Html.BeginForm("AdvancedSearch", "GarageSale", FormMethod.Post, new { @role = "form", @class = "form-inline" }))
+                { 
+                    <ul class="list-group">
+                        <li class="list-group-item" style="background-color:#88C440;">
+                            <div class="white">
+                                <h3>Search the 428 garage sales!</h3><br />
                             </div>
-                            <div aria-labelledby="headingOne" role="tabpanel" class="panel-collapse collapse" id="collapseOne">
-                                <div class="list-group">
-                                    @{
-                                        if (Model.ItemCategories != null)
-                                        {
-                                            var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
-
-                                            foreach (var category in categories1)
+                            <div class="form-group">
+                                <select name="ddlCategories" id="ddlCategories" class="form-control">
+                                    <option value="all" selected="selected">All categories</option>
+                                    <optgroup label="Baby">
+                                        <option value="all_baby">All baby</option>
+                                        @{
+                                            if (Model.ItemCategories != null)
                                             {
-                                                <div class="row" style="margin-left:5px;">
-                                                    <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                </div>
+                                                var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
+
+                                                foreach (var category in categories1)
+                                                {
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                                }
                                             }
                                         }
-                                    }
-                                </div>
-                            </div>
-                            </div>
-                            <div class="panel panel-success">
-                                <div id="headingTwo" role="tab" class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a aria-controls="collapseTwo" aria-expanded="false" href="#collapseTwo" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                            Clothing & Accessories
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div aria-labelledby="headingTwo" role="tabpanel" class="panel-collapse collapse" id="collapseTwo">
-                                    <div class="list-group">
+                                     </optgroup> 
+                                    <optgroup label="Clothing & Accessories">
+                                        <option value="all_clothing_accessories">All clothing & accessories</option>
                                         @{
                                             if (Model.ItemCategories != null)
                                             {
@@ -126,77 +69,41 @@
 
                                                 foreach (var category in categories2)
                                                 {
-                                                    <div class="row" style="margin-left:5px;">
-                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                    </div>
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
                                                 }
                                             }
                                         }
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-success">
-                            <div id="headingThree" role="tab" class="panel-heading">
-                                <h4 class="panel-title">
-                                <a aria-controls="collapseThree" aria-expanded="false" href="#collapseThree" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                    Electronics
-                                </a>
-                                </h4>
-                            </div>
-                            <div aria-labelledby="headingThree" role="tabpanel" class="panel-collapse collapse" id="collapseThree">
-                                <div class="list-group">
-                                    @{
-                                        if (Model.ItemCategories != null)
-                                        {
-                                            var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
-
-                                            foreach (var category in categories3)
+                                     </optgroup>
+                                    <optgroup label="Electronics">
+                                        <option value="all_electronics">All electronics</option>
+                                        @{
+                                            if (Model.ItemCategories != null)
                                             {
-                                                <div class="row" style="margin-left:5px;">
-                                                    <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                </div>
+                                                var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
+
+                                                foreach (var category in categories3)
+                                                {
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                                }
                                             }
                                         }
-                                    }
-                                </div>
-                            </div>
-                            </div>
-                            <div class="panel panel-success">
-                            <div id="headingFour" role="tab" class="panel-heading">
-                                <h4 class="panel-title">
-                                <a aria-controls="collapseFour" aria-expanded="false" href="#collapseFour" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                    Health & Beauty
-                                </a>
-                                </h4>
-                            </div>
-                            <div aria-labelledby="headingFour" role="tabpanel" class="panel-collapse collapse" id="collapseFour">
-                                <div class="list-group">
-                                    @{
-                                        if (Model.ItemCategories != null)
-                                        {
-                                            var categories4 = Model.ItemCategories.Where(m => m.ItemCategoryId == 4);
-
-                                            foreach (var category in categories4)
+                                    </optgroup>
+                                    <optgroup label="Health & Beauty">
+                                        <option value="all_health_beauty">All health & beauty</option>
+                                        @{
+                                            if (Model.ItemCategories != null)
                                             {
-                                                <div class="row" style="margin-left:5px;">
-                                                    <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                </div>
+                                                var categories4 = Model.ItemCategories.Where(m => m.ItemCategoryId == 4);
+
+                                                foreach (var category in categories4)
+                                                {
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                                }
                                             }
                                         }
-                                    }
-                                </div>
-                            </div>
-                            </div>
-                            <div class="panel panel-success">
-                                <div id="headingFive" role="tab" class="panel-heading">
-                                    <h4 class="panel-title">
-                                    <a aria-controls="collapseFive" aria-expanded="false" href="#collapseFive" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                        Pets
-                                    </a>
-                                    </h4>
-                                </div>
-                                <div aria-labelledby="headingFive" role="tabpanel" class="panel-collapse collapse" id="collapseFive">
-                                    <div class="list-group">
+                                    </optgroup>                                    
+                                    <optgroup label="Pets">
+                                        <option value="all_pets">All pets</option>
                                         @{
                                             if (Model.ItemCategories != null)
                                             {
@@ -204,25 +111,13 @@
 
                                                 foreach (var category in categories5)
                                                 {
-                                                        <div class="row" style="margin-left:5px;">
-                                                            <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                        </div>
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
                                                 }
                                             }
                                         }
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-success">
-                                <div id="headingSix" role="tab" class="panel-heading">
-                                    <h4 class="panel-title">
-                                    <a aria-controls="collapseSix" aria-expanded="false" href="#collapseSix" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                        Home
-                                    </a>
-                                    </h4>
-                                </div>
-                                <div aria-labelledby="headingSix" role="tabpanel" class="panel-collapse collapse" id="collapseSix">
-                                    <div class="list-group">
+                                    </optgroup>
+                                    <optgroup label="Home">
+                                        <option value="all_home">All home</option>
                                         @{
                                             if (Model.ItemCategories != null)
                                             {
@@ -230,25 +125,13 @@
 
                                                 foreach (var category in categories6)
                                                 {
-                                                    <div class="row" style="margin-left:5px;">
-                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                    </div>
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
                                                 }
                                             }
                                         }
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-success">
-                                <div id="headingSeven" role="tab" class="panel-heading">
-                                    <h4 class="panel-title">
-                                    <a aria-controls="collapseSeven" aria-expanded="false" href="#collapseSeven" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                        Home Maintenance
-                                    </a>
-                                    </h4>
-                                </div>
-                                <div aria-labelledby="headingSeven" role="tabpanel" class="panel-collapse collapse" id="collapseSeven">
-                                    <div class="list-group">
+                                    </optgroup>
+                                    <optgroup label="Home maintenance">
+                                        <option value="all_home_maintenance">All home maintenance</option>
                                         @{
                                             if (Model.ItemCategories != null)
                                             {
@@ -256,25 +139,13 @@
 
                                                 foreach (var category in categories7)
                                                 {
-                                                    <div class="row" style="margin-left:5px;">
-                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                    </div>
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
                                                 }
                                             }
                                         }
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-success">
-                                <div id="headingEight" role="tab" class="panel-heading">
-                                    <h4 class="panel-title">
-                                    <a aria-controls="collapseEight" aria-expanded="false" href="#collapseEight" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                        Media
-                                    </a>
-                                    </h4>
-                                </div>
-                                <div aria-labelledby="headingEight" role="tabpanel" class="panel-collapse collapse" id="collapseEight">
-                                    <div class="list-group">
+                                    </optgroup>
+                                    <optgroup label="Media">
+                                        <option value="all_media">All media</option>
                                         @{
                                             if (Model.ItemCategories != null)
                                             {
@@ -282,25 +153,13 @@
 
                                                 foreach (var category in categories8)
                                                 {
-                                                    <div class="row" style="margin-left:5px;">
-                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                    </div>
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
                                                 }
                                             }
                                         }
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-success">
-                                <div id="headingNine" role="tab" class="panel-heading">
-                                    <h4 class="panel-title">
-                                    <a aria-controls="collapseNine" aria-expanded="false" href="#collapseNine" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                        Toys & Games
-                                    </a>
-                                    </h4>
-                                </div>
-                                <div aria-labelledby="headingNine" role="tabpanel" class="panel-collapse collapse" id="collapseNine">
-                                    <div class="list-group">
+                                    </optgroup>
+                                    <optgroup label="Toys & games">
+                                        <option value="all_toys_games">All toys & games</option>
                                         @{
                                             if (Model.ItemCategories != null)
                                             {
@@ -308,25 +167,13 @@
 
                                                 foreach (var category in categories9)
                                                 {
-                                                    <div class="row" style="margin-left:5px;">
-                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                    </div>
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
                                                 }
                                             }
                                         }
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-success">
-                                <div id="headingTen" role="tab" class="panel-heading">
-                                    <h4 class="panel-title">
-                                    <a aria-controls="collapseTen" aria-expanded="false" href="#collapseTen" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                        Vehicles
-                                    </a>
-                                    </h4>
-                                </div>
-                                <div aria-labelledby="headingTen" role="tabpanel" class="panel-collapse collapse" id="collapseTen">
-                                    <div class="list-group">
+                                    </optgroup>
+                                    <optgroup label="Vehicles">
+                                        <option value="all_vehicles">All vehicles</option>
                                         @{
                                             if (Model.ItemCategories != null)
                                             {
@@ -334,25 +181,13 @@
 
                                                 foreach (var category in categories10)
                                                 {
-                                                    <div class="row" style="margin-left:5px;">
-                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                    </div>
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
                                                 }
                                             }
                                         }
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-success">
-                                <div id="headingEleven" role="tab" class="panel-heading">
-                                    <h4 class="panel-title">
-                                    <a aria-controls="collapseEleven" aria-expanded="false" href="#collapseEleven" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                        Sports, Fitness & Outdoors
-                                    </a>
-                                    </h4>
-                                </div>
-                                <div aria-labelledby="headingEleven" role="tabpanel" class="panel-collapse collapse" id="collapseEleven">
-                                    <div class="list-group">
+                                    </optgroup>
+                                    <optgroup label="Sports, Fitness & Outdoors">
+                                        <option value="all_sports_fitness">All sports, fitness & outdoors</option>
                                         @{
                                             if (Model.ItemCategories != null)
                                             {
@@ -360,25 +195,13 @@
 
                                                 foreach (var category in categories11)
                                                 {
-                                                    <div class="row" style="margin-left:5px;">
-                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                    </div>
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
                                                 }
                                             }
                                         }
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="panel panel-success">
-                                <div id="headingTwelve" role="tab" class="panel-heading">
-                                    <h4 class="panel-title">
-                                    <a aria-controls="collapseTwelve" aria-expanded="false" href="#collapseTwelve" data-parent="#accordion" data-toggle="collapse" class="collapsed">
-                                        Musical Instruments & Gear
-                                    </a>
-                                    </h4>
-                                </div>
-                                <div aria-labelledby="headingTwelve" role="tabpanel" class="panel-collapse collapse" id="collapseTwelve">
-                                    <div class="list-group">
+                                    </optgroup>     
+                                    <optgroup label="Musical Instruments & Gear">
+                                        <option value="all_musical_instruments">All musical instruments</option>
                                         @{
                                             if (Model.ItemCategories != null)
                                             {
@@ -386,41 +209,82 @@
 
                                                 foreach (var category in categories12)
                                                 {
-                                                    <div class="row" style="margin-left:5px;">
-                                                        <input type="checkbox" name="@category.ItemSubcategoryId" value="@category.ItemSubcategoryId"> <small>@category.ItemSubcategoryName</small>
-                                                    </div>
+                                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
                                                 }
                                             }
                                         }
-                                    </div>
-                                </div>
+                                    </optgroup>                          
+                                </select>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" id="btnFilter" value="Search sales" class="btn btn-primary" />
-                            <input type="button" id="btnClearSearch" value="Clear filters" class="btn btn-danger" />
-                        </div>
-                    </li>
-                </ul>
-            
-                if (Model.SearchResults != null)
-                {
-                    var testy = ViewBag.SearchResults;
+                            <div class="form-group">
+                                <select name="ddlCommunity" id="ddlCommunity" class="form-control">
+                                        <option value="all" selected="selected">All communities</option>
+                                        <option value="dubuque">Dubuque, IA</option>
+                                        <option value="manchester">Manchester, IA</option>
+                                        <option value="platteville">Platteville, WI</option>
+                                    </select>
+                                    <br />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" style="width:300px;" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
+                            </div>                   
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="txtAddress" name="txtAddress" value="@ViewBag.Address" style="width:300px;" placeholder="Enter your starting address or zip code"><br />
+                            </div> 
+                            <p />                           
+                            <div class="form-group">
+                                <select name="ddlRadius" id="ddlRadius" class="form-control">
+                                    <option value="0">How far from your starting point to search?</option>
+                                    <option value="1">1 mile</option>
+                                    <option value="2">2 miles</option>
+                                    <option value="5">5 miles</option>
+                                    <option value="10">10 miles</option>
+                                    <option value="15">15 miles</option>
+                                    <option value="25">25 miles</option>
+                                    <option value="50">50 miles</option>
+                                    <option value="100">100 miles</option>
+                                    <option value="250">250 miles</option>
+                                    <option value="500">500 miles</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="from" name="from" class="form-control" value="@ViewBag.From" placeholder="Enter a start date"> <strong> - </strong>                           
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="to" name="to" class="form-control" value="@ViewBag.To" placeholder="Enter an end date">
+                            </div>
 
-                    if (Model.SearchResults.GarageSaleItems.Count > 0)
+                            <input type="hidden" id="hdnSearchRadius" value="@ViewBag.SearchRadius" />
+                            <input type="hidden" id="hdnSearchCommunity" value="@ViewBag.Community" />
+                            <input type="hidden" id="hdnNoAddress" value="@ViewBag.NoAddress" />
+                            <input type="hidden" id="hdnSavedAddress" value="@ViewBag.Address" />
+                            <input type="hidden" id="hdnSearchCategory" value="@ViewBag.SearchCategory" />
+
+                            <p /><br />
+                            <div class="form-group">
+                                <input type="submit" id="btnFilter" value="Search the sales" class="btn btn-primary" />
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    if (Model.SearchResults != null)
                     {
-                        <input type="hidden" name="hdnSearchCriteria" id="hdnSearchCriteria" value="@ViewBag.SearchCriteria" />
-                    }
-                    else
-                    {
-                            
-                        <input type="hidden" name="hdnSearchResults" id="hdnSearchResults" value="@ViewBag.SearchResults" /> <!-- This is the free text search string -->
+                        if (Model.SearchResults.GarageSaleItems.Count > 0)
+                        {
+                            <input type="hidden" name="hdnSearchCriteria" id="hdnSearchCriteria" value="@ViewBag.SearchCriteria" />
+                        }
+                        else
+                        {                            
+                            <input type="hidden" name="hdnSearchResults" id="hdnSearchResults" value="@ViewBag.SearchResults" /> <!-- This is the free text search string -->
+                        }
                     }
                 }
-            }        
-        </div>
-        
-        <div class="col-md-9">
+            </div>
+        </div>    
+    </div>
+
+        <div class="row">        
+        <div class="col-md-12 text-centered">
             <input type="hidden" id="hdnSearchBarCriteria" value="@ViewBag.SearchCriteria" />
             <input type="hidden" id="hdnShowMap" value="@ViewBag.ShowMap" />                
             <input type="hidden" id="hdnSearchResultsCount" value="@ViewBag.SearchResultsCount" />
@@ -429,7 +293,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <!-- Here's the map -->
-                        <div id="map-canvas" style="width: 100%; height: 565px; margin-bottom:20px;"></div>
+                        <div id="map-canvas" style="width:99%; height: 565px; margin-left:6px; margin-bottom:20px;"></div>
                     </div>
 
                     <!-- This shows the search results -->
@@ -437,96 +301,114 @@
                     {
                         if (Model.SearchResults.SpecialItems.Count != 0 || Model.SearchResults.GarageSaleItems.Count != 0)
                         {
-                            <div class="row">
+                            <div class="row" style="margin-left:5px;">
                                 @if (Model.SearchResults.SpecialItems.Count != 0)
                                 {
-                                    <p class="lead" style="margin-left:18px;">Hot picks</p>
-                                    foreach (var item in Model.SearchResults.SpecialItems)
-                                    {
-                                        <div class="col-md-5">
-                                            <div class="thumbnail" style="max-height:600px;min-height:550px;">
-                                                <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
-	                                                <img alt="@item.Title" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
-                                                </a> 
-                                                <div class="caption">
-                                                    <h3>@item.Title</h3>
-                                                    @item.Description<br /><br />
-                                                    <p><span>$</span> @item.Price</p>
-                                                    @item.SpecialItemAddress.Address1<br />
-                                        
-                                                    @if (@item.SpecialItemAddress.Address2 != string.Empty)
-                                                    {
-                                                        @item.SpecialItemAddress.Address2<br />
-                                                    }
+                                    <div>
+                                         @if (ViewBag.SearchCriteria == null || ViewBag.SearchCriteria == string.Empty)
+                                        {
+                                            <p class="lead">Hot picks results for "<span id="lblSearchCategoryHotPicks"></span>"</p>
+                                        }
+                                        else 
+                                        {
+                                            <p class="lead">Hot picks results for "@ViewBag.SearchCriteria"</p>
+                                        }
 
-                                                    @item.SpecialItemAddress.City, @item.SpecialItemAddress.State @item.SpecialItemAddress.ZipCode<br /><br />
-                                                    <a href="~/GarageSale/ViewGarageSale/@item.SaleId">Visit this garage sale</a><br />                  
-                                                </div>                     
+                                        @foreach (var item in Model.SearchResults.SpecialItems)
+                                        {
+                                            <div class="col-md-3">
+                                                <div class="thumbnail item-container-div" style="max-height:475px;min-height:475px;min-width:250px;">
+                                                    <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
+	                                                    <img alt="@item.Title" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
+                                                    </a>                                                
+                                                    <div class="caption item-controls">
+                                                        <h4>@item.Title</h4>
+
+                                                        <div class="item-desc-scroll">@item.Description</div><br />
+
+                                                        <p><small><span>$</span> @item.Price</small></p>
+                                                        <small>@item.SpecialItemAddress.Address1</small><br />
+                                        
+                                                        @if (@item.SpecialItemAddress.Address2 != string.Empty)
+                                                        {
+                                                            <small>@item.SpecialItemAddress.Address2</small><br />
+                                                        }
+
+                                                        <small>@item.SpecialItemAddress.City, @item.SpecialItemAddress.State @item.SpecialItemAddress.ZipCode</small>
+                                                        <br /><br />
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-md-offset-3">                                                    
+                                                                <div class="btn-group btn-group-xs">
+                                                                    <button aria-label="info" class="btn btn-primary" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@item.Description" data-placement="top" data-content='@item.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@item.DatesTimes.DayOneStart</td><td>Start:<br />@item.DatesTimes.DayTwoStart</td><td>Start:<br />@item.DatesTimes.DayThreeStart</td><td>Start:<br />@item.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@item.DatesTimes.DayOneEnd</td><td>End:<br />@item.DatesTimes.DayTwoEnd</td><td>End:<br />@item.DatesTimes.DayThreeEnd</td><td>End:<br />@item.DatesTimes.DayFourEnd</td></tr></tbody></table>'><span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span></button>
+                                                                    <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Visit this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-home"></span></a>
+                                                                    <button aria-label="fave" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
+                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>              
+                                                    </div>                     
+                                                </div>
                                             </div>
-                                        </div>
-                                    }
+                                        }                                        
+                                    </div>
                                 }
                             </div>
 
-                            if (Model.SearchResults.SpecialItems.Count != 0 && Model.SearchResults.GarageSaleItems.Count != 0)
-                            {
-                             <hr/>   
-                            }
+                                if (Model.SearchResults.SpecialItems.Count != 0 && Model.SearchResults.GarageSaleItems.Count != 0)
+                                {
+                                    <hr/>   
+                                }
 
-                            if (Model.SearchResults.GarageSaleItems.Count != 0)
-                            {
-                                <div style="width:60%;">
-                                    <!-- Diaplay the garage sale items -->
-                                    <p class="lead">Garage sale items for sale</p>
-                                    @(Html.Telerik().Grid(Model.SearchResults.GarageSaleItems)
-                                        .Name("grdGarageSaleItems")
-                                        .DataKeys(dataKeys => dataKeys.Add(k => k.GarageSaleItemsId))
-                                        .Columns(columns =>
+                                if (Model.SearchResults.GarageSaleItems.Count != 0)
+                                {                                
+                                    <div class="row" style="margin-left:5px;">
+                                        @if (ViewBag.SearchCriteria == null || ViewBag.SearchCriteria == string.Empty)
                                         {
-                                            columns.Command(commands =>
-                                            {
-                                                commands.Custom("ViewGarageSale")
-                                                    .Text("View")
-                                                    .Action("ViewGarageSale", "GarageSale")
-                                                    .DataRouteValues(route =>
-                                                    {
-                                                        route.Add(m => m.SaleId).RouteKey("saleId");
-                                                    });
-                                            });
-                                        })
-                                        .RowTemplate(grid => @<text>
-				                            <div>
-                                                @if (item.ProfilePic == string.Empty)
-                                                {
-                                                    <a href="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" data-lightbox="dupaco_garage_sale">
-                                                        <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/keep-calm-and-come-to-the-dupaco-garage-sale.png" />
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="dupaco_garage_sale">
-                                                        <img class="img-circle" style="width:75px;height:75px" src="~/Content/images/profile_pictures/@item.ProfilePic" />
-                                                    </a>
-                                                }
-                                                <br /><br />
-                                                @item.SaleDescription<br /><br />
-                                                @item.ItemCategoryName - @item.ItemSubcategoryName<br /><br />                                                
-					                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @item.Address1,
-					                            @if (item.Address2 != string.Empty)
-                                                {                        
-						                            @item.Address2
-                                                }
-					                            @item.City, @item.State @item.ZipCode<br /><br />
-					                            <a href="~/GarageSale/ViewGarageSale/@item.SaleId">Visit this garage sale</a><br />
-				                            </div>
-                                    
-                                        </text>
-                                        )
-                                        .Pageable(pager => pager.PageSize(20))
-                                        .Sortable()
-                                    )
+                                            <p class="lead">Garage sale results for "<span id="lblSearchCategory"></span>"</p>
+                                        }
+                                        else 
+                                        {
+                                            <p class="lead">Garage sale results for "@ViewBag.SearchCriteria"</p>
+                                        }
+                                                               
+                                        @foreach (var item in Model.SearchResults.GarageSaleItems)
+                                        {
+                                            <div class="col-md-3">
+                                                @*<div class="thumbnail"><br />*@
+                                                <div class="thumbnail item-container-div" style="max-height:475px;min-height:475px;min-width:250px;">
+                                                    <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="@item.ProfilePic">
+	                                                    <img alt="@item.SaleName" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/profile_pictures/@item.ProfilePic">
+                                                    </a>                                                
+                                                    <div class="caption item-controls">
+                                                        <h4>@item.SaleName</h4>
+
+                                                        <div class="item-desc-scroll">@item.SaleDescription</div><br />
+
+                                                        <small>@item.Address1</small><br />
+                                        
+                                                        @if (@item.Address2 != string.Empty)
+                                                        {
+                                                            <small>@item.Address2</small><br />
+                                                        }
+
+                                                        <small>@item.City, @item.State @item.ZipCode</small>
+                                                        <br /><br />
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-md-offset-3">                                                    
+                                                                <div class="btn-group btn-group-xs">
+                                                                    <button id="btnSearchResultsQuickViewSaleItem" aria-label="info" class="btn btn-success" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@item.SaleName" data-placement="top" data-content='@item.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@item.DatesTimes.DayOneStart</td><td>Start:<br />@item.DatesTimes.DayTwoStart</td><td>Start:<br />@item.DatesTimes.DayThreeStart</td><td>Start:<br />@item.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@item.DatesTimes.DayOneEnd</td><td>End:<br />@item.DatesTimes.DayTwoEnd</td><td>End:<br />@item.DatesTimes.DayThreeEnd</td><td>End:<br />@item.DatesTimes.DayFourEnd</td></tr></tbody></table>'><span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span></button>
+                                                                    <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Visit this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-home"></span></a>
+                                                                    <button aria-label="fave" class="btn btn-success" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
+                                                                    <button aria-label="email" class="btn btn-success" type="button" data-toggle="tooltip" data-placement="top" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>              
+                                                    </div>                     
+                                                </div>
+                                            </div>
+                                        }
                                 </div>
-                            }
+                                }
                         }
                         else
                         {
@@ -536,33 +418,119 @@
                             </div>
                         }
                     }                    
+
                     <div class="row">
-                        <!-- This shows the featured hot picks for the search page. -->
+                        <!-- This shows the featured hot picks for the home page. -->
                         @if (Model.GarageSaleSpecialItems != null && Model.SearchResults == null)
                         {
                             if (Model.GarageSaleSpecialItems.Count > 0)
                             {
-                                <p class="lead">Featured hot picks</p>
+                                <p class="lead" style="margin-left:17px;">Featured hot picks</p>
                                 foreach (var item in Model.GarageSaleSpecialItems)
                                 {
-                                    <div class="col-md-5">
-                                        <div class="thumbnail" style="max-height:600px;min-height:550px;">
+                                    <div class="col-md-3">
+                                        <div class="thumbnail item-container-div" style="max-height:475px;min-height:475px;min-width:250px;">
                                             <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
 	                                            <img alt="@item.Title" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
                                             </a>                                                
-                                            <div class="caption">
-                                                <h3>@item.Title</h3>
-                                                @item.Description<br /><br />
-                                                <p><span>$</span> @item.Price</p>
-                                                @item.SpecialItemAddress.Address1<br />
+                                            <div class="caption item-controls">
+                                                <h4>@item.Title</h4>
+
+                                                <div class="item-desc-scroll">@item.Description</div><br />
+
+                                                <p><small><span>$</span> @item.Price</small></p>
+                                                <small>@item.SpecialItemAddress.Address1</small><br />
                                         
                                                 @if (@item.SpecialItemAddress.Address2 != string.Empty)
                                                 {
-                                                    @item.SpecialItemAddress.Address2<br />
+                                                    <small>@item.SpecialItemAddress.Address2</small><br />
                                                 }
 
-                                                @item.SpecialItemAddress.City, @item.SpecialItemAddress.State @item.SpecialItemAddress.ZipCode<br /><br />
-                                                <a href="~/GarageSale/ViewGarageSale/@item.SaleId">Visit this garage sale</a><br />                  
+                                                <small>@item.SpecialItemAddress.City, @item.SpecialItemAddress.State @item.SpecialItemAddress.ZipCode</small>
+                                                <br /><br />
+                                                <div class="row">
+                                                    <div class="col-md-12 col-md-offset-3">                                                    
+                                                        <div class="btn-group btn-group-xs">
+                                                            <button aria-label="info" class="btn btn-primary" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@item.Description" data-placement="top" data-content='@item.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@item.DatesTimes.DayOneStart</td><td>Start:<br />@item.DatesTimes.DayTwoStart</td><td>Start:<br />@item.DatesTimes.DayThreeStart</td><td>Start:<br />@item.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@item.DatesTimes.DayOneEnd</td><td>End:<br />@item.DatesTimes.DayTwoEnd</td><td>End:<br />@item.DatesTimes.DayThreeEnd</td><td>End:<br />@item.DatesTimes.DayFourEnd</td></tr></tbody></table>'><span id="spQuickView" aria-hidden="true" class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="left" data-title="Quick view garage sale"></span></button>
+                                                            <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Visit this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-home"></span></a>
+                                                            @if (item.SaleId == 53)
+                                                            {
+                                                                <button aria-label="fave" class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button aria-label="fave" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
+                                                            }
+                                                            @{
+                                                                var signed_in = ViewBag.SignedIn;
+                                                                if (signed_in == "true") {  
+                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="modal" data-target=".ask-question" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                            
+                                                                }
+                                                                else
+                                                                {
+                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Log in to email this garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                                }
+                                                            }  
+                                                        </div>
+                                                    </div>
+                                                </div>              
+                                            </div>                     
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                    <div class="row" style="margin-left:5px;">
+                        <!-- This shows random garage sale items for the home page. -->
+                        @if (Model.GarageSaleItems != null && Model.SearchResults == null)
+                        {
+                            if (Model.GarageSaleItems.Count > 0)
+                            {
+                                <p class="lead">Garage sale items for sale</p>                            
+                                foreach (var item in Model.GarageSaleItems)
+                                {
+                                    <div class="col-md-3">
+                                        @*<div class="thumbnail"><br />*@
+                                        <div class="thumbnail item-container-div" style="max-height:475px;min-height:475px;min-width:250px;">
+                                            <a href="~/Content/images/profile_pictures/@item.ProfilePic" data-lightbox="@item.ProfilePic">
+	                                            <img alt="@item.SaleName" class="img-responsive" style="display:block;max-height:200px;" src="~/Content/images/profile_pictures/@item.ProfilePic">
+                                            </a>                                                
+                                            <div class="caption item-controls">
+                                                <h4>@item.SaleName</h4>
+
+                                                <div class="item-desc-scroll">@item.SaleDescription</div><br />
+
+                                                <small>@item.Address1</small><br />
+                                        
+                                                @if (@item.Address2 != string.Empty)
+                                                {
+                                                    <small>@item.Address2</small><br />
+                                                }
+
+                                                <small>@item.City, @item.State @item.ZipCode</small>
+                                                <br /><br />
+                                                <div class="row">
+                                                    <div class="col-md-12 col-md-offset-3">                                                    
+                                                        <div class="btn-group btn-group-xs">
+                                                            <button id="btnRandomResultsQuickViewSaleItem" aria-label="info" class="btn btn-primary" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@item.SaleName" data-placement="top" data-content='@item.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@item.DatesTimes.DayOneStart</td><td>Start:<br />@item.DatesTimes.DayTwoStart</td><td>Start:<br />@item.DatesTimes.DayThreeStart</td><td>Start:<br />@item.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@item.DatesTimes.DayOneEnd</td><td>End:<br />@item.DatesTimes.DayTwoEnd</td><td>End:<br />@item.DatesTimes.DayThreeEnd</td><td>End:<br />@item.DatesTimes.DayFourEnd</td></tr></tbody></table>'><span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span></button>
+                                                            <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Visit this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-home"></span></a>
+                                                            <button aria-label="fave" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></button>
+                                                            @{
+                                                                var signed_in = ViewBag.SignedIn;
+                                                                if (signed_in == "true") {  
+                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="modal" data-target=".ask-question" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                            
+                                                                }
+                                                                else
+                                                                {
+                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Log in to email this garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                                }
+                                                            }                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>              
                                             </div>                     
                                         </div>
                                     </div>
@@ -575,8 +543,6 @@
         </div>
     </div>
 </div>
-
-
 
 <input type="hidden" value="@ViewBag.SearchAddress" id="hdnSearchAddress" />
 <input type="hidden" value="@ViewBag.Radius" id="hdnRadius" />
