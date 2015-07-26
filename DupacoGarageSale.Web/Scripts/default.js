@@ -945,6 +945,13 @@
         location.reload();
     })
 
+    $('#special-items').on('click', '.ask-question', function (e) {
+        e.preventDefault();
+
+        var sale_id = $(this).attr('data-sale-id');
+        $('#hdnMessageSaleId').val(sale_id);
+        $('#askQuestionModal').modal('show');
+    });
 });
 
 // This adds the Dupaco locations to the map.

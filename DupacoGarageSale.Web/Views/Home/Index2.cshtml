@@ -565,7 +565,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-12 col-md-offset-3">                                                    
+                                                    <div class="col-md-12 col-md-offset-4">                                                    
                                                         <div class="btn-group btn-group-xs">
                                                             <button aria-label="info" class="btn btn-primary" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@item.Description" data-placement="top" data-content='@item.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@item.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@item.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@item.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@item.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@item.DatesTimes.DayOneStart</td><td>Start:<br />@item.DatesTimes.DayTwoStart</td><td>Start:<br />@item.DatesTimes.DayThreeStart</td><td>Start:<br />@item.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@item.DatesTimes.DayOneEnd</td><td>End:<br />@item.DatesTimes.DayTwoEnd</td><td>End:<br />@item.DatesTimes.DayThreeEnd</td><td>End:<br />@item.DatesTimes.DayFourEnd</td></tr></tbody></table>'><span id="spQuickView" aria-hidden="true" class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="left" data-title="Quick view garage sale"></span></button>
                                                             <a href="~/GarageSale/ViewGarageSale/@item.SaleId" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Visit this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-home"></span></a>
@@ -577,15 +577,15 @@
                                                                     {
                                                                         if (Model.FavoriteGarageSales.Any(m => m.GarageSaleId == item.SaleId))
                                                                         {
-                                                                            <a href="#" aria-label="fave" class="btn btn-danger remove-from-faves" type="button" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Un-fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
+                                                                            <a href="#" aria-label="fave" class="btn btn-danger remove-from-faves" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Un-fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
                                                                         }
                                                                         else
                                                                         {
-                                                                            <a href="#" aria-label="fave" class="btn btn-primary add-to-faves" type="button" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
+                                                                            <a href="#" aria-label="fave" class="btn btn-primary add-to-faves" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
                                                                         }
                                                                     }                                                          
                                                                     
-                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="modal" data-target=".ask-question" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                                    <a href="#" aria-label="email" class="btn btn-primary ask-question" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></a>
                                                                 }
                                                                 else
                                                                 {
@@ -673,15 +673,15 @@
                                                                     {
                                                                         if (Model.FavoriteGarageSales.Any(m => m.GarageSaleId == item.SaleId))
                                                                         {
-                                                                            <a href="#" aria-label="fave" class="btn btn-danger remove-from-faves" type="button" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Un-fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
+                                                                            <a href="#" aria-label="fave" class="btn btn-danger remove-from-faves" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Un-fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
                                                                         }
                                                                         else
                                                                         {
-                                                                            <a href="#" aria-label="fave" class="btn btn-primary add-to-faves" type="button" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
+                                                                            <a href="#" aria-label="fave" class="btn btn-primary add-to-faves" data-sale-id="@item.SaleId" data-toggle="tooltip" data-placement="top" title="Fave this garage sale"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
                                                                         }
                                                                     }                                                          
                                                                     
-                                                                    <button aria-label="email" class="btn btn-primary" type="button" data-toggle="modal" data-target=".ask-question" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></button>
+                                                                    <a href="#" aria-label="email" class="btn btn-primary ask-question" data-sale-id="@item.SaleId" data-toggle="modal" data-target=".ask-question" title="Email garage sale user"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></a>
                                                                 }
                                                                 else
                                                                 {
@@ -709,7 +709,7 @@
 <div class="modal fade ask-question" id="askQuestionModal" tabindex="-1" role="dialog" aria-labelledby="askQuestionModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            @using (Html.BeginForm("SendGarageSaleMessage", "GarageSale", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+            @using (Html.BeginForm("SendGarageSaleMessage", "Home", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
             {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -718,16 +718,17 @@
                 <div class="modal-body">
                     <div class="form-group">
                         @Html.TextAreaFor(m => m.GarageSaleMessage.MessageText, new
-                   {
-                       @class = "form-control",
-                       id = "txtMessage",
-                       placeholder = "Brevity is the soul of wit (140 characters max)",
-                       maxlength = "140",
-                       @style = "margin-left:15px;width:95%;"
-                   })
+                        {
+                            @class = "form-control",
+                            id = "txtMessage",
+                            placeholder = "Brevity is the soul of wit (140 characters max)",
+                            maxlength = "140",
+                            @style = "margin-left:15px;width:95%;"
+                        })
                         <div id="charNumMessage" style="margin-left:15px;"></div>
                         <span class="text-error">@Html.ValidationMessageFor(m => m.GarageSaleMessage.MessageText)</span>
                         @Html.HiddenFor(m => m.Sale.GarageSaleEmail)
+                        @Html.HiddenFor(m => m.GarageSaleMessage.SaleId, new { @id="hdnMessageSaleId" })
                     </div>
                 </div>
                 <div class="modal-footer">
