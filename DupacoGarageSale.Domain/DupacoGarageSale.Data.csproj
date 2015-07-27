@@ -132,6 +132,7 @@
     <Compile Include="Domain\UserSession.cs" />
     <Compile Include="Domain\UserSignUpStatistic.cs" />
     <Compile Include="Helpers\AccountHelper.cs" />
+    <Compile Include="Helpers\ItemCategoryHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AccountsRepository.cs" />
     <Compile Include="Repository\AddressRepository.cs" />

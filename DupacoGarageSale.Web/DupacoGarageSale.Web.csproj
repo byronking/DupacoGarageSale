@@ -947,6 +947,7 @@
     <Content Include="Views\Itinerary\QuickViewGarageSale.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Home\QuickViewGarageSale.cshtml" />
+    <Content Include="Views\GarageSale\SearchByMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

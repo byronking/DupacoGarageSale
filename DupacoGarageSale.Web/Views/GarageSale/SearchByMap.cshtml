@@ -1,0 +1,500 @@
+﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+
+@{
+    ViewBag.Title = "Search the Dupaco Garage Sales!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container down_70">
+    <div class="form-inline">
+        <div class="form-group">
+            <h1>@ViewBag.Title</h1>
+        </div>        
+    </div><br />
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Use the search tools below to find that perfect item. Hone in on it by entering search criteria, setting a date range, distance from your address, and item category.</h4><br />
+        </div>
+    </div>
+
+    @using (Html.BeginForm("SearchByMap", "GarageSale", FormMethod.Post, new { @role = "form", @class = "form-inline" }))
+    { 
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color:#88C440;">
+                <div class="white">
+                    <h3>Search the 428 garage sales!</h3><br />
+                </div>
+                <div class="form-group">
+                    <select name="ddlCategories" id="ddlCategories" class="form-control">
+                        <option value="all" selected="selected">All categories</option>
+                        <optgroup label="Baby">
+                            <option value="all_baby">All baby</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
+
+                                foreach (var category in categories1)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                            </optgroup> 
+                        <optgroup label="Clothing & Accessories">
+                            <option value="all_clothing_accessories">All clothing & accessories</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories2 = Model.ItemCategories.Where(m => m.ItemCategoryId == 2);
+
+                                foreach (var category in categories2)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                            </optgroup>
+                        <optgroup label="Electronics">
+                            <option value="all_electronics">All electronics</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
+
+                                foreach (var category in categories3)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                        </optgroup>
+                        <optgroup label="Health & Beauty">
+                            <option value="all_health_beauty">All health & beauty</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories4 = Model.ItemCategories.Where(m => m.ItemCategoryId == 4);
+
+                                foreach (var category in categories4)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                        </optgroup>                                    
+                        <optgroup label="Pets">
+                            <option value="all_pets">All pets</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories5 = Model.ItemCategories.Where(m => m.ItemCategoryId == 5);
+
+                                foreach (var category in categories5)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                        </optgroup>
+                        <optgroup label="Home">
+                            <option value="all_home">All home</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories6 = Model.ItemCategories.Where(m => m.ItemCategoryId == 6);
+
+                                foreach (var category in categories6)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                        </optgroup>
+                        <optgroup label="Home maintenance">
+                            <option value="all_home_maintenance">All home maintenance</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories7 = Model.ItemCategories.Where(m => m.ItemCategoryId == 7);
+
+                                foreach (var category in categories7)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                        </optgroup>
+                        <optgroup label="Media">
+                            <option value="all_media">All media</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
+
+                                foreach (var category in categories8)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                        </optgroup>
+                        <optgroup label="Toys & games">
+                            <option value="all_toys_games">All toys & games</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories9 = Model.ItemCategories.Where(m => m.ItemCategoryId == 9);
+
+                                foreach (var category in categories9)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                        </optgroup>
+                        <optgroup label="Vehicles">
+                            <option value="all_vehicles">All vehicles</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories10 = Model.ItemCategories.Where(m => m.ItemCategoryId == 10);
+
+                                foreach (var category in categories10)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                        </optgroup>
+                        <optgroup label="Sports, Fitness & Outdoors">
+                            <option value="all_sports_fitness">All sports, fitness & outdoors</option>
+                            @{
+                            if (Model.ItemCategories != null)
+                            {
+                                var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
+
+                                foreach (var category in categories11)
+                                {
+                                    <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                }
+                            }
+                            }
+                        </optgroup>     
+                        <optgroup label="Musical Instruments & Gear">
+                            <option value="all_musical_instruments">All musical instruments</option>
+                            @{
+                                if (Model.ItemCategories != null)
+                                {
+                                    var categories12 = Model.ItemCategories.Where(m => m.ItemCategoryId == 12);
+
+                                    foreach (var category in categories12)
+                                    {
+                                        <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
+                                    }
+                                }
+                            }
+                        </optgroup>                          
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="ddlCommunity" id="ddlCommunity" class="form-control">
+                            <option value="all" selected="selected">All communities</option>
+                            <option value="dubuque">Dubuque, IA</option>
+                            <option value="manchester">Manchester, IA</option>
+                            <option value="platteville">Platteville, WI</option>
+                        </select>
+                        <br />
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" style="width:300px;" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
+                </div>                   
+                <div class="form-group">
+                    <input class="form-control" type="text" id="txtAddress" name="txtAddress" value="@ViewBag.Address" style="width:300px;" placeholder="Enter your starting address or zip code"><br />
+                </div> 
+                <p />                           
+                <div class="form-group">
+                    <select name="ddlRadius" id="ddlRadius" class="form-control">
+                        <option value="0">How far from your starting point to search?</option>
+                        <option value="1">1 mile</option>
+                        <option value="2">2 miles</option>
+                        <option value="5">5 miles</option>
+                        <option value="10">10 miles</option>
+                        <option value="15">15 miles</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="from" name="from" class="form-control" value="@ViewBag.From" placeholder="Enter a start date"> <strong> - </strong>                           
+                </div>
+                <div class="form-group">
+                    <input type="text" id="to" name="to" class="form-control" value="@ViewBag.To" placeholder="Enter an end date">
+                </div>
+
+                <input type="hidden" id="hdnSearchRadius" value="@ViewBag.SearchRadius" />
+                <input type="hidden" id="hdnSearchCommunity" value="@ViewBag.Community" />
+                <input type="hidden" id="hdnNoAddress" value="@ViewBag.NoAddress" />
+                <input type="hidden" id="hdnSavedAddress" value="@ViewBag.Address" />
+                <input type="hidden" id="hdnSearchCategory" value="@ViewBag.SearchCategory" />
+
+                <p /><br />
+                <div class="form-group">
+                    <input type="submit" id="btnFilter" value="Search the sales" class="btn btn-primary" />
+                    <a href="~/Home/ClearSearchResults" class="btn btn-danger">Clear search results</a>
+                </div>
+            </li>
+        </ul>
+                    
+        if (Model.SearchResults != null)
+        {
+            if (Model.SearchResults.GarageSaleItems.Count > 0)
+            {
+                <input type="hidden" name="hdnSearchCriteria" id="hdnSearchCriteria" value="@ViewBag.SearchCriteria" />
+            }
+            else
+            {                            
+                <input type="hidden" name="hdnSearchResults" id="hdnSearchResults" value="@ViewBag.SearchResults" /> <!-- This is the free text search string -->
+            }
+        }
+    }
+
+    
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <div class="row">
+                <!-- Here's the map -->
+                <div id="map-canvas" style="width:99%; height: 565px; margin-left:6px; margin-bottom:20px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" value="@ViewBag.SearchAddress" id="hdnSearchAddress" />
+<input type="hidden" value="@ViewBag.Radius" id="hdnRadius" />
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0PudWjsqLxR5ZBsdLIBHUjMikiAZJgu8&libraries=geometry"></script>
+<script type="text/javascript">     
+
+    // This responds to clicking the add stopover link.
+    //$("#linkAddStopover").click(function (e) {
+    //    alert('hi, linkieee');
+    //    e.preventDefault();
+    //});
+   
+    var mapAddresses = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.Addresses))
+    var geocoder;
+    var circle = null;
+    var gmarkers = [];
+    var map; 
+
+    function initialize() {
+        // Begin simple test map
+        //var latlng = new google.maps.LatLng(40.716948, -74.003563);
+        //var options = {
+        //    zoom: 14,
+        //    center: latlng,
+        //    mapTypeId: google.maps.MapTypeId.ROADMAP
+        //};
+        //var map = new google.maps.Map(document.getElementById("map-canvas"), options);
+        // End simple test map
+
+        geocoder = new google.maps.Geocoder();
+                
+        // var map;
+
+        var myOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng(42.500558, -90.664572),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map($('#map-canvas')[0], myOptions);
+
+        // Sample of hard-coded addresses
+        //var addresses = ['7 Saint Paul St. Baltimore MD 21202', '2201 Lake Ave Baltimore MD 21213', '4846 Western Ave Bethesda MD 20816', '201 State Rd Rehoboth DE 19971', '2804 Hyson Lane Falls Church VA 22043'];
+
+        var addresses = mapAddresses;
+        //alert(addresses);
+        if (addresses != null)
+        {
+            var marker, x;
+            var infowindow = new google.maps.InfoWindow();
+
+            for (x = 0; x < addresses.length; x++) {
+                //alert(addresses.length);
+                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x], null, function (data) {
+
+                    var p = data.results[0].geometry.location
+                    //alert(data.results[0].formatted_address);  // This will alert the individual addresses.
+
+                    //debugObject(data.results[0].formatted_address);
+                    var latlng = new google.maps.LatLng(p.lat, p.lng);
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+                        title: data.results[0].formatted_address
+                    });
+
+                    // Add the markers to the gmarkers array.
+                    gmarkers.push(marker);
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.setContent(data.results[0].formatted_address + ' <br/><a href="~/GarageSale/GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>');
+                        infowindow.open(map, marker);
+                    });
+                });            
+            }
+
+            geoCodeAddress(map);
+        }
+
+        // Add the Dupaco locations
+        var dupacoLocations = AddDupacoLocations();
+        //debugObject(dupacoLocations[0]);
+        //alert(getObjectSize(dupacoLocations));
+
+        if (dupacoLocations != null)
+        {
+            var marker, x;
+            var markerCount = 0;
+            var infowindow = new google.maps.InfoWindow();
+
+            for (x = 0; x < getObjectSize(dupacoLocations); x++) {  
+                var bank_address = dupacoLocations[x].address;
+                var bank_page = dupacoLocations[x].page;
+                var bank_lat = dupacoLocations[x].lat;
+                var bank_long = dupacoLocations[x].long;
+
+                addDupcoBankMarker(map, infowindow, bank_address, bank_page, bank_lat, bank_long);
+            }
+
+            geoCodeAddress(map);
+        }
+    }    
+
+    initialize();
+
+    function addDupcoBankMarker(map, infowindow, address, page, lat, long) {
+        var image = '/Content/images/dupaco_icon.gif';
+        var latlng = new google.maps.LatLng(lat, long);
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            icon: image,
+            title: address
+        });
+
+        // Add the markers to the gmarkers array.
+        gmarkers.push(marker);
+        google.maps.event.addListener(marker, 'click', function () {
+            var signed_in = '@(ViewBag.SignedIn)'
+            // alert('signed in?: ' + signed_in);
+            if (signed_in == "true") {                
+                infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><br/><a target="_blank" href="'+ page + '">Visit this location</a> <br/> <a href="/Home/SetStopoverAddress?address=' + address + '" id=linkAddStopover>Add to itinerary</a> ');
+            }
+            else {
+                infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><a target="_blank" href="'+ page + '">Visit this location</a>');
+            }
+            infowindow.open(map, marker);
+        });
+    }
+
+    function geoCodeAddress(map) {
+        var address = document.getElementById('hdnSearchAddress').value;
+        var radius = parseInt(document.getElementById('hdnRadius').value, 10)*1000;
+        //var address = document.getElementById("hdnCenterAddress").value;
+
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) 
+            {
+                map.setCenter(results[0].geometry.location);
+                var searchCenter = results[0].geometry.location; // Added for the radius circle.
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+
+                var infowindow = new google.maps.InfoWindow();
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.setContent('Your starting point: ' + results[0].formatted_address);                    
+                    infowindow.open(map, marker);
+                });
+
+                //google.maps.event.addDomListener(infowindow, 'domready', function() {
+                //    $('#linkAddStopover').click(function(e) {
+                //        alert("Hello World");
+                //        e.preventDefault();
+                //    });
+                //});
+
+                if (circle) 
+                {
+                    circle.setMap(null); // Clear the previous circle.
+                }
+
+                circle = new google.maps.Circle({center:searchCenter,
+                    radius: radius,
+                    fillOpacity: 0.35,
+                    fillColor: "#FF0000",
+                    map: map
+                });
+
+                var bounds = new google.maps.LatLngBounds();
+
+                var foundMarkers = 0;
+                for (var i=0; i<gmarkers.length;i++) 
+                {
+                    if (google.maps.geometry.spherical.computeDistanceBetween(gmarkers[i].getPosition(),searchCenter) < radius) {
+                        bounds.extend(gmarkers[i].getPosition())
+                        gmarkers[i].setMap(map);
+                        // add a line to the side_bar html
+                        //side_bar_html += '<a href="javascript:myclick(' + i + ')">' + gmarkers[i].title + '<\/a><br>';
+                        foundMarkers++;
+                    } 
+                    else 
+                    {
+                        gmarkers[i].setMap(null);
+                    }
+                }
+                // put the assembled side_bar_html contents into the side_bar div
+                //document.getElementById("side_bar").innerHTML = side_bar_html;
+                //alert(foundMarkers);
+                if (foundMarkers > 0) 
+                {
+                    map.fitBounds(bounds);
+                    //alert('zoom: ' + map.getZoom());
+                    //map.setZoom(map.getZoom()+5);
+                } 
+                else 
+                {
+                    //alert('zoom else: ' + map.getZoom());
+                    map.fitBounds(circle.getBounds());
+                }
+                // makeSidebar();
+                //google.maps.event.addListenerOnce(map, 'bounds_changed', makeSidebar);
+            }
+            else
+            {
+                //alert("Geocode was not successful for the following reason: " + status);
+            }            
+        });
+    }
+
+    // This gets the size of the object array.
+    function getObjectSize(obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
+
+    function debugObject(inputobject) {
+        obj = inputobject;
+        for (x in obj) {
+            alert(x + ": " + obj[x]);
+        }
+    }
+
+</script>

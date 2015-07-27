@@ -27,4 +27,3 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\log4net.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\NPOI.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\NPOI.OOXML.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\bin\Debug\NPOI.OpenXml4Net.xml
-C:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\obj\Debug\DupacoGarageSale.Data.csprojResolveAssemblyReference.cache

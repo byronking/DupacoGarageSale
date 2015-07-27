@@ -1,4 +1,5 @@
 ﻿using DupacoGarageSale.Data.Domain;
+using DupacoGarageSale.Data.Helpers;
 using DupacoGarageSale.Data.Repository;
 using DupacoGarageSale.Data.Services;
 using DupacoGarageSale.Web.Helpers;
@@ -1415,70 +1416,7 @@ namespace DupacoGarageSale.Web.Controllers
             }
             else
             {
-                // Shameful, I know.
-                switch (searchCategory)
-                {
-                    case "all_baby":
-                        {
-                            categoryIdList = new List<int>(new int[] { 4, 6, 2, 7, 3, 8, 9, 5, 1 });
-                        }
-                        break;
-                    case "all_clothing_accessories":
-                        {
-                            categoryIdList = new List<int>(new int[] { 26, 28, 19, 12, 17, 10, 27, 13, 16, 22, 21, 24, 30, 25, 15, 29, 18, 11, 14, 23, 20 });
-                        }
-                        break;
-                    case "all_electronics":
-                        {
-                            categoryIdList = new List<int>(new int[] { 34, 36, 41, 42, 33, 37, 38, 35, 32, 40, 43, 31, 39 });
-                        }
-                        break;
-                    case "all_health_beauty":
-                        {
-                            categoryIdList = new List<int>(new int[] { 48, 47, 45, 44, 46 });
-                        }
-                        break;
-                    case "all_pets":
-                        {
-                            categoryIdList = new List<int>(new int[] { 51, 50, 49, 52, 55, 54, 53 });
-                        }
-                        break;
-                    case "all_home":
-                        {
-                            categoryIdList = new List<int>(new int[] { 79, 62, 61, 71, 57, 69, 56, 59, 58, 68, 70, 60, 66, 74, 77, 75, 78, 67, 72, 63, 65, 73, 76, 64 });
-                        }
-                        break;
-                    case "all_home_maintenance":
-                        {
-                            categoryIdList = new List<int>(new int[] { 80, 82, 81, 86, 87, 85, 83, 88, 84 });
-                        }
-                        break;
-                    case "all_media":
-                        {
-                            categoryIdList = new List<int>(new int[] { 89, 91, 90, 96, 94, 92, 93, 95, 97, 98 });
-                        }
-                        break;
-                    case "all_toys_games":
-                        {
-                            categoryIdList = new List<int>(new int[] { 99, 100, 112, 101, 114, 102, 103, 104, 105, 106, 108, 107, 111, 109, 110, 113 });
-                        }
-                        break;
-                    case "all_vehicles":
-                        {
-                            categoryIdList = new List<int>(new int[] { 120, 117, 115, 118, 122, 119, 121, 116 });
-                        }
-                        break;
-                    case "all_sports_fitness":
-                        {
-                            categoryIdList = new List<int>(new int[] { 135, 123, 125, 127, 137, 139, 132, 133, 130, 131, 128, 138, 129, 140, 126, 124, 134, 136 });
-                        }
-                        break;
-                    case "all_musical_instruments":
-                        {
-                            categoryIdList = new List<int>(new int[] { 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152 });
-                        }
-                        break;
-                }
+                categoryIdList = ItemCategoryHelper.GetItemCategoryIds(searchCategory);
             }
 
             // This is for when you allow searching of multiple categories
@@ -1541,6 +1479,141 @@ namespace DupacoGarageSale.Web.Controllers
             Session["ViewModel"] = viewModel;
 
             return RedirectToAction("Search", viewModel);
+        }
+
+        #endregion
+
+        #region Search by map
+
+        [HttpGet]
+        public ActionResult SearchByMap()
+        {
+            UserSession session = null;
+            var repository = new GarageSaleRepository();
+            var viewModel = new GarageSaleViewModel();
+
+            if (Session["ViewModel"] != null)
+            {
+                viewModel = Session["ViewModel"] as GarageSaleViewModel;
+            }
+
+            if (Session["UserSession"] != null)
+            {
+                session = Session["UserSession"] as UserSession;
+                viewModel.User = session.User;
+            }
+
+            viewModel.SelectedCategories = new List<int>();
+            viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+
+            if (Session["SearchData"] != null)
+            {
+                var searchData = Session["SearchData"] as string[];
+                ViewBag.Address = searchData[0].ToString();
+                ViewBag.From = searchData[1].ToString();
+                ViewBag.To = searchData[2].ToString();
+                ViewBag.SearchCriteria = searchData[3].ToString();
+                ViewBag.SearchCategory = searchData[4].ToString();
+                ViewBag.SearchRadius = searchData[5].ToString();
+                ViewBag.Community = searchData[6].ToString();
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult SearchByMap(FormCollection form)
+        {
+            var searchCriteria = string.Empty;
+
+            if (form["txtSearchCriteria"] != null)
+            {
+                searchCriteria = form["txtSearchCriteria"].ToString();
+            }
+
+            var community = form["ddlCommunity"].ToString();
+            var radius = form["ddlRadius"].ToString();
+            var address = form["txtAddress"].ToString();
+            var startDate = form["from"].ToString();
+            var endDate = form["to"].ToString();
+            var searchCategory = form["ddlCategories"].ToString();
+
+            string[] searchData = { address, startDate, endDate, searchCriteria, searchCategory, radius, community };
+            Session["SearchData"] = searchData;
+
+            var categoryIdList = new List<int>();
+            int categoryId;
+
+            if (Int32.TryParse(searchCategory, out categoryId))
+            {
+                categoryIdList.Add(categoryId);
+            }
+            else
+            {
+                categoryIdList = ItemCategoryHelper.GetItemCategoryIds(searchCategory);              
+            }
+
+            var viewModel = new GarageSaleViewModel();
+
+            if (Session["ViewModel"] != null)
+            {
+                viewModel = Session["ViewModel"] as GarageSaleViewModel;
+            }
+
+            viewModel.MappingData = new MappingData();
+            viewModel.MappingData.StartingAddress = address;
+            viewModel.MappingData.Radius = radius;
+            viewModel.MappingData.Addresses = new List<string>();
+
+            var repository = new GarageSaleRepository();
+            if (community == "all")
+            {
+                viewModel.SearchResults = repository.SearchGarageSales(searchCriteria, categoryIdList, startDate, endDate);
+            }
+            else
+            {
+                viewModel.SearchResults = repository.SearchGarageSalesByCommunity(community, searchCriteria, categoryIdList, startDate, endDate);
+            }
+
+            // Instantiate the selected categories.
+            viewModel.SelectedCategories = new List<int>();
+
+            // Take all the items in the search results and piece together addresses.
+            foreach (var item in viewModel.SearchResults.GarageSaleItems)
+            {
+                viewModel.MappingData.Addresses.Add(item.Address1 + ' ' + item.Address2 + ' ' + item.City + ' ' + item.State + ' ' + item.ZipCode);
+                viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+            }
+
+            // Get the special items addresses
+            if (viewModel.SearchResults.SpecialItems.Count > 0)
+            {
+                foreach (var item in viewModel.SearchResults.SpecialItems)
+                {
+                    var saleAddress = repository.GetGarageSaleAddressBySaleId(item.SaleId);
+                    viewModel.MappingData.Addresses.Add(saleAddress.Address1 + ' ' + saleAddress.Address2 + ' ' + saleAddress.City + ' ' + saleAddress.State + ' ' + saleAddress.ZipCode);
+                    viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                }
+            }
+
+            ViewBag.Addresses = viewModel.MappingData.Addresses.ToArray();
+
+
+            ViewBag.Address = viewModel.MappingData.StartingAddress;
+            ViewBag.From = searchData[1].ToString();
+            ViewBag.To = searchData[2].ToString();
+            ViewBag.SearchCriteria = searchData[3].ToString();
+            ViewBag.SearchCategory = searchData[4].ToString();
+            ViewBag.SearchRadius = searchData[5].ToString();
+            ViewBag.Community = searchData[6].ToString();
+
+            var selectedCategories = viewModel.SelectedCategories.ToArray();
+            ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+
+            Session["ViewModel"] = viewModel;
+            TempData["SearchButtonClicked"] = "true";
+
+            return View(viewModel);
         }
 
         #endregion

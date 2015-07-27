@@ -17,8 +17,10 @@ namespace DupacoGarageSale.Web
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index2", id = UrlParameter.Optional }
+                
                 // Uncomment and chage for testing.
                 //defaults: new { controller = "GarageSale", action = "Search", id = UrlParameter.Optional, s = 1 }
+                //defaults: new { controller = "GarageSale", action = "SearchByMap", id = UrlParameter.Optional }
             );
         }
     }
