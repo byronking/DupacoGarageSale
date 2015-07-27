@@ -1091,6 +1091,7 @@ namespace DupacoGarageSale.Web.Controllers
         public ActionResult Search(FormCollection formCollection, string s)
         {
             var viewModel = new GarageSaleViewModel();
+            var repository = new GarageSaleRepository();
 
             if (Session["ViewModel"] != null)
             {
@@ -1105,6 +1106,8 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     viewModel.User = session.User;
                 }
+
+                viewModel.FavoriteGarageSales = repository.GetFavoriteGarageSales(viewModel.User.UserId);
 
                 // Set the sign-in flag.
                 ViewBag.SignedIn = "true";
@@ -1150,9 +1153,7 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     ViewBag.NoAddress = "true";
                 }
-            }
-
-            var repository = new GarageSaleRepository();
+            }            
 
             if (formCollection.AllKeys.Count() != 0)
             {
@@ -1185,7 +1186,7 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     var session = Session["UserSession"] as UserSession;
                     viewModel.User = session.User;
-
+                    
                     if (viewModel.MappingData == null)
                     {
                         // Default to the user's address in the search box.

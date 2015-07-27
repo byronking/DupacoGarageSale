@@ -930,6 +930,7 @@ namespace DupacoGarageSale.Data.Repository
                             ProfilePic = reader["profile_pic_link"].ToString(),
                             SaleId = Convert.ToInt32(reader["sale_id"]),
                             SaleDescription = reader["sale_description"].ToString(),
+                            SaleName = reader["sale_name"].ToString(),
                             Address1 = reader["sale_address1"].ToString(),
                             Address2 = reader["sale_address2"].ToString(),
                             City = reader["sale_city"].ToString(),

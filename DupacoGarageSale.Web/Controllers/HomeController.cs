@@ -208,11 +208,11 @@ namespace DupacoGarageSale.Web.Controllers
             if (viewModel.SearchResults == null)
             {
                 // Get some random items for the home page.
-                var randomSpecialItems = repository.GetRandomSpecialItems();
+                var randomSpecialItems = repository.GetRandomSpecialItems(); //.Take(6).ToList(); // new List<SpecialItem>(); //
                 viewModel.GarageSaleSpecialItems = randomSpecialItems;
 
                 // Get random garage sale items for the home page.
-                var randomGarageSaleItems = repository.GetRandomGarageSaleItems();
+                var randomGarageSaleItems = repository.GetRandomGarageSaleItems(); //.Take(6).ToList(); // new List<GarageSaleSearchItem>(); // 
                 viewModel.GarageSaleItems = randomGarageSaleItems;
 
                 // Set the selected categories for the special items.

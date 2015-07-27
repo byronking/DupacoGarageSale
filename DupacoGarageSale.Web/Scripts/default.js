@@ -876,9 +876,9 @@
     }
 
     // Add the garage sale to the users' faves.
-    $('#special-items').on('click', 'a.add-to-faves', function (e) {
-        //var value = $(this).attr('data-sale-id');
-        //alert('value: ' + value);
+    $('.special-items').on('click', 'a.add-to-faves', function (e) {
+        var value = $(this).attr('data-sale-id');
+        alert('value: ' + value);
         e.preventDefault();
 
         var sale_id = $(this).attr('data-sale-id');
@@ -911,7 +911,7 @@
     })
 
     // Remove the garage sale from the users' faves.
-    $('#special-items').on('click', 'a.remove-from-faves', function (e) {
+    $('.special-items').on('click', 'a.remove-from-faves', function (e) {
         //alert('hi');
         e.preventDefault();
 
@@ -945,7 +945,7 @@
         location.reload();
     })
 
-    $('#special-items').on('click', '.ask-question', function (e) {
+    $('.special-items').on('click', '.ask-question', function (e) {
         e.preventDefault();
 
         var sale_id = $(this).attr('data-sale-id');
