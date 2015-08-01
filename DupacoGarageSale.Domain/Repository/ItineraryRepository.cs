@@ -127,6 +127,7 @@ namespace DupacoGarageSale.Data.Repository
                         {
                             ItineraryId = Convert.ToInt32(reader["itinerary_id"]),
                             ItineraryName = reader["itinerary_name"].ToString(),
+                            ItineraryNote = reader["itinerary_note"].ToString(),
                             ItineraryCreatedDate = Convert.ToDateTime(reader["itinerary_create_date"]),
                             ItineraryLegId = Convert.ToInt32(reader["itinerary_leg_id"]),
                             ItineraryLegOrder = Convert.ToInt32(reader["leg_order"]),
@@ -548,9 +549,9 @@ namespace DupacoGarageSale.Data.Repository
         /// </summary>
         /// <param name="itineraryId"></param>
         /// <returns></returns>
-        public List<string> GetItineraryWaypoints(int itineraryId)
+        public List<ItineraryWaypoint> GetItineraryWaypoints(int itineraryId)
         {
-            var itineraryWaypoints = new List<string>();
+            var itineraryWaypoints = new List<ItineraryWaypoint>();
 
             try
             {
@@ -565,7 +566,13 @@ namespace DupacoGarageSale.Data.Repository
 
                     while (reader.Read())
                     {
-                        var waypoint = reader["waypoint_address"].ToString();
+                        var waypoint = new ItineraryWaypoint
+                        {
+                            WaypointId = Convert.ToInt32(reader["waypoint_id"]),
+                            WaypointAddress = reader["waypoint_address"].ToString(),
+                            ItineraryNote = reader["itinerary_note"].ToString()
+                        };
+
                         itineraryWaypoints.Add(waypoint);
                     }
                 }
@@ -601,6 +608,74 @@ namespace DupacoGarageSale.Data.Repository
                     cmd.ExecuteNonQuery();
 
                     saveResult.IsSaveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveResult;
+        }
+
+        /// <summary>
+        /// This updates the itinerary leg note.
+        /// </summary>
+        /// <param name="waypointId"></param>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        public UserSaveResult UpdateItineraryLegNote(int itineraryLegId, string note)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("UpdateItineraryLegNote", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@itinerary_leg_id", SqlDbType.Int).Value = itineraryLegId;
+                    cmd.Parameters.Add("@itinerary_note", SqlDbType.VarChar).Value = note;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.IsSaveSuccessful = true;
+                    saveResult.SaveResultId = itineraryLegId;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveResult;
+        }
+        
+        /// <summary>
+        /// This updates the itinerary waypoint note.
+        /// </summary>
+        /// <param name="waypointId"></param>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        public UserSaveResult UpdateWaypointNote(int waypointId, string note)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("UpdateWaypointNote", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@waypoint_id", SqlDbType.Int).Value = waypointId;
+                    cmd.Parameters.Add("@itinerary_note", SqlDbType.VarChar).Value = note;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.IsSaveSuccessful = true;
+                    saveResult.SaveResultId = waypointId;
                 }
             }
             catch (Exception ex)

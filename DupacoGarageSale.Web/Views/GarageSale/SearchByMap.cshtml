@@ -208,10 +208,12 @@
                         <br />
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" style="width:300px;" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
+                    <input class="form-control" type="text" style="width:300px;" value="gps" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
+                    @*<input class="form-control" type="text" style="width:300px;" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />*@
                 </div>                   
                 <div class="form-group">
-                    <input class="form-control" type="text" id="txtAddress" name="txtAddress" value="@ViewBag.Address" style="width:300px;" placeholder="Enter your starting address or zip code"><br />
+                    <input class="form-control" type="text" id="txtAddress" name="txtAddress" value="52001" style="width:300px;" placeholder="Enter your starting address or zip code"><br />
+                    @*<input class="form-control" type="text" id="txtAddress" name="txtAddress" value="@ViewBag.Address" style="width:300px;" placeholder="Enter your starting address or zip code"><br />*@
                 </div> 
                 <p />                           
                 <div class="form-group">
@@ -221,14 +223,16 @@
                         <option value="2">2 miles</option>
                         <option value="5">5 miles</option>
                         <option value="10">10 miles</option>
-                        <option value="15">15 miles</option>
+                        <option value="15" selected="selected">15 miles</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="from" name="from" class="form-control" value="@ViewBag.From" placeholder="Enter a start date"> <strong> - </strong>                           
+                    <input type="text" id="from" name="from" class="form-control" value="3/1/2015" placeholder="Enter a start date"> <strong> - </strong> 
+                    @*<input type="text" id="from" name="from" class="form-control" value="@ViewBag.From" placeholder="Enter a start date"> <strong> - </strong> *@                          
                 </div>
                 <div class="form-group">
-                    <input type="text" id="to" name="to" class="form-control" value="@ViewBag.To" placeholder="Enter an end date">
+                    <input type="text" id="to" name="to" class="form-control" value="7/1/2015" placeholder="Enter an end date">
+                    @*<input type="text" id="to" name="to" class="form-control" value="@ViewBag.To" placeholder="Enter an end date">*@
                 </div>
 
                 <input type="hidden" id="hdnSearchRadius" value="@ViewBag.SearchRadius" />
@@ -256,13 +260,10 @@
                 <input type="hidden" name="hdnSearchResults" id="hdnSearchResults" value="@ViewBag.SearchResults" /> <!-- This is the free text search string -->
             }
         }
-    }
-
-    
+    }    
 
     <div class="panel panel-default">
         <div class="panel-body">
-
             <div class="row">
                 <!-- Here's the map -->
                 <div id="map-canvas" style="width:99%; height: 565px; margin-left:6px; margin-bottom:20px;"></div>
@@ -271,17 +272,22 @@
     </div>
 </div>
 
-<input type="hidden" value="@ViewBag.SearchAddress" id="hdnSearchAddress" />
-<input type="hidden" value="@ViewBag.Radius" id="hdnRadius" />
+<input type="hidden" value="@ViewBag.Address" id="hdnSearchAddress" />
+<input type="hidden" value="@ViewBag.SearchRadius" id="hdnRadius" />
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0PudWjsqLxR5ZBsdLIBHUjMikiAZJgu8&libraries=geometry"></script>
 <script type="text/javascript">     
 
-    // This responds to clicking the add stopover link.
-    //$("#linkAddStopover").click(function (e) {
-    //    alert('hi, linkieee');
-    //    e.preventDefault();
-    //});
+    @*//var garageSaleItems = JSON.parse('@Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.GarageSaleItems))');*@
+
+    var mapAddresses = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.Addresses))
+
+    // alert(garageSaleItems);
+    // console.log(garageSaleItems);
+
+    //for (x = 0; x < garageSaleItems.length; x++) {
+    //    alert('sale id: ' + garageSaleItems[x].SaleId);
+    //}
    
     var mapAddresses = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.Addresses))
     var geocoder;
@@ -290,19 +296,8 @@
     var map; 
 
     function initialize() {
-        // Begin simple test map
-        //var latlng = new google.maps.LatLng(40.716948, -74.003563);
-        //var options = {
-        //    zoom: 14,
-        //    center: latlng,
-        //    mapTypeId: google.maps.MapTypeId.ROADMAP
-        //};
-        //var map = new google.maps.Map(document.getElementById("map-canvas"), options);
-        // End simple test map
 
         geocoder = new google.maps.Geocoder();
-                
-        // var map;
 
         var myOptions = {
             zoom: 8,
@@ -311,24 +306,18 @@
         };
         map = new google.maps.Map($('#map-canvas')[0], myOptions);
 
-        // Sample of hard-coded addresses
-        //var addresses = ['7 Saint Paul St. Baltimore MD 21202', '2201 Lake Ave Baltimore MD 21213', '4846 Western Ave Bethesda MD 20816', '201 State Rd Rehoboth DE 19971', '2804 Hyson Lane Falls Church VA 22043'];
+        //alert('map addys: ' + mapAddresses);
 
         var addresses = mapAddresses;
-        //alert(addresses);
         if (addresses != null)
         {
             var marker, x;
             var infowindow = new google.maps.InfoWindow();
 
             for (x = 0; x < addresses.length; x++) {
-                //alert(addresses.length);
                 $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x], null, function (data) {
 
                     var p = data.results[0].geometry.location
-                    //alert(data.results[0].formatted_address);  // This will alert the individual addresses.
-
-                    //debugObject(data.results[0].formatted_address);
                     var latlng = new google.maps.LatLng(p.lat, p.lng);
                     var marker = new google.maps.Marker({
                         position: latlng,
@@ -339,8 +328,11 @@
                     // Add the markers to the gmarkers array.
                     gmarkers.push(marker);
 
+                    var contentString = data.results[0].formatted_address + ' <br/><a href="GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>'
+
                     google.maps.event.addListener(marker, 'click', function () {
-                        infowindow.setContent(data.results[0].formatted_address + ' <br/><a href="~/GarageSale/GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>');
+                        //infowindow.setContent(data.results[0].formatted_address + ' <br/><a href="~/GarageSale/GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>');
+                        infowindow.setContent(contentString);
                         infowindow.open(map, marker);
                     });
                 });            
@@ -351,8 +343,6 @@
 
         // Add the Dupaco locations
         var dupacoLocations = AddDupacoLocations();
-        //debugObject(dupacoLocations[0]);
-        //alert(getObjectSize(dupacoLocations));
 
         if (dupacoLocations != null)
         {
@@ -371,7 +361,78 @@
 
             geoCodeAddress(map);
         }
-    }    
+    }  
+
+    function initialize_experiment() {
+
+        geocoder = new google.maps.Geocoder();
+
+        var myOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng(42.500558, -90.664572),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map($('#map-canvas')[0], myOptions);
+
+        var addresses = garageSaleItems;
+        if (addresses != null)
+        {
+           var marker, x;
+           var infowindow = new google.maps.InfoWindow();
+
+           for (x = 0; x < addresses.length; x++) {
+
+               var addressToMap = addresses[x].Address1 + ' ' + addresses[x].Address2 + ' ' + addresses[x].City + ' ' + addresses[x].State + ' ' + addresses[x].ZipCode;
+               var sale_id = addresses[x].SaleId;
+                //alert(addressToMap + ' ' + sale_id);
+                //alert('the upper sale id: ' + sale_id);
+                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addressToMap, null, function (data) {
+
+                    var p = data.results[0].geometry.location
+                    var latlng = new google.maps.LatLng(p.lat, p.lng);
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+                        title: data.results[0].formatted_address
+                    });
+
+                    // Add the markers to the gmarkers array.
+                    //debugObject(marker);
+                    gmarkers.push(marker);
+                    //alert('the lower sale id: ' + sale_id);
+                    var contentString = data.results[0].formatted_address + ' <br/><a href="ViewGarageSale/'+ sale_id + '">Visit this sale</a>'
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.setContent(contentString);
+                        infowindow.open(map, marker);
+                    });
+                });
+            }
+
+            geoCodeAddress(map);
+        }
+
+        // Add the Dupaco locations
+        var dupacoLocations = AddDupacoLocations();
+
+        if (dupacoLocations != null)
+        {
+            var marker, x;
+            var markerCount = 0;
+            var infowindow = new google.maps.InfoWindow();
+
+            for (x = 0; x < getObjectSize(dupacoLocations); x++) {  
+                var bank_address = dupacoLocations[x].address;
+                var bank_page = dupacoLocations[x].page;
+                var bank_lat = dupacoLocations[x].lat;
+                var bank_long = dupacoLocations[x].long;
+
+                addDupcoBankMarker(map, infowindow, bank_address, bank_page, bank_lat, bank_long);
+            }
+
+            geoCodeAddress(map);
+        }
+    }  
 
     initialize();
 
@@ -404,11 +465,16 @@
         var address = document.getElementById('hdnSearchAddress').value;
         var radius = parseInt(document.getElementById('hdnRadius').value, 10)*1000;
         //var address = document.getElementById("hdnCenterAddress").value;
+        //alert('radius: ' + radius);
 
         geocoder.geocode({ 'address': address }, function (results, status) {
+            //alert('geocode status: ' + status);
+            //alert('address to geocode: ' + address);
             if (status == google.maps.GeocoderStatus.OK) 
             {
                 map.setCenter(results[0].geometry.location);
+                //alert('set center: ' + results[0].geometry.location);
+
                 var searchCenter = results[0].geometry.location; // Added for the radius circle.
                 var marker = new google.maps.Marker({
                     map: map,
@@ -420,13 +486,6 @@
                     infowindow.setContent('Your starting point: ' + results[0].formatted_address);                    
                     infowindow.open(map, marker);
                 });
-
-                //google.maps.event.addDomListener(infowindow, 'domready', function() {
-                //    $('#linkAddStopover').click(function(e) {
-                //        alert("Hello World");
-                //        e.preventDefault();
-                //    });
-                //});
 
                 if (circle) 
                 {
@@ -496,5 +555,4 @@
             alert(x + ": " + obj[x]);
         }
     }
-
 </script>

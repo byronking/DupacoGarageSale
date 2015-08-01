@@ -1,9 +1,12 @@
 ﻿using DupacoGarageSale.Data.Domain;
 using DupacoGarageSale.Data.Repository;
+using DupacoGarageSale.Data.Services;
 using DupacoGarageSale.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -226,7 +229,9 @@ namespace DupacoGarageSale.Web.Controllers
                     var itinerary = new GarageSaleItinerary
                     {
                         SaleId = 7777777,
-                        SaleAddress1 = waypoint
+                        SaleAddress1 = waypoint.WaypointAddress,
+                        ItineraryNote = waypoint.ItineraryNote,
+                        ItineraryLegId = waypoint.WaypointId
                     };
 
                     viewModel.GarageSaleItineraries.Add(itinerary);
@@ -560,6 +565,60 @@ namespace DupacoGarageSale.Web.Controllers
         }
 
         /// <summary>
+        /// This updates the itinerary note.
+        /// </summary>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult UpdateItineraryNote(int itinerary_leg_id, string note)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var repository = new ItineraryRepository();
+                var saveResult = repository.UpdateItineraryLegNote(itinerary_leg_id, note); 
+
+                return RedirectToAction("ViewItinerary", new RouteValueDictionary(new
+                {
+                    controller = "Itinerary",
+                    action = "ViewItinerary",
+                    id = session.User.UserId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        /// <summary>
+        /// This updates the waypoint note.
+        /// </summary>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult UpdateWaypointNote(int waypoint_id, string note)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var session = Session["UserSession"] as UserSession;
+                var repository = new ItineraryRepository();
+                var saveResult = repository.UpdateWaypointNote(waypoint_id, note);                
+
+                return RedirectToAction("ViewItinerary", new RouteValueDictionary(new
+                {
+                    controller = "Itinerary",
+                    action = "ViewItinerary",
+                    id = session.User.UserId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
+        }
+
+        /// <summary>
         /// This displays a garage sale.
         /// </summary>
         /// <param name="id"></param>
@@ -568,6 +627,11 @@ namespace DupacoGarageSale.Web.Controllers
         public ActionResult QuickViewGarageSale(int id)
         {
             var viewModel = new GarageSaleViewModel();
+
+            if (Session["ViewModel"] != null)
+            {
+                viewModel = Session["ViewModel"] as GarageSaleViewModel;
+            }
 
             if (id == 0)
             {
@@ -581,12 +645,7 @@ namespace DupacoGarageSale.Web.Controllers
                 ViewData["StatesList"] = new SelectList(statesList, "stateid", "statename");
 
                 var repository = new GarageSaleRepository();
-
-                viewModel = new GarageSaleViewModel
-                {
-                    Sale = repository.GetGarageSaleAndItemsById(id),
-                    SelectedCategories = new List<int>()
-                };
+                viewModel.Sale = repository.GetGarageSaleAndItemsById(id);
 
                 // Get the user session
                 UserSession session = null;
@@ -611,26 +670,15 @@ namespace DupacoGarageSale.Web.Controllers
                     viewModel.GarageSaleItineraries = itineraryList;
                 }
 
-                foreach (var itemId in viewModel.Sale.GarageSaleItems)
-                {
-                    viewModel.SelectedCategories.Add(itemId.ItemSubcategoryId);
-                }
+                // Get the special items.
+                viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(viewModel.Sale.GarageSaleId);
 
-                // Get the categories and subcategories.
-                viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
+                // Get the blog posts.
+                var blogRepo = new BlogPostRepository();
+                viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.Sale.GarageSaleId);
 
-                var selectedCategories = viewModel.SelectedCategories.ToArray();
-                ViewBag.SelectedCategories = string.Join(",", selectedCategories);
-
-                //// Get the special items.
-                //viewModel.GarageSaleSpecialItems = repository.GetGarageSaleSpecialItems(viewModel.Sale.GarageSaleId);
-
-                //// Get the blog posts.
-                //var blogRepo = new BlogPostRepository();
-                //viewModel.BlogPosts = blogRepo.GetBlogPosts(viewModel.Sale.GarageSaleId);
-
-                //// Get the messages.
-                //viewModel.GarageSaleMessages = repository.GetGarageSaleMessages(id);
+                // Get the messages.
+                viewModel.GarageSaleMessages = repository.GetGarageSaleMessages(id);
 
                 // Save the viewmodel for later use.
                 Session["ViewModel"] = viewModel;
@@ -639,6 +687,74 @@ namespace DupacoGarageSale.Web.Controllers
             ViewBag.NavGarageSales = "active";
 
             return View(viewModel);
+        }
+
+        /// <summary>
+        /// This sends a message to the garage saler.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SendGarageSaleMessage(GarageSaleViewModel model)
+        {
+            if (Session["UserSession"] != null)
+            {
+                var userSession = Session["UserSession"] as UserSession;
+                var viewModel = new GarageSaleViewModel();
+
+                if (Session["ViewModel"] != null)
+                {
+                    viewModel = Session["ViewModel"] as GarageSaleViewModel;
+                    viewModel.GarageSaleMessage = new GarageSaleMessage();
+                    viewModel.GarageSaleMessage.MessageFrom = userSession.User.UserName;
+                    viewModel.GarageSaleMessage.MessageTo = viewModel.Sale.GarageSaleEmail;
+                    viewModel.GarageSaleMessage.SaleId = viewModel.Sale.GarageSaleId;
+                    viewModel.GarageSaleMessage.MessageSent = DateTime.Now;
+                    viewModel.GarageSaleMessage.MessageText = model.GarageSaleMessage.MessageText;
+
+                    var repository = new GarageSaleRepository();
+                    var saveResult = repository.SaveGarageSaleMessage(viewModel.GarageSaleMessage);
+
+                    if (saveResult.IsSaveSuccessful)
+                    {
+                        try
+                        {
+                            // Send notification email.
+                            var mailMessage = new System.Net.Mail.MailMessage(viewModel.User.Email, viewModel.Sale.GarageSaleEmail);
+                            mailMessage.IsBodyHtml = true;
+                            mailMessage.Subject = "Dupaco Garage Sale Message from " + viewModel.GarageSaleMessage.MessageFrom;
+                            mailMessage.Body = viewModel.GarageSaleMessage.MessageText;
+                            mailMessage.Priority = System.Net.Mail.MailPriority.Normal;
+
+                            var smtp = new SmtpClient();
+                            smtp.Host = ConfigurationManager.AppSettings["MailServer"].ToString();
+                            smtp.Send(mailMessage);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Log.Error(ex.ToString());
+                        }
+
+                        viewModel.GarageSaleMessage.MessageId = saveResult.SaveResultId;
+                        Session["SaveSuccessful"] = true;
+                    }
+                    else
+                    {
+                        // Indicate in some way that the save failed.
+                    }
+                }
+
+                return RedirectToAction("ViewItinerary", new RouteValueDictionary(new
+                {
+                    controller = "Itinerary",
+                    action = "ViewItinerary",
+                    id = viewModel.GarageSaleItinerary.ItineraryId
+                }));
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
         }
     }
 }

@@ -307,10 +307,10 @@ textarea {
 
 #map-itinerary { 
     height: 510px; 
-    width: 885px;
+    width: 720px;
 }
 
 .container-overflow {
     overflow:auto;
-    max-height:510px;
+    max-height:600px;
 }

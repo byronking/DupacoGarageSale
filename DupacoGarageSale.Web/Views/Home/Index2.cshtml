@@ -898,7 +898,7 @@
 
         var myOptions = {
             zoom: 8,
-            center: new google.maps.LatLng(39.329102, -76.576853),
+            center: new google.maps.LatLng(42.500558, -90.664572),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map($('#map-canvas')[0], myOptions);
@@ -918,9 +918,6 @@
                 $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x], null, function (data) {
 
                     var p = data.results[0].geometry.location
-                    //alert(data.results[0].formatted_address);  // This will alert the individual addresses.
-
-                    //debugObject(data.results[0].formatted_address);
                     var latlng = new google.maps.LatLng(p.lat, p.lng);
                     var marker = new google.maps.Marker({
                         position: latlng,
@@ -998,6 +995,8 @@
         //var address = document.getElementById("hdnCenterAddress").value;
 
         geocoder.geocode({ 'address': address }, function (results, status) {
+            //alert('geocode status: ' + status);
+            //alert('address to geocode: ' + address);
             if (status == google.maps.GeocoderStatus.OK) 
             {
                 map.setCenter(results[0].geometry.location);

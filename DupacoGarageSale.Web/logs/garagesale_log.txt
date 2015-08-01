@@ -629,3 +629,8 @@ Error Number:-2,State:0,Class:11
    --- End of inner exception stack trace ---
    at System.Net.Mail.SmtpClient.Send(MailMessage message)
    at DupacoGarageSale.Web.Controllers.HomeController.SendGarageSaleMessage(GarageSaleViewModel model) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Web\Controllers\HomeController.cs:line 717
+2015-07-29 15:38:00,026 [5] ERROR DupacoGarageSale.Data.Services.Logger System.IndexOutOfRangeException: sale_description
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.GetRandomSpecialItems() in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 862

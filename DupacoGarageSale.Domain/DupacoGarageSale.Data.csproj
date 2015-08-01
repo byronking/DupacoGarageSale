@@ -113,6 +113,7 @@
     <Compile Include="Domain\ItineraryGarageSaleItem.cs" />
     <Compile Include="Domain\ItinerarySearchResults.cs" />
     <Compile Include="Domain\ItinerarySpecialItem.cs" />
+    <Compile Include="Domain\ItineraryWaypoint.cs" />
     <Compile Include="Domain\MappingData.cs" />
     <Compile Include="Domain\GarageSaleItem.cs" />
     <Compile Include="Domain\GarageSaleSearchItem.cs" />

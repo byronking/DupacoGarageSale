@@ -526,7 +526,7 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 foreach (var item in viewModel.SearchResults.SpecialItems)
                 {
-                    var saleAddress = repository.GetGarageSaleAddressBySaleId(item.SaleId);
+                    var saleAddress = repository.GetGarageSaleAddressBySaleId(item.SaleId);                    
                     viewModel.MappingData.Addresses.Add(saleAddress.Address1 + ' ' + saleAddress.Address2 + ' ' + saleAddress.City + ' ' + saleAddress.State + ' ' + saleAddress.ZipCode);
                     viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
                 }

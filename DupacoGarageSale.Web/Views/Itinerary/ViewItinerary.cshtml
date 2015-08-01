@@ -8,10 +8,13 @@
     var arrayItineraryLegsJoined = string.Empty;
 }
 
-<div class="container-fluid down_70">
-    <div class="row" style="margin-left:10px;">
-        <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@ViewBag.Title / @Model.GarageSaleItinerary.ItineraryName</h2>
-        <br />                
+<div class="container down_70">
+    <div class="form-inline">
+        <div class="form-group">
+            <h2><a href="~/Home" style="text-decoration:none;">Home / </a>@ViewBag.Title / @Model.GarageSaleItinerary.ItineraryName</h2>
+            <br />
+        </div>
+        
         @{ 
             if (Model.User.Address != null)
             {
@@ -21,8 +24,7 @@
 
                 <input type="hidden" id="hdnStartingAddress" value="@startingAddress" />
                 <input type="hidden" id="hdnItineraryLegs" value="@Model.GarageSaleItineraries.Count" />
-                
-                <div class="col-md-5">      
+                <div class="col-md-8 col-md-offset-2">      
                     <form>
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -30,7 +32,7 @@
                             </div>
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <input type="text" id="txtStartingAddress" class="form-control" value="@startingAddress" />
+                                    <input type="text" id="txtStartingAddress" style="width:370px;" class="form-control" value="@startingAddress" />
                                 </div>
                                 <div class="form-group">
                                     <!-- Adding an itinerary here means it is not tied to any particular sale -->
@@ -72,21 +74,37 @@
                                             <label for="txtItineraryLeg@(address.ItineraryLegId)">Stopover:</label>
                                             <div class="form-inline">
                                                 <div class="form-group">
-                                                    <input type="text" id="txtItineraryLeg@(address.ItineraryLegId)" class="input-sm form-control" style="margin-bottom:3px;min-width:295px;" value="@itineraryAddress" /> @*<!-- style="min-width:245px; -->*@
+                                                    <input type="text" style="min-width:400px;" id="txtItineraryLeg@(address.ItineraryLegId)" class="input-sm form-control" value="@itineraryAddress" />
                                                 </div>
+                                                
                                                 <div class="form-group">
-                                                     @if (address.SaleId == 7777777)
-                                                        {
-                                                            <a href="~/Itinerary/DeleteWaypoint?id=@(Model.GarageSaleItinerary.ItineraryId)&address=@address.SaleAddress1" class="btn btn-danger btn-sm">Delete waypoint</a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href="~/Itinerary/DeleteItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-danger btn-sm">Delete</a>
-                                                            <a href="#" id="linkQuickView@(address.SaleId)" data-saleid="@(address.SaleId)" class="quickView btn btn-default btn-sm">Quick view</a>
-                                                        }
+                                                    @if (address.SaleId == 7777777)
+                                                    {
+                                                        <a href="~/Itinerary/DeleteWaypoint?id=@(Model.GarageSaleItinerary.ItineraryId)&address=@address.SaleAddress1" class="btn btn-danger btn-sm">Delete waypoint</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="~/Itinerary/DeleteItineraryLeg?legId=@(address.ItineraryLegId)" class="btn btn-danger btn-sm">Delete</a>
+                                                        <a href="#" id="linkQuickView@(address.SaleId)" data-saleid="@(address.SaleId)" class="quickView btn btn-default btn-sm">Quick view</a>
+                                                    }
                                                 </div>
                                             </div>
                                             <input type="hidden" id="hdnItineraryLeg@(address.ItineraryLegId)" value="@address.ItineraryLegId" />
+                                            <br />
+                                            <label>Note:</label>
+                                            <div class="form-inline">
+                                                <div class="form-group">   
+                                                    <textarea id="txtItineraryNote@(address.ItineraryLegId)" class="input-sm form-control" style="min-width:400px;">@address.ItineraryNote</textarea>
+                                                    @if (address.ItineraryId == 0)
+                                                    {
+                                                        <a href="#" data-itinerary-waypoint-id="@address.ItineraryLegId" class="updateItinerary btn btn-default btn-sm">Update waypoint note</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" data-itinerary-leg-id="@address.ItineraryLegId" class="updateItinerary btn btn-default btn-sm">Update note</a>
+                                                    }
+                                                </div>
+                                            </div>                                                
                                         </li>
                                     }
                                 </ul>
@@ -102,16 +120,20 @@
                         
                         <input type="button" id="btnMapItinerary" class="btn btn-primary" value="Get directions" onclick="calculateRoute();" /><br /><br />
                     </form>
-                </div>
-                                    
-                <div class="col-md-7"> 
-                    <!-- the map with directions -->
-                    <div class="row">
-                        <div id="map-itinerary" class="alert alert-info" style="padding:3px;"></div>
-                    </div><br />                    
-                </div>
-                <div class="col-md-11" style="margin-left:10px;">
-                    <div class="row">
+                </div>            
+            
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div id="map-itinerary"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+                
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
                         <div id="driving-directions" class="hidden">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -135,8 +157,9 @@
                     'Add to itinerary' link on a garage sale home page.
                 </div>
             }
-        }
+        }       
     </div>
+    <br />
     <hr />
     <div class="row" style="margin-left:5px;">
         <div class="col-md-7">
@@ -290,8 +313,8 @@
                 </div>
                 <div class="panel-body">
                     @{
-                        if(TempData["FaveRemovedSuccess"] != null)
-                        { 
+                        if (TempData["FaveRemovedSuccess"] != null)
+                        {
                             var faveRemovedSuccess = TempData["FaveRemovedSuccess"].ToString();
                             <input type="hidden" id="hdnFaveRemovedSuccess" value="@faveRemovedSuccess" />
 
@@ -339,9 +362,10 @@
     </div>
 </div>
 
+
 <!-- Quick sale view modal -->
 <div class="modal fade quick-sale-modal" id="quickSaleModal" tabindex="-1" role="dialog" aria-labelledby="quickSaleModal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
@@ -349,6 +373,17 @@
             </div>
             <div class="modal-body">
                 <div id="saleData"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Note updated modal -->
+<div class="modal fade update_note" id="updateNoteModal" tabindex="-1" role="dialog" aria-labelledby="updateNoteModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                Itinerary note updated!
             </div>
         </div>
     </div>

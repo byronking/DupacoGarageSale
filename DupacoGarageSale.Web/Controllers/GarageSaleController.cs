@@ -1521,6 +1521,11 @@ namespace DupacoGarageSale.Web.Controllers
             return View(viewModel);
         }
 
+        /// <summary>
+        /// This searches using the map only.
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SearchByMap(FormCollection form)
         {
@@ -1576,13 +1581,13 @@ namespace DupacoGarageSale.Web.Controllers
             }
 
             // Instantiate the selected categories.
-            viewModel.SelectedCategories = new List<int>();
+            //viewModel.SelectedCategories = new List<int>();
 
             // Take all the items in the search results and piece together addresses.
             foreach (var item in viewModel.SearchResults.GarageSaleItems)
             {
-                viewModel.MappingData.Addresses.Add(item.Address1 + ' ' + item.Address2 + ' ' + item.City + ' ' + item.State + ' ' + item.ZipCode);
-                viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                viewModel.MappingData.Addresses.Add(item.Address1 + ' ' + item.Address2 + ' ' + item.City + ' ' + item.State + ' ' + item.ZipCode);                
+                //viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
             }
 
             // Get the special items addresses
@@ -1592,26 +1597,29 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     var saleAddress = repository.GetGarageSaleAddressBySaleId(item.SaleId);
                     viewModel.MappingData.Addresses.Add(saleAddress.Address1 + ' ' + saleAddress.Address2 + ' ' + saleAddress.City + ' ' + saleAddress.State + ' ' + saleAddress.ZipCode);
-                    viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                    //viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
                 }
             }
 
             ViewBag.Addresses = viewModel.MappingData.Addresses.ToArray();
 
+            var garageSaleItems = viewModel.SearchResults.GarageSaleItems.ToArray();
+            ViewBag.GarageSaleItems = garageSaleItems;
 
             ViewBag.Address = viewModel.MappingData.StartingAddress;
             ViewBag.From = searchData[1].ToString();
             ViewBag.To = searchData[2].ToString();
             ViewBag.SearchCriteria = searchData[3].ToString();
             ViewBag.SearchCategory = searchData[4].ToString();
+            ViewBag.Radius = searchData[5].ToString();
             ViewBag.SearchRadius = searchData[5].ToString();
             ViewBag.Community = searchData[6].ToString();
 
-            var selectedCategories = viewModel.SelectedCategories.ToArray();
-            ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+            //var selectedCategories = viewModel.SelectedCategories.ToArray();
+            //ViewBag.SelectedCategories = string.Join(",", selectedCategories);
 
             Session["ViewModel"] = viewModel;
-            TempData["SearchButtonClicked"] = "true";
+            //TempData["SearchButtonClicked"] = "true";
 
             return View(viewModel);
         }
