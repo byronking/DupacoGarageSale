@@ -859,6 +859,7 @@
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleSpecialItems.txt" />
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleUser.txt" />
     <Content Include="Scripts\sql scripts\sp_SaveGarageSaleUserProfile.txt" />
+    <Content Include="Scripts\sql scripts\sp_SaveItineraryLeg.txt" />
     <Content Include="Scripts\sql scripts\sp_SearchSpecialItems.txt" />
     <Content Include="Scripts\sql scripts\sp_SearchSpecialItemsBySubcategory.txt" />
     <Content Include="Scripts\sql scripts\sp_UpdateGarageSale.txt" />

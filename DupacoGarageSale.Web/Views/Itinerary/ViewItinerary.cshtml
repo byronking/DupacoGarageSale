@@ -336,13 +336,13 @@
                                         <div>
                                             <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> @sale.SaleAddress1<br />
 		                                    @if (sale.SaleAddress2 != string.Empty)
-                                      {                        
+                                            {                        
 			                                    @sale.SaleAddress2<br />
-                                      }
+                                            }
 		                                    @sale.SaleCity, @sale.SaleState @sale.SaleZip<br /><br />
 		                                    <div>
-                                                <button type="button"class="btn btn-default btn-xs" data-toggle="popover" title="@sale.GarageSaleName" data-placement="top"
-                                                    data-content="@sale.SaleDescription">Quick view</button>
+                                                <!--<button type="button"class="btn btn-default btn-xs" data-toggle="popover" title="@sale.GarageSaleName" data-placement="top" data-content="@sale.SaleDescription">Quick view</button>-->
+                                                <button aria-label="info" class="btn btn-primary btn-xs" type="button" data-toggle="popover" data-html="true" data-trigger="focus" title="@sale.GarageSaleName" data-placement="top" data-content='@sale.SaleDescription<br/><br/><table class="table table-bordered table-condensed table-hover"><thead><tr><th>@sale.DatesTimes.SaleDateOne.ToLongDateString()</th><th>@sale.DatesTimes.SaleDateTwo.ToLongDateString()</th><th>@sale.DatesTimes.SaleDateThree.ToLongDateString()</th><th>@sale.DatesTimes.SaleDateFour.ToLongDateString()</th></tr></thead><tbody style="width:auto"><tr><td>Start:<br />@sale.DatesTimes.DayOneStart</td><td>Start:<br />@sale.DatesTimes.DayTwoStart</td><td>Start:<br />@sale.DatesTimes.DayThreeStart</td><td>Start:<br />@sale.DatesTimes.DayFourStart</td></tr><tr><td>End:<br />@sale.DatesTimes.DayOneEnd</td><td>End:<br />@sale.DatesTimes.DayTwoEnd</td><td>End:<br />@sale.DatesTimes.DayThreeEnd</td><td>End:<br />@sale.DatesTimes.DayFourEnd</td></tr></tbody></table>'>Quick view</button>
                                                 <a href="~/GarageSale/ViewGarageSale/@sale.GarageSaleId" class="btn btn-primary btn-xs">Visit this garage sale</a>
                                                 <a href="~/GarageSale/RemoveSaleFromFavesByUserId?saleId=@sale.GarageSaleId&userId=@Model.User.UserId" class="btn btn-danger btn-xs">Remove</a>
                                             </div>

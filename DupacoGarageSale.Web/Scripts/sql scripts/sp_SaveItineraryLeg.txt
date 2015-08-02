@@ -1,0 +1,32 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[SaveItineraryLeg]    Script Date: 8/1/15 5:49:56 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[SaveItineraryLeg] 
+
+@itinerary_id int,
+@sale_id int
+
+AS
+BEGIN
+
+set nocount on;
+declare @id int
+
+		if (select count(*) from ItineraryLegs where itinerary_id = @itinerary_id) = 0  
+			insert into ItineraryLegs (itinerary_id, sale_id, leg_order) values(@itinerary_id, @sale_id, 1);
+		else insert into ItineraryLegs (itinerary_id, sale_id, leg_order) values(@itinerary_id, @sale_id, (select max(leg_order) + 1 
+			from ItineraryLegs where itinerary_id = @itinerary_id));
+
+	set @id = SCOPE_IDENTITY();	
+
+	return (@id);
+
+END
+
+
+select * from ItineraryLegs

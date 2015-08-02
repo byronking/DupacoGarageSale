@@ -285,10 +285,54 @@
 
 <!-- Add to faves modal -->
 <div class="modal fade add-to-faves" id="addToFavesModal" tabindex="-1" role="dialog" aria-labelledby="addToFavesModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
-                Garage sale added to your faves!
+                <h3>Garage sale added to your faves!  Do you want to add this sale to your itinerary?</h3>
+                <div>
+                    <form action="~/Itinerary/CreateOrAddToItinerary" method="post">            
+                        <h4>Existing itineraries</h4>
+                        <div>
+                            @if (Model.GarageSaleItineraries != null)
+                            {   
+                                if (Model.GarageSaleItineraries.Count == 0)
+                                {
+                                    <span class="margin_bottom_40">No itineraries.  Let's create one!</span>
+                                }
+                                else
+                                {
+                                    <table class="table-hover table-bordered table-condensed margin_bottom_30">
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Itinerary name</th>
+                                            <th>Itinerary create date</th>
+                                        </tr>
+                                        @foreach(var itinerary in Model.GarageSaleItineraries)
+                                        {
+                                            <tr>
+                                                <td>@Html.ActionLink("Save to this itinerary", "AddToUserItinerary", "GarageSale", new { saleId = Model.Sale.GarageSaleId, itineraryId = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>
+                                                <td>@Html.ActionLink("View itinerary", "ViewItinerary", "Itinerary", new { id = @itinerary.ItineraryId }, new { @class="btn btn-xs btn-info" })</td>
+                                                <td>@itinerary.ItineraryName</td>
+                                                <td>@itinerary.ItineraryCreatedDate</td>
+                                            </tr>
+                                        }                            
+                                    </table>
+                                }
+                            }
+                        </div><br />
+                        @Html.HiddenFor(m => m.Sale.GarageSaleId)
+                        @Html.HiddenFor(m => m.User.UserId)
+                        <h4>Create a new itinerary</h4>
+                
+                        <div class="form-group">
+                            <label for="txtItineraryName">Itinerary name</label>
+                            @Html.TextBoxFor(m => m.UserItinerary.ItineraryName, new { @class="form-control", @style="width:70%;" })
+                        </div>
+                        <br />
+                        <input type="submit" value="Add to itinerary" class="btn btn-sm btn-info" />
+                    </form>
+                </div>
             </div>
         </div>
     </div>

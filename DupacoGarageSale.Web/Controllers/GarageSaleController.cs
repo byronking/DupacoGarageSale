@@ -1755,6 +1755,9 @@ namespace DupacoGarageSale.Web.Controllers
                 var repository = new GarageSaleRepository();
                 var saveResult = repository.SaveFaveGarageSale(saleId, userId);
 
+                //var itineraryRepository = new ItineraryRepository();
+                //var testy = itineraryRepository.
+
                 return RedirectToAction("ViewGarageSale", new RouteValueDictionary(new
                 {
                     controller = "GarageSale",
