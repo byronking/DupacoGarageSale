@@ -837,6 +837,37 @@ namespace DupacoGarageSale.Data.Repository
         }
 
         /// <summary>
+        /// This deletes a message in message center by id.
+        /// </summary>
+        /// <param name="messageId"></param>
+        /// <returns></returns>
+        public UserSaveResult DeleteMessage(int messageId)
+        {
+            var saveResult = new UserSaveResult();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["DupacoGarageSale"]))
+                using (SqlCommand cmd = new SqlCommand("DeleteMessage", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@message_id", SqlDbType.Int).Value = messageId;
+
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    saveResult.IsSaveSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString());
+            }
+
+            return saveResult;
+        }
+
+        /// <summary>
         /// This gets the replies to the contact us messages.
         /// </summary>
         /// <param name="messageId"></param>

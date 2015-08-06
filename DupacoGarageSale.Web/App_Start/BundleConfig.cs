@@ -47,6 +47,9 @@ namespace DupacoGarageSale.Web
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
                         "~/Scripts/Highcharts-4.0.1/js/highcharts.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jscroll").Include(
+                        "~/Scripts/jquery.jscroll.js"));
             
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

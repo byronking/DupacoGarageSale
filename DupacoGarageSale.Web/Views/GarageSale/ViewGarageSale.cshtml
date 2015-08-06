@@ -1,7 +1,7 @@
 ﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
 
 @{
-    ViewBag.Title = "View garage sales";
+    ViewBag.Title = "Come to my garage sale!";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -40,6 +40,11 @@
                 else
                 {
                     <a href="#" id="linkAddToFaves" style="margin-top:5px"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Add sale to faves</a><br /><br />
+                }
+                
+                if (Model.Sale != null)
+                {
+                    <div class="fb-like" data-href="http://www.dupacogaragesales.com/GarageSale/ViewGarageSale/@Model.Sale.GarageSaleId" data-title="this rocks!" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 }
             }
         </div>
@@ -376,3 +381,18 @@
         </div>
     </div>
 </div>
+
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id)
+    {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=379123135604010";
+          fjs.parentNode.insertBefore(js, fjs);
+    }
+
+    (document, 'script', 'facebook-jssdk'));
+
+</script>

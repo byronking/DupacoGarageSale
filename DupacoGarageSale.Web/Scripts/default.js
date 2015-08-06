@@ -28,6 +28,9 @@
         //alert('Hello, ' + ie);
     }
 
+    // jScroll
+    //$('.scroll').jscroll();
+
     // Preserve the address when searching.
     if ($('#hdnSavedAddress').val() !== "") {
         $('#txtAddress').text($('#hdnSavedAddress').val());

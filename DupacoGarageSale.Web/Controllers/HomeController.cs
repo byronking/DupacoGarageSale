@@ -17,8 +17,9 @@ namespace DupacoGarageSale.Web.Controllers
 {
     public class HomeController : Controller
     {
+        #region Old Index
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index_old()
         {
             UserSession session = null;
             var repository = new GarageSaleRepository();
@@ -145,7 +146,7 @@ namespace DupacoGarageSale.Web.Controllers
                     TempData["UserAddress"] = viewModel.MappingData.StartingAddress;
                 }
 
-                return View("Index2", viewModel); 
+                return View("Index", viewModel); 
             }
             else
             {
@@ -170,8 +171,10 @@ namespace DupacoGarageSale.Web.Controllers
                 return View(viewModel);
             }
         }
+        #endregion
 
-        public ActionResult Index2()
+        [HttpGet]
+        public ActionResult Index()
         {
             UserSession session = null;
             var repository = new GarageSaleRepository();
@@ -538,7 +541,7 @@ namespace DupacoGarageSale.Web.Controllers
             Session["ViewModel"] = viewModel;
             TempData["SearchButtonClicked"] = "true";
 
-            return RedirectToAction("Index2", viewModel);
+            return RedirectToAction("Index", viewModel);
         }
 
         /// <summary>
@@ -560,7 +563,7 @@ namespace DupacoGarageSale.Web.Controllers
                 Session["SearchData"] = null;
             }
 
-            return RedirectToAction("Index2", viewModel);
+            return RedirectToAction("Index", viewModel);
         }
 
         /// <summary>
@@ -668,7 +671,7 @@ namespace DupacoGarageSale.Web.Controllers
                     }
                 }
 
-                return RedirectToAction("Index2");
+                return RedirectToAction("Index");
             }
             else
             {

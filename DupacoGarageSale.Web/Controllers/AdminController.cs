@@ -7,6 +7,7 @@ using DupacoGarageSale.Data.Repository;
 using DupacoGarageSale.Data.Services;
 using DupacoGarageSale.Domain.Helpers;
 using DupacoGarageSale.Web.Models;
+using GoogleMaps.LocationServices;
 using NPOI.HSSF.UserModel;
 using System;
 using System.Collections.Generic;
@@ -561,6 +562,20 @@ namespace DupacoGarageSale.Web.Controllers
                 // Load all the garage sales.
                 var repository = new AdminRepository();
                 viewModel.GarageSales = repository.GetAllGarageSales();
+
+                // Append the lat/long to the garage sales
+                foreach (var sale in viewModel.GarageSales)
+                {
+                    var address = sale.SaleAddress1 + " " + sale.SaleAddress2 + " " + sale.SaleCity + " " + sale.SaleState + " " + sale.SaleZip;
+                    var locationService = new GoogleLocationService();
+                    var point = locationService.GetLatLongFromAddress(address);
+
+                    if (point != null)
+                    {
+                        sale.Latitude = point.Latitude;
+                        sale.Longitude = point.Longitude;
+                    }
+                }
 
                 Session["AllGarageSales"] = viewModel.GarageSales;
 
@@ -1588,6 +1603,14 @@ namespace DupacoGarageSale.Web.Controllers
                     }
                 }
 
+                if (TempData["MessageDeleted"] != null)
+                {
+                    if (TempData["MessageDeleted"] != "true")
+                    {
+                        TempData["MessageDeleted"] = "false";
+                    }
+                }
+
                 var communityList = repository.GetCommunities();
                 ViewData["CommunityList"] = new SelectList(communityList, "name", "name");
 
@@ -1829,6 +1852,29 @@ namespace DupacoGarageSale.Web.Controllers
             {
                 return View("~/Views/Accounts/Login.cshtml");
             }
+        }
+
+        /// <summary>
+        /// This deletes a message in message center.
+        /// </summary>
+        /// <param name="messageId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult DeleteMessage(int messageId)
+        {
+            var repository = new AdminRepository();
+            var saveResult = repository.DeleteMessage(messageId);
+
+            if (saveResult.IsSaveSuccessful == true)
+            {
+                TempData["MessageDeleted"] = "true";
+            }
+            else
+            {
+                TempData["MessageDeleted"] = "false";
+            }
+
+            return RedirectToAction("MessageCenter");
         }
 
         #endregion

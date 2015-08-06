@@ -43,6 +43,10 @@
       <HintPath>..\packages\DotNet.Highcharts.4.0\lib\DotNet.Highcharts.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GoogleMaps.LocationServices, Version=0.1.5219.29552, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GoogleMaps.LocationServices.0.9.8.5\lib\net40\GoogleMaps.LocationServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="GoogleMapsApi">
       <HintPath>..\packages\GoogleMapsApi.0.40.0.0\lib\net45\GoogleMapsApi.dll</HintPath>
     </Reference>
@@ -694,6 +698,7 @@
     <Content Include="Content\lightbox\js\lightbox.min.map" />
     <Content Include="Content\lightbox\README.markdown" />
     <None Include="Properties\PublishProfiles\DupacoGarageSale.pubxml" />
+    <Content Include="GoogleMaps.LocationServices.readme.txt" />
     <Content Include="Scripts\2013.2.611\jquery-1.7.1x.min.js" />
     <Content Include="Scripts\2013.2.611\jquery.validate.min.js" />
     <Content Include="Scripts\2013.2.611\telerik.all.min.js" />
@@ -819,6 +824,7 @@
     <Content Include="Scripts\jquery-ui-sliderAccess.js" />
     <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\jquery-ui-timepicker-addon.min.js" />
+    <Content Include="Scripts\jquery.jscroll.js" />
     <Content Include="Scripts\jquery.maxlength.js" />
     <Content Include="Scripts\jquery.timepicker.js" />
     <Content Include="Scripts\jquery.timepicker.min.js" />
@@ -883,7 +889,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Index_old.cshtml" />
     <Content Include="Views\Shared\_TopNavigation.cshtml" />
     <Content Include="Views\Accounts\SignUp.cshtml" />
     <Content Include="Views\Accounts\UserProfile.cshtml" />
@@ -946,7 +952,7 @@
     <Content Include="Views\Shared\_AllGarageSalesNav.cshtml" />
     <Content Include="Views\Accounts\ProfileCreationError.cshtml" />
     <Content Include="Views\Itinerary\QuickViewGarageSale.cshtml" />
-    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\QuickViewGarageSale.cshtml" />
     <Content Include="Views\GarageSale\SearchByMap.cshtml" />
   </ItemGroup>

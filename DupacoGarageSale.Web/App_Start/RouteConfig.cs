@@ -16,7 +16,7 @@ namespace DupacoGarageSale.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index2", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
                 
                 // Uncomment and chage for testing.
                 //defaults: new { controller = "GarageSale", action = "Search", id = UrlParameter.Optional, s = 1 }

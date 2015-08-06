@@ -122,7 +122,7 @@
                                             }
 		                                    @sale.SaleCity, @sale.SaleState @sale.SaleZip<br /><br />
 		                                    <div>
-                                                <button type="button"class="btn btn-default btn-xs" data-toggle="popover" title="@sale.GarageSaleName" data-placement="top"
+                                                <button type="button"class="btn btn-primary btn-xs" data-toggle="popover" title="@sale.GarageSaleName" data-placement="top"
                                                     data-content="@sale.SaleDescription">Quick view</button>
                                                 <a href="~/GarageSale/ViewGarageSale/@sale.GarageSaleId" class="btn btn-primary btn-xs">Visit this garage sale</a>
                                                 <a href="~/GarageSale/RemoveSaleFromFavesByUserId?saleId=@sale.GarageSaleId&userId=@Model.User.UserId" class="btn btn-danger btn-xs">Remove</a>
