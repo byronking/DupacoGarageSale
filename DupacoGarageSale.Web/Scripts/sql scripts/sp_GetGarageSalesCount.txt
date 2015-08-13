@@ -1,0 +1,24 @@
+﻿USE [DupacoGarageSale]
+GO
+/****** Object:  StoredProcedure [dbo].[GetGarageSalesCount]    Script Date: 8/13/15 1:36:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[GetGarageSalesCount] 
+
+AS
+BEGIN
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+	set nocount on;
+
+	begin
+
+		select count(sale_id) as salesCount from GarageSales;
+
+	end	
+END

@@ -1091,6 +1091,10 @@ namespace DupacoGarageSale.Web.Controllers
         /// <returns></returns>
         public ActionResult Search(FormCollection formCollection, string s)
         {
+            var helper = new GarageSalesHelper();
+            var salesCount = helper.GetGarageSalesCount();
+            ViewBag.GarageSalesCount = salesCount;
+
             var viewModel = new GarageSaleViewModel();
             var repository = new GarageSaleRepository();
 
@@ -1241,6 +1245,11 @@ namespace DupacoGarageSale.Web.Controllers
                             }
                         }
                     }
+
+                    var garageSaleItems = viewModel.SearchResults.GarageSaleItems.ToArray();
+                    ViewBag.GarageSaleItems = garageSaleItems;
+
+                    Session["ViewModel"] = viewModel;
                 }
                 else
                 {
@@ -1459,7 +1468,7 @@ namespace DupacoGarageSale.Web.Controllers
             foreach (var item in viewModel.SearchResults.GarageSaleItems)
             {
                 viewModel.MappingData.Addresses.Add(item.Address1 + ' ' + item.Address2 + ' ' + item.City + ' ' + item.State + ' ' + item.ZipCode);
-                viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                //viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
             }
 
             // Get the special items addresses
@@ -1469,14 +1478,12 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     var saleAddress = repository.GetGarageSaleAddressBySaleId(item.SaleId);
                     viewModel.MappingData.Addresses.Add(saleAddress.Address1 + ' ' + saleAddress.Address2 + ' ' + saleAddress.City + ' ' + saleAddress.State + ' ' + saleAddress.ZipCode);
-                    viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                    //viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
                 }
             }
 
-            var selectedCategories = viewModel.SelectedCategories.ToArray();
-            ViewBag.SelectedCategories = string.Join(",", selectedCategories);
-
-            Session["ViewModel"] = viewModel;
+            //var selectedCategories = viewModel.SelectedCategories.ToArray();
+            //ViewBag.SelectedCategories = string.Join(",", selectedCategories);            
 
             return RedirectToAction("Search", viewModel);
         }
@@ -1484,10 +1491,17 @@ namespace DupacoGarageSale.Web.Controllers
         #endregion
 
         #region Search by map
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult SearchByMap()
         {
+            var helper = new GarageSalesHelper();
+            var salesCount = helper.GetGarageSalesCount();
+            ViewBag.GarageSalesCount = salesCount;
+
             UserSession session = null;
             var repository = new GarageSaleRepository();
             var viewModel = new GarageSaleViewModel();
@@ -1503,7 +1517,7 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.User = session.User;
             }
 
-            viewModel.SelectedCategories = new List<int>();
+            //viewModel.SelectedCategories = new List<int>();
             viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
 
             if (Session["SearchData"] != null)
@@ -1605,6 +1619,8 @@ namespace DupacoGarageSale.Web.Controllers
 
             var garageSaleItems = viewModel.SearchResults.GarageSaleItems.ToArray();
             ViewBag.GarageSaleItems = garageSaleItems;
+
+            viewModel.ItemCategories = repository.GetCategoriesAndSubcategories();
 
             ViewBag.Address = viewModel.MappingData.StartingAddress;
             ViewBag.From = searchData[1].ToString();

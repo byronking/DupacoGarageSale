@@ -687,3 +687,11 @@ The statement has been terminated.
    at DupacoGarageSale.Data.Repository.AdminRepository.DeleteMessage(Int32 messageId) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\AdminRepository.cs:line 857
 ClientConnectionId:4c9a0d03-44a3-4dad-a5d6-c949ca0e39ac
 Error Number:547,State:0,Class:16
+2015-08-10 20:51:52,895 [15] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1324
+2015-08-10 20:54:46,588 [11] ERROR DupacoGarageSale.Data.Services.Logger System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at DupacoGarageSale.Data.Repository.GarageSaleRepository.SearchGarageSales(String searchCriteria, List`1 itemSubcategories, String startDate, String endDate) in c:\Projects\DupacoGarageSale\DupacoGarageSale.Domain\Repository\GarageSaleRepository.cs:line 1324

@@ -89,6 +89,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -590,7 +593,6 @@
     <Content Include="Content\images\garage-sale-3.jpg" />
     <Content Include="Content\images\garage-sale-4.jpg" />
     <Content Include="Content\images\garagesale.gif" />
-    <Content Include="Content\images\garage_sale_pictures\71 Rangie.jpg" />
     <Content Include="Content\images\garage_sale_pictures\8_m.jpg" />
     <Content Include="Content\images\garage_sale_pictures\bmw r1200.jpg" />
     <Content Include="Content\images\garage_sale_pictures\Capretti-Design-Toscana-Convertible-Crib.jpg" />
@@ -854,6 +856,7 @@
     <Content Include="Scripts\sql scripts\sp_GetGarageSaleItemById.txt" />
     <Content Include="Scripts\sql scripts\sp_GetGarageSaleItemsBySaleId.txt" />
     <Content Include="Scripts\sql scripts\sp_GetGarageSalesByUserName.txt" />
+    <Content Include="Scripts\sql scripts\sp_GetGarageSalesCount.txt" />
     <Content Include="Scripts\sql scripts\sp_GetGarageSaleSpecialItems.txt" />
     <Content Include="Scripts\sql scripts\sp_GetSpecialItemsForSearch.txt" />
     <Content Include="Scripts\sql scripts\sp_GetStates.txt" />

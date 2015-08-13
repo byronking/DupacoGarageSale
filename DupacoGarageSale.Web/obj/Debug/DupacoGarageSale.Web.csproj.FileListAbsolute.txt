@@ -42,3 +42,5 @@ C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\NPOI.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\NPOI.OOXML.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\NPOI.OpenXml4Net.xml
 C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\GoogleMaps.LocationServices.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.Helpers.dll
+C:\Projects\DupacoGarageSale\DupacoGarageSale.Web\bin\System.Web.Helpers.xml

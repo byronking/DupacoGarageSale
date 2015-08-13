@@ -61,7 +61,7 @@
                     <ul class="list-group">
                         <li class="list-group-item" style="background-color:#88C440;">
                             <div class="white">
-                                <h3>Search the 428 garage sales!</h3><br />
+                                <h3>Search the @ViewBag.GarageSalesCount garage sales!</h3><br />
                             </div>
                             <div class="form-group">
                                 <select name="ddlCategories" id="ddlCategories" class="form-control">
@@ -69,169 +69,169 @@
                                     <optgroup label="Baby">
                                         <option value="all_baby">All baby</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories1 = Model.ItemCategories.Where(m => m.ItemCategoryId == 1);
 
-                        foreach (var category in categories1)
-                        {
+                                                foreach (var category in categories1)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                      </optgroup> 
                                     <optgroup label="Clothing & Accessories">
                                         <option value="all_clothing_accessories">All clothing & accessories</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories2 = Model.ItemCategories.Where(m => m.ItemCategoryId == 2);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories2 = Model.ItemCategories.Where(m => m.ItemCategoryId == 2);
 
-                        foreach (var category in categories2)
-                        {
+                                                foreach (var category in categories2)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                      </optgroup>
                                     <optgroup label="Electronics">
                                         <option value="all_electronics">All electronics</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories3 = Model.ItemCategories.Where(m => m.ItemCategoryId == 3);
 
-                        foreach (var category in categories3)
-                        {
+                                                foreach (var category in categories3)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                     </optgroup>
                                     <optgroup label="Health & Beauty">
                                         <option value="all_health_beauty">All health & beauty</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories4 = Model.ItemCategories.Where(m => m.ItemCategoryId == 4);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories4 = Model.ItemCategories.Where(m => m.ItemCategoryId == 4);
 
-                        foreach (var category in categories4)
-                        {
+                                                foreach (var category in categories4)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                     </optgroup>                                    
                                     <optgroup label="Pets">
                                         <option value="all_pets">All pets</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories5 = Model.ItemCategories.Where(m => m.ItemCategoryId == 5);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories5 = Model.ItemCategories.Where(m => m.ItemCategoryId == 5);
 
-                        foreach (var category in categories5)
-                        {
+                                                foreach (var category in categories5)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                     </optgroup>
                                     <optgroup label="Home">
                                         <option value="all_home">All home</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories6 = Model.ItemCategories.Where(m => m.ItemCategoryId == 6);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories6 = Model.ItemCategories.Where(m => m.ItemCategoryId == 6);
 
-                        foreach (var category in categories6)
-                        {
+                                                foreach (var category in categories6)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                     </optgroup>
                                     <optgroup label="Home maintenance">
                                         <option value="all_home_maintenance">All home maintenance</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories7 = Model.ItemCategories.Where(m => m.ItemCategoryId == 7);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories7 = Model.ItemCategories.Where(m => m.ItemCategoryId == 7);
 
-                        foreach (var category in categories7)
-                        {
+                                                foreach (var category in categories7)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                     </optgroup>
                                     <optgroup label="Media">
                                         <option value="all_media">All media</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories8 = Model.ItemCategories.Where(m => m.ItemCategoryId == 8);
 
-                        foreach (var category in categories8)
-                        {
+                                                foreach (var category in categories8)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                     </optgroup>
                                     <optgroup label="Toys & games">
                                         <option value="all_toys_games">All toys & games</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories9 = Model.ItemCategories.Where(m => m.ItemCategoryId == 9);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories9 = Model.ItemCategories.Where(m => m.ItemCategoryId == 9);
 
-                        foreach (var category in categories9)
-                        {
+                                                foreach (var category in categories9)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                     </optgroup>
                                     <optgroup label="Vehicles">
                                         <option value="all_vehicles">All vehicles</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories10 = Model.ItemCategories.Where(m => m.ItemCategoryId == 10);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories10 = Model.ItemCategories.Where(m => m.ItemCategoryId == 10);
 
-                        foreach (var category in categories10)
-                        {
+                                                foreach (var category in categories10)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                     </optgroup>
                                     <optgroup label="Sports, Fitness & Outdoors">
                                         <option value="all_sports_fitness">All sports, fitness & outdoors</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories11 = Model.ItemCategories.Where(m => m.ItemCategoryId == 11);
 
-                        foreach (var category in categories11)
-                        {
+                                                foreach (var category in categories11)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                     </optgroup>     
                                     <optgroup label="Musical Instruments & Gear">
                                         <option value="all_musical_instruments">All musical instruments</option>
                                         @{
-                    if (Model.ItemCategories != null)
-                    {
-                        var categories12 = Model.ItemCategories.Where(m => m.ItemCategoryId == 12);
+                                            if (Model.ItemCategories != null)
+                                            {
+                                                var categories12 = Model.ItemCategories.Where(m => m.ItemCategoryId == 12);
 
-                        foreach (var category in categories12)
-                        {
+                                                foreach (var category in categories12)
+                                                {
                                                     <option value="@category.ItemSubcategoryId">@category.ItemSubcategoryName</option>
-                        }
-                    }
+                                                }
+                                            }
                                         }
                                     </optgroup>                          
                                 </select>
@@ -869,32 +869,43 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0PudWjsqLxR5ZBsdLIBHUjMikiAZJgu8&libraries=geometry"></script>
 <script type="text/javascript">     
 
-    // This responds to clicking the add stopover link.
-    //$("#linkAddStopover").click(function (e) {
-    //    alert('hi, linkieee');
-    //    e.preventDefault();
-    //});
+    var garageSaleItems = JSON.parse('@Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.GarageSaleItems))');
+
+    // This is the default.
+    //var mapAddresses = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.Addresses))
+
+    //alert(garageSaleItems);
+    //console.log(garageSaleItems);
+
+    var garageSales = [];
+
+    if (garageSaleItems !== null) {
+        for (x = 0; x < garageSaleItems.length; x++) {
+            var garageSale = [{
+                saleId: garageSaleItems[x].SaleId, saleAddress: garageSaleItems[x].Address1 + ' ' + garageSaleItems[x].Address2 + ' ' + garageSaleItems[x].City + ' '
+                    + garageSaleItems[x].State + ' ' + garageSaleItems[x].ZipCode, saleDatesTimes: {
+                        saleDateOne: garageSaleItems[x].DatesTimes.SaleDateOne, dayOneStart: garageSaleItems[x].DatesTimes.DayOneStart, dayOneEnd: garageSaleItems[x].DatesTimes.DayOneEnd,
+                        saleDateTwo: garageSaleItems[x].DatesTimes.SaleDateTwo, dayTwoStart: garageSaleItems[x].DatesTimes.DayTwoStart, dayTwoEnd: garageSaleItems[x].DatesTimes.DayTwoEnd,
+                        saleDateThree: garageSaleItems[x].DatesTimes.SaleDateThree, dayThreeStart: garageSaleItems[x].DatesTimes.DayThreeStart, dayThreeEnd: garageSaleItems[x].DatesTimes.DayThreeEnd,
+                        saleDateFour: garageSaleItems[x].DatesTimes.SaleDateFour, dayFourStart: garageSaleItems[x].DatesTimes.DayFourStart, dayFourEnd: garageSaleItems[x].DatesTimes.DayFourEnd
+                    }
+            }]
+
+            garageSales.push(garageSale);
+        }
+    }
+
+    console.log(garageSales);
    
-    var mapAddresses = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.Addresses))
+    var mapAddresses = garageSales;
     var geocoder;
     var circle = null;
     var gmarkers = [];
     var map; 
 
     function initialize() {
-        // Begin simple test map
-        //var latlng = new google.maps.LatLng(40.716948, -74.003563);
-        //var options = {
-        //    zoom: 14,
-        //    center: latlng,
-        //    mapTypeId: google.maps.MapTypeId.ROADMAP
-        //};
-        //var map = new google.maps.Map(document.getElementById("map-canvas"), options);
-        // End simple test map
 
         geocoder = new google.maps.Geocoder();
-                
-        // var map;
 
         var myOptions = {
             zoom: 8,
@@ -903,36 +914,14 @@
         };
         map = new google.maps.Map($('#map-canvas')[0], myOptions);
 
-        // Sample of hard-coded addresses
-        //var addresses = ['7 Saint Paul St. Baltimore MD 21202', '2201 Lake Ave Baltimore MD 21213', '4846 Western Ave Bethesda MD 20816', '201 State Rd Rehoboth DE 19971', '2804 Hyson Lane Falls Church VA 22043'];
-
         var addresses = mapAddresses;
-        //alert(addresses);
+        //debugObject(addresses);
+        //console.info(addresses);
+
         if (addresses != null)
         {
-            var marker, x;
-            var infowindow = new google.maps.InfoWindow();
-
             for (x = 0; x < addresses.length; x++) {
-                //alert(addresses.length);
-                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x], null, function (data) {
-
-                    var p = data.results[0].geometry.location
-                    var latlng = new google.maps.LatLng(p.lat, p.lng);
-                    var marker = new google.maps.Marker({
-                        position: latlng,
-                        map: map,
-                        title: data.results[0].formatted_address
-                    });
-
-                    // Add the markers to the gmarkers array.
-                    gmarkers.push(marker);
-
-                    google.maps.event.addListener(marker, 'click', function () {
-                        infowindow.setContent(data.results[0].formatted_address + ' <br/><a href="~/GarageSale/GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>');
-                        infowindow.open(map, marker);
-                    });
-                });            
+                createMarkers(addresses[x].saleId, addresses[x].saleAddress, addresses[x].saleDatesTimes);           
             }
 
             geoCodeAddress(map);
@@ -940,8 +929,6 @@
 
         // Add the Dupaco locations
         var dupacoLocations = AddDupacoLocations();
-        //debugObject(dupacoLocations[0]);
-        //alert(getObjectSize(dupacoLocations));
 
         if (dupacoLocations != null)
         {
@@ -960,7 +947,7 @@
 
             geoCodeAddress(map);
         }
-    }    
+    }  
 
     initialize();
 
@@ -978,7 +965,6 @@
         gmarkers.push(marker);
         google.maps.event.addListener(marker, 'click', function () {
             var signed_in = '@(ViewBag.SignedIn)'
-            // alert('signed in?: ' + signed_in);
             if (signed_in == "true") {                
                 infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><br/><a target="_blank" href="'+ page + '">Visit this location</a> <br/> <a href="/Home/SetStopoverAddress?address=' + address + '" id=linkAddStopover>Add to itinerary</a> ');
             }
@@ -989,10 +975,92 @@
         });
     }
 
+    function createMarkers(sale_id, address, datesTimes) {
+
+        var marker, x;
+        var infowindow = new google.maps.InfoWindow();
+        var saleId = sale_id;
+
+        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address, null, function (data) {
+
+            var p = data.results[0].geometry.location
+            var latlng = new google.maps.LatLng(p.lat, p.lng);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: data.results[0].formatted_address
+            });
+
+            // Add the markers to the gmarkers array.
+            gmarkers.push(marker);
+
+            var contentString = data.results[0].formatted_address +
+                '<br/><br/>' +
+                '<div class="col-md-12">' +
+                    '<table class="table table-bordered table-condensed table-hover">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th>' + formatDate(datesTimes.saleDateOne) + '</th>' +
+                                '<th>' + formatDate(datesTimes.saleDateTwo) + '</th>' +
+                                '<th>' + formatDate(datesTimes.saleDateThree) + '</th>' +
+                                '<th>' + formatDate(datesTimes.saleDateFour) + '</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody style="width:auto">' +
+                            '<tr>' +
+                                '<td>Start:<br />' + datesTimes.dayOneStart + '</td>' +
+                                '<td>Start:<br />' + datesTimes.dayTwoStart + '</td>' +
+                                '<td>Start:<br />' + datesTimes.dayThreeStart + '</td>' +
+                                '<td>Start:<br />' + datesTimes.dayFourStart + '</td>' +
+                                //'<td>Start:<br />' + formatTime(datesTimes.dayOneStart) + '</td>' +
+                                //'<td>Start:<br />' + formatTime(datesTimes.dayTwoStart) + '</td>' +
+                                //'<td>Start:<br />' + formatTime(datesTimes.dayThreeStart) + '</td>' +
+                                //'<td>Start:<br />' + formatTime(datesTimes.dayFourStart) + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td>End:<br />' + datesTimes.dayOneEnd + '</td>' +
+                                '<td>End:<br />' + datesTimes.dayTwoEnd + '</td>' +
+                                '<td>End:<br />' + datesTimes.dayThreeEnd + '</td>' +
+                                '<td>End:<br />' + datesTimes.dayFourEnd + '</td>' +
+                                //'<td>End:<br />' + formatTime(datesTimes.dayOneEnd) + '</td>' +
+                                //'<td>End:<br />' + formatTime(datesTimes.dayTwoEnd) + '</td>' +
+                                //'<td>End:<br />' + formatTime(datesTimes.dayThreeEnd) + '</td>' +
+                                //'<td>End:<br />' + formatTime(datesTimes.dayFourEnd) + '</td>' +
+                            '</tr>' +
+                        '</tbody>' +
+                    '</table>' +                                                          
+                '</div>' + 
+                '<br/><a href="/GarageSale/ViewGarageSale/' + saleId + '">Visit this sale</a>'
+            //var contentString = data.results[0].formatted_address + ' <br/><a href="GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>'
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(contentString);
+                infowindow.open(map, marker);
+            });
+        });
+    }
+
+    function formatDate(rawDate) {
+        var formattedDate = new Date(parseInt(rawDate.substr(6)));
+        return formattedDate.toLocaleDateString();
+    }
+
+    function formatTime(hour) {
+        //alert('time: ' + rawTime);
+        hour = 12;
+        if (hour < 12) {
+            hour = hour + 12;
+        }
+
+        //alert(hour);
+        return hour;
+    }
+
     function geoCodeAddress(map) {
         var address = document.getElementById('hdnSearchAddress').value;
         var radius = parseInt(document.getElementById('hdnRadius').value, 10)*1000;
         //var address = document.getElementById("hdnCenterAddress").value;
+        //alert('radius: ' + radius);
 
         geocoder.geocode({ 'address': address }, function (results, status) {
             //alert('geocode status: ' + status);
@@ -1000,6 +1068,8 @@
             if (status == google.maps.GeocoderStatus.OK) 
             {
                 map.setCenter(results[0].geometry.location);
+                //alert('set center: ' + results[0].geometry.location);
+
                 var searchCenter = results[0].geometry.location; // Added for the radius circle.
                 var marker = new google.maps.Marker({
                     map: map,
@@ -1011,13 +1081,6 @@
                     infowindow.setContent('Your starting point: ' + results[0].formatted_address);                    
                     infowindow.open(map, marker);
                 });
-
-                //google.maps.event.addDomListener(infowindow, 'domready', function() {
-                //    $('#linkAddStopover').click(function(e) {
-                //        alert("Hello World");
-                //        e.preventDefault();
-                //    });
-                //});
 
                 if (circle) 
                 {
@@ -1087,5 +1150,4 @@
             alert(x + ": " + obj[x]);
         }
     }
-
 </script>

@@ -14,7 +14,12 @@
             <br />
         </div>
         <div class="col-md-1">
-            <h1><a href="#" style="text-decoration:none;" data-toggle="modal" data-target="#howToSpruceUpSaleModal"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a></h1><br />
+            <h1><a href="#" style="text-decoration:none;" data-toggle="modal" data-target="#howToSpruceUpSaleModal"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a></h1>
+            @if (Model.Sale != null)
+            {
+                <div class="fb-share-button" data-href="http://www.dupacogaragesales.com/GarageSale/ViewGarageSale/@Model.Sale.GarageSaleId" data-layout="button_count"></div><br /><br />
+                
+            }
         </div>
     </div>
     <div class="row">
@@ -496,7 +501,7 @@
                         foreach (var item in Model.GarageSaleSpecialItems)
                         {
                             <div class="col-md-4">
-                                <div class="thumbnail" style="min-height:535px;">
+                                <div class="thumbnail" style="min-height:545px;">
                                     <a href="~/Content/images/garage_sale_pictures/@item.PictureLink" data-lightbox="@item.PictureLink">
                                         <img alt="hot pick image" data-src="holder.js/200x200" style="display: block;" src="~/Content/images/garage_sale_pictures/@item.PictureLink">
                                     </a>
@@ -505,11 +510,15 @@
                                         @item.Description<br /><br />
                                         <p><span>$</span> @item.Price</p>
                                         <p>
+                                            <a href="#" id="btnPostToFacebook" data-sale-url="http://www.dupacogaragesales.com/GarageSale/ViewGarageSale/@Model.Sale.GarageSaleId" 
+                                                data-pic-url="http://www.dupacogaragesales.com/Content/images/garage_sale_pictures/@item.PictureLink" data-title="@item.Title" 
+                                                data-description="@item.Description" data-toggle="tooltip" data-placement="top" title="Share this on Facebook" 
+                                                class="btn btn-primary btn-xs"><span aria-hidden="true" class="glyphicon glyphicon-thumbs-up"></span></a>
                                             @Html.ActionLink("Edit this item", "EditSpecialItem", "GarageSale", new { special_item_id = @item.SpecialItemsId }, new { @class = "btn btn-primary btn-xs" })
                                             @Html.ActionLink("Delete this item", "DeleteSpecialItem", "GarageSale", new { special_item_id = @item.SpecialItemsId }, new { @class = "btn btn-danger btn-xs" })
                                         </p>                     
-                                    </div>                    
-                                </div>
+                                    </div>         
+                                </div>                                                                
                             </div>
                         }
                     }
@@ -664,3 +673,81 @@
         </div>
     </div>
 </div>
+
+<script>
+    $("#btnPostToFacebook").click(function (e){
+        e.preventDefault();
+        var sale_url = $(this).attr('data-sale-url');
+        var pic_url = $(this).attr('data-pic-url');
+        var title = $(this).attr('data-title');
+        var description = $(this).attr('data-description');
+        //alert('pic: ' + pic_link);
+
+        FB.ui({
+            method: 'share_open_graph',
+            action_type: 'og.likes',
+            action_properties: JSON.stringify({
+                object:{
+                    url: sale_url,
+                    title: title,
+                    description:description,
+                    image: pic_url
+                }
+            })
+        }, function (response) {
+            if (!response || response.error) {
+                //alert('Error occured');
+                //debugObject(response.error);
+            } else {
+                //alert('Post ID: ' + response.id);
+            }
+        });
+    });
+</script>
+
+<div id="fb-root"></div>
+<script>
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '1564898977097519',
+            xfbml: true,
+            version: 'v2.4'
+        });
+    };
+
+    
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    function debugObject(inputobject) {
+        obj = inputobject;
+        for (x in obj) {
+            alert(x + ": " + obj[x]);
+        }
+    }
+
+    function uploadPic(imageLink) {
+        var imgURL = imageLink;
+        alert(imgURL);
+        FB.api('/me/photos', 'post', {
+            message: 'photo description',
+            url: imgURL
+        }, function (response) {
+
+            if (!response || response.error) {
+                //alert('Error occured');
+                debugObject(response.error);
+            } else {
+                alert('Post ID: ' + response.id);
+            }
+        });
+    }
+</script>
+

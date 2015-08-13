@@ -61,6 +61,22 @@
   min-height: 50%;
 }
 
+/* garage sale item description */
+.item-desc-scroll {
+    min-height: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.item-container-div {
+    position: relative;
+}
+
+.item-controls {
+    position: absolute;
+    bottom: 0px;
+}
+
 /* Profile pic upload preview */
 #uploadPreview img{
   height:200px;
@@ -291,10 +307,10 @@ textarea {
 
 #map-itinerary { 
     height: 510px; 
-    width: 885px;
+    width: 720px;
 }
 
 .container-overflow {
     overflow:auto;
-    max-height:510px;
+    max-height:600px;
 }

@@ -13,6 +13,25 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"><a href="~/Home"  style="text-decoration:none;"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home / </a>Message center</h1>
             <hr/>
+            <div class="row" style="margin-bottom:5px;">
+                <div class="col-md-6">
+                    @if (TempData["MessageDeleted"] != null && TempData["MessageDeleted"].ToString() == "true")
+                    {
+                        <div class="alert alert-success fade in" role="alert">
+                            <strong>Hooray!</strong>
+                            Message deleted!
+                        </div>
+                    }
+                    else if (TempData["MessageDeleted"] != null && TempData["MessageDeleted"].ToString() == "false")
+                    {
+                        <div class="alert alert-danger fade in" role="alert" style="width:444px;">
+                            <strong>Oops!</strong>
+                            An error occurred while deleting the message!
+                        </div>
+                    }                             
+                </div>
+            </div>
+
             <p class="lead">Messages sent from garage sale users through the site:</p>
             <div data-example-id="togglable-tabs" role="tabpanel" class="bs-example bs-example-tabs">
                 <ul role="tablist" class="nav nav-tabs" id="myTab">
@@ -52,7 +71,8 @@
                                                 <br />
                                             </div>
                                             <div class="col-sm-2">
-                                                @item.MessageSentDateTime
+                                                @item.MessageSentDateTime<br />
+                                                @Html.ActionLink("Delete message", "DeleteMessage", new { messageId = @item.MessageId }, new { @class="btn btn-danger btn-xs" })
                                             </div>
                                         </div>
                                         <div class="row">
@@ -125,7 +145,8 @@
                                                 <br />
                                             </div>
                                             <div class="col-sm-2">
-                                                @item.MessageSentDateTime
+                                                @item.MessageSentDateTime<br />
+                                                @Html.ActionLink("Delete message", "DeleteMessage", new { messageId = @item.MessageId }, new { @class="btn btn-danger btn-xs" })
                                             </div>
                                         </div>
                                         <div class="row">

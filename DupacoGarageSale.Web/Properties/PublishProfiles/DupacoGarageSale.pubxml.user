@@ -127,13 +127,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/08/2015 22:20:28</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Data.dll">
-      <publishTime>05/06/2015 14:34:19</publishTime>
+      <publishTime>08/11/2015 10:53:37</publishTime>
     </File>
     <File Include="bin/DupacoGarageSale.Web.dll">
-      <publishTime>05/06/2015 14:34:19</publishTime>
+      <publishTime>08/11/2015 10:56:09</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/18/2014 14:27:46</publishTime>
+    </File>
+    <File Include="bin/GoogleMaps.LocationServices.dll">
+      <publishTime>08/04/2015 15:05:15</publishTime>
     </File>
     <File Include="bin/GoogleMapsApi.dll">
       <publishTime>01/06/2015 11:22:35</publishTime>
@@ -170,6 +173,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>11/18/2014 14:27:50</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>07/10/2012 12:03:34</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>11/18/2014 14:27:51</publishTime>
@@ -814,7 +820,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/23/2014 10:55:16</publishTime>
     </File>
     <File Include="Content/bootstrap/css/bootstrap.css">
-      <publishTime>12/23/2014 10:55:16</publishTime>
+      <publishTime>07/06/2015 10:33:49</publishTime>
     </File>
     <File Include="Content/bootstrap/css/bootstrap.css.map">
       <publishTime>12/23/2014 10:55:16</publishTime>
@@ -1066,7 +1072,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/30/2014 10:45:10</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>03/25/2015 13:31:28</publishTime>
+      <publishTime>07/30/2015 18:45:48</publishTime>
     </File>
     <File Include="Content/standard.css">
       <publishTime>02/21/2015 12:37:45</publishTime>
@@ -1377,8 +1383,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Global.asax">
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
+    <File Include="GoogleMaps.LocationServices.readme.txt">
+      <publishTime>08/04/2015 15:05:15</publishTime>
+    </File>
     <File Include="packages.config">
-      <publishTime>04/13/2015 16:54:57</publishTime>
+      <publishTime>08/04/2015 15:05:16</publishTime>
     </File>
     <File Include="Scripts/2013.2.611/jquery-1.7.1.min.js">
       <publishTime>01/29/2015 14:27:06</publishTime>
@@ -1474,7 +1483,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/29/2015 14:27:05</publishTime>
     </File>
     <File Include="Scripts/admin.js">
-      <publishTime>04/03/2015 16:35:15</publishTime>
+      <publishTime>07/29/2015 13:22:05</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>12/23/2014 10:55:16</publishTime>
@@ -1483,13 +1492,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/23/2014 10:55:16</publishTime>
     </File>
     <File Include="Scripts/default.js">
-      <publishTime>05/04/2015 14:07:58</publishTime>
+      <publishTime>08/05/2015 17:02:50</publishTime>
     </File>
     <File Include="Scripts/facebook.login.js">
       <publishTime>03/18/2015 16:00:57</publishTime>
     </File>
     <File Include="Scripts/garagesale.itinerary.js">
-      <publishTime>05/06/2015 13:31:41</publishTime>
+      <publishTime>07/31/2015 09:52:42</publishTime>
     </File>
     <File Include="Scripts/Highcharts-4.0.1/js/adapters/standalone-framework.js">
       <publishTime>04/08/2015 22:20:29</publishTime>
@@ -1767,6 +1776,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery-ui-timepicker-addon.min.js">
       <publishTime>01/30/2015 14:05:08</publishTime>
     </File>
+    <File Include="Scripts/jquery.jscroll.js">
+      <publishTime>08/02/2015 10:49:15</publishTime>
+    </File>
     <File Include="Scripts/jquery.maxlength.js">
       <publishTime>03/13/2015 09:53:37</publishTime>
     </File>
@@ -1884,11 +1896,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/sql scripts/sp_SaveGarageSaleUserProfile.txt">
       <publishTime>12/16/2014 21:31:29</publishTime>
     </File>
+    <File Include="Scripts/sql scripts/sp_SaveItineraryLeg.txt">
+      <publishTime>08/01/2015 17:54:11</publishTime>
+    </File>
     <File Include="Scripts/sql scripts/sp_SearchSpecialItems.txt">
       <publishTime>03/15/2015 23:18:14</publishTime>
     </File>
     <File Include="Scripts/sql scripts/sp_SearchSpecialItemsBySubcategory.txt">
       <publishTime>01/17/2015 12:03:52</publishTime>
+    </File>
+    <File Include="Scripts/sql scripts/sp_SearchSpecialItemsBySubcategoryAndDate.txt">
+      <publishTime>07/19/2015 16:16:12</publishTime>
     </File>
     <File Include="Scripts/sql scripts/sp_UpdateGarageSale.txt">
       <publishTime>12/16/2014 21:32:04</publishTime>
@@ -1918,7 +1936,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2015 01:03:05</publishTime>
     </File>
     <File Include="Views/Accounts/UserHome.cshtml">
-      <publishTime>03/31/2015 11:43:17</publishTime>
+      <publishTime>08/01/2015 21:40:59</publishTime>
     </File>
     <File Include="Views/Accounts/UserProfile.cshtml">
       <publishTime>03/24/2015 15:52:39</publishTime>
@@ -1933,7 +1951,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/10/2015 10:31:15</publishTime>
     </File>
     <File Include="Views/Admin/GarageSales.cshtml">
-      <publishTime>04/13/2015 17:41:21</publishTime>
+      <publishTime>08/04/2015 16:15:18</publishTime>
     </File>
     <File Include="Views/Admin/HeadlineNews.cshtml">
       <publishTime>03/24/2015 13:20:19</publishTime>
@@ -1942,7 +1960,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/11/2015 12:46:19</publishTime>
     </File>
     <File Include="Views/Admin/MessageCenter.cshtml">
-      <publishTime>04/02/2015 15:53:36</publishTime>
+      <publishTime>08/02/2015 21:04:02</publishTime>
     </File>
     <File Include="Views/Admin/MessageSent.cshtml">
       <publishTime>03/24/2015 12:02:21</publishTime>
@@ -1972,7 +1990,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/05/2014 15:31:35</publishTime>
     </File>
     <File Include="Views/GarageSale/Edit.cshtml">
-      <publishTime>05/04/2015 13:58:01</publishTime>
+      <publishTime>08/06/2015 00:16:44</publishTime>
     </File>
     <File Include="Views/GarageSale/EditSpecialItem.cshtml">
       <publishTime>03/09/2015 22:26:38</publishTime>
@@ -1987,7 +2005,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2015 02:07:41</publishTime>
     </File>
     <File Include="Views/GarageSale/Search.cshtml">
-      <publishTime>05/06/2015 13:02:26</publishTime>
+      <publishTime>08/10/2015 14:11:09</publishTime>
+    </File>
+    <File Include="Views/GarageSale/SearchByMap.cshtml">
+      <publishTime>08/11/2015 10:35:16</publishTime>
     </File>
     <File Include="Views/GarageSale/SearchResults.cshtml">
       <publishTime>03/17/2015 12:05:49</publishTime>
@@ -1996,7 +2017,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/31/2015 11:46:18</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewGarageSale.cshtml">
-      <publishTime>03/31/2015 12:06:03</publishTime>
+      <publishTime>08/05/2015 15:58:58</publishTime>
     </File>
     <File Include="Views/GarageSale/ViewItinerary.cshtml">
       <publishTime>02/16/2015 16:28:14</publishTime>
@@ -2014,19 +2035,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/17/2015 12:05:49</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/06/2015 13:04:36</publishTime>
+      <publishTime>08/10/2015 16:31:00</publishTime>
+    </File>
+    <File Include="Views/Home/Index_old.cshtml">
+      <publishTime>07/02/2015 15:07:58</publishTime>
+    </File>
+    <File Include="Views/Home/QuickViewGarageSale.cshtml">
+      <publishTime>07/05/2015 23:42:01</publishTime>
     </File>
     <File Include="Views/Itinerary/AddStopover.cshtml">
       <publishTime>03/27/2015 14:32:29</publishTime>
     </File>
     <File Include="Views/Itinerary/QuickViewGarageSale.cshtml">
-      <publishTime>05/05/2015 12:32:11</publishTime>
+      <publishTime>08/01/2015 17:59:56</publishTime>
     </File>
     <File Include="Views/Itinerary/UserItineraries.cshtml">
-      <publishTime>03/19/2015 01:17:22</publishTime>
+      <publishTime>07/30/2015 18:50:17</publishTime>
     </File>
     <File Include="Views/Itinerary/ViewItinerary.cshtml">
-      <publishTime>05/06/2015 13:29:11</publishTime>
+      <publishTime>08/01/2015 19:15:35</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>11/18/2014 14:27:45</publishTime>
@@ -2074,7 +2101,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/16/2015 22:02:41</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/18/2015 11:24:24</publishTime>
+      <publishTime>08/02/2015 14:21:48</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutNoBackground.cshtml">
       <publishTime>01/17/2015 16:03:14</publishTime>
@@ -2089,7 +2116,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/15/2014 23:01:28</publishTime>
     </File>
     <File Include="Views/Shared/_TopNavigation.cshtml">
-      <publishTime>03/18/2015 16:02:01</publishTime>
+      <publishTime>08/02/2015 17:08:59</publishTime>
     </File>
     <File Include="Views/Shared/_TopNavigation2.cshtml">
       <publishTime>01/12/2015 17:32:51</publishTime>
@@ -2113,7 +2140,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 14:27:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/05/2015 12:41:37</publishTime>
+      <publishTime>08/11/2015 10:53:39</publishTime>
     </File>
   </ItemGroup>
 </Project>

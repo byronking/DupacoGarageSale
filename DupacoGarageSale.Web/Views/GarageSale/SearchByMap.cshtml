@@ -1,4 +1,5 @@
 ﻿@model DupacoGarageSale.Web.Models.GarageSaleViewModel
+@using System.Web.Helpers
 
 @{
     ViewBag.Title = "Search the Dupaco Garage Sales!";
@@ -23,7 +24,7 @@
         <ul class="list-group">
             <li class="list-group-item" style="background-color:#88C440;">
                 <div class="white">
-                    <h3>Search the 428 garage sales!</h3><br />
+                    <h3>Search the @ViewBag.GarageSalesCount garage sales!</h3><br />
                 </div>
                 <div class="form-group">
                     <select name="ddlCategories" id="ddlCategories" class="form-control">
@@ -208,12 +209,10 @@
                         <br />
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" style="width:300px;" value="gps" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
-                    @*<input class="form-control" type="text" style="width:300px;" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />*@
+                    <input class="form-control" type="text" style="width:300px;" value="@ViewBag.SearchCriteria" id="txtSearchCriteria" name="txtSearchCriteria" placeholder="Enter search criteria"><br />
                 </div>                   
                 <div class="form-group">
-                    <input class="form-control" type="text" id="txtAddress" name="txtAddress" value="52001" style="width:300px;" placeholder="Enter your starting address or zip code"><br />
-                    @*<input class="form-control" type="text" id="txtAddress" name="txtAddress" value="@ViewBag.Address" style="width:300px;" placeholder="Enter your starting address or zip code"><br />*@
+                    <input class="form-control" type="text" id="txtAddress" name="txtAddress" value="@ViewBag.Address" style="width:300px;" placeholder="Enter your starting address or zip code"><br />
                 </div> 
                 <p />                           
                 <div class="form-group">
@@ -223,16 +222,14 @@
                         <option value="2">2 miles</option>
                         <option value="5">5 miles</option>
                         <option value="10">10 miles</option>
-                        <option value="15" selected="selected">15 miles</option>
+                        <option value="15">15 miles</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="from" name="from" class="form-control" value="3/1/2015" placeholder="Enter a start date"> <strong> - </strong> 
-                    @*<input type="text" id="from" name="from" class="form-control" value="@ViewBag.From" placeholder="Enter a start date"> <strong> - </strong> *@                          
+                    <input type="text" id="from" name="from" class="form-control" value="@ViewBag.From" placeholder="Enter a start date"> <strong> - </strong>                        
                 </div>
                 <div class="form-group">
-                    <input type="text" id="to" name="to" class="form-control" value="7/1/2015" placeholder="Enter an end date">
-                    @*<input type="text" id="to" name="to" class="form-control" value="@ViewBag.To" placeholder="Enter an end date">*@
+                    <input type="text" id="to" name="to" class="form-control" value="@ViewBag.To" placeholder="Enter an end date">
                 </div>
 
                 <input type="hidden" id="hdnSearchRadius" value="@ViewBag.SearchRadius" />
@@ -278,18 +275,47 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0PudWjsqLxR5ZBsdLIBHUjMikiAZJgu8&libraries=geometry"></script>
 <script type="text/javascript">     
 
-    @*//var garageSaleItems = JSON.parse('@Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.GarageSaleItems))');*@
+    @*var garageSaleItems = JSON.parse('@Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.GarageSaleItems))');*@
+    var garageSaleItems = @Html.Raw(System.Web.Helpers.Json.Encode(ViewBag.GarageSaleItems))
 
-    var mapAddresses = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.Addresses))
+    // This is the default.
+    @*var mapAddresses = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.Addresses))*@
 
-    // alert(garageSaleItems);
-    // console.log(garageSaleItems);
+    //alert(garageSaleItems);
+    //console.log(garageSaleItems);
 
-    //for (x = 0; x < garageSaleItems.length; x++) {
-    //    alert('sale id: ' + garageSaleItems[x].SaleId);
+    //{
+    //    "response1": [
+    //        {"some": "object"},
+    //        {"some": "object"}
+    //    ],
+    //    "response2": [
+    //        {"some": "object"},
+    //        {"some": "object"}
+    //    ]
     //}
+    
+    var garageSales = [];
+
+    if (garageSaleItems !== null) {
+        for (x = 0; x < garageSaleItems.length; x++) {
+            var garageSale = {
+                saleId: garageSaleItems[x].SaleId, saleAddress: garageSaleItems[x].Address1 + ' ' + garageSaleItems[x].Address2 + ' ' + garageSaleItems[x].City + ' '
+                    + garageSaleItems[x].State + ' ' + garageSaleItems[x].ZipCode, saleDatesTimes: {
+                        saleDateOne: garageSaleItems[x].DatesTimes.SaleDateOne, dayOneStart: garageSaleItems[x].DatesTimes.DayOneStart, dayOneEnd: garageSaleItems[x].DatesTimes.DayOneEnd,
+                        saleDateTwo: garageSaleItems[x].DatesTimes.SaleDateTwo, dayTwoStart: garageSaleItems[x].DatesTimes.DayTwoStart, dayTwoEnd: garageSaleItems[x].DatesTimes.DayTwoEnd,
+                        saleDateThree: garageSaleItems[x].DatesTimes.SaleDateThree, dayThreeStart: garageSaleItems[x].DatesTimes.DayThreeStart, dayThreeEnd: garageSaleItems[x].DatesTimes.DayThreeEnd,
+                        saleDateFour: garageSaleItems[x].DatesTimes.SaleDateFour, dayFourStart: garageSaleItems[x].DatesTimes.DayFourStart, dayFourEnd: garageSaleItems[x].DatesTimes.DayFourEnd
+                    }
+            }
+
+            garageSales.push(garageSale);
+        }
+    }
+
+    console.log(garageSales);
    
-    var mapAddresses = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(ViewBag.Addresses))
+    var mapAddresses = garageSales;
     var geocoder;
     var circle = null;
     var gmarkers = [];
@@ -306,107 +332,14 @@
         };
         map = new google.maps.Map($('#map-canvas')[0], myOptions);
 
-        //alert('map addys: ' + mapAddresses);
-
         var addresses = mapAddresses;
+        //debugObject(addresses);
+        //console.info(addresses);
+
         if (addresses != null)
         {
-            var marker, x;
-            var infowindow = new google.maps.InfoWindow();
-
             for (x = 0; x < addresses.length; x++) {
-                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x], null, function (data) {
-
-                    var p = data.results[0].geometry.location
-                    var latlng = new google.maps.LatLng(p.lat, p.lng);
-                    var marker = new google.maps.Marker({
-                        position: latlng,
-                        map: map,
-                        title: data.results[0].formatted_address
-                    });
-
-                    // Add the markers to the gmarkers array.
-                    gmarkers.push(marker);
-
-                    var contentString = data.results[0].formatted_address + ' <br/><a href="GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>'
-
-                    google.maps.event.addListener(marker, 'click', function () {
-                        //infowindow.setContent(data.results[0].formatted_address + ' <br/><a href="~/GarageSale/GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>');
-                        infowindow.setContent(contentString);
-                        infowindow.open(map, marker);
-                    });
-                });            
-            }
-
-            geoCodeAddress(map);
-        }
-
-        // Add the Dupaco locations
-        var dupacoLocations = AddDupacoLocations();
-
-        if (dupacoLocations != null)
-        {
-            var marker, x;
-            var markerCount = 0;
-            var infowindow = new google.maps.InfoWindow();
-
-            for (x = 0; x < getObjectSize(dupacoLocations); x++) {  
-                var bank_address = dupacoLocations[x].address;
-                var bank_page = dupacoLocations[x].page;
-                var bank_lat = dupacoLocations[x].lat;
-                var bank_long = dupacoLocations[x].long;
-
-                addDupcoBankMarker(map, infowindow, bank_address, bank_page, bank_lat, bank_long);
-            }
-
-            geoCodeAddress(map);
-        }
-    }  
-
-    function initialize_experiment() {
-
-        geocoder = new google.maps.Geocoder();
-
-        var myOptions = {
-            zoom: 8,
-            center: new google.maps.LatLng(42.500558, -90.664572),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map($('#map-canvas')[0], myOptions);
-
-        var addresses = garageSaleItems;
-        if (addresses != null)
-        {
-           var marker, x;
-           var infowindow = new google.maps.InfoWindow();
-
-           for (x = 0; x < addresses.length; x++) {
-
-               var addressToMap = addresses[x].Address1 + ' ' + addresses[x].Address2 + ' ' + addresses[x].City + ' ' + addresses[x].State + ' ' + addresses[x].ZipCode;
-               var sale_id = addresses[x].SaleId;
-                //alert(addressToMap + ' ' + sale_id);
-                //alert('the upper sale id: ' + sale_id);
-                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addressToMap, null, function (data) {
-
-                    var p = data.results[0].geometry.location
-                    var latlng = new google.maps.LatLng(p.lat, p.lng);
-                    var marker = new google.maps.Marker({
-                        position: latlng,
-                        map: map,
-                        title: data.results[0].formatted_address
-                    });
-
-                    // Add the markers to the gmarkers array.
-                    //debugObject(marker);
-                    gmarkers.push(marker);
-                    //alert('the lower sale id: ' + sale_id);
-                    var contentString = data.results[0].formatted_address + ' <br/><a href="ViewGarageSale/'+ sale_id + '">Visit this sale</a>'
-
-                    google.maps.event.addListener(marker, 'click', function () {
-                        infowindow.setContent(contentString);
-                        infowindow.open(map, marker);
-                    });
-                });
+                createMarkers(addresses[x].saleId, addresses[x].saleAddress, addresses[x].saleDatesTimes);           
             }
 
             geoCodeAddress(map);
@@ -450,7 +383,6 @@
         gmarkers.push(marker);
         google.maps.event.addListener(marker, 'click', function () {
             var signed_in = '@(ViewBag.SignedIn)'
-            // alert('signed in?: ' + signed_in);
             if (signed_in == "true") {                
                 infowindow.setContent('Dupaco Bank <br/>' + address + ' <br/><br/><a target="_blank" href="'+ page + '">Visit this location</a> <br/> <a href="/Home/SetStopoverAddress?address=' + address + '" id=linkAddStopover>Add to itinerary</a> ');
             }
@@ -459,6 +391,87 @@
             }
             infowindow.open(map, marker);
         });
+    }
+
+    function createMarkers(sale_id, address, datesTimes) {
+
+        var marker, x;
+        var infowindow = new google.maps.InfoWindow();
+        var saleId = sale_id;
+
+        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address, null, function (data) {
+
+            var p = data.results[0].geometry.location
+            var latlng = new google.maps.LatLng(p.lat, p.lng);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: data.results[0].formatted_address
+            });
+
+            // Add the markers to the gmarkers array.
+            gmarkers.push(marker);
+
+            var contentString = data.results[0].formatted_address +
+                '<br/><br/>' +
+                '<div class="col-md-12">' +
+                    '<table class="table table-bordered table-condensed table-hover">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th>' + formatDate(datesTimes.saleDateOne) + '</th>' +
+                                '<th>' + formatDate(datesTimes.saleDateTwo) + '</th>' +
+                                '<th>' + formatDate(datesTimes.saleDateThree) + '</th>' +
+                                '<th>' + formatDate(datesTimes.saleDateFour) + '</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody style="width:auto">' +
+                            '<tr>' +
+                                '<td>Start:<br />' + datesTimes.dayOneStart + '</td>' +
+                                '<td>Start:<br />' + datesTimes.dayTwoStart + '</td>' +
+                                '<td>Start:<br />' + datesTimes.dayThreeStart + '</td>' +
+                                '<td>Start:<br />' + datesTimes.dayFourStart + '</td>' +
+                                //'<td>Start:<br />' + formatTime(datesTimes.dayOneStart) + '</td>' +
+                                //'<td>Start:<br />' + formatTime(datesTimes.dayTwoStart) + '</td>' +
+                                //'<td>Start:<br />' + formatTime(datesTimes.dayThreeStart) + '</td>' +
+                                //'<td>Start:<br />' + formatTime(datesTimes.dayFourStart) + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                                '<td>End:<br />' + datesTimes.dayOneEnd + '</td>' +
+                                '<td>End:<br />' + datesTimes.dayTwoEnd + '</td>' +
+                                '<td>End:<br />' + datesTimes.dayThreeEnd + '</td>' +
+                                '<td>End:<br />' + datesTimes.dayFourEnd + '</td>' +
+                                //'<td>End:<br />' + formatTime(datesTimes.dayOneEnd) + '</td>' +
+                                //'<td>End:<br />' + formatTime(datesTimes.dayTwoEnd) + '</td>' +
+                                //'<td>End:<br />' + formatTime(datesTimes.dayThreeEnd) + '</td>' +
+                                //'<td>End:<br />' + formatTime(datesTimes.dayFourEnd) + '</td>' +
+                            '</tr>' +
+                        '</tbody>' +
+                    '</table>' +                                                          
+                '</div>' + 
+                '<br/><a href="/GarageSale/ViewGarageSale/' + saleId + '">Visit this sale</a>'
+            //var contentString = data.results[0].formatted_address + ' <br/><a href="GetGarageSaleByAddress?address='+ data.results[0].formatted_address + '">Visit this sale</a>'
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(contentString);
+                infowindow.open(map, marker);
+            });            
+        });
+    }
+    
+    function formatDate(rawDate) {
+        var formattedDate = new Date(parseInt(rawDate.substr(6)));
+        return formattedDate.toLocaleDateString();
+    }
+
+    function formatTime(hour) {
+        //alert('time: ' + rawTime);
+        hour = 12;
+        if (hour < 12) {
+            hour = hour + 12;
+        }
+
+        //alert(hour);
+        return hour;
     }
 
     function geoCodeAddress(map) {
@@ -473,7 +486,6 @@
             if (status == google.maps.GeocoderStatus.OK) 
             {
                 map.setCenter(results[0].geometry.location);
-                //alert('set center: ' + results[0].geometry.location);
 
                 var searchCenter = results[0].geometry.location; // Added for the radius circle.
                 var marker = new google.maps.Marker({
@@ -555,4 +567,5 @@
             alert(x + ": " + obj[x]);
         }
     }
+
 </script>

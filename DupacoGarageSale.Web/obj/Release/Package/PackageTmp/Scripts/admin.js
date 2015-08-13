@@ -68,6 +68,19 @@
         }
     });
 
+    // Character count for the garage sale description.
+    $("#txtDescription").keyup(function () {
+        var max = 100;
+        var len = $(this).val().length;
+        //alert('length: ' + len);
+        if (len >= max) {
+            $("#charNumDescription").text(' you have reached the limit');
+        } else {
+            var char = max - len;
+            $("#charNumDescription").text(char + ' characters left');
+        }
+    });
+
     // Character counter for the admin headline news.
     $("#txtHeadlineNews").keyup(function () {
         var max = 1000;

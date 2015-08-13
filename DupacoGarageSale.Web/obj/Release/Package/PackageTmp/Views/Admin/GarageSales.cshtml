@@ -66,6 +66,8 @@
                         columns.Bound(m => m.SaleCity);
                         columns.Bound(m => m.SaleState);
                         columns.Bound(m => m.SaleZip);
+                        columns.Bound(m => m.Latitude);
+                        columns.Bound(m => m.Longitude);
                     })
                     .Pageable(pager => pager.PageSize(10))
                     .Sortable()

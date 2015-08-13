@@ -173,9 +173,74 @@
             error: function (data) {
                 // Do something
                 //debugObject(data);
-                alert('There was a problem adding the garage sale to faves.');
+                alert('There was a problem displaying the garage sale.');
             }
         });        
+    });
+
+    // Respond to the click of the update itinerary note button
+    $('#itineraryLegControls').on('click', 'a.updateItinerary', function (e) {
+
+        e.preventDefault();
+        var itinerary_leg_id = $(this).attr('data-itinerary-leg-id');
+        var itinerary_waypoint_id = $(this).attr('data-itinerary-waypoint-id');
+        var note;
+        //alert('itinerary_leg_id: ' + itinerary_leg_id);
+        //alert('waypoint_leg_id: ' + waypoint_leg_id);
+
+        if (itinerary_leg_id == undefined) {
+            // this is a waypoint
+            //alert('waypoint text field id: ' + $("#txtItineraryNote" + itinerary_waypoint_id).attr('id'));
+            note = $("#txtItineraryNote" + itinerary_waypoint_id).val();
+
+            var url = "/Itinerary/UpdateWaypointNote/";
+            $.ajax({
+                type: "post",
+                data: JSON.stringify({
+                    waypoint_id: itinerary_waypoint_id,
+                    note: note
+                }),
+                url: url,
+                //dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $('#updateNoteModal').modal('show');
+                    //alert('waypoint note updated!');
+                },
+                error: function (data) {
+                    // Do something
+                    debugObject(data);
+                    alert('There was a problem updating the waypoint note.');
+                }
+            });
+        }
+
+        if (itinerary_waypoint_id == undefined) {
+            //this is an itinerary leg
+            //alert('itinerary leg text field id: ' + $("#txtItineraryNote" + itinerary_leg_id).attr('id'));
+            note = $("#txtItineraryNote" + itinerary_leg_id).val();
+
+            var url = "/Itinerary/UpdateItineraryNote/";
+            $.ajax({
+                type: "post",
+                data: JSON.stringify({
+                    itinerary_leg_id: itinerary_leg_id,
+                    note: note
+                }),
+                url: url,
+                //dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $('#updateNoteModal').modal('show');
+                    //alert('itinerary leg note updated!');
+                },
+                error: function (data) {
+                    // Do something
+                    //debugObject(data);
+                    alert('There was a problem updating the itinerary leg note.');
+                }
+            });
+        }
     });
 });
 

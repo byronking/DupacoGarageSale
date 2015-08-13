@@ -176,6 +176,10 @@ namespace DupacoGarageSale.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            var helper = new GarageSalesHelper();
+            var salesCount = helper.GetGarageSalesCount();
+            ViewBag.GarageSalesCount = salesCount;
+
             UserSession session = null;
             var repository = new GarageSaleRepository();
             var viewModel = new GarageSaleViewModel();
@@ -242,19 +246,22 @@ namespace DupacoGarageSale.Web.Controllers
                 // Set the selected categories for the special items.
                 if (viewModel.SearchResults.SpecialItems.Count > 0)
                 {
-                    foreach (var item in viewModel.SearchResults.SpecialItems)
-                    {
-                        viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
-                    }
+                    //foreach (var item in viewModel.SearchResults.SpecialItems)
+                    //{
+                    //    viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                    //}
                 }
 
                 // Set the selected categories for the regular items.
                 if (viewModel.SearchResults.GarageSaleItems.Count > 0)
                 {
-                    foreach (var item in viewModel.SearchResults.GarageSaleItems)
-                    {
-                        viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
-                    }
+                    var garageSaleItems = viewModel.SearchResults.GarageSaleItems.ToArray();
+                    ViewBag.GarageSaleItems = garageSaleItems;
+
+                    //foreach (var item in viewModel.SearchResults.GarageSaleItems)
+                    //{
+                    //    viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                    //}
                 }
 
                 var selectedCategories = viewModel.SelectedCategories.ToArray();
@@ -514,14 +521,14 @@ namespace DupacoGarageSale.Web.Controllers
                 viewModel.SearchResults = repository.SearchGarageSalesByCommunity(community, searchCriteria, categoryIdList, startDate, endDate);
             }
 
-            // Instantiate the selected categories.
-            viewModel.SelectedCategories = new List<int>();
+            //// Instantiate the selected categories.
+            //viewModel.SelectedCategories = new List<int>();
 
             // Take all the items in the search results and piece together addresses.
             foreach (var item in viewModel.SearchResults.GarageSaleItems)
             {
                 viewModel.MappingData.Addresses.Add(item.Address1 + ' ' + item.Address2 + ' ' + item.City + ' ' + item.State + ' ' + item.ZipCode);                
-                viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                //viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
             }
 
             // Get the special items addresses
@@ -531,15 +538,18 @@ namespace DupacoGarageSale.Web.Controllers
                 {
                     var saleAddress = repository.GetGarageSaleAddressBySaleId(item.SaleId);                    
                     viewModel.MappingData.Addresses.Add(saleAddress.Address1 + ' ' + saleAddress.Address2 + ' ' + saleAddress.City + ' ' + saleAddress.State + ' ' + saleAddress.ZipCode);
-                    viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
+                    //viewModel.SelectedCategories.Add(item.ItemSubcategoryId);
                 }
             }
 
-            var selectedCategories = viewModel.SelectedCategories.ToArray();
-            ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+            //var selectedCategories = viewModel.SelectedCategories.ToArray();
+            //ViewBag.SelectedCategories = string.Join(",", selectedCategories);
+
+            var garageSaleItems = viewModel.SearchResults.GarageSaleItems.ToArray();
+            ViewBag.GarageSaleItems = garageSaleItems;
 
             Session["ViewModel"] = viewModel;
-            TempData["SearchButtonClicked"] = "true";
+            //TempData["SearchButtonClicked"] = "true";
 
             return RedirectToAction("Index", viewModel);
         }
